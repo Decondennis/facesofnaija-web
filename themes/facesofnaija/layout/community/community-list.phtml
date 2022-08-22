@@ -1,0 +1,24 @@
+<?php 
+	$community_privacy = $wo['lang']['public'];
+	if ($wo['community']['privacy'] == 2) {
+		$community_privacy = $wo['lang']['private'];
+	}
+?>
+<div class="col-md-3 col-sm-6">
+	<div class="wow_content wow_my_groups">
+		<div class="avatar">
+			<a href="<?php echo $wo['community']['url'];?>" data-ajax="?link1=timeline&u=<?php echo $wo['community']['community_name'];?>">
+				<img src="<?php echo $wo['community']['avatar'];?>" alt="<?php echo $wo['community']['community_name']; ?> Profile Picture" />
+			</a>
+		</div>
+		<div class="wow_my_groups_info">
+			<h3 class="page_title"><a href="<?php echo $wo['community']['url'];?>" data-ajax="?link1=timeline&u=<?php echo $wo['community']['community_name'];?>"><?php echo $wo['community']['community_title']; ?></a></h3>
+			<p><?php echo Wo_CountCommunityMembers($wo['community']['id']);?> <?php echo $wo['lang']['members']; ?></p>
+			<?php if( isset( $wo['community']['Wo_CommunitySug'] ) ){ ?>
+				<?php echo Wo_GetJoinButton($wo['community']['id']);?>
+			<?php }else{ ?>
+				<a href="<?php echo Wo_SeoLink('index.php?link1=community-setting&community=' .  $wo['community']['community_name']); ?>" data-ajax="?link1=community-setting&community=<?php echo $wo['community']['community_name'];?>" class="btn btn-default btn-mat"><?php echo $wo['lang']['edit']; ?></a>
+			<?php } ?>
+		</div>
+	</div>
+</div>

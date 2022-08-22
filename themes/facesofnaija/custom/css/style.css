@@ -1,0 +1,24 @@
+/* 
+
+Add here your custom css styles Example: p { text-align: center; color: red; } 
+
+*/
+.wo_follow_btn {
+  background: linear-gradient(to right,#1da1f2 0,#009343 100%) !important;
+}
+
+.emoji--like {
+  background: #009343 !important;
+}
+
+.active-like-1 {
+  color: #009343 !important;
+}
+
+ul.profile-completion-bar .completion-bar div.completion-bar-status {
+    background: rgb(0 148 68 / 80%) !important;
+}
+
+ul.profile-completion-bar .completion-bar div.completion-bar-wrapper {
+    background: rgb(141 198 63 / 50%) !important;
+}
