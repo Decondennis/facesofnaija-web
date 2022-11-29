@@ -183,6 +183,20 @@ if ($followers_alert == 0) {
 					<a href="<?php echo Wo_SeoLink('index.php?link1=groups'); ?>" data-ajax="?link1=groups"><?php echo $wo['lang']['groups']; ?></a>
 				</li>
 			<?php } ?>
+
+			<?php if ($wo['config']['communities'] == 1) { ?>
+				<li class="dropdown-search-link">
+					<a href="<?php echo Wo_SeoLink('index.php?link1=communities'); ?>" data-ajax="?link1=communities"><?php echo $wo['lang']['communities']; ?></a>
+				</li>
+			<?php } ?>
+
+			<li class="dropdown-search-link">
+				<a href="https://virtualtour.facesofnaija.com" target="_blank">Virtual Tours</a>
+			</li>
+
+			<li class="dropdown-search-link">
+				<a href="http://job.facesofnaija.com" target="_blank">Jobs Portal</a>
+			</li>
          
 			<?php if ($wo['config']['forum'] == 1) { ?>
 				<li class="dropdown-search-link">

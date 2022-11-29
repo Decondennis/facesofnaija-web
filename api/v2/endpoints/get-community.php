@@ -118,6 +118,22 @@ if (empty($error_code)) {
 			}
 
 		}
+		if (!empty($data['random_communities'])) {
+			$offset = (!empty($_POST['random_communities_offset']) && is_numeric($_POST['random_communities_offset']) && $_POST['random_communities_offset'] > 0 ? Wo_Secure($_POST['random_communities_offset']) : 0);
+			$limit = (!empty($_POST['random_communities_limit']) && is_numeric($_POST['random_communities_limit']) && $_POST['random_communities_limit'] > 0 && $_POST['random_communities_limit'] <= 50 ? Wo_Secure($_POST['random_communities_limit']) : 20);
+
+			$communities = Wo_GetRandomCommunitiesAPI($limit, $offset);
+			foreach ($communities as $key => $community) {
+				$communities[$key]['members'] = Wo_CountCommunityMembers($community['id']);
+			}
+			$response_data = array(
+							'api_status' => 200,
+							'data' => $communities,
+							'joined_communities' => $communities,
+						);
+
+		}
+
 		if (!empty($data['groups'])) {
 			$groups_offset = (!empty($_POST['groups_offset']) && is_numeric($_POST['groups_offset']) && $_POST['groups_offset'] > 0 ? Wo_Secure($_POST['groups_offset']) : 0);
 	        $groups_limit = (!empty($_POST['groups_limit']) && is_numeric($_POST['groups_limit']) && $_POST['groups_limit'] > 0 && $_POST['groups_limit'] <= 50 ? Wo_Secure($_POST['groups_limit']) : 20);

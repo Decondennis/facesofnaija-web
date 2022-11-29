@@ -15,7 +15,7 @@ $sql_db_user = "28305c3bb5c9";
 // MySQL Database Password
 $sql_db_pass = "c2009812d087e5c0";
 // MySQL Database Name
-$sql_db_name = "wosocial_bb5098e5r";
+$sql_db_name = "facesofnaija";
 
 // Site URL
 $site_url = "https://facesofnaija.com"; // e.g (http://example.com)

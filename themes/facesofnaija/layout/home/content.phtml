@@ -13,6 +13,7 @@
 						</li>
 						<?php
 							if ($wo['config']['user_status'] == 1) {
+								
 								$get_user_status = Wo_GetFriendsStatus(array('limit' => 4));
 								if (!empty($get_user_status)) {
 						?>
@@ -22,7 +23,8 @@
 							}
 							}
 						?>
-						<?php } ?>
+						<?php
+						 } ?>
 						<?php if (Wo_CountStories() > 4) { ?>
 							<li class="view-more-stories">
 								<a href="<?php echo Wo_SeoLink('index.php?link1=more-status'); ?>">
@@ -59,7 +61,6 @@
 							}
 							echo $namesStr;
 						?>
-						
 						</marquee></p></div>
 			</div>
 
@@ -82,7 +83,6 @@
 						echo Wo_LoadPage('story/publisher-box');
 				}
 			?>
-
 			<?php if (Wo_IsMobile() == true) { ?>
 			<?php if ($wo['config']['order_posts_by'] == 0) { ?>
 				<div class="order-by">

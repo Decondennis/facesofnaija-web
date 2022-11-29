@@ -311,8 +311,6 @@ function Wo_GetMyCommunitiesAPI($limit = 0,$offset = 0,$sort = '') {
         }
     }
    
-        
-
     return  $data;
 }
 function Wo_IsCommunityUserExists($user_id = false, $community_id = false) {
@@ -418,6 +416,32 @@ function Wo_GetUsersCommunitiesAPI($user_id,$limit = 0,$offset = 0) {
     }
     $user_id   = Wo_Secure($user_id);
     $query     = " SELECT `community_id` FROM " . T_COMMUNITY_MEMBERS . " WHERE `user_id` = {$user_id} AND `active` = '1' $offset_query  ORDER BY `community_id` DESC  $limit_query";
+    $sql_query = mysqli_query($sqlConnect, $query);
+    if (mysqli_num_rows($sql_query)) {
+        while ($fetched_data = mysqli_fetch_assoc($sql_query)) {
+            $data[] = Wo_CommunityData($fetched_data['community_id']);
+        }
+    }
+        
+    return $data;
+}
+function Wo_GetRandomCommunitiesAPI($limit = 0,$offset = 0) {
+    global $wo, $sqlConnect;
+    $data = array();
+
+    $limit_query = '';
+    if (!empty($limit)) {
+        $limit    = Wo_Secure($limit);
+        $limit_query = " LIMIT $limit";
+    }
+    $offset_query = '';
+    if (!empty($offset)) {
+        $offset    = Wo_Secure($offset);
+        $offset_query = " AND `community_id` < $offset ";
+    }
+    
+    $query     = " SELECT `community_id` FROM " . T_COMMUNITY_MEMBERS . " WHERE `active` = '1' $offset_query  ORDER BY `community_id` DESC";//  $limit_query
+        
     $sql_query = mysqli_query($sqlConnect, $query);
     if (mysqli_num_rows($sql_query)) {
         while ($fetched_data = mysqli_fetch_assoc($sql_query)) {

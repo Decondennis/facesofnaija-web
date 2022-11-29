@@ -22,7 +22,10 @@ if (empty($error_code)) {
     } else {
     	$user_recover_data         = Wo_UserData(Wo_UserIdFromEmail($_POST['email']));
         $subject                   = $config['siteName'] . ' ' . $wo['lang']['password_rest_request'];
-        $user_recover_data['link'] = Wo_Link('index.php?link1=reset-password&code=' . $user_recover_data['user_id'] . '_' . $user_recover_data['password']);
+        $code              = md5(rand(111, 999) . uniqid() . time());
+        $user_recover_data['link'] = Wo_Link('index.php?link1=reset-password&code=' . $user_recover_data['user_id'] . '_' . $code);
+        $time = time() + (60 * 60 * 12);
+        $query                     = mysqli_query($sqlConnect, "UPDATE " . T_USERS . " SET `email_code` = '$code' , `time_code_sent` = '".$time."' WHERE `user_id` = {$user_recover_data['user_id']}");
         $wo['recover']             = $user_recover_data;
         $body                      = Wo_LoadPage('emails/recover');
         $send_message_data         = array(
