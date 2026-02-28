@@ -18,14 +18,9 @@
 			    	if ($value['status'] == 1) {
 			    		
 			     ?>
-				<li class="reaction reaction-<?php echo $value['id'];?>" data-reaction="<?php echo $value['name'];?>" data-reaction-id="<?php echo $value['id'];?>" data-reaction-lang="<?php echo $value['name'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this,'<?php echo($value['wowonder_small_icon']) ?>',<?php echo($value['is_html']) ?>);">
-					<?php if (preg_match("/<[^<]+>/",$value['wowonder_icon'],$m)) {
-						  	echo($value['wowonder_icon']);
-						 }
-						 else{ ?>
-				     	<img src="<?php echo($value['wowonder_icon']) ?>">
-				    <?php } ?>
-				</li>
+					<li class="reaction reaction-<?php echo $value['id'];?> animated_2" data-reaction="<?php echo $value['name'];?>" data-reaction-id="<?php echo $value['id'];?>" data-reaction-lang="<?php echo $value['name'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this,'<?php echo($value['sunshine_small_icon']) ?>');">
+						<img class="reaction-sm" src="<?php echo $value['sunshine_small_icon'];?>" data-rid="<?php echo $value['id'];?>" alt="<?php echo $value['name'];?>" onerror="this.onerror=null;this.src='/serve_any_reaction.php?id='+this.getAttribute('data-rid');">
+					</li>
 			<?php } } } ?>
 
 
@@ -100,11 +95,10 @@
 			     ?>
 				<li class="reaction reaction-<?php echo $value['id'];?>" data-reaction="<?php echo $value['name'];?>" data-reaction-id="<?php echo $value['id'];?>" data-reaction-lang="<?php echo $value['name'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this,'<?php echo($value['wowonder_small_icon']) ?>',<?php echo($value['is_html']) ?>);">
 					<?php if (preg_match("/<[^<]+>/",$value['wowonder_icon'],$m)) {
-						  	echo($value['wowonder_icon']);
-						 }
-						 else{ ?>
-				     	<img src="<?php echo($value['wowonder_icon']) ?>">
-				    <?php } ?>
+							echo($value['wowonder_icon']);
+					} else { ?>
+						<img class="reaction-sm" src="<?php echo (!empty($value['wowonder_small_icon']) ? $value['wowonder_small_icon'] : $value['sunshine_small_icon']); ?>" data-rid="<?php echo $value['id'];?>" alt="<?php echo $value['name'];?>" onerror="this.onerror=null;this.src='/serve_any_reaction.php?id='+this.getAttribute('data-rid');">
+					<?php } ?>
 				</li>
 			<?php } } } ?>
 

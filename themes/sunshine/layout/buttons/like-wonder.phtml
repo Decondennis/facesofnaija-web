@@ -11,6 +11,20 @@
 				}    
 			?>
 		</span>
+			<ul class="reactions-box reactions-lightbox-container-<?php echo $wo['story']['id']; ?> unselectable" data-id="<?php echo $wo['story']['id']; ?>" style="<?php if ($wo['language_type'] == 'rtl') {?> left: auto; <?php }else{ ?> right: auto; <?php }?>">
+				<?php if (!empty($wo['reactions_types'])) {
+				    foreach ($wo['reactions_types'] as $key => $value) {
+				    	if ($value['status'] == 1) {
+			     ?>
+				<li class="reaction reaction-<?php echo $value['id'];?> animated_2" data-reaction="<?php echo $value['name'];?>" data-reaction-id="<?php echo $value['id'];?>" data-reaction-lang="<?php echo $value['name'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this,'<?php echo($value['wowonder_small_icon']) ?>',<?php echo($value['is_html']) ?>);">
+					<?php if (preg_match("/<[^<]+>/",$value['wowonder_icon'],$m)) {
+						echo($value['wowonder_icon']);
+					} else { ?>
+						<img class="reaction-sm" src="<?php echo (!empty($value['wowonder_small_icon']) ? $value['wowonder_small_icon'] : $value['sunshine_small_icon']); ?>" data-rid="<?php echo $value['id'];?>" alt="<?php echo $value['name'];?>" onerror="this.onerror=null;this.src='/serve_any_reaction.php?id='+this.getAttribute('data-rid');">
+					<?php } ?>
+				</li>
+			<?php } } } ?>
+			</ul>
 		<ul class="reactions-box reactions-lightbox-container-<?php echo $wo['story']['id']; ?> unselectable" data-id="<?php echo $wo['story']['id']; ?>" style="<?php if ($wo['language_type'] == 'rtl') {?> left: auto; <?php }else{ ?> right: auto; <?php }?>">
 
 			<?php if (!empty($wo['reactions_types'])) {
@@ -18,7 +32,7 @@
 			    	if ($value['status'] == 1) {
 			     ?>
 				<li class="reaction reaction-<?php echo $value['id'];?> animated_2" data-reaction="<?php echo $value['name'];?>" data-reaction-id="<?php echo $value['id'];?>" data-reaction-lang="<?php echo $value['name'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this,'<?php echo($value['sunshine_small_icon']) ?>');">
-					<img class="" src="<?php echo $value['sunshine_icon'];?>" alt="<?php echo $value['name'];?>">
+					<img class="reaction-sm" src="<?php echo $value['sunshine_small_icon'];?>" data-rid="<?php echo $value['id'];?>" alt="<?php echo $value['name'];?>" onerror="this.onerror=null;this.src='/serve_any_reaction.php?id='+this.getAttribute('data-rid');">
 				</li>
 			<?php } } } ?>
 
@@ -63,7 +77,7 @@
 			    	if ($value['status'] == 1) {
 			     ?>
 				<li class="reaction reaction-<?php echo $value['id'];?> animated_2" data-reaction="<?php echo $value['name'];?>" data-reaction-id="<?php echo $value['id'];?>" data-reaction-lang="<?php echo $value['name'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this,'<?php echo($value['sunshine_small_icon']) ?>');">
-					<img class="" src="<?php echo $value['sunshine_icon'];?>" alt="<?php echo $value['name'];?>">
+					<img class="reaction-sm" src="<?php echo $value['sunshine_small_icon'];?>" data-rid="<?php echo $value['id'];?>" alt="<?php echo $value['name'];?>" onerror="this.onerror=null;this.src='/serve_any_reaction.php?id='+this.getAttribute('data-rid');">
 				</li>
 			<?php } } } ?>
 			<!-- <li class="reaction reaction-like animated_2" data-reaction="Like" data-reaction-lang="<?php echo $wo['lang']['like'];?>" data-post-id="<?php echo $wo['story']['id']; ?>" onclick="Wo_RegisterReaction(this);">
