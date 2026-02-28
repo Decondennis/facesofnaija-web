@@ -2085,7 +2085,7 @@ function Wo_DeletePageLike($page_id = 0, $user_id = 0) {
         return true;
     }
 }
-function Wo_UpdatePageData($page_id = 0, $update_data) {
+function Wo_UpdatePageData($page_id = 0, $update_data = array()) {
     global $wo, $sqlConnect, $cache;
     if ($wo["loggedin"] == false) {
         return false;
@@ -2189,7 +2189,7 @@ function Wo_UpdateGroupAdminData($group_id, $update_data, $user_id) {
         return false;
     }
 }
-function Wo_UpdatePostData($post_id = 0, $update_data) {
+function Wo_UpdatePostData($post_id = 0, $update_data = array()) {
     global $wo, $sqlConnect, $cache;
     if ($wo["loggedin"] == false) {
         return false;
@@ -2894,7 +2894,7 @@ function Wo_LeaveGroup($group_id = 0, $user_id = 0) {
         return true;
     }
 }
-function Wo_UpdateGroupData($group_id = 0, $update_data) {
+function Wo_UpdateGroupData($group_id = 0, $update_data = array()) {
     global $wo, $sqlConnect, $cache;
     if ($wo["loggedin"] == false) {
         return false;
@@ -6908,7 +6908,7 @@ function Wo_GetPopularGames($limit = 10, $after = 0) {
     }
     return $data;
 }
-function Wo_GetGenders($lang = "english", $langs) {
+function Wo_GetGenders($lang = "english", $langs = array()) {
     global $wo, $db;
     if (!empty($lang) && in_array($lang, $langs)) {
         $lang = Wo_Secure($lang);

@@ -1,0 +1,83 @@
+MySQL Connection Error - Fix Guide
+===================================
+
+ERROR: "Failed to connect to MySQL: No connection could be made because the target machine actively refused it."
+
+This means your MySQL/MariaDB database server is NOT RUNNING.
+
+HOW TO FIX:
+===========
+
+METHOD 1: Using XAMPP
+---------------------
+1. Open XAMPP Control Panel (usually in C:\xampp\xampp-control.exe)
+2. Look for "MySQL" in the list
+3. Click the "Start" button next to MySQL
+4. Wait until it shows "Running" (green highlight)
+5. Try accessing your site again
+
+METHOD 2: Using WAMP
+--------------------
+1. Look for WAMP icon in your system tray (bottom-right corner)
+2. Left-click the WAMP icon
+3. Go to: MySQL → Service → Start/Resume Service
+4. Wait for WAMP icon to turn green
+5. Try accessing your site again
+
+METHOD 3: Using Laragon
+-----------------------
+1. Open Laragon
+2. Click "Start All" button
+3. Wait for services to start
+4. Try accessing your site again
+
+METHOD 4: MySQL Installed Separately
+------------------------------------
+1. Press Windows + R
+2. Type: services.msc and press Enter
+3. Look for "MySQL" or "MySQL80" in the list
+4. Right-click on it
+5. Click "Start"
+6. Try accessing your site again
+
+METHOD 5: Check if MySQL is Running
+-----------------------------------
+Open Command Prompt (cmd) and run:
+   tasklist | findstr /i "mysql"
+
+If you see mysqld.exe, it's running.
+If you don't see anything, it's NOT running.
+
+VERIFY CONNECTION SETTINGS:
+===========================
+Your current settings (from config.php):
+- Host: localhost
+- User: root
+- Password: (empty)
+- Database: facesofnaija
+
+Make sure these match your MySQL setup.
+
+COMMON PORTS:
+=============
+MySQL usually runs on port 3306.
+Check if something is blocking this port:
+   netstat -ano | findstr :3306
+
+If you see a result, MySQL is running.
+If empty, MySQL is NOT running.
+
+AFTER STARTING MYSQL:
+====================
+1. Refresh this page: http://localhost/facesofnaija/setup_community_requests.php
+2. It should work now!
+
+STILL NOT WORKING?
+==================
+Check these:
+1. Is Apache/Web Server running?
+2. Is MySQL service installed?
+3. Check Windows Firewall - make sure it's not blocking port 3306
+4. Try connecting with phpMyAdmin: http://localhost/phpmyadmin
+
+If you're using XAMPP, both Apache and MySQL should be running (green in control panel).

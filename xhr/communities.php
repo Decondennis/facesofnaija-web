@@ -94,6 +94,85 @@ if ($f == 'communities') {
         }
         exit();
     }
+    if ($s == 'request_community') {
+        $data = array();
+        if (Wo_IsAdmin() || Wo_IsModerator()) {
+            $errors[] = $error_icon . 'Admins can create communities directly. Please use the Create Community button.';
+        }
+        elseif (empty($_POST['community_name']) || empty($_POST['community_title']) || empty($_POST['reason']) || Wo_CheckSession($hash_id) === false) {
+            $errors[] = $error_icon . $wo['lang']['please_check_details'];
+        } else {
+            $is_exist = Wo_IsNameExist($_POST['community_name'], 0);
+            if (in_array(true, $is_exist)) {
+                $errors[] = $error_icon . $wo['lang']['community_name_exists'];
+            }
+            if (in_array($_POST['community_name'], $wo['site_pages'])) {
+                $errors[] = $error_icon . $wo['lang']['community_name_invalid_characters'];
+            }
+            if (strlen($_POST['community_name']) < 5 OR strlen($_POST['community_name']) > 32) {
+                $errors[] = $error_icon . $wo['lang']['community_name_characters_length'];
+            }
+            if (!preg_match('/^[\w]+$/', $_POST['community_name'])) {
+                $errors[] = $error_icon . $wo['lang']['community_name_invalid_characters'];
+            }
+            if (empty($_POST['category'])) {
+                $_POST['category'] = 1;
+            }
+        }
+        $privacy = 1;
+        if (!empty($_POST['privacy'])) {
+            if ($_POST['privacy'] == 2) {
+                $privacy = 2;
+            }
+        }
+        if (empty($errors)) {
+            $sub_category = '';
+            if (!empty($_POST['community_sub_category']) && !empty($wo['community_sub_categories'][$_POST['category']])) {
+                foreach ($wo['community_sub_categories'][$_POST['category']] as $key => $value) {
+                    if ($value['id'] == $_POST['community_sub_category']) {
+                        $sub_category = $value['id'];
+                    }
+                }
+            }
+
+            // Insert request into database
+            $insert_data = array(
+                'user_id' => $wo['user']['user_id'],
+                'community_name' => Wo_Secure($_POST['community_name']),
+                'community_title' => Wo_Secure($_POST['community_title']),
+                'about' => Wo_Secure($_POST['about']),
+                'category' => Wo_Secure($_POST['category']),
+                'sub_category' => $sub_category,
+                'privacy' => Wo_Secure($privacy),
+                'reason' => Wo_Secure($_POST['reason']),
+                'status' => 'pending',
+                'time' => time()
+            );
+
+            $fields_str = '`' . implode('`, `', array_keys($insert_data)) . '`';
+            $values_str = '\'' . implode('\', \'', $insert_data) . '\'';
+
+            $query = mysqli_query($sqlConnect, "INSERT INTO Wo_Community_Requests ({$fields_str}) VALUES ({$values_str})");
+
+            if ($query) {
+                $data = array(
+                    'status' => 200,
+                    'message' => $success_icon . 'Your community creation request has been submitted successfully! An administrator will review it soon.'
+                );
+            } else {
+                $errors[] = $error_icon . 'Failed to submit request. Please try again.';
+            }
+        }
+        header("Content-type: application/json");
+        if (isset($errors)) {
+            echo json_encode(array(
+                'errors' => $errors
+            ));
+        } else {
+            echo json_encode($data);
+        }
+        exit();
+    }
     if ($s == 'update_information_setting') {
         if (!empty($_POST['page_id']) && is_numeric($_POST['page_id']) && $_POST['page_id'] > 0) {
             $PageData = Wo_PageData($_POST['page_id']);

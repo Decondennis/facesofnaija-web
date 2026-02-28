@@ -560,6 +560,9 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                     case 'site-pages':
                         include('sources/site_pages.php');
                         break;
+                    case 'request-community':
+                        include('sources/request-community.php');
+                        break;
                 }
             }
         } else {
@@ -633,11 +636,14 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                 case 'unusual-login':
                     include('sources/unusual-login.php');
                     break;
-                case 'terms':
-                    include('sources/term.php');
-                    break;
-            }
-        }
+                        case 'terms':
+                            include('sources/term.php');
+                            break;
+                        case 'request-community':
+                            include('sources/request-community.php');
+                            break;
+                    }
+                }
     } else {
         switch ($page) {
             case 'maintenance':
@@ -743,7 +749,10 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
             case 'community-setting':
                 include('sources/community_setting.php');
                 break;
-            /** stopped here */ 
+            case 'request-community':
+                include('sources/request-community.php');
+                break;
+            /** stopped here */
             case 'create-page':
                 include('sources/create_page.php');
                 break;

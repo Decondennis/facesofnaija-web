@@ -6719,7 +6719,7 @@ function Wo_IsPostPinned($post_id) {
     }
     return false;
 }
-include_once('./assets/libraries/SimpleImage-master/vendor/claviska/simpleimage/src/claviska/SimpleImage-Class.php');
+// include_once('./assets/libraries/SimpleImage-master/vendor/claviska/simpleimage/src/claviska/SimpleImage-Class.php');
 function Wo_IsUserPinned($id, $type = '') {
     global $sqlConnect, $wo;
     if ($wo['loggedin'] == false) {

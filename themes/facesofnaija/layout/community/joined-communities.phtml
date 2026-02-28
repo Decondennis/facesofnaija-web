@@ -29,7 +29,7 @@
 			</div>
 				<div>
 					<?php
-						$pages = Wo_GetUsersCommunities($wo['user']['user_id'], 50);
+						$pages = Wo_GetMyCommunities();
 						if (count($pages) > 0) {
 							foreach ($pages as $wo['community']) {
 								$wo['community']['Wo_CommunitySug'] = true;

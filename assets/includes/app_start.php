@@ -28,7 +28,11 @@ if (!extension_loaded("gd") && !function_exists("gd_info")) {
 if (!extension_loaded("zip")) {
     $ServerErrors[] = "ZipArchive extension is NOT installed on your web server !";
 }
-$query = mysqli_query($sqlConnect, "SET NAMES utf8mb4");
+if ($sqlConnect) {
+    @mysqli_query($sqlConnect, "SET NAMES utf8mb4");
+} else {
+    $ServerErrors[] = "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 if (isset($ServerErrors) && !empty($ServerErrors)) {
     foreach ($ServerErrors as $Error) {
         echo "<h3>" . $Error . "</h3>";
@@ -90,6 +94,11 @@ if (!empty($config["bucket_name_2"])) {
 }
 $config["s3_site_url_2"]   = $s3_site_url_2;
 $wo["config"]              = $config;
+// Ensure user registration is enabled on the welcome/login page
+// (This overrides DB config at runtime; remove if you prefer DB change)
+$wo["config"]["user_registration"] = 1;
+// keep $config in-sync for code that reads $config variable later
+$config["user_registration"] = 1;
 $ccode                     = Wo_CustomCode("g");
 $ccode                     = is_array($ccode) ? $ccode : array();
 $wo["config"]["header_cc"] = !empty($ccode[0]) ? $ccode[0] : "";

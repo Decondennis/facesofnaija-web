@@ -238,11 +238,11 @@ function Wo_GetMyCommunities() {
     }
     $data       = array();
     $user_id    = Wo_Secure($wo['user']['user_id']);
-    $query_text = "SELECT `id` FROM " . T_COMMUNITIES . " WHERE `id` IN (SELECT `community_id` FROM ".T_COMMUNITY_MODERATORS." WHERE `user_id` = {$user_id})";
+    $query_text = "SELECT `id` FROM " . T_COMMUNITIES . " WHERE `id` IN (SELECT `community_id` FROM ".T_COMMUNITY_MEMBERS." WHERE `user_id` = {$user_id})";
     if(Wo_IsAdmin() || Wo_IsModerator()) {
         $query_text = "SELECT `id` FROM " . T_COMMUNITIES;
     }
-    
+
     $query_one  = mysqli_query($sqlConnect, $query_text);
     if (mysqli_num_rows($query_one)) {
         while ($fetched_data = mysqli_fetch_assoc($query_one)) {
@@ -251,7 +251,7 @@ function Wo_GetMyCommunities() {
             }
         }
     }
-        
+
 
     return  $data;
 }
@@ -352,17 +352,17 @@ function Wo_CommunitySug($limit = 20) {
     }
     $data      = array();
     $user_id   = Wo_Secure($wo['user']['user_id']);
-    $query_one = " SELECT `id` FROM " . T_COMMUNITIES . " WHERE `active` = '1' AND `id` NOT IN (SELECT `community_id` FROM " . T_COMMUNITY_MEMBERS . " WHERE `user_id` = {$user_id}) AND `user_id` <> {$user_id}";
+    $query_one = " SELECT `id` FROM " . T_COMMUNITIES . " WHERE `active` = '1' AND `id` NOT IN (SELECT `community_id` FROM " . T_COMMUNITY_MEMBERS . " WHERE `user_id` = {$user_id})";
     if (isset($limit)) {
         $query_one .= " ORDER BY RAND() LIMIT {$limit}";
     }
     $sql = mysqli_query($sqlConnect, $query_one);
-    /*if (mysqli_num_rows($sql)) {
+    if (mysqli_num_rows($sql)) {
         while ($fetched_data = mysqli_fetch_assoc($sql)) {
             $data[] = Wo_CommunityData($fetched_data['id']);
         }
-    }*/
-        
+    }
+
     return $data;
 }
 function Wo_GetUsersCommunities($user_id = 0, $limit = 12, $placement = array(), $offset = 0) {
@@ -579,7 +579,7 @@ function Wo_GetCommunityPostPublisherBox($community_id = 0) {
         return Wo_LoadPage('story/publisher-box');
     }
 }
-function Wo_UpdateCommunityData($community_id = 0, $update_data) {
+function Wo_UpdateCommunityData($community_id = 0, $update_data = array()) {
     global $wo, $sqlConnect, $cache;
     if ($wo['loggedin'] == false) {
         return false;

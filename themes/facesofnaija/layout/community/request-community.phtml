@@ -1,0 +1,176 @@
+<div class="page-margin">
+	<div class="row">
+		<div class="col-md-2 leftcol"><?php echo Wo_LoadPage("sidebar/left-sidebar"); ?></div>
+		<div class="col-md-7 middlecol">
+			<div class="page-margin wow_content mt-0">
+				<div class="wo_page_hdng pag_neg_padd pag_alone">
+					<div class="wo_page_hdng_innr">
+						<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M13 3V11H21V3H13M3 21H11V13H3V21M3 3V11H11V3H3M13 16H16V13H18V16H21V18H18V21H16V18H13V16Z"></path></svg></span> <?php echo $wo['lang']['request_community'] ?? 'Request Community';?>
+					</div>
+				</div>
+			</div>
+
+			<div class="page-margin wow_content wow_sett_content">
+				<p style="padding: 15px; background: #f8f9fa; border-left: 4px solid #007bff; margin-bottom: 20px;">
+					<strong>Note:</strong> As a regular user, you can request permission to create a community. An administrator will review your request.
+				</p>
+
+				<form class="request-community-form form-horizontal" method="post">
+					<div class="wow_form_fields">
+						<label for="community_title"><?php echo $wo['lang']['community_name']; ?> <span style="color:red;">*</span></label>
+						<input id="community_title" name="community_title" type="text" required>
+					</div>
+					<div class="wow_form_fields">
+						<label for="community_name"><?php echo $wo['lang']['community'];?> URL <span style="color:red;">*</span></label>
+						<div class="input-group">
+							<span class="input-group-addon"><?php echo $wo['config']['site_url'];?>/</span>
+							<input id="community_name" name="community_name" type="text" required>
+						</div>
+					</div>
+					<div class="wow_form_fields">
+						<label for="community_about"><?php echo $wo['lang']['description']; ?> <span style="color:red;">*</span></label>
+						<textarea name="about" id="community_about" rows="3" required></textarea>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="wow_form_fields">
+								<label for="privacy"><?php echo $wo['lang']['community_type']; ?></label>
+								<select id="privacy" name="privacy">
+									<option value="1" ><?php echo $wo['lang']['public'];?> </option>
+									<option value="2" ><?php echo $wo['lang']['private'];?> </option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="wow_form_fields">
+								<label for="category"><?php echo $wo['lang']['category']; ?></label>
+								<select name="category" id="category" onchange="GetCommunitySubCategory(this)">
+									<?php foreach ($wo['community_categories'] as $category_id => $category_name) {?>
+									<option value="<?php echo $category_id?>"><?php echo $category_name; ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						<?php if (!empty($wo['community_sub_categories'])) { ?>
+						<div class="col-md-6">
+							<div class="wow_form_fields">
+								<label for="community_sub_category"><?php echo $wo['lang']['sub_category']; ?></label>
+								<select name="community_sub_category" id="community_sub_category">
+									<?php
+									if (!empty($wo['community_sub_categories'][array_keys($wo['community_categories'])[0]])) {
+									foreach ($wo['community_sub_categories'][array_keys($wo['community_categories'])[0]] as $id => $sub_category) { ?>
+										<option value="<?php echo $sub_category['id']?>"><?php echo $sub_category['lang']; ?></option>
+									<?php } } ?>
+								</select>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+					<div class="wow_form_fields">
+						<label for="reason"><?php echo $wo['lang']['reason'] ?? 'Reason for Request'; ?> <span style="color:red;">*</span></label>
+						<textarea name="reason" id="reason" rows="3" required placeholder="Why do you want to create this community?"></textarea>
+					</div>
+					<div class="app-general-alert setting-update-alert"></div>
+					<div class="text-center">
+						<a class="btn btn-mat" data-ajax="?link1=communities" href="<?php echo Wo_SeoLink('index.php?link1=communities');?>">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path></svg> <?php echo $wo['lang']['go_back'];?>
+						</a>
+						<button class="btn btn-main btn-mat btn-mat-raised add_wow_loader" type="submit"><?php echo $wo['lang']['submit_request'] ?? 'Submit Request'; ?></button>
+					</div>
+					<input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+				</form>
+			</div>
+		</div>
+		<!-- .col-md-7 -->
+		<?php echo Wo_LoadPage('sidebar/content');?>
+	</div>
+	<!-- .row -->
+</div>
+<!-- .page-margin -->
+<script type="text/javascript">
+	<?php 
+$js_array = json_encode($wo['community_sub_categories']);
+echo "var sub_categories_array = ". $js_array . ";\n";
+?>
+	function GetCommunitySubCategory(self) {
+		id = $(self).val();
+		var text = "";
+		if (typeof(sub_categories_array[id]) == 'undefined') {
+			$('#community_sub_category').html('');
+		}
+		else{
+			sub_categories_array[id].forEach(function(entry) {
+				text = text + "<option value='"+entry.id+"'>"+entry.lang+"</option>";
+			});
+			$('#community_sub_category').html(text);
+		}
+	}
+   $(document).ready(function() {
+	 // Check if ajaxForm is available
+	 if (typeof $.fn.ajaxForm !== 'undefined') {
+	   $('form.request-community-form').ajaxForm({
+		 url: Wo_Ajax_Requests_File() + '?f=communities&s=request_community',
+		 dataType: 'json',
+		 beforeSend: function() {
+		   $('.request-community-form').find('.add_wow_loader').addClass('btn-loading');
+		   $('.app-general-alert').html('');
+		 },
+		 success: function(data) {
+		   scrollToTop();
+		   if (data.status == 200) {
+			 $('.app-general-alert').html('<div class="alert alert-success">' + data.message + '</div>');
+			 $('.alert-success').fadeIn(300);
+			 // Clear form
+			 $('.request-community-form')[0].reset();
+		   } else {
+			   var errors = data.errors.join("<br>");
+			   $('.app-general-alert').html('<div class="alert alert-danger">' + errors + '</div>');
+			   $('.alert-danger').fadeIn(300);
+		   }
+		   $('.request-community-form').find('.add_wow_loader').removeClass('btn-loading');
+		 },
+		 error: function(xhr, status, error) {
+		   $('.app-general-alert').html('<div class="alert alert-danger">Error submitting request. Please try again.</div>');
+		   $('.alert-danger').fadeIn(300);
+		   $('.request-community-form').find('.add_wow_loader').removeClass('btn-loading');
+		   console.log('XHR Error:', xhr.responseText);
+		 }
+	   });
+	 } else {
+	   // Fallback: Use regular AJAX submit
+	   $('form.request-community-form').on('submit', function(e) {
+		 e.preventDefault();
+		 var formData = $(this).serialize();
+
+		 $('.request-community-form').find('.add_wow_loader').addClass('btn-loading');
+		 $('.app-general-alert').html('');
+
+		 $.ajax({
+		   url: Wo_Ajax_Requests_File() + '?f=communities&s=request_community',
+		   type: 'POST',
+		   data: formData,
+		   dataType: 'json',
+		   success: function(data) {
+			 scrollToTop();
+			 if (data.status == 200) {
+			   $('.app-general-alert').html('<div class="alert alert-success">' + data.message + '</div>');
+			   $('.alert-success').fadeIn(300);
+			   $('.request-community-form')[0].reset();
+			 } else {
+			   var errors = data.errors.join("<br>");
+			   $('.app-general-alert').html('<div class="alert alert-danger">' + errors + '</div>');
+			   $('.alert-danger').fadeIn(300);
+			 }
+			 $('.request-community-form').find('.add_wow_loader').removeClass('btn-loading');
+		   },
+		   error: function(xhr, status, error) {
+			 $('.app-general-alert').html('<div class="alert alert-danger">Error submitting request. Please try again.</div>');
+			 $('.alert-danger').fadeIn(300);
+			 $('.request-community-form').find('.add_wow_loader').removeClass('btn-loading');
+			 console.log('AJAX Error:', xhr.responseText);
+		   }
+		 });
+	   });
+	 }
+   });
+</script>

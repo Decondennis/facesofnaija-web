@@ -1186,6 +1186,31 @@ function Wo_DeleteReplyComment(reply_id) {
 
 // community here 
 
+function Wo_RegisterCommunityJoin(community_id, privacy) {
+  if (!community_id || !$.isNumeric(community_id) || community_id < 1) {
+    return false;
+  }
+  $.ajax({
+    url: Wo_Ajax_Requests_File(),
+    type: 'GET',
+    dataType: 'json',
+    data: {
+      f: 'join_community',
+      community_id: community_id
+    },
+    beforeSend: function() {
+      Wo_progressIconLoader($('#community-join-' + community_id).find('button'));
+    }
+  }).done(function(data) {
+    if (data.status == 200) {
+      $('#community-join-' + community_id).html(data.html);
+      Wo_GetButtons('#community-join-' + community_id);
+    }
+  }).fail(function() {
+    console.log("error joining community");
+  });
+}
+
 function Wo_AcceptJoinCommunity(user_id, community_id) {
   $.get(Wo_Ajax_Requests_File(), {f:'communities', s:'accept_request', user_id:user_id, community_id:community_id}, function(data) {
     if (data.status == 200) {

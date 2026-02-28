@@ -1,4 +1,5 @@
 <?php
+// front controller
 // +--------------------------------------\----------------------------------+
 // | @author Deen Doughouz (DoughouzForest)
 // | @author_url 1: http://www.wowonder.com
@@ -1150,7 +1151,9 @@ if (empty($wo['content'])) {
         include('sources/404.php');
     }
 }
-echo Wo_Loadpage('container');
+// Clean any buffered output (accidental whitespace or notices) before sending the DOCTYPE
+@ob_end_clean();
+echo Wo_LoadPage('container');
 mysqli_close($sqlConnect);
 unset($wo);
 ?>

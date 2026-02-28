@@ -32,6 +32,7 @@ $pages = array(
     'payment-settings',
     'manage-pages',
     'manage-groups',
+    'manage-communities',
     'manage-posts',
     'manage-articles',
     'manage-events',

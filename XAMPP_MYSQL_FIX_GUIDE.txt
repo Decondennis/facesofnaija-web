@@ -1,0 +1,142 @@
+XAMPP MySQL Won't Start - Complete Fix Guide
+=============================================
+
+ERROR: "MySQL shutdown unexpectedly"
+
+This happens when:
+1. Port 3306 is blocked or in use
+2. Another MySQL service is running
+3. MySQL data files are corrupted
+4. Antivirus is blocking MySQL
+
+QUICK FIXES (Try in order):
+============================
+
+FIX 1: Kill Any Stuck MySQL Processes
+--------------------------------------
+1. Open Task Manager (Ctrl+Shift+Esc)
+2. Go to "Details" tab
+3. Look for "mysqld.exe"
+4. If found, right-click → End Task
+5. Try starting MySQL in XAMPP again
+
+FIX 2: Stop Other MySQL Services
+---------------------------------
+1. Press Windows + R
+2. Type: services.msc and press Enter
+3. Look for these services:
+   - MySQL
+   - MySQL80
+   - MySQL57
+   - MariaDB
+4. If any are "Running", right-click → Stop
+5. Try starting XAMPP MySQL again
+
+FIX 3: Change MySQL Port
+-------------------------
+If port 3306 is blocked:
+
+1. Open XAMPP Control Panel
+2. Click "Config" button next to MySQL
+3. Select "my.ini"
+4. Find these lines and change port from 3306 to 3307:
+   
+   [mysqld]
+   port=3306          <- Change to 3307
+   
+   [client]
+   port=3306          <- Change to 3307
+
+5. Save the file
+6. Also update config.php in your project:
+   
+   Change:
+   $sql_db_host = "localhost";
+   
+   To:
+   $sql_db_host = "localhost:3307";
+
+7. Try starting MySQL again
+
+FIX 4: Check Error Logs
+------------------------
+1. In XAMPP Control Panel
+2. Click "Logs" button next to MySQL
+3. Look for the actual error message
+4. Common errors:
+   - "Can't connect to MySQL server on 'localhost' (10061)"
+     → Port blocked or service not running
+   
+   - "Another MySQL daemon already running"
+     → Stop other MySQL services (FIX 2)
+   
+   - "InnoDB: Unable to lock ./ibdata1"
+     → MySQL crashed, files locked (FIX 5)
+
+FIX 5: Reset MySQL (ADVANCED - BACKS UP YOUR DATA FIRST!)
+----------------------------------------------------------
+⚠️ WARNING: Only do this if other fixes don't work!
+
+1. BACKUP YOUR DATABASE FIRST!
+   - Go to: C:\xampp\mysql\data
+   - Copy the entire "data" folder to Desktop (rename to "data_backup")
+
+2. Stop XAMPP MySQL (if running)
+
+3. Rename corrupted files:
+   - Go to: C:\xampp\mysql\data
+   - Find these files and rename them (add .old):
+     * ibdata1 → ibdata1.old
+     * ib_logfile0 → ib_logfile0.old
+     * ib_logfile1 → ib_logfile1.old
+
+4. Start XAMPP MySQL (it will create new files)
+
+5. If it starts, RESTORE your databases:
+   a. Go to: C:\xampp\mysql\data_backup
+   b. Copy each database folder (like "facesofnaija") back to C:\xampp\mysql\data
+   c. Restart MySQL
+
+FIX 6: Disable Antivirus Temporarily
+-------------------------------------
+Sometimes antivirus blocks mysqld.exe:
+1. Temporarily disable your antivirus
+2. Try starting MySQL
+3. If it works, add mysqld.exe to antivirus exceptions:
+   - File: C:\xampp\mysql\bin\mysqld.exe
+
+FIX 7: Reinstall MySQL in XAMPP
+--------------------------------
+If all else fails:
+1. Backup database: C:\xampp\mysql\data
+2. In XAMPP Control Panel, click "Config" → "MySQL" → Uninstall
+3. Download fresh XAMPP from: https://www.apachefriends.org/
+4. Install only MySQL component
+5. Restore your database files
+
+TESTING:
+========
+After applying a fix, test by:
+1. Open XAMPP Control Panel
+2. Click "Start" next to MySQL
+3. It should turn GREEN and stay running
+4. Test connection: http://localhost/phpmyadmin
+
+IMMEDIATE WORKAROUND:
+=====================
+If you need to work NOW and can't fix MySQL, you can:
+1. Use online MySQL (like db4free.net)
+2. Use SQLite instead (requires code changes)
+3. Install MariaDB separately
+
+NEED HELP?
+==========
+Run the diagnostic script:
+1. Right-click "fix_xampp_mysql.bat"
+2. Run as Administrator
+3. Send me the output
+
+Or check XAMPP MySQL error log:
+1. XAMPP Control Panel → Logs (next to MySQL)
+2. Copy the last 20 lines
+3. Send to me for analysis
