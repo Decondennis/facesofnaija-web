@@ -174,7 +174,7 @@ function Wo_RegisterReactionLike(element,reaction_icon){
   //         reaction_color = '#f7806c';
   //         break;
   // }
-  reaction_icon = '<div class="inline_post_emoji"><img class="" src="'+reaction_icon+'"></div>';
+  reaction_icon = '<div class="inline_post_emoji"><img class="reaction-sm" src="'+reaction_icon+'" data-rid="'+reaction+'" alt="" onerror="this.onerror=null;this.src=\'/serve_any_reaction.php?id=\'+this.getAttribute(\'data-rid\');" /></div>';
 
     $('.status-reaction-'+post_id).html(reaction_icon+lang).css({"color": reaction_color});
     $('.status-reaction-'+post_id).addClass("active-like");
@@ -209,7 +209,7 @@ function Wo_RegisterReaction(element,reaction_icon){
     $('.reactions-box-container-'+post_id).fadeOut(1);
 
     var reaction_color = '';
-    reaction_icon = '<div class="inline_post_emoji"><img class="" src="'+reaction_icon+'"></div>';
+    reaction_icon = '<div class="inline_post_emoji"><img class="reaction-sm" src="'+reaction_icon+'" data-rid="'+reaction+'" alt="" onerror="this.onerror=null;this.src=\'/serve_any_reaction.php?id=\'+this.getAttribute(\'data-rid\');" /></div>';
     reaction_class = 'active-like';
     switch (reaction) {
         case '1':
@@ -985,6 +985,11 @@ $(window).on('load', function() {
     setTimeout( function () {
       if ($('#post-' + id + ' .wo-reaction-post:hover').length != 0) {
           $('.reactions-box-container-'+id).fadeIn(50);
+          setTimeout(function(){
+            $('.reactions-box-container-'+id+' img.reaction-sm').each(function(){
+              console.log('reaction-img', $(this).attr('src'), 'rid='+$(this).data('rid'));
+            });
+          }, 20);
       }
     }, 300);
   });
@@ -992,6 +997,11 @@ $(window).on('load', function() {
     var id = $( this ).attr( 'data-story-id' );
     setTimeout( function () {
       $('.reactions-box-story-container-'+id).fadeIn(50);
+        setTimeout(function(){
+          $('.reactions-box-story-container-'+id+' img.reaction-sm').each(function(){
+            console.log('reaction-story-img', $(this).attr('src'), 'rid='+$(this).data('rid'));
+          });
+        }, 20);
     }, 300);
   });
   $('body').delegate('.like-story-lightbox','mouseleave', function() {

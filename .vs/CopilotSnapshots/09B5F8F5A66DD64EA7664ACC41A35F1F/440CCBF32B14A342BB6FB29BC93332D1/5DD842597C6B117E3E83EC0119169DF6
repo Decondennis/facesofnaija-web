@@ -1,0 +1,66 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Animated rotating globe -->
+  <defs>
+    <linearGradient id="globeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e88e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="shineGrad">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Globe base -->
+  <circle cx="50" cy="50" r="45" fill="url(#globeGrad)"/>
+  
+  <!-- Continents (simplified) -->
+  <g fill="#2e7d32" opacity="0.9">
+    <!-- North America -->
+    <ellipse cx="25" cy="25" rx="12" ry="8" transform="rotate(-20 25 25)"/>
+    <ellipse cx="30" cy="35" rx="8" ry="10"/>
+    
+    <!-- South America -->
+    <ellipse cx="35" cy="55" rx="7" ry="12"/>
+    
+    <!-- Europe -->
+    <ellipse cx="50" cy="22" rx="10" ry="6"/>
+    
+    <!-- Africa -->
+    <ellipse cx="52" cy="45" rx="12" ry="15"/>
+    
+    <!-- Asia -->
+    <ellipse cx="70" cy="30" rx="14" ry="12"/>
+    
+    <!-- Australia -->
+    <ellipse cx="75" cy="60" rx="8" ry="6"/>
+  </g>
+  
+  <!-- Latitude lines -->
+  <g stroke="#ffffff" stroke-width="0.5" fill="none" opacity="0.3">
+    <ellipse cx="50" cy="50" rx="45" ry="10"/>
+    <ellipse cx="50" cy="50" rx="45" ry="20"/>
+    <ellipse cx="50" cy="50" rx="45" ry="30"/>
+    <circle cx="50" cy="50" r="45"/>
+  </g>
+  
+  <!-- Longitude lines -->
+  <g stroke="#ffffff" stroke-width="0.5" fill="none" opacity="0.3">
+    <ellipse cx="50" cy="50" rx="10" ry="45"/>
+    <ellipse cx="50" cy="50" rx="20" ry="45"/>
+    <ellipse cx="50" cy="50" rx="30" ry="45"/>
+  </g>
+  
+  <!-- Shine effect -->
+  <circle cx="35" cy="30" r="15" fill="url(#shineGrad)" opacity="0.6"/>
+  
+  <!-- Rotating animation -->
+  <animateTransform
+    attributeName="transform"
+    attributeType="XML"
+    type="rotate"
+    from="0 50 50"
+    to="360 50 50"
+    dur="3s"
+    repeatCount="indefinite"/>
+</svg>

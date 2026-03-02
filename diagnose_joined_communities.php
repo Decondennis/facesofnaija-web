@@ -28,7 +28,7 @@ if (mysqli_num_rows($members_check) > 0) {
     }
     echo "</table>";
 } else {
-    echo "<strong style='color:red;'>No memberships found in Wo_CommunityMembers table!</strong><br>";
+    echo "<strong style='color:red;'>No memberships found in " . T_COMMUNITY_MEMBERS . " table!</strong><br>";
     echo "This means the join didn't work properly.";
 }
 

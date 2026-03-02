@@ -531,19 +531,19 @@ function Wo_IsReportExists($id = false, $type = 'user') {
     if ($type == 'user') {
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `profile_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     } else if ($type == 'page') {
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `page_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     } else if ($type == 'group') {
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `group_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     } else if ($type == 'community') { // added this
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `community_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     }
     return $match;
 }

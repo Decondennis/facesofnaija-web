@@ -1,0 +1,8 @@
+﻿Options -Indexes
+Order Allow,Deny
+Allow from all
+
+AddType image/svg+xml .svg .svgz
+AddType image/png .png
+AddType image/jpeg .jpg .jpeg
+AddType image/gif .gif

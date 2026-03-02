@@ -244,6 +244,24 @@ function Wo_GetMyCommunities() {
     }
 
     $query_one  = mysqli_query($sqlConnect, $query_text);
+    /*
+     * Some installs used a slightly different table name (Wo_CommunityMembers)
+     * without the underscore. If the primary query returns zero rows try
+     * the alternate table name so existing membership records aren't missed.
+     */
+    if (mysqli_num_rows($query_one) == 0 && !Wo_IsAdmin() && !Wo_IsModerator()) {
+        $alt_table = str_replace('_', '', T_COMMUNITY_MEMBERS); // e.g. Wo_CommunityMembers
+        if ($alt_table != T_COMMUNITY_MEMBERS) {
+            $alt_q = "SELECT `id` FROM " . T_COMMUNITIES . " WHERE `id` IN (SELECT `community_id` FROM {$alt_table} WHERE `user_id` = {$user_id})";
+            $alt_res = @mysqli_query($sqlConnect, $alt_q);
+            if ($alt_res && mysqli_num_rows($alt_res) > 0) {
+                $query_one = $alt_res;
+                // expose alternate-table detection in debug for troubleshooting
+                $wo['joined_diag_alt_table'] = $alt_table;
+            }
+        }
+    }
+
     if (mysqli_num_rows($query_one)) {
         while ($fetched_data = mysqli_fetch_assoc($query_one)) {
             if (is_array($fetched_data)) {
@@ -361,6 +379,20 @@ function Wo_CommunitySug($limit = 20) {
         while ($fetched_data = mysqli_fetch_assoc($sql)) {
             $data[] = Wo_CommunityData($fetched_data['id']);
         }
+    }
+
+    // If no suggestions found (user joined all active communities),
+    // fallback to returning random active communities so the UI isn't empty.
+    if (empty($data)) {
+        $fallback = array();
+        $query_fb = " SELECT `id` FROM " . T_COMMUNITIES . " WHERE `active` = '1' ORDER BY RAND() LIMIT {$limit} ";
+        $sql_fb = mysqli_query($sqlConnect, $query_fb);
+        if (mysqli_num_rows($sql_fb)) {
+            while ($f = mysqli_fetch_assoc($sql_fb)) {
+                $fallback[] = Wo_CommunityData($f['id']);
+            }
+        }
+        return $fallback;
     }
 
     return $data;

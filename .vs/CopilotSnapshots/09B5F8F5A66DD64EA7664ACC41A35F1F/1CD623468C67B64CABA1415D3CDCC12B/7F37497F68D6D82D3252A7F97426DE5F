@@ -1,0 +1,30 @@
+﻿<?php 
+
+if ($f == 'join_community') {
+    if (isset($_GET['community_id']) && Wo_CheckMainSession($hash_id) === true) {
+        if (Wo_IsCommunityJoined($_GET['community_id']) === true || Wo_IsCommunityJoinRequested($_GET['community_id'], $wo['user']['user_id']) === true) {
+            if (Wo_LeaveCommunity($_GET['community_id'], $wo['user']['user_id'])) {
+                $data = array(
+                    'status' => 200,
+                    'html' => ''
+                );
+            }
+        } else {
+            if (Wo_RegisterCommunityJoin($_GET['community_id'], $wo['user']['user_id'])) {
+                $data = array(
+                    'status' => 200,
+                    'html' => ''
+                );
+                if (Wo_CanSenEmails()) {
+                    $data['can_send'] = 1;
+                }
+            }
+        }
+    }
+    if ($wo['loggedin'] == true) {
+        Wo_CleanCache();
+    }
+    header("Content-type: application/json");
+    echo json_encode($data);
+    exit();
+}

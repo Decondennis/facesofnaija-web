@@ -1,4 +1,9 @@
 <?php 
+// Admin create-forum diagnostics log
+$logp = dirname(__DIR__) . '/php-cli-test/admin_create.log';
+$entry = date('c') . " | add-new-forum called | user_id=" . (!empty($wo['user']['user_id'])? $wo['user']['user_id'] : '0') . " | is_admin=" . (Wo_IsAdmin() ? '1' : '0') . " | session_ok=" . (Wo_CheckSession($hash_id) ? '1' : '0') . " | POST=" . json_encode($_POST) . "\n";
+@file_put_contents($logp, $entry, FILE_APPEND);
+
 if ($f == "add-new-forum" && Wo_IsAdmin() == true && Wo_CheckSession($hash_id) === true) {
     if (empty($_POST['name']) || empty($_POST['description']) || empty($_POST['section'])) {
         $error = $error_icon . $wo['lang']['please_check_details'];

@@ -40,9 +40,7 @@ if ($community) {
     }
     
     echo "<br><h4>Your Communities:</h4>";
-    $my_communities = mysqli_query($sqlConnect, "SELECT c.* FROM Wo_Communities c 
-        INNER JOIN Wo_CommunityMembers cm ON c.id = cm.community_id 
-        WHERE cm.user_id = " . $wo['user']['user_id']);
+    $my_communities = mysqli_query($sqlConnect, "SELECT c.* FROM " . T_COMMUNITIES . " c INNER JOIN " . T_COMMUNITY_MEMBERS . " cm ON c.id = cm.community_id WHERE cm.user_id = " . $wo['user']['user_id']);
     
     if (mysqli_num_rows($my_communities) > 0) {
         echo "<ul>";

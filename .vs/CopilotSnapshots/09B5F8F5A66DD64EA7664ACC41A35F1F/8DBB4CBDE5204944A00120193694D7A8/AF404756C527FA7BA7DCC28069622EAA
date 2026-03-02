@@ -1,0 +1,73 @@
+﻿<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+			<div class="wow_content">
+				<div class="wo_page_hdng">
+					<div class="wo_page_hdng_innr">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z"/>
+							</svg>
+						</span> 
+						<?php echo $wo['lang']['my_community_requests'] ?? 'My Community Requests'; ?>
+					</div>
+				</div>
+				<div class="setting-well">
+					<?php
+					// Get communities where the current user has sent join requests
+					$user_id = $wo['user']['user_id'];
+					$query = mysqli_query($sqlConnect, "SELECT community_id FROM Wo_CommunityRequests WHERE user_id = {$user_id}");
+					
+					$community_requests = [];
+					while ($fetch = mysqli_fetch_assoc($query)) {
+						$community_data = Wo_CommunityData($fetch['community_id']);
+						if (!empty($community_data)) {
+							$community_requests[] = $community_data;
+						}
+					}
+					
+					if (count($community_requests) > 0) {
+						foreach ($community_requests as $wo['community']) {
+							?>
+							<div class="profile-style">
+								<a href="<?php echo Wo_SeoLink('index.php?link1=community&id=' . $wo['community']['community_id']); ?>" data-ajax="?link1=community&id=<?php echo $wo['community']['community_id']; ?>">
+									<div class="avatar <?php echo Wo_RightToLeft('pull-left');?>">
+										<img src="<?php echo $wo['community']['avatar']; ?>" alt="<?php echo $wo['community']['community_name']; ?>" />
+									</div>
+									<div class="name">
+										<?php echo $wo['community']['community_name']; ?>
+										<?php if($wo['community']['verified'] == 1) { ?>
+											<span class="verified-color">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather feather-check-circle" title="<?php echo $wo['lang']['verified'];?>" data-toggle="tooltip">
+													<path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
+												</svg>
+											</span>
+										<?php } ?>
+									</div>
+								</a>
+								<div class="page-website">
+									<?php echo $wo['community']['category']; ?>
+								</div>
+								<div class="page-description">
+									<span class="label label-warning"><?php echo $wo['lang']['request_pending'] ?? 'Request Pending'; ?></span>
+								</div>
+							</div>
+							<?php
+						}
+					} else {
+						?>
+						<div class="empty_state">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z" />
+							</svg>
+							<?php echo $wo['lang']['no_community_requests'] ?? 'You have no pending community join requests.'; ?>
+						</div>
+						<?php
+					}
+					?>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

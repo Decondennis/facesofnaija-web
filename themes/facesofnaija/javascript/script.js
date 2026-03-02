@@ -1190,13 +1190,15 @@ function Wo_RegisterCommunityJoin(community_id, privacy) {
   if (!community_id || !$.isNumeric(community_id) || community_id < 1) {
     return false;
   }
+  var main_hash = $('.main_session').val();
   $.ajax({
     url: Wo_Ajax_Requests_File(),
     type: 'GET',
     dataType: 'json',
     data: {
       f: 'join_community',
-      community_id: community_id
+      community_id: community_id,
+      hash: main_hash
     },
     beforeSend: function() {
       Wo_progressIconLoader($('#community-join-' + community_id).find('button'));

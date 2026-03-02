@@ -7031,6 +7031,12 @@ function Wo_GetReactionsTypes($type = "page") {
             if ($type == "page") {
                 if (!empty($fetched_data["wowonder_icon"])) {
                     $fetched_data["wowonder_icon"] = $fetched_data["wowonder_small_icon"] = Wo_GetMedia($fetched_data["wowonder_icon"]);
+                    // If wowonder small icon is an SVG, route it through the PHP handler
+                    if (str_ends_with(strtolower($fetched_data["wowonder_small_icon"]), '.svg')) {
+                        $url_path = parse_url($fetched_data["wowonder_small_icon"], PHP_URL_PATH);
+                        $file_name = basename($url_path);
+                        $fetched_data["wowonder_small_icon"] = $wo["config"]["site_url"] . "/serve_any_reaction.php?file=" . $file_name . "&id=" . $fetched_data["id"];
+                    }
                     // $explode2  = @end(explode('.', $fetched_data['wowonder_icon']));
                     // $explode3  = @explode('.', $fetched_data['wowonder_icon']);
                     // $fetched_data['wowonder_small_icon'] = $explode3[0] . '_small.' . $explode2;
@@ -7059,6 +7065,12 @@ function Wo_GetReactionsTypes($type = "page") {
                 }
                 if (!empty($fetched_data["sunshine_icon"])) {
                     $fetched_data["sunshine_icon"] = $fetched_data["sunshine_small_icon"] = Wo_GetMedia($fetched_data["sunshine_icon"]);
+                    // If the stored small icon is an SVG, point it to the PHP SVG handler
+                    if (str_ends_with(strtolower($fetched_data["sunshine_small_icon"]), '.svg')) {
+                        $url_path = parse_url($fetched_data["sunshine_small_icon"], PHP_URL_PATH);
+                        $file_name = basename($url_path);
+                        $fetched_data["sunshine_small_icon"] = $wo["config"]["site_url"] . "/serve_any_reaction.php?file=" . $file_name . "&id=" . $fetched_data["id"];
+                    }
                     // $explode2  = @end(explode('.', $fetched_data['sunshine_icon']));
                     // $explode3  = @explode('.', $fetched_data['sunshine_icon']);
                     // $fetched_data['sunshine_small_icon'] = $explode3[0] . '_small.' . $explode2;
@@ -7091,6 +7103,11 @@ function Wo_GetReactionsTypes($type = "page") {
             } else {
                 if (!empty($fetched_data["wowonder_icon"])) {
                     $fetched_data["wowonder_icon"] = $fetched_data["wowonder_small_icon"] = Wo_GetMedia($fetched_data["wowonder_icon"]);
+                    if (str_ends_with(strtolower($fetched_data["wowonder_small_icon"]), '.svg')) {
+                        $url_path = parse_url($fetched_data["wowonder_small_icon"], PHP_URL_PATH);
+                        $file_name = basename($url_path);
+                        $fetched_data["wowonder_small_icon"] = $wo["config"]["site_url"] . "/serve_any_reaction.php?file=" . $file_name . "&id=" . $fetched_data["id"];
+                    }
                     // $explode2  = @end(explode('.', $fetched_data['wowonder_icon']));
                     // $explode3  = @explode('.', $fetched_data['wowonder_icon']);
                     // $fetched_data['wowonder_small_icon'] = $explode3[0] . '_small.' . $explode2;
@@ -7119,6 +7136,11 @@ function Wo_GetReactionsTypes($type = "page") {
                 }
                 if (!empty($fetched_data["sunshine_icon"])) {
                     $fetched_data["sunshine_icon"] = $fetched_data["sunshine_small_icon"] = Wo_GetMedia($fetched_data["sunshine_icon"]);
+                    if (str_ends_with(strtolower($fetched_data["sunshine_small_icon"]), '.svg')) {
+                        $url_path = parse_url($fetched_data["sunshine_small_icon"], PHP_URL_PATH);
+                        $file_name = basename($url_path);
+                        $fetched_data["sunshine_small_icon"] = $wo["config"]["site_url"] . "/serve_any_reaction.php?file=" . $file_name . "&id=" . $fetched_data["id"];
+                    }
                     // $explode2  = @end(explode('.', $fetched_data['sunshine_icon']));
                     // $explode3  = @explode('.', $fetched_data['sunshine_icon']);
                     // $fetched_data['sunshine_small_icon'] = $explode3[0] . '_small.' . $explode2;

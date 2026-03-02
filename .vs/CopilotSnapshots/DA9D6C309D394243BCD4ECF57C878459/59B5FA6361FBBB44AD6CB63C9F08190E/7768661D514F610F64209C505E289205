@@ -1,0 +1,30 @@
+﻿<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once('config.php');
+require_once('assets/init.php');
+
+echo "Testing PHP loading...<br>";
+echo "Config loaded...<br>";
+echo "Init loaded...<br>";
+
+echo "All files loaded successfully!<br>";
+echo "Community functions exist: " . (function_exists('Wo_CommunityData') ? 'YES' : 'NO') . "<br>";
+
+// Test database connection
+$sqlConnect = mysqli_connect($sql_db_host, $sql_db_user, $sql_db_pass, $sql_db_name);
+if ($sqlConnect) {
+    echo "Database connected successfully!<br>";
+
+    // Check if communities table exists
+    $result = mysqli_query($sqlConnect, "SHOW TABLES LIKE 'Wo_Communities'");
+    if ($result && mysqli_num_rows($result) > 0) {
+        echo "Communities table exists!<br>";
+    } else {
+        echo "Communities table NOT found!<br>";
+    }
+} else {
+    echo "Database connection failed: " . mysqli_connect_error() . "<br>";
+}
+?>

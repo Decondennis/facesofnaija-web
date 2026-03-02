@@ -20,8 +20,7 @@ if (isset($_POST['create'])) {
         $community_id = mysqli_insert_id($sqlConnect);
 
         // Add creator as member
-        mysqli_query($sqlConnect, "INSERT INTO Wo_CommunityMembers (community_id, user_id, active, time) 
-            VALUES ($community_id, $user_id, 1, " . time() . ")");
+        mysqli_query($sqlConnect, "INSERT INTO " . T_COMMUNITY_MEMBERS . " (community_id, user_id, active, time) VALUES ($community_id, $user_id, 1, " . time() . ")");
 
         echo "<div style='background:green;color:white;padding:10px;'>";
         echo "✅ Community created successfully!<br>";

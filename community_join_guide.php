@@ -34,7 +34,7 @@ if (mysqli_num_rows($communities) > 0) {
     echo "<tr><th>ID</th><th>Name</th><th>Privacy</th><th>Members</th><th>Action</th></tr>";
     while ($comm = mysqli_fetch_assoc($communities)) {
         $privacy = ($comm['privacy'] == 1 ? 'Public' : 'Private');
-        $members_count = mysqli_fetch_assoc(mysqli_query($sqlConnect, "SELECT COUNT(*) as count FROM Wo_CommunityMembers WHERE community_id = " . $comm['id']))['count'];
+        $members_count = mysqli_fetch_assoc(mysqli_query($sqlConnect, "SELECT COUNT(*) as count FROM " . T_COMMUNITY_MEMBERS . " WHERE community_id = " . $comm['id']))['count'];
         
         echo "<tr>";
         echo "<td>" . $comm['id'] . "</td>";
@@ -52,11 +52,11 @@ if (mysqli_num_rows($communities) > 0) {
 
 // Check community members table
 echo "<hr><h3>Community System Check:</h3>";
-$check_members = mysqli_query($sqlConnect, "SHOW TABLES LIKE 'Wo_CommunityMembers'");
+$check_members = mysqli_query($sqlConnect, "SHOW TABLES LIKE '" . T_COMMUNITY_MEMBERS . "'");
 if (mysqli_num_rows($check_members) > 0) {
-    echo "✅ Wo_CommunityMembers table exists<br>";
+    echo "✅ " . T_COMMUNITY_MEMBERS . " table exists<br>";
 } else {
-    echo "❌ Wo_CommunityMembers table missing!<br>";
+    echo "❌ " . T_COMMUNITY_MEMBERS . " table missing!<br>";
 }
 
 $check_requests = mysqli_query($sqlConnect, "SHOW TABLES LIKE 'Wo_CommunityRequests'");

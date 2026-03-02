@@ -36,6 +36,7 @@ $allow_array     = array(
     'coinbase',
     'load_more_products',
     'yoomoney',
+    'debug_admin_session',
     'iyzipay',
 );
 if ($f == 'certification' && $s == 'download_user_certification' && !empty($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {

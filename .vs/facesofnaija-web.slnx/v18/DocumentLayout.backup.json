@@ -1,0 +1,1467 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\xampp\\htdocs\\facesofnaija-web\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\home\\content.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\home\\content.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\final_reaction_fix.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:final_reaction_fix.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_reaction_urls.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_reaction_urls.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:upload\\files\\2022\\09\\EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_svg.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_svg.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\default_avatar.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:upload\\files\\2022\\09\\default_avatar.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\check_headers.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:check_headers.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\quick_test.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:quick_test.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:upload\\files\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\serve_svg.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:serve_svg.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\upload\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:upload\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:upload\\files\\2022\\09\\iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\config.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:config.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\facesofnaija.sql||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:facesofnaija.sql||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\admin_load.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:admin_load.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\admincp.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:admincp.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\check_db.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:check_db.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_includes.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_includes.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\debug.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:debug.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\functions_one.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\includes\\functions_one.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_load.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_load.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\phpinfo.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:phpinfo.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\community_tables.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\includes\\community_tables.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\full_test.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:full_test.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\check_config.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:check_config.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\activate_all_users.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:activate_all_users.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_svg.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_svg.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\complete_fix.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:complete_fix.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\svg_diagnostic.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:svg_diagnostic.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\stylesheet\\font-awesome-4.7.0\\fonts\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\stylesheet\\font-awesome-4.7.0\\fonts\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\stylesheet\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\stylesheet\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_icons.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_icons.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\create_reactions.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:create_reactions.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_reaction.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_reaction.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\get_reaction.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:get_reaction.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\quick_reaction_test.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:quick_reaction_test.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:upload\\files\\2022\\09\\.htaccess||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\serve_any_reaction.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:serve_any_reaction.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\disable_socketio.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:disable_socketio.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\all_fixed.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:all_fixed.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_tts.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_tts.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\TTS_README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TTS_README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\img\\globe.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\img\\globe.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_announcement.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_announcement.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\ANNOUNCEMENT_README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ANNOUNCEMENT_README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\clear_all_cache.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:clear_all_cache.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_socketio_error.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_socketio_error.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\sources\\request-community.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:sources\\request-community.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\request-community.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\community\\request-community.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\check_community_requests.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:check_community_requests.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\ajax_loading.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ajax_loading.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\header\\content.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\header\\content.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\check_community_system.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:check_community_system.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_community_system.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_community_system.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_request_community.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:diagnose_request_community.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_community_access.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_community_access.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_request_community_final.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_request_community_final.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\community_join_guide.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:community_join_guide.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\content.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\community\\content.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\community_join_button_function.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:community_join_button_function.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\functions_two.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\includes\\functions_two.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-join.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\buttons\\community-join.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-leave.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\buttons\\community-leave.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-join-requested.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\buttons\\community-join-requested.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_join_button.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:diagnose_join_button.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_join_button.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_join_button.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_function_load.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_function_load.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\create_community_script.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:create_community_script.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\check_community_table.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:check_community_table.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_join_button_preview.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_join_button_preview.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\full_community_diagnostic.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:full_community_diagnostic.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\community_functions.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\includes\\community_functions.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_joined_communities.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:diagnose_joined_communities.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\joined-communities.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\layout\\community\\joined-communities.phtml||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\javascript\\script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:themes\\facesofnaija\\javascript\\script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\xhr\\join_community.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:xhr\\join_community.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\community_fixes_summary.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:community_fixes_summary.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\xhr\\communities.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:xhr\\communities.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\create_community_requests_table.sql||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:create_community_requests_table.sql||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\setup_community_requests.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:setup_community_requests.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\request_community_guide.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:request_community_guide.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\test_community_request_form.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:test_community_request_form.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\REQUEST_FORM_FIX_README.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:REQUEST_FORM_FIX_README.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\MYSQL_CONNECTION_ERROR_FIX.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MYSQL_CONNECTION_ERROR_FIX.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_xampp_mysql.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_xampp_mysql.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\XAMPP_MYSQL_FIX_GUIDE.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:XAMPP_MYSQL_FIX_GUIDE.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\mysql_diagnostic.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:mysql_diagnostic.ps1||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\fix_aria_logs.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fix_aria_logs.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\facesofnaija-web\\repair_mysql_tables.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:repair_mysql_tables.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "mysql_diagnostic.ps1",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\mysql_diagnostic.ps1",
+              "RelativeDocumentMoniker": "mysql_diagnostic.ps1",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\mysql_diagnostic.ps1",
+              "RelativeToolTip": "mysql_diagnostic.ps1",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T11:22:20.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "XAMPP_MYSQL_FIX_GUIDE.txt",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\XAMPP_MYSQL_FIX_GUIDE.txt",
+              "RelativeDocumentMoniker": "XAMPP_MYSQL_FIX_GUIDE.txt",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\XAMPP_MYSQL_FIX_GUIDE.txt",
+              "RelativeToolTip": "XAMPP_MYSQL_FIX_GUIDE.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-02-21T11:21:59.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "fix_xampp_mysql.bat",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_xampp_mysql.bat",
+              "RelativeDocumentMoniker": "fix_xampp_mysql.bat",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_xampp_mysql.bat",
+              "RelativeToolTip": "fix_xampp_mysql.bat",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG7SURBVDhPzZTNSxtBHEBfPGipJ\u002B2iGFBjzJqu4nda0EO99CaCeBOEQlsotCCUakMO6sWrBz8QlZaWInjxXyjtQbNKwCqYUGObRKIosfFSKTazcXsQQWZXJOqhD4aB37x5cxu4TUzTlEc3xhHwD8bBdMkH18ORyLtOrLOr23YH00XAP2BmMplbWQH/gJl34WELuweHfF5eYz91JB9dim3wz8lf9G8Rfib2\u002BH18TGQ7xnJog1T66rBtMByNkzpMc3qaxdegkc0a7Ozuk9w7kFULtsEmzYNhGHhc5VRVOPG6KzEMQb2myqoF22A4GkOIDOGtH2zHdtiIRBFC8DUYklULtsGyUoWyEgUhBF\u002BWVskaBiVKEW2tjbJqwTZYqhTT0dZKg6ZypyCfWq\u002Bbx4/aiSeTvPIPsb4Z5lc6LV\u002BDy4LnVJY76e3pxFtdxeS7j8x8mKeuxsP49Cxz7z/JOlwVvEitWk1djYeXz55Qr91HVd2yArkEI9\u002B3WA2FGJuYIqivENR1WYFcgk/7eul/8RxdX\u002BHt635GR4ZlBXIJKveK8bU0s7gwz8MHPgoL78oKnH1fb\u002BLgyPnHscdMyJP/j39Wh9oGPXeiTgAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-02-21T11:21:32.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "MYSQL_CONNECTION_ERROR_FIX.txt",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\MYSQL_CONNECTION_ERROR_FIX.txt",
+              "RelativeDocumentMoniker": "MYSQL_CONNECTION_ERROR_FIX.txt",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\MYSQL_CONNECTION_ERROR_FIX.txt",
+              "RelativeToolTip": "MYSQL_CONNECTION_ERROR_FIX.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-02-21T11:17:02.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "content.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\home\\content.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\home\\content.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\home\\content.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\home\\content.phtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAqwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:40:55.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "repair_mysql_tables.bat",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\repair_mysql_tables.bat",
+              "RelativeDocumentMoniker": "repair_mysql_tables.bat",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\repair_mysql_tables.bat",
+              "RelativeToolTip": "repair_mysql_tables.bat",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG7SURBVDhPzZTNSxtBHEBfPGipJ\u002B2iGFBjzJqu4nda0EO99CaCeBOEQlsotCCUakMO6sWrBz8QlZaWInjxXyjtQbNKwCqYUGObRKIosfFSKTazcXsQQWZXJOqhD4aB37x5cxu4TUzTlEc3xhHwD8bBdMkH18ORyLtOrLOr23YH00XAP2BmMplbWQH/gJl34WELuweHfF5eYz91JB9dim3wz8lf9G8Rfib2\u002BH18TGQ7xnJog1T66rBtMByNkzpMc3qaxdegkc0a7Ozuk9w7kFULtsEmzYNhGHhc5VRVOPG6KzEMQb2myqoF22A4GkOIDOGtH2zHdtiIRBFC8DUYklULtsGyUoWyEgUhBF\u002BWVskaBiVKEW2tjbJqwTZYqhTT0dZKg6ZypyCfWq\u002Bbx4/aiSeTvPIPsb4Z5lc6LV\u002BDy4LnVJY76e3pxFtdxeS7j8x8mKeuxsP49Cxz7z/JOlwVvEitWk1djYeXz55Qr91HVd2yArkEI9\u002B3WA2FGJuYIqivENR1WYFcgk/7eul/8RxdX\u002BHt635GR4ZlBXIJKveK8bU0s7gwz8MHPgoL78oKnH1fb\u002BLgyPnHscdMyJP/j39Wh9oGPXeiTgAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-02-21T11:31:34.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "fix_aria_logs.bat",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_aria_logs.bat",
+              "RelativeDocumentMoniker": "fix_aria_logs.bat",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_aria_logs.bat",
+              "RelativeToolTip": "fix_aria_logs.bat",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG7SURBVDhPzZTNSxtBHEBfPGipJ\u002B2iGFBjzJqu4nda0EO99CaCeBOEQlsotCCUakMO6sWrBz8QlZaWInjxXyjtQbNKwCqYUGObRKIosfFSKTazcXsQQWZXJOqhD4aB37x5cxu4TUzTlEc3xhHwD8bBdMkH18ORyLtOrLOr23YH00XAP2BmMplbWQH/gJl34WELuweHfF5eYz91JB9dim3wz8lf9G8Rfib2\u002BH18TGQ7xnJog1T66rBtMByNkzpMc3qaxdegkc0a7Ozuk9w7kFULtsEmzYNhGHhc5VRVOPG6KzEMQb2myqoF22A4GkOIDOGtH2zHdtiIRBFC8DUYklULtsGyUoWyEgUhBF\u002BWVskaBiVKEW2tjbJqwTZYqhTT0dZKg6ZypyCfWq\u002Bbx4/aiSeTvPIPsb4Z5lc6LV\u002BDy4LnVJY76e3pxFtdxeS7j8x8mKeuxsP49Cxz7z/JOlwVvEitWk1djYeXz55Qr91HVd2yArkEI9\u002B3WA2FGJuYIqivENR1WYFcgk/7eul/8RxdX\u002BHt635GR4ZlBXIJKveK8bU0s7gwz8MHPgoL78oKnH1fb\u002BLgyPnHscdMyJP/j39Wh9oGPXeiTgAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-02-21T11:28:00.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "script.js",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\javascript\\script.js",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\javascript\\script.js",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\javascript\\script.js",
+              "RelativeToolTip": "themes\\facesofnaija\\javascript\\script.js",
+              "ViewState": "AgIAALsEAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-02-21T08:33:25.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "diagnose_join_button.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_join_button.php",
+              "RelativeDocumentMoniker": "diagnose_join_button.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_join_button.php",
+              "RelativeToolTip": "diagnose_join_button.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:01:08.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "community-join.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-join.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\buttons\\community-join.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-join.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\buttons\\community-join.phtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:54:29.484Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "community_fixes_summary.html",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\community_fixes_summary.html",
+              "RelativeDocumentMoniker": "community_fixes_summary.html",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\community_fixes_summary.html",
+              "RelativeToolTip": "community_fixes_summary.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-02-21T08:36:54.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "REQUEST_FORM_FIX_README.txt",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\REQUEST_FORM_FIX_README.txt",
+              "RelativeDocumentMoniker": "REQUEST_FORM_FIX_README.txt",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\REQUEST_FORM_FIX_README.txt",
+              "RelativeToolTip": "REQUEST_FORM_FIX_README.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-02-21T09:05:16.586Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "test_community_request_form.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_community_request_form.php",
+              "RelativeDocumentMoniker": "test_community_request_form.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_community_request_form.php",
+              "RelativeToolTip": "test_community_request_form.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T09:04:39.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "request_community_guide.html",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\request_community_guide.html",
+              "RelativeDocumentMoniker": "request_community_guide.html",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\request_community_guide.html",
+              "RelativeToolTip": "request_community_guide.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-02-21T08:54:44.229Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "setup_community_requests.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\setup_community_requests.php",
+              "RelativeDocumentMoniker": "setup_community_requests.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\setup_community_requests.php",
+              "RelativeToolTip": "setup_community_requests.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:54:01.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "create_community_requests_table.sql",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\create_community_requests_table.sql",
+              "RelativeDocumentMoniker": "create_community_requests_table.sql",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\create_community_requests_table.sql",
+              "RelativeToolTip": "create_community_requests_table.sql",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-21T08:53:44.874Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "functions_two.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\functions_two.php",
+              "RelativeDocumentMoniker": "assets\\includes\\functions_two.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\functions_two.php",
+              "RelativeToolTip": "assets\\includes\\functions_two.php",
+              "ViewState": "AgIAALUKAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:54:04.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "communities.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\xhr\\communities.php",
+              "RelativeDocumentMoniker": "xhr\\communities.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\xhr\\communities.php",
+              "RelativeToolTip": "xhr\\communities.php",
+              "ViewState": "AgIAAGEAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:53:37.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "community_join_button_function.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\community_join_button_function.php",
+              "RelativeDocumentMoniker": "community_join_button_function.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\community_join_button_function.php",
+              "RelativeToolTip": "community_join_button_function.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:53:49.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "join_community.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\xhr\\join_community.php",
+              "RelativeDocumentMoniker": "xhr\\join_community.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\xhr\\join_community.php",
+              "RelativeToolTip": "xhr\\join_community.php",
+              "ViewState": "AgIAAAYAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:36:13.122Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "joined-communities.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\joined-communities.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\community\\joined-communities.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\joined-communities.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\community\\joined-communities.phtml",
+              "ViewState": "AgIAAB8AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:32:22.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "diagnose_joined_communities.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_joined_communities.php",
+              "RelativeDocumentMoniker": "diagnose_joined_communities.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_joined_communities.php",
+              "RelativeToolTip": "diagnose_joined_communities.php",
+              "ViewState": "AgIAAAoAAAAAAAAAAABBwFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:26:58.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "community_functions.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\community_functions.php",
+              "RelativeDocumentMoniker": "assets\\includes\\community_functions.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\community_functions.php",
+              "RelativeToolTip": "assets\\includes\\community_functions.php",
+              "ViewState": "AgIAAPAAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:17:34.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "full_community_diagnostic.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\full_community_diagnostic.php",
+              "RelativeDocumentMoniker": "full_community_diagnostic.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\full_community_diagnostic.php",
+              "RelativeToolTip": "full_community_diagnostic.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:15:21.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "test_join_button_preview.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_join_button_preview.php",
+              "RelativeDocumentMoniker": "test_join_button_preview.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_join_button_preview.php",
+              "RelativeToolTip": "test_join_button_preview.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:12:02.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "check_community_table.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\check_community_table.php",
+              "RelativeDocumentMoniker": "check_community_table.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\check_community_table.php",
+              "RelativeToolTip": "check_community_table.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:11:30.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "create_community_script.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\create_community_script.php",
+              "RelativeDocumentMoniker": "create_community_script.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\create_community_script.php",
+              "RelativeToolTip": "create_community_script.php",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:06:09.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "test_function_load.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_function_load.php",
+              "RelativeDocumentMoniker": "test_function_load.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_function_load.php",
+              "RelativeToolTip": "test_function_load.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:05:52.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "test_join_button.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_join_button.php",
+              "RelativeDocumentMoniker": "test_join_button.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_join_button.php",
+              "RelativeToolTip": "test_join_button.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T08:01:37.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "content.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\content.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\community\\content.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\content.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\community\\content.phtml",
+              "ViewState": "AgIAAFAAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:51:53.563Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "community-join-requested.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-join-requested.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\buttons\\community-join-requested.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-join-requested.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\buttons\\community-join-requested.phtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:54:49.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ajax_loading.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\ajax_loading.php",
+              "RelativeDocumentMoniker": "ajax_loading.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\ajax_loading.php",
+              "RelativeToolTip": "ajax_loading.php",
+              "ViewState": "AgIAAPECAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T06:50:50.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "community-leave.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-leave.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\buttons\\community-leave.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\buttons\\community-leave.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\buttons\\community-leave.phtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:54:39.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "request-community.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\request-community.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\community\\request-community.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\community\\request-community.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\community\\request-community.phtml",
+              "ViewState": "AgIAAI8AAAAAAAAAAABBwLAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T06:43:30.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "request-community.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\sources\\request-community.php",
+              "RelativeDocumentMoniker": "sources\\request-community.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\sources\\request-community.php",
+              "RelativeToolTip": "sources\\request-community.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T06:43:03.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "fix_socketio_error.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_socketio_error.php",
+              "RelativeDocumentMoniker": "fix_socketio_error.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_socketio_error.php",
+              "RelativeToolTip": "fix_socketio_error.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T06:40:37.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "community_join_guide.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\community_join_guide.php",
+              "RelativeDocumentMoniker": "community_join_guide.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\community_join_guide.php",
+              "RelativeToolTip": "community_join_guide.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:47:23.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "test_request_community_final.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_request_community_final.php",
+              "RelativeDocumentMoniker": "test_request_community_final.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_request_community_final.php",
+              "RelativeToolTip": "test_request_community_final.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:40:06.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "fix_community_access.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_community_access.php",
+              "RelativeDocumentMoniker": "fix_community_access.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_community_access.php",
+              "RelativeToolTip": "fix_community_access.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:23:02.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "diagnose_request_community.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_request_community.php",
+              "RelativeDocumentMoniker": "diagnose_request_community.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\diagnose_request_community.php",
+              "RelativeToolTip": "diagnose_request_community.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:20:49.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "fix_community_system.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_community_system.php",
+              "RelativeDocumentMoniker": "fix_community_system.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_community_system.php",
+              "RelativeToolTip": "fix_community_system.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:17:09.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "check_community_system.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\check_community_system.php",
+              "RelativeDocumentMoniker": "check_community_system.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\check_community_system.php",
+              "RelativeToolTip": "check_community_system.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:16:18.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "clear_all_cache.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\clear_all_cache.php",
+              "RelativeDocumentMoniker": "clear_all_cache.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\clear_all_cache.php",
+              "RelativeToolTip": "clear_all_cache.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T06:40:29.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "content.phtml",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\header\\content.phtml",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\layout\\header\\content.phtml",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\layout\\header\\content.phtml",
+              "RelativeToolTip": "themes\\facesofnaija\\layout\\header\\content.phtml",
+              "ViewState": "AgIAABsAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T07:01:36.842Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "check_community_requests.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\check_community_requests.php",
+              "RelativeDocumentMoniker": "check_community_requests.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\check_community_requests.php",
+              "RelativeToolTip": "check_community_requests.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-21T06:43:43.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "test_tts.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_tts.php",
+              "RelativeDocumentMoniker": "test_tts.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_tts.php",
+              "RelativeToolTip": "test_tts.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:42:42.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "TTS_README.md",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\TTS_README.md",
+              "RelativeDocumentMoniker": "TTS_README.md",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\TTS_README.md",
+              "RelativeToolTip": "TTS_README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-02-20T19:44:08.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "globe.svg",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\img\\globe.svg",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\img\\globe.svg",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\img\\globe.svg",
+              "RelativeToolTip": "themes\\facesofnaija\\img\\globe.svg",
+              "ViewState": "AgIAADYAAAAAAAAAAABBwDgAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQESURBVDhPrZRdbJNVHMZ/b/u26xfUbqPYbd2wIKxsbGDYpk6joISJCuIHRkyMVxpDNBpjQjDRZFfeaFiI3ojGS00MshgvIEQkYyTAnJMs4yPb2Nqt27p17d5\u002B0L7v23O8WDc28JIneXK\u002B/ufJ\u002BZ/znD88SEgplXvnurq6jjc2Nn5UWkdKuRQLgBCCfD5PNpvtPnr06JFoNBpbrXAPurq6hoQQolgs/i9N0xQDAwOir69PnDhx4tdwOLxl5X7rygFAR0fHkba2tkohwdRTiNw1lMwP6DM/Y0z9AcDwhMHOljacTmfIbrfXTE5OXkskEon7BO2tbyr1za1HbuTKKm9N9rLW/A7nzPeYsbOgbEHIIGb8EtFZqNvcis/nU10u16by8vLg9evXL6bT6fSioKLgfmy/r/bF975cE6h9viVss\u002B9efxzv9BkGRrfzm/YxI2WH2da8DzE7RMZwc7F/jP7\u002BfjRNs/p8vvCFCxd\u002BSaVSMRXA0bjXW3fgw8\u002Be21nz/mvbRlw7xeckbubozR7jVugVorqTSyPTZI0xXvc3UN\u002B8kRr86LqOx\u002BNhcHBwOUsLgL/jg/a28Lq3DzVcXtuS\u002B1RZGMgzqXSSW3cQWxbchknthiquzhbpST6CsqaWysoKAoEAXq8Xq9W67AILQF3Ac/Dl\u002BqGKJuMbZa7PwNX0E9seP8ihHQHeaqokMzWLz16G4nbSl7Axl7eUziNhhbUAVICt61JPP\u002BH90ZkZdfCt8QUTf9kwzH8RUiIR5IsqFaoFm93G6GyBZFqnaq0DKQHlrkcB1KqAan\u002B36UyNLTKinLd8Jd0te5SQtLAYTUlUYtzR0XWDgmliSllalsh7PoBl4kbtgc3i97IrmcNyqGJv8cqlm1KOjiNGxigO36Y4fBsxfBslOk51YZ5ngx78HntJbPUvAlClFntjZry6cL64CyMrVbfTZmkPVSo7qt14HSpa3uDyWJJIMgdSEvS58DjUpQQW73EF1PxEvj2ZLfuzd1rdWqum6taHqpWzUznO3ppB6gaqXaXoqSBZdDEfn\u002BcFi4LNcrcELKW8BIu5oDj3HSscjk3PfX1zaDQxPpWWunsN1G5A2fQoheo64lIhHk8Qcpi81Lgeu3Xple\u002BH9dg7\u002BJ95OBm62nujpy5gMzIpo17LCPdEfIHEXIo7iXls6QUaHlL5ZNdGyt12UJRlyyiKQiQS4fTp0yc1TYtZN1RxOTbN7rB95pnqeM9goKbZtefJp\u002Br9tiJbvCqtVW72N/h5dXsVDpu6eIySXQAUi4VIJEp3d/dJTdPuL2WdnZ09QghhGEaJujD0RerLLCy3hmGIc\u002BfOiWAw2MKSsVdCSvn3qVOn2kt9pJQIIVYV2pUE0DTtH2B\u002BtdIDwn\u002B7nChdLXVvTAAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-02-20T19:51:24.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "test_announcement.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_announcement.php",
+              "RelativeDocumentMoniker": "test_announcement.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_announcement.php",
+              "RelativeToolTip": "test_announcement.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:52:11.828Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ANNOUNCEMENT_README.md",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\ANNOUNCEMENT_README.md",
+              "RelativeDocumentMoniker": "ANNOUNCEMENT_README.md",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\ANNOUNCEMENT_README.md",
+              "RelativeToolTip": "ANNOUNCEMENT_README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-02-20T19:52:38.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "all_fixed.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\all_fixed.php",
+              "RelativeDocumentMoniker": "all_fixed.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\all_fixed.php",
+              "RelativeToolTip": "all_fixed.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:25:34.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "disable_socketio.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\disable_socketio.php",
+              "RelativeDocumentMoniker": "disable_socketio.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\disable_socketio.php",
+              "RelativeToolTip": "disable_socketio.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:25:11.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "serve_any_reaction.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\serve_any_reaction.php",
+              "RelativeDocumentMoniker": "serve_any_reaction.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\serve_any_reaction.php",
+              "RelativeToolTip": "serve_any_reaction.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:24:58.993Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\.htaccess",
+              "RelativeDocumentMoniker": "upload\\files\\2022\\09\\.htaccess",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\.htaccess",
+              "RelativeToolTip": "upload\\files\\2022\\09\\.htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:24:58.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "final_reaction_fix.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\final_reaction_fix.php",
+              "RelativeDocumentMoniker": "final_reaction_fix.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\final_reaction_fix.php",
+              "RelativeToolTip": "final_reaction_fix.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:19:59.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "fix_reaction_urls.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_reaction_urls.php",
+              "RelativeDocumentMoniker": "fix_reaction_urls.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_reaction_urls.php",
+              "RelativeToolTip": "fix_reaction_urls.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:09:35.084Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "get_reaction.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\get_reaction.php",
+              "RelativeDocumentMoniker": "get_reaction.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\get_reaction.php",
+              "RelativeToolTip": "get_reaction.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:08:40.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "test_reaction.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_reaction.php",
+              "RelativeDocumentMoniker": "test_reaction.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_reaction.php",
+              "RelativeToolTip": "test_reaction.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:04:26.588Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "create_reactions.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\create_reactions.php",
+              "RelativeDocumentMoniker": "create_reactions.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\create_reactions.php",
+              "RelativeToolTip": "create_reactions.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:00:54.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg",
+              "RelativeDocumentMoniker": "upload\\files\\2022\\09\\EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg",
+              "RelativeToolTip": "upload\\files\\2022\\09\\EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQESURBVDhPrZRdbJNVHMZ/b/u26xfUbqPYbd2wIKxsbGDYpk6joISJCuIHRkyMVxpDNBpjQjDRZFfeaFiI3ojGS00MshgvIEQkYyTAnJMs4yPb2Nqt27p17d5\u002B0L7v23O8WDc28JIneXK\u002B/ufJ\u002BZ/znD88SEgplXvnurq6jjc2Nn5UWkdKuRQLgBCCfD5PNpvtPnr06JFoNBpbrXAPurq6hoQQolgs/i9N0xQDAwOir69PnDhx4tdwOLxl5X7rygFAR0fHkba2tkohwdRTiNw1lMwP6DM/Y0z9AcDwhMHOljacTmfIbrfXTE5OXkskEon7BO2tbyr1za1HbuTKKm9N9rLW/A7nzPeYsbOgbEHIIGb8EtFZqNvcis/nU10u16by8vLg9evXL6bT6fSioKLgfmy/r/bF975cE6h9viVss\u002B9efxzv9BkGRrfzm/YxI2WH2da8DzE7RMZwc7F/jP7\u002BfjRNs/p8vvCFCxd\u002BSaVSMRXA0bjXW3fgw8\u002Be21nz/mvbRlw7xeckbubozR7jVugVorqTSyPTZI0xXvc3UN\u002B8kRr86LqOx\u002BNhcHBwOUsLgL/jg/a28Lq3DzVcXtuS\u002B1RZGMgzqXSSW3cQWxbchknthiquzhbpST6CsqaWysoKAoEAXq8Xq9W67AILQF3Ac/Dl\u002BqGKJuMbZa7PwNX0E9seP8ihHQHeaqokMzWLz16G4nbSl7Axl7eUziNhhbUAVICt61JPP\u002BH90ZkZdfCt8QUTf9kwzH8RUiIR5IsqFaoFm93G6GyBZFqnaq0DKQHlrkcB1KqAan\u002B36UyNLTKinLd8Jd0te5SQtLAYTUlUYtzR0XWDgmliSllalsh7PoBl4kbtgc3i97IrmcNyqGJv8cqlm1KOjiNGxigO36Y4fBsxfBslOk51YZ5ngx78HntJbPUvAlClFntjZry6cL64CyMrVbfTZmkPVSo7qt14HSpa3uDyWJJIMgdSEvS58DjUpQQW73EF1PxEvj2ZLfuzd1rdWqum6taHqpWzUznO3ppB6gaqXaXoqSBZdDEfn\u002BcFi4LNcrcELKW8BIu5oDj3HSscjk3PfX1zaDQxPpWWunsN1G5A2fQoheo64lIhHk8Qcpi81Lgeu3Xple\u002BH9dg7\u002BJ95OBm62nujpy5gMzIpo17LCPdEfIHEXIo7iXls6QUaHlL5ZNdGyt12UJRlyyiKQiQS4fTp0yc1TYtZN1RxOTbN7rB95pnqeM9goKbZtefJp\u002Br9tiJbvCqtVW72N/h5dXsVDpu6eIySXQAUi4VIJEp3d/dJTdPuL2WdnZ09QghhGEaJujD0RerLLCy3hmGIc\u002BfOiWAw2MKSsVdCSvn3qVOn2kt9pJQIIVYV2pUE0DTtH2B\u002BtdIDwn\u002B7nChdLXVvTAAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-02-20T19:00:17.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "quick_reaction_test.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\quick_reaction_test.php",
+              "RelativeDocumentMoniker": "quick_reaction_test.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\quick_reaction_test.php",
+              "RelativeToolTip": "quick_reaction_test.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T19:10:25.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\stylesheet\\.htaccess",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\stylesheet\\.htaccess",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\stylesheet\\.htaccess",
+              "RelativeToolTip": "themes\\facesofnaija\\stylesheet\\.htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:19:17.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\stylesheet\\font-awesome-4.7.0\\fonts\\.htaccess",
+              "RelativeDocumentMoniker": "themes\\facesofnaija\\stylesheet\\font-awesome-4.7.0\\fonts\\.htaccess",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\themes\\facesofnaija\\stylesheet\\font-awesome-4.7.0\\fonts\\.htaccess",
+              "RelativeToolTip": "themes\\facesofnaija\\stylesheet\\font-awesome-4.7.0\\fonts\\.htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:19:16.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "check_headers.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\check_headers.php",
+              "RelativeDocumentMoniker": "check_headers.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\check_headers.php",
+              "RelativeToolTip": "check_headers.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:16:25.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "quick_test.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\quick_test.php",
+              "RelativeDocumentMoniker": "quick_test.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\quick_test.php",
+              "RelativeToolTip": "quick_test.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:14:12.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "default_avatar.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\default_avatar.php",
+              "RelativeDocumentMoniker": "upload\\files\\2022\\09\\default_avatar.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\default_avatar.php",
+              "RelativeToolTip": "upload\\files\\2022\\09\\default_avatar.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:09:56.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "test_svg.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_svg.php",
+              "RelativeDocumentMoniker": "test_svg.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_svg.php",
+              "RelativeToolTip": "test_svg.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:03:16.918Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "test_icons.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_icons.php",
+              "RelativeDocumentMoniker": "test_icons.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_icons.php",
+              "RelativeToolTip": "test_icons.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:19:51.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\.htaccess",
+              "RelativeDocumentMoniker": "upload\\files\\.htaccess",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\.htaccess",
+              "RelativeToolTip": "upload\\files\\.htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:13:00.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "serve_svg.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\serve_svg.php",
+              "RelativeDocumentMoniker": "serve_svg.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\serve_svg.php",
+              "RelativeToolTip": "serve_svg.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:09:10.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "svg_diagnostic.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\svg_diagnostic.php",
+              "RelativeDocumentMoniker": "svg_diagnostic.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\svg_diagnostic.php",
+              "RelativeToolTip": "svg_diagnostic.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:09:00.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\.htaccess",
+              "RelativeDocumentMoniker": "upload\\.htaccess",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\.htaccess",
+              "RelativeToolTip": "upload\\.htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:02:56.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": ".htaccess",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\.htaccess",
+              "RelativeDocumentMoniker": ".htaccess",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\.htaccess",
+              "RelativeToolTip": ".htaccess",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T17:54:30.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "complete_fix.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\complete_fix.php",
+              "RelativeDocumentMoniker": "complete_fix.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\complete_fix.php",
+              "RelativeToolTip": "complete_fix.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T18:04:00.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "fix_svg.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_svg.php",
+              "RelativeDocumentMoniker": "fix_svg.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\fix_svg.php",
+              "RelativeToolTip": "fix_svg.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T17:56:23.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg",
+              "RelativeDocumentMoniker": "upload\\files\\2022\\09\\iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\upload\\files\\2022\\09\\iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg",
+              "RelativeToolTip": "upload\\files\\2022\\09\\iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAjAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQESURBVDhPrZRdbJNVHMZ/b/u26xfUbqPYbd2wIKxsbGDYpk6joISJCuIHRkyMVxpDNBpjQjDRZFfeaFiI3ojGS00MshgvIEQkYyTAnJMs4yPb2Nqt27p17d5\u002B0L7v23O8WDc28JIneXK\u002B/ufJ\u002BZ/znD88SEgplXvnurq6jjc2Nn5UWkdKuRQLgBCCfD5PNpvtPnr06JFoNBpbrXAPurq6hoQQolgs/i9N0xQDAwOir69PnDhx4tdwOLxl5X7rygFAR0fHkba2tkohwdRTiNw1lMwP6DM/Y0z9AcDwhMHOljacTmfIbrfXTE5OXkskEon7BO2tbyr1za1HbuTKKm9N9rLW/A7nzPeYsbOgbEHIIGb8EtFZqNvcis/nU10u16by8vLg9evXL6bT6fSioKLgfmy/r/bF975cE6h9viVss\u002B9efxzv9BkGRrfzm/YxI2WH2da8DzE7RMZwc7F/jP7\u002BfjRNs/p8vvCFCxd\u002BSaVSMRXA0bjXW3fgw8\u002Be21nz/mvbRlw7xeckbubozR7jVugVorqTSyPTZI0xXvc3UN\u002B8kRr86LqOx\u002BNhcHBwOUsLgL/jg/a28Lq3DzVcXtuS\u002B1RZGMgzqXSSW3cQWxbchknthiquzhbpST6CsqaWysoKAoEAXq8Xq9W67AILQF3Ac/Dl\u002BqGKJuMbZa7PwNX0E9seP8ihHQHeaqokMzWLz16G4nbSl7Axl7eUziNhhbUAVICt61JPP\u002BH90ZkZdfCt8QUTf9kwzH8RUiIR5IsqFaoFm93G6GyBZFqnaq0DKQHlrkcB1KqAan\u002B36UyNLTKinLd8Jd0te5SQtLAYTUlUYtzR0XWDgmliSllalsh7PoBl4kbtgc3i97IrmcNyqGJv8cqlm1KOjiNGxigO36Y4fBsxfBslOk51YZ5ngx78HntJbPUvAlClFntjZry6cL64CyMrVbfTZmkPVSo7qt14HSpa3uDyWJJIMgdSEvS58DjUpQQW73EF1PxEvj2ZLfuzd1rdWqum6taHqpWzUznO3ppB6gaqXaXoqSBZdDEfn\u002BcFi4LNcrcELKW8BIu5oDj3HSscjk3PfX1zaDQxPpWWunsN1G5A2fQoheo64lIhHk8Qcpi81Lgeu3Xple\u002BH9dg7\u002BJ95OBm62nujpy5gMzIpo17LCPdEfIHEXIo7iXls6QUaHlL5ZNdGyt12UJRlyyiKQiQS4fTp0yc1TYtZN1RxOTbN7rB95pnqeM9goKbZtefJp\u002Br9tiJbvCqtVW72N/h5dXsVDpu6eIySXQAUi4VIJEp3d/dJTdPuL2WdnZ09QghhGEaJujD0RerLLCy3hmGIc\u002BfOiWAw2MKSsVdCSvn3qVOn2kt9pJQIIVYV2pUE0DTtH2B\u002BtdIDwn\u002B7nChdLXVvTAAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-02-20T17:55:31.05Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "activate_all_users.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\activate_all_users.php",
+              "RelativeDocumentMoniker": "activate_all_users.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\activate_all_users.php",
+              "RelativeToolTip": "activate_all_users.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T17:25:28.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "check_config.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\check_config.php",
+              "RelativeDocumentMoniker": "check_config.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\check_config.php",
+              "RelativeToolTip": "check_config.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T17:18:31.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "check_db.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\check_db.php",
+              "RelativeDocumentMoniker": "check_db.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\check_db.php",
+              "RelativeToolTip": "check_db.php",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T21:21:16.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "config.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\config.php",
+              "RelativeDocumentMoniker": "config.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\config.php",
+              "RelativeToolTip": "config.php",
+              "ViewState": "AgIAAAoAAAAAAAAAAAASwBkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T13:23:11.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "facesofnaija.sql",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\facesofnaija.sql",
+              "RelativeDocumentMoniker": "facesofnaija.sql",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\facesofnaija.sql",
+              "RelativeToolTip": "facesofnaija.sql",
+              "ViewState": "AgIAAP0RAAAAAAAAAAAqwCwSAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-19T16:26:59.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "admincp.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\admincp.php",
+              "RelativeDocumentMoniker": "admincp.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\admincp.php",
+              "RelativeToolTip": "admincp.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T08:17:51.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "debug.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\debug.php",
+              "RelativeDocumentMoniker": "debug.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\debug.php",
+              "RelativeToolTip": "debug.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T17:59:34.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "admin_load.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\admin_load.php",
+              "RelativeDocumentMoniker": "admin_load.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\admin_load.php",
+              "RelativeToolTip": "admin_load.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-20T08:17:55.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "community_tables.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\community_tables.php",
+              "RelativeDocumentMoniker": "assets\\includes\\community_tables.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\community_tables.php",
+              "RelativeToolTip": "assets\\includes\\community_tables.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T21:13:33.65Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "test_includes.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_includes.php",
+              "RelativeDocumentMoniker": "test_includes.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_includes.php",
+              "RelativeToolTip": "test_includes.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T21:13:49.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "full_test.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\full_test.php",
+              "RelativeDocumentMoniker": "full_test.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\full_test.php",
+              "RelativeToolTip": "full_test.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T21:20:15.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "phpinfo.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\phpinfo.php",
+              "RelativeDocumentMoniker": "phpinfo.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\phpinfo.php",
+              "RelativeToolTip": "phpinfo.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T17:54:15.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "test_load.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\test_load.php",
+              "RelativeDocumentMoniker": "test_load.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\test_load.php",
+              "RelativeToolTip": "test_load.php",
+              "ViewState": "AgIAAAMAAAAAAAAAAABBwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T17:52:20.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "functions_one.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\functions_one.php",
+              "RelativeDocumentMoniker": "assets\\includes\\functions_one.php",
+              "ToolTip": "C:\\xampp\\htdocs\\facesofnaija-web\\assets\\includes\\functions_one.php",
+              "RelativeToolTip": "assets\\includes\\functions_one.php",
+              "ViewState": "AgIAALUOAAAAAAAAAAAqwEUkAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-18T13:23:03.803Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

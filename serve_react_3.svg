@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <radialGradient id="hahaGrad">
+      <stop offset="0%" style="stop-color:#ffd32a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f9ca24;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#hahaGrad)"/>
+  <ellipse cx="35" cy="42" rx="3" ry="8" fill="#553000"/>
+  <ellipse cx="65" cy="42" rx="3" ry="8" fill="#553000"/>
+  <path d="M 30 60 Q 50 75 70 60" stroke="#553000" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 30 60 Q 50 70 70 60 Q 50 65 30 60" fill="#553000"/>
+</svg>

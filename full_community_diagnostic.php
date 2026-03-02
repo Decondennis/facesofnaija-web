@@ -41,7 +41,7 @@ if (mysqli_num_rows($all_communities) > 0) {
 }
 
 echo "<h3>3. Are you a member of any community?</h3>";
-$membership = mysqli_query($sqlConnect, "SELECT * FROM Wo_CommunityMembers WHERE user_id = " . $wo['user']['user_id']);
+$membership = mysqli_query($sqlConnect, "SELECT * FROM " . T_COMMUNITY_MEMBERS . " WHERE user_id = " . $wo['user']['user_id']);
 echo "Memberships found: " . mysqli_num_rows($membership) . "<br>";
 
 echo "<h3>4. Testing Wo_GetMyCommunities() function:</h3>";

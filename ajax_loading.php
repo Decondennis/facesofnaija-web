@@ -143,6 +143,10 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                         break;
                     /** added here */ 
                     case 'joined-communities':
+                        // log AJAX requests for joined-communities for debugging
+                        $logp = __DIR__ . '/php-cli-test/joined_web.log';
+                        $entry = date('c') . " | AJAX joined-communities | REQUEST_URI=" . (isset($_SERVER['REQUEST_URI'])?$_SERVER['REQUEST_URI']:'') . " | QUERY=" . (isset($_SERVER['QUERY_STRING'])?$_SERVER['QUERY_STRING']:'') . " | debug_joined=" . (isset($_REQUEST['debug_joined'])?$_REQUEST['debug_joined']:'') . " | method=" . $_SERVER['REQUEST_METHOD'] . " | POST=" . json_encode($_POST) . " | GET=" . json_encode($_GET) . "\n";
+                        @file_put_contents($logp, $entry, FILE_APPEND);
                         include('sources/joined_communities.php');
                         break;
                     case 'communities':

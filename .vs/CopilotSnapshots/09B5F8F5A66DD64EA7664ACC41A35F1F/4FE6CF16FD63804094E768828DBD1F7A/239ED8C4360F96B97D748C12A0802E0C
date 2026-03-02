@@ -1,0 +1,14 @@
+﻿Options -Indexes
+Order Allow,Deny
+Allow from all
+
+AddType image/svg+xml .svg .svgz
+AddType image/png .png
+AddType image/jpeg .jpg .jpeg
+AddType image/gif .gif
+
+# Remove cache restrictions for images
+<IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=2592000"
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
