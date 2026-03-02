@@ -120,17 +120,39 @@ echo "var sub_categories_array = ". $js_array . ";\n";
        beforeSend: function() {
          $('.create-community-form').find('.add_wow_loader').addClass('btn-loading');
        },
-       success: function(data) {
-         scrollToTop();
-         if (data.status == 200) {
-           window.location.href = data.location;
-         } else {
-             var errors = data.errors.join("<br>");
-             $('.app-general-alert').html('<div class="alert alert-danger">' + errors + '</div>');
-             $('.alert-danger').fadeIn(300);
-         }
-         $('.create-community-form').find('.add_wow_loader').removeClass('btn-loading');
-       }
+			 success: function(data) {
+				 scrollToTop();
+				 if (data.status == 200) {
+					 var loc = data.location || '';
+					 var viewBtn = '';
+					if (loc) {
+						viewBtn = '<a class="btn btn-sm btn-primary" href="' + loc + '" target="_blank" rel="noopener">View community</a>';
+					}
+					 $('.app-general-alert').html('<div class="alert alert-success">Community created. ' + viewBtn + '</div>');
+					 $('.app-general-alert').find('.alert-success').fadeIn(200);
+					 // Do not auto-redirect; keep the success message visible and allow user action
+				 } else {
+						 var html = '';
+						 if (data.errors) {
+								 if (Array.isArray(data.errors)) {
+										 html = data.errors.join("<br>");
+								 } else if (typeof data.errors === 'string') {
+										 html = data.errors;
+								 } else {
+										 try { html = JSON.stringify(data.errors); } catch(e) { html = ''; }
+								 }
+						 } else if (data.message) {
+								 html = data.message;
+						 }
+						 var textOnly = $('<div>').html(html).text().trim();
+						 if (!textOnly) {
+								 html = '<i class="fa fa-exclamation-circle"></i> ' + '<?php echo $wo['lang']['please_check_details']; ?>';
+						 }
+						 $('.app-general-alert').html('<div class="alert alert-danger">' + html + '</div>');
+						 $('.app-general-alert').find('.alert-danger').fadeIn(300);
+				 }
+				 $('.create-community-form').find('.add_wow_loader').removeClass('btn-loading');
+			 }
      });
    });
 </script>

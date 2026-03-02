@@ -278,6 +278,10 @@
            var box = $('#contnet');
            var ISAPI = $('#ISAPI').val();
            $(document).on('click', 'a[data-ajax]', function(e) {
+            // If the link explicitly targets a new tab, don't intercept with AJAX
+            if ($(this).attr('target') && $(this).attr('target') === '_blank') {
+              return;
+            }
             if (typeof(check_wallet) != 'undefined') {
               clearInterval(check_wallet);
             }

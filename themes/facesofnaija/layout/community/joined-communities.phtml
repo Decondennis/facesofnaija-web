@@ -10,18 +10,7 @@
 				</div>
 			</div>
 			<div class="page-margin wow_content">
-				<?php if (!empty($wo['joined_diag'])) { ?>
-					<div class="debug_box" style="background:#fff6c6;padding:10px;border:1px solid #f0e1a0;margin:8px 0;">
-						<strong>Joined communities debug:</strong>
-						<ul>
-							<li>loggedin: <?php echo ($wo['joined_diag']['loggedin'] ? 'true' : 'false'); ?></li>
-							<li>user_id: <?php echo $wo['joined_diag']['user_id']; ?></li>
-							<li>pages_count: <?php echo $wo['joined_diag']['pages_count']; ?></li>
-							<li>raw_rows: <?php echo $wo['joined_diag']['raw_rows']; ?></li>
-							<?php if (!empty($wo['joined_diag']['raw_err'])) { ?><li style="color:#c00;">raw_err: <?php echo htmlspecialchars($wo['joined_diag']['raw_err']); ?></li><?php } ?>
-						</ul>
-					</div>
-				<?php } ?>
+
 				<div class="wo_page_hdng pag_neg_padd pag_alone">
 					<div class="wo_page_hdng_menu">
 						<ul class="list-unstyled">

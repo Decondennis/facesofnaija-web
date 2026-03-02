@@ -1,22 +1,81 @@
 <?php 
 if ($f == 'communities') {
     if ($s == 'create_community') {
-        if (empty($_POST['community_name']) || empty($_POST['community_title']) || empty(Wo_Secure($_POST['community_title'])) || Wo_CheckSession($hash_id) === false) {
-            $errors[] = $error_icon . $wo['lang']['please_check_details'];
+        // Temporary debug logging: capture create community requests
+        try {
+            $log = array(
+                'time' => date('c'),
+                'type' => 'create_community',
+                'GET' => $_GET,
+                'POST' => $_POST,
+                'SERVER' => array('REQUEST_URI' => isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''),
+                'SESSION_main_hash' => (!empty($_SESSION['main_hash_id']) ? $_SESSION['main_hash_id'] : ''),
+                'SESSION_hash_id' => (!empty($_SESSION['hash_id']) ? $_SESSION['hash_id'] : '')
+            );
+            @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode($log, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+        } catch (Exception $e) {
+            // ignore logging failures
+        }
+        // Validate individual fields with specific messages
+        $validation_errors = array();
+        if (empty($_POST['community_name'])) {
+            $label = (!empty($wo['lang']['community_name'])) ? $wo['lang']['community_name'] : 'Community URL';
+            $validation_errors[] = $error_icon . ' ' . $label . ' is required.';
+        }
+        if (empty($_POST['community_title'])) {
+            $label = (!empty($wo['lang']['community_title'])) ? $wo['lang']['community_title'] : 'Community title';
+            $validation_errors[] = $error_icon . ' ' . $label . ' is required.';
+        }
+        if (empty(Wo_Secure(@$_POST['community_title']))) {
+            $label = (!empty($wo['lang']['community_title_invalid_characters'])) ? $wo['lang']['community_title_invalid_characters'] : 'Community title contains invalid characters';
+            $validation_errors[] = $error_icon . ' ' . $label;
+        }
+        if (Wo_CheckSession($hash_id) === false && Wo_CheckMainSession($hash_id) === false) {
+            $label = (!empty($wo['lang']['session_expired'])) ? $wo['lang']['session_expired'] : 'Session expired';
+            $validation_errors[] = $error_icon . ' ' . $label;
+        }
+        if (!empty($validation_errors)) {
+            // Log validation details
+            try {
+                $debug_fail = array(
+                    'time' => date('c'),
+                    'type' => 'create_community_validation_fail',
+                    'validation_errors' => $validation_errors,
+                    'POST' => $_POST,
+                    'SESSION_main_hash' => (!empty($_SESSION['main_hash_id']) ? $_SESSION['main_hash_id'] : ''),
+                    'SESSION_hash_id' => (!empty($_SESSION['hash_id']) ? $_SESSION['hash_id'] : '')
+                );
+                @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode($debug_fail, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+            } catch (Exception $e) {}
+            $errors = array_merge((isset($errors) ? $errors : array()), $validation_errors);
         } else {
             $is_exist = Wo_IsNameExist($_POST['community_name'], 0);
+            $name_in_site_pages = in_array($_POST['community_name'], $wo['site_pages']);
+            $name_length_ok = (strlen($_POST['community_name']) >= 5 && strlen($_POST['community_name']) <= 32);
+            $name_pattern_ok = preg_match('/^[\w]+$/', $_POST['community_name']);
             if (in_array(true, $is_exist)) {
                 $errors[] = $error_icon . $wo['lang']['community_name_exists'];
             }
-            if (in_array($_POST['community_name'], $wo['site_pages'])) {
+            if ($name_in_site_pages) {
                 $errors[] = $error_icon . $wo['lang']['community_name_invalid_characters'];
             }
-            if (strlen($_POST['community_name']) < 5 OR strlen($_POST['community_name']) > 32) {
+            if (!$name_length_ok) {
                 $errors[] = $error_icon . $wo['lang']['community_name_characters_length'];
             }
-            if (!preg_match('/^[\w]+$/', $_POST['community_name'])) {
+            if (!$name_pattern_ok) {
                 $errors[] = $error_icon . $wo['lang']['community_name_invalid_characters'];
             }
+            // debug details for this submission
+            $debug_details = array(
+                'name' => @$_POST['community_name'],
+                'is_exist' => $is_exist,
+                'name_in_site_pages' => $name_in_site_pages,
+                'name_length_ok' => $name_length_ok,
+                'name_pattern_ok' => (bool)$name_pattern_ok
+            );
+            try {
+                @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode(array('time' => date('c'), 'type' => 'create_debug_details', 'details' => $debug_details), JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+            } catch (Exception $e) {}
             if (empty($_POST['category'])) {
                 $_POST['category'] = 1;
             }
@@ -51,19 +110,24 @@ if ($f == 'communities') {
                 $re_community_data['join_privacy'] = 2;
             }
             $fields = Wo_GetCustomFields('community'); 
+            $missing_required = array();
             if (!empty($fields)) {
                 foreach ($fields as $key => $field) {
                     if ($field['required'] == 'on' && empty($_POST['fid_'.$field['id']])) {
-                        $errors[] = $error_icon . $wo['lang']['please_check_details'];
-                        header("Content-type: application/json");
-                        echo json_encode(array(
-                            'errors' => $errors
-                        ));
-                        exit();
+                        $missing_required[] = $field['name'];
                     }
                     elseif (!empty($_POST['fid_'.$field['id']])) {
                         $re_community_data['fid_'.$field['id']] = Wo_Secure($_POST['fid_'.$field['id']]);
                     }
+                }
+                if (!empty($missing_required)) {
+                    $msg = $error_icon . ' ' . $wo['lang']['please_check_details'] . ' Required fields: ' . implode(', ', $missing_required);
+                    $errors[] = $msg;
+                    // Log missing fields for debugging
+                    try {
+                        $dbg = array('time' => date('c'), 'type' => 'create_missing_fields', 'missing' => $missing_required, 'POST' => $_POST);
+                        @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode($dbg, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+                    } catch (Exception $e) {}
                 }
             }
 
@@ -84,22 +148,95 @@ if ($f == 'communities') {
                 );
             }
         }
-        header("Content-type: application/json");
-        if (isset($errors)) {
-            echo json_encode(array(
-                'errors' => $errors
-            ));
-        } else {
-            echo json_encode($data);
+        // Normalize empty/icon-only errors to a readable message
+        if (isset($errors) && is_array($errors)) {
+            foreach ($errors as $ei => $err) {
+                if (trim(strip_tags($err)) === '') {
+                    $errors[$ei] = $error_icon . ' ' . $wo['lang']['please_check_details'];
+                }
+            }
         }
+        // Prepare response and log it for debugging
+        $response = (isset($errors)) ? array('errors' => $errors) : $data;
+        // If server returned only the generic please_check_details, augment with concrete checks
+        if (!empty($response['errors']) && count($response['errors']) == 1) {
+            $only = trim(strip_tags($response['errors'][0]));
+            if ($only == trim($wo['lang']['please_check_details']) || $only == '') {
+                $aug = array();
+                // check community name
+                $cname = isset($_POST['community_name']) ? $_POST['community_name'] : '';
+                if (empty($cname)) {
+                    $aug[] = $error_icon . ' Community URL is required.';
+                } else {
+                    if (strlen($cname) < 5 || strlen($cname) > 32) {
+                        $aug[] = $error_icon . ' Community URL must be between 5 and 32 characters.';
+                    }
+                    if (!preg_match('/^[\w]+$/', $cname)) {
+                        $aug[] = $error_icon . ' Community URL contains invalid characters.';
+                    }
+                    $is_exist = Wo_IsNameExist($cname, 0);
+                    if (in_array(true, (array)$is_exist)) {
+                        $aug[] = $error_icon . ' Community URL already exists.';
+                    }
+                }
+                // check title
+                $ctitle = isset($_POST['community_title']) ? trim($_POST['community_title']) : '';
+                if (empty($ctitle)) {
+                    $aug[] = $error_icon . ' Community title is required.';
+                }
+                // check custom required fields
+                $fields = Wo_GetCustomFields('community');
+                if (!empty($fields)) {
+                    $missing = array();
+                    foreach ($fields as $f) {
+                        if ($f['required'] == 'on' && empty($_POST['fid_'.$f['id']])) {
+                            $missing[] = $f['name'];
+                        }
+                    }
+                    if (!empty($missing)) {
+                        $aug[] = $error_icon . ' Required custom fields missing: ' . implode(', ', $missing);
+                    }
+                }
+                if (!empty($aug)) {
+                    $response['errors'] = $aug;
+                }
+            }
+        }
+        try {
+            $log_response = array(
+                'time' => date('c'),
+                'type' => 'create_community_response',
+                'response' => $response
+            );
+            @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode($log_response, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+        } catch (Exception $e) {
+            // ignore
+        }
+        header("Content-type: application/json");
+        echo json_encode($response);
         exit();
     }
     if ($s == 'request_community') {
+        // Temporary debug logging: capture community request submissions
+        try {
+            $log = array(
+                'time' => date('c'),
+                'type' => 'request_community',
+                'GET' => $_GET,
+                'POST' => $_POST,
+                'SERVER' => array('REQUEST_URI' => isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''),
+                'SESSION_main_hash' => (!empty($_SESSION['main_hash_id']) ? $_SESSION['main_hash_id'] : ''),
+                'SESSION_hash_id' => (!empty($_SESSION['hash_id']) ? $_SESSION['hash_id'] : '')
+            );
+            @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode($log, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+        } catch (Exception $e) {
+            // ignore logging failures
+        }
         $data = array();
         if (Wo_IsAdmin() || Wo_IsModerator()) {
             $errors[] = $error_icon . 'Admins can create communities directly. Please use the Create Community button.';
         }
-        elseif (empty($_POST['community_name']) || empty($_POST['community_title']) || empty($_POST['reason']) || Wo_CheckSession($hash_id) === false) {
+        elseif (empty($_POST['community_name']) || empty($_POST['community_title']) || empty($_POST['reason']) || (Wo_CheckSession($hash_id) === false && Wo_CheckMainSession($hash_id) === false)) {
             $errors[] = $error_icon . $wo['lang']['please_check_details'];
         } else {
             $is_exist = Wo_IsNameExist($_POST['community_name'], 0);
@@ -163,14 +300,28 @@ if ($f == 'communities') {
                 $errors[] = $error_icon . 'Failed to submit request. Please try again.';
             }
         }
-        header("Content-type: application/json");
-        if (isset($errors)) {
-            echo json_encode(array(
-                'errors' => $errors
-            ));
-        } else {
-            echo json_encode($data);
+        // Normalize empty/icon-only errors to a readable message
+        if (isset($errors) && is_array($errors)) {
+            foreach ($errors as $ei => $err) {
+                if (trim(strip_tags($err)) === '') {
+                    $errors[$ei] = $error_icon . ' ' . $wo['lang']['please_check_details'];
+                }
+            }
         }
+        // Prepare response and log it for debugging
+        $response = (isset($errors)) ? array('errors' => $errors) : $data;
+        try {
+            $log_response = array(
+                'time' => date('c'),
+                'type' => 'request_community_response',
+                'response' => $response
+            );
+            @file_put_contents(dirname(__FILE__) . '/../php-cli-test/create_community_debug.log', json_encode($log_response, JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND);
+        } catch (Exception $e) {
+            // ignore
+        }
+        header("Content-type: application/json");
+        echo json_encode($response);
         exit();
     }
     if ($s == 'update_information_setting') {

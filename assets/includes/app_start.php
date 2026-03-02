@@ -73,9 +73,12 @@ if (isset($_SESSION["theme"]) && !empty($_SESSION["theme"])) {
         header("Location: " . $_SERVER["HTTP_REFERER"]);
     }
 }
+$http_scheme = (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== 'off') ? 'https://' : 'http://';
 // Config Url
-$config["theme_url"] = $site_url . "/themes/" . $config["theme"];
-$config["site_url"]  = $site_url;
+// Build theme_url using the current request scheme/host to avoid mixed-content
+// (some environments use htaccess to force HTTPS while $site_url may be http)
+$config["theme_url"] = $http_scheme . $_SERVER["HTTP_HOST"] . "/themes/" . $config["theme"];
+$config["site_url"]  = $http_scheme . $_SERVER["HTTP_HOST"];
 $wo["site_url"]      = $site_url;
 $config["wasabi_site_url"]         = "https://s3.wasabisys.com";
 if (!empty($config["wasabi_bucket_name"])) {

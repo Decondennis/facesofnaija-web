@@ -1,1 +1,13 @@
 -- join debug log (created)
+[2026-03-02T13:58:08+00:00] JOIN_ATTEMPT GET={"hash":"acadffc0371e43a201b8","f":"join_community","community_id":"3","_":"1772459870693"} POST=[] SESSION_main_hash=acadffc0371e43a201b8
+[2026-03-02T16:14:09+00:00] JOIN_ATTEMPT GET={"hash":"acadffc0371e43a201b8","f":"join_community","community_id":"1","_":"1772468022201"} POST=[] SESSION_main_hash=acadffc0371e43a201b8
+[2026-03-02T16:14:19+00:00] JOIN_ATTEMPT GET={"hash":"acadffc0371e43a201b8","f":"join_community","community_id":"3","_":"1772468022202"} POST=[] SESSION_main_hash=acadffc0371e43a201b8
+[2026-03-02T16:14:33+00:00] JOIN_ATTEMPT GET={"hash":"acadffc0371e43a201b8","f":"join_community","community_id":"2","_":"1772468022203"} POST=[] SESSION_main_hash=acadffc0371e43a201b8
+[2026-03-02T16:14:43+00:00] JOIN_ATTEMPT GET={"hash":"acadffc0371e43a201b8","f":"join_community","community_id":"3","_":"1772468022204"} POST=[] SESSION_main_hash=acadffc0371e43a201b8
+[2026-03-02T16:14:56+00:00] JOIN_ATTEMPT GET={"hash":"acadffc0371e43a201b8","f":"join_community","community_id":"3","_":"1772468022205"} POST=[] SESSION_main_hash=acadffc0371e43a201b8
+[2026-03-02T16:16:27+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"2","_":"1772468158906"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
+[2026-03-02T16:16:45+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"2","_":"1772468158907"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
+[2026-03-02T16:16:52+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"2","_":"1772468158908"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
+[2026-03-02T16:16:54+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"2","_":"1772468158909"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
+[2026-03-02T16:16:56+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"3","_":"1772468158910"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
+[2026-03-02T20:07:16+00:00] JOIN_ATTEMPT GET={"hash":"fbd5c4e21f715ae152ac","f":"join_community","community_id":"8","_":"1772481988238"} POST=[] SESSION_main_hash=fbd5c4e21f715ae152ac
