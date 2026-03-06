@@ -394,17 +394,17 @@ $time_array               = array(
     "year" => $ultima_package_duration,
     "unlimited" => $vip_package_duration
 );
-if (in_array($wo["pro_packages"]["star"]["time"], array_keys($time_array))) {
-    $star_package_duration = $time_array[$wo["pro_packages"]["star"]["time"]];
+if (in_array(($wo["pro_packages"]["star"]["time"] ?? ''), array_keys($time_array))) {
+    $star_package_duration = $time_array[$wo["pro_packages"]["star"]["time"] ?? 'week'];
 }
-if (in_array($wo["pro_packages"]["hot"]["time"], array_keys($time_array))) {
-    $hot_package_duration = $time_array[$wo["pro_packages"]["hot"]["time"]];
+if (in_array(($wo["pro_packages"]["hot"]["time"] ?? ''), array_keys($time_array))) {
+    $hot_package_duration = $time_array[$wo["pro_packages"]["hot"]["time"] ?? 'month'];
 }
-if (in_array($wo["pro_packages"]["ultima"]["time"], array_keys($time_array))) {
-    $ultima_package_duration = $time_array[$wo["pro_packages"]["ultima"]["time"]];
+if (in_array(($wo["pro_packages"]["ultima"]["time"] ?? ''), array_keys($time_array))) {
+    $ultima_package_duration = $time_array[$wo["pro_packages"]["ultima"]["time"] ?? 'year'];
 }
-if (in_array($wo["pro_packages"]["vip"]["time"], array_keys($time_array))) {
-    $vip_package_duration = $time_array[$wo["pro_packages"]["vip"]["time"]];
+if (in_array(($wo["pro_packages"]["vip"]["time"] ?? ''), array_keys($time_array))) {
+    $vip_package_duration = $time_array[$wo["pro_packages"]["vip"]["time"] ?? 'unlimited'];
 }
 // $seconds_in_day = (60*60*24);
 // $star_package_duration   = $seconds_in_day * $wo['pro_packages']['star']['time']; // week in seconds

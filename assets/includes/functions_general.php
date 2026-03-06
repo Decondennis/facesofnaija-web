@@ -100,7 +100,8 @@ function Wo_LoadAdminPage($page_url = '') {
 }
 function Wo_LoadAdminLinkSettings($link = '') {
     global $site_url;
-    return $site_url . '/admin-cp/' . $link;
+    // Return the admin control panel URL used elsewhere (admincp.php?page=...)
+    return $site_url . '/admincp.php?page=' . $link;
 }
 function Wo_LoadAdminLink($link = '') {
     global $site_url;

@@ -11,3 +11,7 @@
 [2026-03-02T16:16:54+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"2","_":"1772468158909"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
 [2026-03-02T16:16:56+00:00] JOIN_ATTEMPT GET={"hash":"60fe82d4c44b3bb12ea6","f":"join_community","community_id":"3","_":"1772468158910"} POST=[] SESSION_main_hash=60fe82d4c44b3bb12ea6
 [2026-03-02T20:07:16+00:00] JOIN_ATTEMPT GET={"hash":"fbd5c4e21f715ae152ac","f":"join_community","community_id":"8","_":"1772481988238"} POST=[] SESSION_main_hash=fbd5c4e21f715ae152ac
+[2026-03-06T12:00:57+00:00] JOIN_ATTEMPT GET={"hash":"2d3730e6849fab2a79e5","f":"join_community","community_id":"14","_":"1772798421157"} POST=[] SESSION_main_hash=2d3730e6849fab2a79e5
+[2026-03-06T12:01:03+00:00] JOIN_ATTEMPT GET={"hash":"2d3730e6849fab2a79e5","f":"join_community","community_id":"14","_":"1772798421158"} POST=[] SESSION_main_hash=2d3730e6849fab2a79e5
+[2026-03-06T12:01:20+00:00] JOIN_ATTEMPT GET={"hash":"2d3730e6849fab2a79e5","f":"join_community","community_id":"14","_":"1772798421159"} POST=[] SESSION_main_hash=2d3730e6849fab2a79e5
+[2026-03-06T12:01:48+00:00] JOIN_ATTEMPT GET={"hash":"2d3730e6849fab2a79e5","f":"join_community","community_id":"9","_":"1772798421160"} POST=[] SESSION_main_hash=2d3730e6849fab2a79e5

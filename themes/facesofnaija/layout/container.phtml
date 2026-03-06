@@ -282,6 +282,11 @@
             if ($(this).attr('target') && $(this).attr('target') === '_blank') {
               return;
             }
+            // If this is a timeline/profile/community/page/group link, allow full page load
+            var _dataAjax = $(this).attr('data-ajax') || '';
+            if (_dataAjax.indexOf('link1=timeline&u=') !== -1 || _dataAjax.indexOf('link1=community') !== -1 || _dataAjax.indexOf('link1=community-setting') !== -1 || _dataAjax.indexOf('link1=page') !== -1 || _dataAjax.indexOf('link1=group') !== -1) {
+              return;
+            }
             if (typeof(check_wallet) != 'undefined') {
               clearInterval(check_wallet);
             }
@@ -350,6 +355,15 @@
                      } else {
                        $('.styled-profile').attr('href', '');
                        $('.extra-css').empty();
+                     }
+                     // Ensure main theme stylesheet is present (fallback for AJAX fragments)
+                     try {
+                       if ($('head link[href*="/stylesheet/style.css"]').length == 0) {
+                         var _href = '<?php echo $wo['config']['theme_url'];?>/stylesheet/style.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>';
+                         $('<link rel="stylesheet" href="' + _href + '">').appendTo('head');
+                       }
+                     } catch (err) {
+                       console && console.warn && console.warn('style fallback injection failed', err);
                      }
                      Wo_clearPRecording();
                      Wo_CleanRecordNodes();

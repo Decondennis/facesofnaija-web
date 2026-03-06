@@ -11,6 +11,9 @@
    <td><?php echo $wo['communitylist']['members'];?></td>
    <td>
       <a target = "_blank" class="btn bg-info admn_table_btn" href="<?php echo Wo_SeoLink('index.php?link1=community-setting&community=' . $wo['communitylist']['community_name']) ?>">Edit</a>
+      <?php $reqs = Wo_GetCommunityRequests($wo['communitylist']['id']); $req_count = (!empty($reqs) ? count($reqs) : 0); ?>
+      <button type="button" class="btn bg-success admn_table_btn" onclick="OpenCommunityRequests(<?php echo $wo['communitylist']['id']?>);">Requests (<?php echo $req_count; ?>)</button>
       <button onclick="Wo_DeleteCommunity(<?php echo $wo['communitylist']['id']?>,'hide');" type="button" class="btn bg-danger admn_table_btn">Delete</button>
    </td>
 </tr>
+ 

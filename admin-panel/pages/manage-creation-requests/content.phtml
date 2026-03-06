@@ -1,0 +1,130 @@
+<?php
+$page = (!empty($_GET['page-id']) && is_numeric($_GET['page-id'])) ? $_GET['page-id'] : 1;
+$db->pageLimit = 50;
+$requests = $db->objectbuilder()->rawQuery("SELECT * FROM Wo_Community_Requests ORDER BY id DESC");
+?>
+<div class="container-fluid">
+  <div>
+    <h3>Community Creation Requests</h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Manage Features</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Creation Requests</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title">Pending Requests</h6>
+      <div class="table-responsive1">
+        <div class="mb-2">
+          <button class="btn btn-success btn-sm" id="bulk-approve" disabled>Approve Selected</button>
+          <button class="btn btn-danger btn-sm" id="bulk-decline" disabled>Decline Selected</button>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="check-all-requests"></th>
+              <th>ID</th>
+              <th>Requester</th>
+              <th>Community Name</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Privacy</th>
+              <th>Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($requests)) {
+              foreach ($requests as $r) {
+                $user = $db->objectBuilder()->where('user_id', $r['user_id'])->getOne('Wo_Users');
+                $time = date('Y-m-d H:i', $r['time']);
+                ?>
+                <tr id="creation_req_<?php echo $r['id']; ?>">
+                  <td><input type="checkbox" class="req-checkbox" value="<?php echo $r['id']; ?>"></td>
+                  <td><?php echo $r['id']; ?></td>
+                  <td><?php echo (!empty($user) ? $user->name . ' (@' . $user->username . ')' : $r['user_id']); ?></td>
+                  <td><?php echo $r['community_name']; ?></td>
+                  <td><?php echo $r['community_title']; ?></td>
+                  <td><?php echo (isset($r['category']) ? $r['category'] : ''); ?></td>
+                  <td><?php echo (isset($r['privacy']) && $r['privacy'] == 2 ? 'Private' : 'Public'); ?></td>
+                  <td><?php echo $time; ?></td>
+                  <td>
+                    <button class="btn btn-success btn-sm" onclick="ApproveCreation(<?php echo $r['id']; ?>, this)">Approve</button>
+                    <button class="btn btn-danger btn-sm" onclick="DeclineCreation(<?php echo $r['id']; ?>, this)">Decline</button>
+                  </td>
+                </tr>
+              <?php }
+            } else { ?>
+              <tr><td colspan="8" class="text-center">No creation requests found.</td></tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function ApproveCreation(id, btn) {
+  $(btn).attr('disabled', true).text('Please wait..');
+  $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=approve_creation_request", {id: id}, function (data) {
+    if (data.status == 200) {
+      $('#creation_req_'+id).fadeOut(300, function(){ $(this).remove(); });
+    } else {
+      alert(data.error || 'Failed');
+      $(btn).attr('disabled', false).text('Approve');
+    }
+  }, 'json');
+}
+function DeclineCreation(id, btn) {
+  $(btn).attr('disabled', true).text('Please wait..');
+  $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=decline_creation_request", {id: id}, function (data) {
+    if (data.status == 200) {
+      $('#creation_req_'+id).fadeOut(300, function(){ $(this).remove(); });
+    } else {
+      alert(data.error || 'Failed');
+      $(btn).attr('disabled', false).text('Decline');
+    }
+  }, 'json');
+}
+</script>
+<script>
+$(function(){
+  $('#check-all-requests').on('change', function(){
+    $('.req-checkbox').prop('checked', this.checked).trigger('change');
+  });
+  $(document).on('change', '.req-checkbox', function(){
+    var any = $('.req-checkbox:checked').length > 0;
+    $('#bulk-approve').prop('disabled', !any);
+    $('#bulk-decline').prop('disabled', !any);
+  });
+  $('#bulk-approve').on('click', function(){
+    var ids = $('.req-checkbox:checked').map(function(){ return $(this).val(); }).get();
+    if (!ids.length) return;
+    $(this).prop('disabled', true).text('Please wait..');
+    $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=approve_creation_requests_bulk", {ids: ids}, function(data){
+      if (data.status == 200) {
+        ids.forEach(function(id){ $('#creation_req_'+id).remove(); });
+      } else {
+        alert(data.error || 'Failed');
+      }
+      $('#bulk-approve').prop('disabled', true).text('Approve Selected');
+    }, 'json');
+  });
+  $('#bulk-decline').on('click', function(){
+    var ids = $('.req-checkbox:checked').map(function(){ return $(this).val(); }).get();
+    if (!ids.length) return;
+    $(this).prop('disabled', true).text('Please wait..');
+    $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=decline_creation_requests_bulk", {ids: ids}, function(data){
+      if (data.status == 200) {
+        ids.forEach(function(id){ $('#creation_req_'+id).remove(); });
+      } else {
+        alert(data.error || 'Failed');
+      }
+      $('#bulk-decline').prop('disabled', true).text('Decline Selected');
+    }, 'json');
+  });
+});
+</script>

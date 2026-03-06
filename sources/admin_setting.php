@@ -2,6 +2,276 @@
 use Aws\S3\S3Client;
 use Google\Cloud\Storage\StorageClient;
 if ($f == 'admin_setting' AND (Wo_IsAdmin() || Wo_IsModerator())) {
+    if ($s == 'get_community_requests') {
+        if (!empty($_POST['community_id']) && is_numeric($_POST['community_id'])) {
+            $community_id = Wo_Secure($_POST['community_id']);
+            $requests = Wo_GetCommunityRequests($community_id);
+            $html = '';
+            if (!empty($requests)) {
+                foreach ($requests as $req) {
+                    $html .= '<div class="community-request" id="community_request_' . $req['user_id'] . '">';
+                    $html .= '<div class="media"><img src="' . $req['avatar'] . '" class="mr-3 rounded" style="width:40px;height:40px;">';
+                    $html .= '<div class="media-body"><h6 class="mt-0">' . $req['name'] . '</h6>';
+                    $html .= '<small>@' . $req['username'] . '</small></div></div>';
+                    $html .= '<div class="mt-2"><button class="btn btn-success btn-sm" onclick="ApproveRequest(' . $req['user_id'] . ',' . $community_id . ',this)">Approve</button> ';
+                    $html .= '<button class="btn btn-danger btn-sm" onclick="DeclineRequest(' . $req['user_id'] . ',' . $community_id . ',this)">Decline</button></div><hr></div>';
+                }
+            } else {
+                $html = '<div class="text-center">No pending requests</div>';
+            }
+            $data = array('status' => 200, 'html' => $html);
+        } else {
+            $data = array('status' => 400, 'html' => 'Invalid community id');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+
+    if ($s == 'get_creation_requests') {
+        $requests = $db->objectbuilder()->rawQuery("SELECT * FROM Wo_Community_Requests ORDER BY id DESC");
+        $html = '';
+        if (!empty($requests)) {
+            $html .= '<div class="mb-2">';
+            $html .= '<button class="btn btn-success btn-sm" id="bulk-approve" disabled>Approve Selected</button> ';
+            $html .= '<button class="btn btn-danger btn-sm" id="bulk-decline" disabled>Decline Selected</button>';
+            $html .= '</div>';
+            $html .= '<table class="table table-bordered table-striped table-hover"><thead><tr>';
+            $html .= '<th><input type="checkbox" id="check-all-requests"></th><th>ID</th><th>Requester</th><th>Community Name</th><th>Title</th><th>Category</th><th>Privacy</th><th>Time</th><th>Action</th>';
+            $html .= '</tr></thead><tbody>';
+            foreach ($requests as $r) {
+                $user = $db->objectBuilder()->where('user_id', $r['user_id'])->getOne('Wo_Users');
+                $time = date('Y-m-d H:i', $r['time']);
+                $html .= '<tr id="creation_req_' . $r['id'] . '">';
+                $html .= '<td><input type="checkbox" class="req-checkbox" value="' . $r['id'] . '"></td>';
+                $html .= '<td>' . $r['id'] . '</td>';
+                $html .= '<td>' . (!empty($user) ? $user->name . ' (@' . $user->username . ')' : $r['user_id']) . '</td>';
+                $html .= '<td>' . $r['community_name'] . '</td>';
+                $html .= '<td>' . $r['community_title'] . '</td>';
+                $html .= '<td>' . (isset($r['category']) ? $r['category'] : '') . '</td>';
+                $html .= '<td>' . (isset($r['privacy']) && $r['privacy'] == 2 ? 'Private' : 'Public') . '</td>';
+                $html .= '<td>' . $time . '</td>';
+                $html .= '<td><button class="btn btn-success btn-sm" onclick="ApproveCreation(' . $r['id'] . ', this)">Approve</button> <button class="btn btn-danger btn-sm" onclick="DeclineCreation(' . $r['id'] . ', this)">Decline</button></td>';
+                $html .= '</tr>';
+            }
+            $html .= '</tbody></table>';
+        } else {
+            $html = '<div class="text-center">No creation requests found.</div>';
+        }
+        $data = array('status' => 200, 'html' => $html);
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+
+    if ($s == 'approve_community_join') {
+        if (!empty($_POST['community_id']) && is_numeric($_POST['community_id']) && !empty($_POST['user_id']) && is_numeric($_POST['user_id'])) {
+            $community_id = Wo_Secure($_POST['community_id']);
+            $user_id = Wo_Secure($_POST['user_id']);
+            if (Wo_AcceptJoinCommunityRequest($user_id, $community_id)) {
+                $data = array('status' => 200);
+            } else {
+                $data = array('status' => 400, 'error' => 'Unable to approve request');
+            }
+        } else {
+            $data = array('status' => 400, 'error' => 'Invalid data');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+
+    if ($s == 'decline_community_join') {
+        if (!empty($_POST['community_id']) && is_numeric($_POST['community_id']) && !empty($_POST['user_id']) && is_numeric($_POST['user_id'])) {
+            $community_id = Wo_Secure($_POST['community_id']);
+            $user_id = Wo_Secure($_POST['user_id']);
+            if (Wo_DeleteJoinCommunityRequest($user_id, $community_id)) {
+                $data = array('status' => 200);
+            } else {
+                $data = array('status' => 400, 'error' => 'Unable to decline request');
+            }
+        } else {
+            $data = array('status' => 400, 'error' => 'Invalid data');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+    if ($s == 'approve_creation_request') {
+        if (!empty($_POST['id']) && is_numeric($_POST['id'])) {
+            $id = Wo_Secure($_POST['id']);
+            $table = 'Wo_Community_Requests';
+            $request = $db->where('id', $id)->getOne($table);
+            if (empty($request)) {
+                $table = 'Wo_Community_Request';
+                $request = $db->where('id', $id)->getOne($table);
+            }
+            if (!empty($request)) {
+                $insert = array(
+                    'community_name' => Wo_Secure($request['community_name']),
+                    'community_title' => Wo_Secure($request['community_title']),
+                    'about' => Wo_Secure($request['about']),
+                    'category' => (isset($request['category']) ? Wo_Secure($request['category']) : 1),
+                    'sub_category' => (isset($request['sub_category']) ? Wo_Secure($request['sub_category']) : ''),
+                    'privacy' => (isset($request['privacy']) ? Wo_Secure($request['privacy']) : 1),
+                    'user_id' => (isset($request['user_id']) ? Wo_Secure($request['user_id']) : 0),
+                    'time' => time(),
+                    'active' => 1
+                );
+                $res = $db->insert(T_COMMUNITIES, $insert);
+                if ($res) {
+                    $community_id = $db->getInsertId();
+                    $db->insert(T_COMMUNITY_MEMBERS, array('user_id' => $request['user_id'], 'community_id' => $community_id, 'active' => 1, 'time' => time()));
+                    $db->insert(T_COMMUNITY_MODERATORS, array('user_id' => $request['user_id'], 'community_id' => $community_id, 'members' => 1, 'delete_community' => 1));
+                    // update request status on the correct table
+                    $db->where('id', $id)->update($table, array('status' => 'approved', 'reviewed_by' => $wo['user']['user_id'], 'reviewed_at' => time()));
+                    // notify requester
+                    $notification_data_array = array(
+                        'recipient_id' => $request['user_id'],
+                        'type' => 'admin_notification',
+                        'text' => 'Your community creation request has been approved',
+                        'url' => 'index.php?link1=timeline&u=' . $insert['community_name'],
+                        'type2' => 'approve_community_creation',
+                        'time' => time()
+                    );
+                    Wo_RegisterNotification($notification_data_array);
+                    $data = array('status' => 200);
+                } else {
+                    $data = array('status' => 400, 'error' => 'Failed to create community');
+                }
+            } else {
+                $data = array('status' => 400, 'error' => 'Request not found');
+            }
+        } else {
+            $data = array('status' => 400, 'error' => 'Invalid id');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+    if ($s == 'decline_creation_request') {
+        if (!empty($_POST['id']) && is_numeric($_POST['id'])) {
+            $id = Wo_Secure($_POST['id']);
+            $table = 'Wo_Community_Requests';
+            $request = $db->where('id', $id)->getOne($table);
+            if (empty($request)) {
+                $table = 'Wo_Community_Request';
+                $request = $db->where('id', $id)->getOne($table);
+            }
+            if (!empty($request)) {
+                $db->where('id', $id)->update($table, array('status' => 'rejected', 'reviewed_by' => $wo['user']['user_id'], 'reviewed_at' => time()));
+                // notify requester
+                $notification_data_array = array(
+                    'recipient_id' => $request['user_id'],
+                    'type' => 'admin_notification',
+                    'text' => 'Your community creation request has been rejected',
+                    'url' => 'index.php?link1=contact-us',
+                    'type2' => 'reject_community_creation',
+                    'time' => time()
+                );
+                Wo_RegisterNotification($notification_data_array);
+                $data = array('status' => 200);
+            } else {
+                $data = array('status' => 400, 'error' => 'Request not found');
+            }
+        } else {
+            $data = array('status' => 400, 'error' => 'Invalid id');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+
+    if ($s == 'approve_creation_requests_bulk') {
+        if (!empty($_POST['ids']) && is_array($_POST['ids'])) {
+            $success = 0;
+            foreach ($_POST['ids'] as $rid) {
+                $rid = (int)$rid;
+                $_POST['id'] = $rid;
+                $_POST_backup = $_POST;
+                // reuse single approve flow
+                $_POST['id'] = $rid;
+                $_REQUEST['s'] = 'approve_creation_request';
+                // call internal by copying logic (simpler to repeat minimal code)
+                $table = 'Wo_Community_Requests';
+                $request = $db->where('id', $rid)->getOne($table);
+                if (empty($request)) {
+                    $table = 'Wo_Community_Request';
+                    $request = $db->where('id', $rid)->getOne($table);
+                }
+                if (!empty($request)) {
+                    $insert = array(
+                        'community_name' => Wo_Secure($request['community_name']),
+                        'community_title' => Wo_Secure($request['community_title']),
+                        'about' => Wo_Secure($request['about']),
+                        'category' => (isset($request['category']) ? Wo_Secure($request['category']) : 1),
+                        'sub_category' => (isset($request['sub_category']) ? Wo_Secure($request['sub_category']) : ''),
+                        'privacy' => (isset($request['privacy']) ? Wo_Secure($request['privacy']) : 1),
+                        'user_id' => (isset($request['user_id']) ? Wo_Secure($request['user_id']) : 0),
+                        'time' => time(),
+                        'active' => 1
+                    );
+                    $res = $db->insert(T_COMMUNITIES, $insert);
+                    if ($res) {
+                        $community_id = $db->getInsertId();
+                        $db->insert(T_COMMUNITY_MEMBERS, array('user_id' => $request['user_id'], 'community_id' => $community_id, 'active' => 1, 'time' => time()));
+                        $db->insert(T_COMMUNITY_MODERATORS, array('user_id' => $request['user_id'], 'community_id' => $community_id, 'members' => 1, 'delete_community' => 1));
+                        $db->where('id', $rid)->update($table, array('status' => 'approved', 'reviewed_by' => $wo['user']['user_id'], 'reviewed_at' => time()));
+                        $notification_data_array = array(
+                            'recipient_id' => $request['user_id'],
+                            'type' => 'admin_notification',
+                            'text' => 'Your community creation request has been approved',
+                            'url' => 'index.php?link1=timeline&u=' . $insert['community_name'],
+                            'type2' => 'approve_community_creation',
+                            'time' => time()
+                        );
+                        Wo_RegisterNotification($notification_data_array);
+                        $success++;
+                    }
+                }
+            }
+            $data = array('status' => 200, 'approved' => $success);
+        } else {
+            $data = array('status' => 400, 'error' => 'Invalid ids');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+
+    if ($s == 'decline_creation_requests_bulk') {
+        if (!empty($_POST['ids']) && is_array($_POST['ids'])) {
+            $success = 0;
+            foreach ($_POST['ids'] as $rid) {
+                $rid = (int)$rid;
+                $table = 'Wo_Community_Requests';
+                $request = $db->where('id', $rid)->getOne($table);
+                if (empty($request)) {
+                    $table = 'Wo_Community_Request';
+                    $request = $db->where('id', $rid)->getOne($table);
+                }
+                if (!empty($request)) {
+                    $db->where('id', $rid)->update($table, array('status' => 'rejected', 'reviewed_by' => $wo['user']['user_id'], 'reviewed_at' => time()));
+                    $notification_data_array = array(
+                        'recipient_id' => $request['user_id'],
+                        'type' => 'admin_notification',
+                        'text' => 'Your community creation request has been rejected',
+                        'url' => 'index.php?link1=contact-us',
+                        'type2' => 'reject_community_creation',
+                        'time' => time()
+                    );
+                    Wo_RegisterNotification($notification_data_array);
+                    $success++;
+                }
+            }
+            $data = array('status' => 200, 'rejected' => $success);
+        } else {
+            $data = array('status' => 400, 'error' => 'Invalid ids');
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
     if ($s == 'search_in_pages') {
         $keyword           = Wo_Secure($_POST['keyword']);
         $html              = '';

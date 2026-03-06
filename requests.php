@@ -1,5 +1,37 @@
 <?php
 require_once('assets/init.php');
+
+// Ensure $wo is an array to avoid stdClass vs array access issues and null offsets
+if (!isset($wo) || $wo === null) {
+    $wo = array();
+} elseif (is_object($wo)) {
+    $wo = json_decode(json_encode($wo), true);
+}
+// Provide safe defaults used throughout this router
+$wo['config'] = $wo['config'] ?? array();
+$wo['loggedin'] = $wo['loggedin'] ?? false;
+$wo['user'] = $wo['user'] ?? array('banned' => 0);
+
+// Temporary debug: log incoming requests and fatal errors to requests_debug.log
+@ini_set('display_errors', 1);
+error_reporting(E_ALL);
+$__debug_file = __DIR__ . '/requests_debug.log';
+file_put_contents($__debug_file, "\n----\n".date('c')." REQUEST: " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI'] . "\nGET: " . print_r($_GET, true) . "\nPOST: " . print_r($_POST, true) . "\nCOOKIE: " . print_r($_COOKIE, true) . "\nSERVER: " . print_r(array('HTTP_HOST'=>$_SERVER['HTTP_HOST'],'HTTP_REFERER'=>($_SERVER['HTTP_REFERER']??''),'HTTP_USER_AGENT'=>($_SERVER['HTTP_USER_AGENT']??''),'HTTP_X_REQUESTED_WITH'=>($_SERVER['HTTP_X_REQUESTED_WITH']??'')), true) . "\n", FILE_APPEND);
+set_exception_handler(function($e) use ($__debug_file) {
+    file_put_contents($__debug_file, "EXCEPTION: " . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n", FILE_APPEND);
+});
+// Convert PHP errors/warnings/notices into exceptions so we capture stack traces
+set_error_handler(function($errno, $errstr, $errfile, $errline) use ($__debug_file) {
+    $ex = new ErrorException($errstr, 0, $errno, $errfile, $errline);
+    file_put_contents($__debug_file, "ERROR_CONVERTED: " . $errstr . " in " . $errfile . ":" . $errline . "\n" . $ex->getTraceAsString() . "\n", FILE_APPEND);
+    throw $ex;
+});
+register_shutdown_function(function() use ($__debug_file) {
+    $err = error_get_last();
+    if ($err) {
+        file_put_contents($__debug_file, "FATAL: " . print_r($err, true) . "\n", FILE_APPEND);
+    }
+});
 $f = '';
 $s = '';
 if (isset($_GET['f'])) {
@@ -88,7 +120,7 @@ $non_login_array = array(
     'yoomoney',
     'iyzipay',
 );
-if ($wo['config']['membership_system'] == 1) {
+if (!empty($wo['config']['membership_system']) && $wo['config']['membership_system'] == 1) {
     $non_login_array[] = 'pro_register';
     $non_login_array[] = 'get_payment_method';
     $non_login_array[] = 'cashfree';
@@ -111,13 +143,13 @@ if (!in_array($f, $allow_array)) {
     }
 }
 if (!in_array($f, $non_login_array)) {
-    if ($wo['loggedin'] == false && ($s != 'load_more_posts')) {
+    if (empty($wo['loggedin']) && ($s != 'load_more_posts')) {
         if ($s != 'load-comments') {
             exit("Please login or signup to continue.");
         }
     }
 }
-if ($wo['loggedin'] && $wo['user']['banned'] == 1 && !in_array($f, $non_login_array)) {
+if (!empty($wo['loggedin']) && !empty($wo['user']['banned']) && $wo['user']['banned'] == 1 && !in_array($f, $non_login_array)) {
     exit();
 }
 $files = scandir('xhr');

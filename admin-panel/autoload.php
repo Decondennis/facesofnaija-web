@@ -33,6 +33,7 @@ $pages = array(
     'manage-pages',
     'manage-groups',
     'manage-communities',
+    'manage-creation-requests',
     'manage-posts',
     'manage-articles',
     'manage-events',
@@ -311,10 +312,18 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
     <script src="<?php echo Wo_LoadAdminLink('assets/js/jquery.form.min.js'); ?>"></script>
     <script>
         function Wo_Ajax_Requests_File(){
-            return "<?php echo $wo['config']['site_url'].'/requests.php';?>"
+            try {
+                return window.location.origin + '/requests.php';
+            } catch (e) {
+                return "<?php echo $wo['config']['site_url'].'/requests.php';?>";
+            }
         }
         function Wo_Ajax_Requests_File_load(){
-            return "<?php echo $wo['config']['site_url'].'/admin_load.php';?>"
+            try {
+                return window.location.origin + '/admin_load.php';
+            } catch (e) {
+                return "<?php echo $wo['config']['site_url'].'/admin_load.php';?>";
+            }
         }
     </script>
     <style>
