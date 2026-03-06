@@ -121,14 +121,17 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                       </div>
                       <div class="font-weight-bold ml-1 font-size-30 ml-3"><?php echo Wo_CountCommunityData('join_requests'); ?></div>
                   </div>
+                                    <!-- Duplicate "Review Creation Requests" button removed; linked in Manage & Edit header -->
               </div>
           </div>
       </div>
         
         <div class="col-lg-12 col-md-12">
             <div class="card">
-                <div class="card-body">
-                  <h6 class="card-title">Manage & Edit Communities</h6>
+                                <div class="card-body">
+                                    <h6 class="card-title">Manage & Edit Communities
+                                        <a id="review-creation-requests-btn" class="btn btn-sm btn-warning float-right" href="javascript:void(0);" style="margin-top:-6px;">Review Creation Requests</a>
+                                    </h6>
                     <div class="row">
                       <div class="col-md-4" style="margin-bottom:0;">
                         <form method="get" action="<?php echo Wo_LoadAdminLinkSettings('manage-communities'); ?>">
@@ -214,20 +217,20 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                                     </li>
                                   <?php  } ?>
 
-                                  <?php 
-                                    $nums       = 0;
-                                    $nums_pages = ($page > 4) ? ($page - 4) : $page;
+                                                                    <?php 
+                                                                        $nums       = 0;
+                                                                        $nums_pages = ($page > 4) ? ($page - 4) : $page;
 
-                                    for ($i=$nums_pages; $i <= $db->totalPages; $i++) { 
-                                      if ($nums < 20) {
-                                  ?>
-                                    <li class="<?php echo ($page == $i) ? 'active' : ''; ?>">
-                                      <a href="<?php echo Wo_LoadAdminLinkSettings('manage-communities?page-id=' . ($i)).$link; ?>" data-ajax="?path=manage-communities&page-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
-                                        <?php echo $i ?>   
-                                      </a>
-                                    </li>
+                                                                        for ($i=$nums_pages; $i <= $db->totalPages; $i++) { 
+                                                                            if ($nums < 20) {
+                                                                    ?>
+                                                                        <li class="<?php echo ($page == $i) ? 'active' : ''; ?>">
+                                                                            <a href="<?php echo Wo_LoadAdminLinkSettings('manage-communities?page-id=' . ($i)).$link; ?>" data-ajax="?path=manage-communities&page-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                                                                <?php echo $i ?>   
+                                                                            </a>
+                                                                        </li>
 
-                                  <?php } $nums++; }?>
+                                                                    <?php } $nums++; }?>
 
                                   <?php if ($db->totalPages > $page) { ?>
                                     <li>
@@ -257,6 +260,224 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
         </div>
         <div class="clearfix"></div>
     </div>
+        <!-- Requests Modal -->
+        <!-- Creation Requests Modal (reduced size) -->
+        <div class="modal fade" id="CreationRequestsModal" tabindex="-1" role="dialog" aria-labelledby="CreationRequestsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document" style="max-width:900px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="CreationRequestsModalLabel">Community Creation Requests</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="creation-requests-body">
+                        <div class="text-center">Loading...</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="RequestsModal" tabindex="-1" role="dialog" aria-labelledby="RequestsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="RequestsModalLabel">Community Join Requests</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="requests-body">
+                        <div class="text-center">Loading...</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        $(document).on('click', '#review-creation-requests-btn', function(e){
+            e.preventDefault();
+            console.log('Review Creation Requests clicked');
+            $('#creation-requests-body').html('<div class="text-center">Loading...</div>');
+            $('#CreationRequestsModal').modal('show');
+            $.ajax({
+                url: Wo_Ajax_Requests_File()+"?f=admin_setting&s=get_creation_requests",
+                method: 'POST',
+                dataType: 'text',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                data: {},
+                success: function(resp) {
+                    var data = null;
+                    try {
+                        data = JSON.parse(resp);
+                    } catch (e) {
+                        // Not JSON — likely HTML (login page or full admin page). Show it for debugging.
+                        var trimmed = (resp || '').trim();
+                        if (trimmed.charAt(0) === '<') {
+                            $('#creation-requests-body').html('<div style="max-height:60vh;overflow:auto;"><pre style="white-space:pre-wrap;">'+$('<div>').text(trimmed).html()+'</pre></div>');
+                        } else {
+                            $('#creation-requests-body').html('<div class="text-center">Unable to load requests</div>');
+                        }
+                        return;
+                    }
+                    if (data && data.status == 200) {
+                        $('#creation-requests-body').html(data.html);
+                    } else {
+                        $('#creation-requests-body').html('<div class="text-center">Unable to load requests</div>');
+                    }
+                },
+                error: function(xhr) {
+                    var text = xhr.responseText || 'Unable to load requests';
+                    $('#creation-requests-body').html('<pre style="white-space:pre-wrap;">'+$('<div>').text(text).html()+'</pre>');
+                }
+            });
+        });
+        function OpenCommunityRequests(community_id) {
+            $('#requests-body').html('<div class="text-center">Loading...</div>');
+            $('#RequestsModal').modal('show');
+            $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=get_community_requests", {community_id: community_id}, function (data) {
+                if (data.status == 200) {
+                    $('#requests-body').html(data.html);
+                } else {
+                    $('#requests-body').html('<div class="text-center">Unable to load requests</div>');
+                }
+            }, 'json');
+        }
+        function ApproveRequest(user_id, community_id, btn) {
+            $(btn).attr('disabled', true).text('Please wait..');
+            $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=approve_community_join", {user_id: user_id, community_id: community_id}, function (data) {
+                if (data.status == 200) {
+                    $('#community_request_'+user_id).fadeOut(300, function(){ $(this).remove(); });
+                } else {
+                    alert(data.error || 'Failed');
+                    $(btn).attr('disabled', false).text('Approve');
+                }
+            }, 'json');
+        }
+        function DeclineRequest(user_id, community_id, btn) {
+            $(btn).attr('disabled', true).text('Please wait..');
+            $.post(Wo_Ajax_Requests_File()+"?f=admin_setting&s=decline_community_join", {user_id: user_id, community_id: community_id}, function (data) {
+                if (data.status == 200) {
+                    $('#community_request_'+user_id).fadeOut(300, function(){ $(this).remove(); });
+                } else {
+                    alert(data.error || 'Failed');
+                    $(btn).attr('disabled', false).text('Decline');
+                }
+            }, 'json');
+        }
+        </script>
+
+        <script>
+        function ApproveCreation(id, btn) {
+            $(btn).attr('disabled', true).text('Please wait..');
+            $.ajax({
+                url: Wo_Ajax_Requests_File()+"?f=admin_setting&s=approve_creation_request",
+                method: 'POST',
+                dataType: 'json',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                data: {id: id},
+                success: function(data) {
+                    if (data.status == 200) {
+                        $('#creation_req_'+id+' td:last').html('<span class="badge badge-success">Approved</span>');
+                        $(btn).attr('disabled', true).text('Approved');
+                    } else {
+                        alert(data.error || 'Failed');
+                        $(btn).attr('disabled', false).text('Approve');
+                    }
+                },
+                error: function(xhr) {
+                    alert(xhr.responseText || 'Failed');
+                    $(btn).attr('disabled', false).text('Approve');
+                }
+            });
+        }
+        function DeclineCreation(id, btn) {
+            $(btn).attr('disabled', true).text('Please wait..');
+            $.ajax({
+                url: Wo_Ajax_Requests_File()+"?f=admin_setting&s=decline_creation_request",
+                method: 'POST',
+                dataType: 'json',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                data: {id: id},
+                success: function(data) {
+                    if (data.status == 200) {
+                        $('#creation_req_'+id+' td:last').html('<span class="badge badge-danger">Declined</span>');
+                        $(btn).attr('disabled', true).text('Declined');
+                    } else {
+                        alert(data.error || 'Failed');
+                        $(btn).attr('disabled', false).text('Decline');
+                    }
+                },
+                error: function(xhr) {
+                    alert(xhr.responseText || 'Failed');
+                    $(btn).attr('disabled', false).text('Decline');
+                }
+            });
+        }
+
+        $(document).on('change', '#CreationRequestsModal .req-checkbox', function(){
+            var any = $('#CreationRequestsModal .req-checkbox:checked').length > 0;
+            $('#CreationRequestsModal #bulk-approve').prop('disabled', !any);
+            $('#CreationRequestsModal #bulk-decline').prop('disabled', !any);
+        });
+        $(document).on('click', '#CreationRequestsModal #check-all-requests', function(){
+            var checked = $(this).is(':checked');
+            $('#CreationRequestsModal .req-checkbox').prop('checked', checked).trigger('change');
+        });
+        $(document).on('click', '#CreationRequestsModal #bulk-approve', function(){
+            var ids = $('#CreationRequestsModal .req-checkbox:checked').map(function(){ return $(this).val(); }).get();
+            if (!ids.length) return;
+            $(this).prop('disabled', true).text('Please wait..');
+            $.ajax({
+                url: Wo_Ajax_Requests_File()+"?f=admin_setting&s=approve_creation_requests_bulk",
+                method: 'POST',
+                dataType: 'json',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                data: {ids: ids},
+                success: function(data) {
+                    if (data.status == 200) {
+                        ids.forEach(function(id){ $('#creation_req_'+id+' td:last').html('<span class="badge badge-success">Approved</span>'); });
+                    } else {
+                        alert(data.error || 'Failed');
+                    }
+                    $('#CreationRequestsModal #bulk-approve').prop('disabled', true).text('Approve Selected');
+                },
+                error: function(xhr) {
+                    alert(xhr.responseText || 'Failed');
+                    $('#CreationRequestsModal #bulk-approve').prop('disabled', true).text('Approve Selected');
+                }
+            });
+        });
+        $(document).on('click', '#CreationRequestsModal #bulk-decline', function(){
+            var ids = $('#CreationRequestsModal .req-checkbox:checked').map(function(){ return $(this).val(); }).get();
+            if (!ids.length) return;
+            $(this).prop('disabled', true).text('Please wait..');
+            $.ajax({
+                url: Wo_Ajax_Requests_File()+"?f=admin_setting&s=decline_creation_requests_bulk",
+                method: 'POST',
+                dataType: 'json',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                data: {ids: ids},
+                success: function(data) {
+                    if (data.status == 200) {
+                        ids.forEach(function(id){ $('#creation_req_'+id+' td:last').html('<span class="badge badge-danger">Declined</span>'); });
+                    } else {
+                        alert(data.error || 'Failed');
+                    }
+                    $('#CreationRequestsModal #bulk-decline').prop('disabled', true).text('Decline Selected');
+                },
+                error: function(xhr) {
+                    alert(xhr.responseText || 'Failed');
+                    $('#CreationRequestsModal #bulk-decline').prop('disabled', true).text('Decline Selected');
+                }
+            });
+        });
+        </script>
 <div class="modal fade" id="SelectedDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
