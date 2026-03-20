@@ -390,7 +390,7 @@
                         window.location.href = document.location;
                       };
 
-                     if (json_data.page == 'timeline' || json_data.page == 'page' || json_data.page == 'group') {
+                     if (json_data.page == 'timeline' || json_data.page == 'page' || json_data.page == 'group' || json_data.page == 'community') {
                        $('.content-container').css('margin-top', '25px');
                        $('.ad-placement-header-footer').find('.contnet').css('margin-top', '20px');
                      } else {
@@ -787,12 +787,12 @@
         $container = 'wo-msg-container';
       }
       ?>
-      <div class="content-container <?php echo $container?>" style="<?php echo ($wo['page'] == 'timeline' || $wo['page'] == 'page' || $wo['page'] == 'group') ? 'margin-top:25px;' : '';?>">
+      <div class="content-container <?php echo $container?>" style="<?php echo ($wo['page'] == 'timeline' || $wo['page'] == 'page' || $wo['page'] == 'group' || $wo['page'] == 'community') ? 'margin-top:25px;' : '';?>">
          <div class="ad-placement-header-footer">
             <?php 
                $header_ad = Wo_GetAd('header', false);
                if($wo['page'] != 'admin' && $wo['page'] != 'welcome' && $wo['page'] != 'messages' && $wo['page'] != '404' && !empty($header_ad) && $wo['page'] != 'video-api') {
-                 $timeline_ads = ($wo['page'] == 'timeline' || $wo['page'] == 'page' || $wo['page'] == 'group')  ? 'style="margin-top: 20px;"' : '';
+                 $timeline_ads = ($wo['page'] == 'timeline' || $wo['page'] == 'page' || $wo['page'] == 'group' || $wo['page'] == 'community')  ? 'style="margin-top: 20px;"' : '';
                  echo '<div class="contnet" ' . $timeline_ads . '>' . $header_ad . '</div>';
                } 
                ?>
