@@ -39,30 +39,30 @@
 
 
 			<!-- .added this section -->
-			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: rgb(255, 193, 7); background-color: rgb(231, 239, 221); color:#517322;">
+			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: rgb(255, 193, 7); background-color: rgb(231, 239, 221); color:#517322; padding-bottom: 10px;">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="setCookie('day_status', '1', 3);"><span aria-hidden="true">×</span></button>
-				<div id="daynightmsg1"><div class="small-texts">
-					<h4><a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities">Communities</a></h4> 
-						<!--img src="<?php echo $wo['config']['theme_url'];?>/img/sidebar/forum.svg" --> </div><p>
-						<?php
-							$communitiesNames = Wo_GetCommunitiesNames();
-
-							shuffle($communitiesNames);
-							$namesStr = '';
-							for ($i=0; $i < count($communitiesNames); $i++) { 
-								if ($i >= 10) {
-									break;
-								}
-								
-								if ($namesStr != '') {
-									$namesStr .= ', ';
-								}
-								$namesStr .= $communitiesNames[$i];
-							}
-							echo $namesStr;
-						?>
-						</p></div>
+				<div id="daynightmsg1">
+					<div class="small-texts" style="margin-bottom: 10px;">
+						<h4 style="margin:0;"><a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities">Communities</a></h4>
+					</div>
+					<div class="community-carousel-track" style="display:flex; overflow-x:auto; gap:10px; padding-bottom:6px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;">
+					<?php
+						$_carousel_communities = Wo_GetCommunitiesForCarousel(20);
+						foreach ($_carousel_communities as $_cc):
+							$_cc_url  = Wo_SeoLink('index.php?link1=timeline&u=' . htmlspecialchars($_cc['community_name']));
+							$_cc_ajax = '?link1=timeline&u=' . htmlspecialchars($_cc['community_name']);
+							$_cc_name = htmlspecialchars($_cc['community_title']);
+							$_cc_img  = htmlspecialchars($_cc['avatar']);
+					?>
+						<a href="<?php echo $_cc_url; ?>" data-ajax="<?php echo $_cc_ajax; ?>" class="community-carousel-card" style="flex:0 0 auto; scroll-snap-align:start; display:flex; flex-direction:column; align-items:center; text-decoration:none; color:inherit; background:#fff; border-radius:10px; padding:8px 10px; min-width:80px; max-width:90px; box-shadow:0 1px 4px rgba(0,0,0,0.10); border:1px solid rgba(0,0,0,0.07);">
+							<img src="<?php echo $_cc_img; ?>" alt="<?php echo $_cc_name; ?>" style="width:46px; height:46px; border-radius:50%; object-fit:cover; margin-bottom:5px; border:2px solid rgba(255,193,7,0.5);">
+							<span style="font-size:11px; font-weight:600; text-align:center; line-height:1.3; word-break:break-word; color:#333;"><?php echo $_cc_name; ?></span>
+						</a>
+					<?php endforeach; ?>
+					</div>
+				</div>
 			</div>
+			<style>.community-carousel-track::-webkit-scrollbar{display:none;}</style>
 
 			<?php
 				if (Wo_IsThereAnnouncement() === true) {
