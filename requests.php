@@ -20,11 +20,14 @@ file_put_contents($__debug_file, "\n----\n".date('c')." REQUEST: " . $_SERVER['R
 set_exception_handler(function($e) use ($__debug_file) {
     file_put_contents($__debug_file, "EXCEPTION: " . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n", FILE_APPEND);
 });
-// Convert PHP errors/warnings/notices into exceptions so we capture stack traces
+// Log PHP errors/warnings/notices without throwing (throwing breaks AJAX responses)
 set_error_handler(function($errno, $errstr, $errfile, $errline) use ($__debug_file) {
-    $ex = new ErrorException($errstr, 0, $errno, $errfile, $errline);
-    file_put_contents($__debug_file, "ERROR_CONVERTED: " . $errstr . " in " . $errfile . ":" . $errline . "\n" . $ex->getTraceAsString() . "\n", FILE_APPEND);
-    throw $ex;
+    // Respect @ operator — if error_reporting is 0, the error was suppressed
+    if (error_reporting() === 0) {
+        return false;
+    }
+    file_put_contents($__debug_file, "PHP_ERROR[$errno]: " . $errstr . " in " . $errfile . ":" . $errline . "\n", FILE_APPEND);
+    return false; // let PHP's default error handler also run
 });
 register_shutdown_function(function() use ($__debug_file) {
     $err = error_get_last();

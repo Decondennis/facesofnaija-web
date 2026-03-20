@@ -38,9 +38,9 @@ if ($f == 'update_user_avatar_picture') {
             $img  = Wo_UserData($_POST['user_id']);
             $data = array(
                 'status' => 200,
-                'img' => $img['avatar'] . '?cache=' . rand(11, 22),
+                'img' => $img['avatar'] . '?cache=' . time(),
                 'img_or' => $img['avatar_org'],
-                'avatar_full' => Wo_GetMedia($img['avatar_full']) . '?cache=' . rand(11, 22),
+                'avatar_full' => Wo_GetMedia($img['avatar_full']) . '?cache=' . time(),
                 'avatar_full_or' => $img['avatar_full'],
                 'big_text' => $wo['lang']['looks_good'],
                 'small_text' => $wo['lang']['looks_good_des']

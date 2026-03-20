@@ -7,9 +7,9 @@ if ($f == 'update_user_cover_picture') {
             $_SESSION['file'] = $img['cover_org'];
             $data             = array(
                 'status' => 200,
-                'img' => $img['cover'],
+                'img' => $img['cover'] . '?cache=' . time(),
                 'cover_or' => $img['cover_org'],
-                'cover_full' => Wo_GetMedia($img['cover_full']),
+                'cover_full' => Wo_GetMedia($img['cover_full']) . '?cache=' . time(),
                 'session' => $_SESSION['file']
             );
         } else {

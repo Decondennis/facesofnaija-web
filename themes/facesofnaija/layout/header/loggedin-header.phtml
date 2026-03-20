@@ -90,7 +90,7 @@ if ($followers_alert == 0) {
 			<li>
 				<a id="update-username" href="<?php echo $wo['user']['url']; ?>" data-ajax="?link1=timeline&u=<?php echo $wo['user']['username'];?>" class="wow_hdr_menu_usr_lnk">
 					<b><?php echo $wo['user']['name'];?></b>
-					<img src="<?php echo $wo['user']['avatar'];?>" alt="<?php echo $wo['user']['name'];?> Profile Picture">
+					<img id="updateImage-<?php echo $wo['user']['user_id']?>-menu" src="<?php echo $wo['user']['avatar'];?>" alt="<?php echo $wo['user']['name'];?> Profile Picture">
 				</a>
 			</li>
 			<?php if ($wo['config']['point_level_system'] == 1) { ?>
