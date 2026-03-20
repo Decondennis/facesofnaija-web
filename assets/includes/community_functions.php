@@ -305,6 +305,7 @@ function Wo_GetCommunitiesForCarousel($total = 20) {
     $query = mysqli_query($sqlConnect, "SELECT `community_name`, `community_title`, `avatar` FROM " . T_COMMUNITIES . " WHERE `active` = '1' ORDER BY RAND() LIMIT 0, {$total}");
     if ($query && mysqli_num_rows($query)) {
         while ($row = mysqli_fetch_assoc($query)) {
+            $row['avatar'] = Wo_GetMedia($row['avatar']);
             $data[] = $row;
         }
     }
