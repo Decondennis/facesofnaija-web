@@ -189,7 +189,7 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                         include('sources/community_setting.php');
                         break;
                     case 'request-community':
-                        include('sources/request_community.php');
+                        include('sources/request-community.php');
                         break;
                     /** to here*/
                     case 'create-page':

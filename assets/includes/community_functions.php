@@ -576,6 +576,7 @@ function Wo_CanBeOnCommunity($community_id) {
         if (Wo_IsCommunityJoined($community_id) === true) {
             return true;
         }
+        return false;
     } else if ($community['privacy'] == 1) {
         return true;
     } else {
