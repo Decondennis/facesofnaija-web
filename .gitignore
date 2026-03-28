@@ -6,3 +6,10 @@
 /upload/videos/
 /upload/sounds/
 /upload/photos/.vs/
+
+# Logs and debug output
+*.log
+home_test.txt
+html_output.txt
+html_output2.txt
+deploy/db_export.sql
