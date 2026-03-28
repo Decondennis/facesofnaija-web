@@ -3,10 +3,10 @@
 # Run this from your Windows machine to deploy to Linode
 # =============================================================================
 # FILL THESE IN BEFORE RUNNING:
-$SERVER_IP   = "YOUR_LINODE_IP"       # e.g. "172.234.56.78"
-$SERVER_USER = "root"                 # usually root on a fresh Linode
-$SERVER_PASS = "YOUR_ROOT_PASSWORD"   # your Linode root password
-$DOMAIN      = "facesofnaija.com"     # your domain pointing to the Linode
+$SERVER_IP   = "172.236.19.52"
+$SERVER_USER = "root"
+$SERVER_PASS = "YOUR_ROOT_PASSWORD"   # fill in your Linode root password
+$DOMAIN      = "facesofnaija.net"
 # =============================================================================
 
 $APP_DIR    = "C:\xampp\htdocs\facesofnaija-web"

@@ -7,7 +7,7 @@
 
 set -e
 
-DOMAIN="facesofnaija.com"       # Change to your actual domain
+DOMAIN="facesofnaija.net"
 DB_NAME="facesofnaija"
 DB_USER="facesofnaija_user"
 DB_PASS="$(openssl rand -base64 16)"   # Auto-generates a strong password
