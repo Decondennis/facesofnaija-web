@@ -350,7 +350,7 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
                     $('.navigation-menu-body').find('a').removeClass('active');
                     $(this).addClass('active');
                 }
-                window.history.pushState({state:'new'},'', $(this).attr('href'));
+                try { window.history.pushState({state:'new'},'', $(this).attr('href')); } catch(e) {}
                 $(".barloading").css("display","block");
                 if ($(this)[0].hasAttribute("data-sent")) {
                     $(this).attr('data-sent', "1");
