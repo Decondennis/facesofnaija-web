@@ -1,5 +1,6 @@
 <?php 
 if ($f == 'update_page_avatar_picture') {
+    $data = array('status' => 400, 'message' => 'Invalid request');
     if (isset($_FILES['avatar']['name']) && !empty($_POST['page_id']) && is_numeric($_POST['page_id']) && $_POST['page_id'] > 0) {
         if (Wo_UploadImage($_FILES["avatar"]["tmp_name"], $_FILES['avatar']['name'], 'avatar', $_FILES['avatar']['type'], $_POST['page_id'], 'page')) {
             $img  = Wo_PageData($_POST['page_id']);

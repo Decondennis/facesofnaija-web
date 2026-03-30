@@ -1,5 +1,6 @@
 <?php
 if ($f == 'update_user_cover_picture') {
+    $data = array('status' => 400, 'message' => 'Invalid request');
     if (isset($_FILES['cover']['name'])) {
         $upload = Wo_UploadImage($_FILES["cover"]["tmp_name"], $_FILES['cover']['name'], 'cover', $_FILES['cover']['type'], $_POST['user_id']);
         if ($upload === true) {

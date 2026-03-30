@@ -1811,7 +1811,7 @@ if ($f == 'admin_setting' AND (Wo_IsAdmin() || Wo_IsModerator())) {
             'job' => T_JOB_CATEGORY
         );
         if (!empty($_GET['type']) && in_array($_GET['type'], array_keys($types))) {
-            if ($_POST['lang_key'] != 'other' && $_POST['lang_key'] != 'all_') {
+            if ($_POST['lang_key'] != 'other' && $_POST['lan_key'] != 'all_') {
                 $lang_key = Wo_Secure($_POST['lang_key']);
                 $category = $db->where('lang_key', $lang_key)->getOne($types[$_GET['type']]);
                 if (!empty($category)) {

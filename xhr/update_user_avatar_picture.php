@@ -32,6 +32,7 @@ if ($f == 'update_user_avatar_picture') {
         '29',
         '30'
     );
+    $data = array('status' => 400, 'message' => 'Invalid request');
     if (isset($_FILES['avatar']['name'])) {
         $upload = Wo_UploadImage($_FILES["avatar"]["tmp_name"], $_FILES['avatar']['name'], 'avatar', $_FILES['avatar']['type'], $_POST['user_id']);
         if ($upload === true) {

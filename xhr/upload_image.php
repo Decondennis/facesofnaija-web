@@ -1,5 +1,6 @@
 <?php 
 if ($f == 'upload_image') {
+    $data = array('status' => 400, 'message' => 'Invalid file');
     if (isset($_FILES['image']['name'])) {
         $fileInfo = array(
             'file' => $_FILES["image"]["tmp_name"],

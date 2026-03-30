@@ -1,5 +1,6 @@
 <?php 
 if ($f == 'update_group_avatar_picture') {
+    $data = array('status' => 400, 'message' => 'Invalid request');
     if (isset($_FILES['avatar']['name']) && !empty($_POST['group_id']) && is_numeric($_POST['group_id']) && $_POST['group_id'] > 0) {
         if (Wo_UploadImage($_FILES["avatar"]["tmp_name"], $_FILES['avatar']['name'], 'avatar', $_FILES['avatar']['type'], $_POST['group_id'], 'group')) {
             $img  = Wo_GroupData($_POST['group_id']);
