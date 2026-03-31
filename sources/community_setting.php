@@ -26,19 +26,19 @@ if (isset($_GET['community']) && !empty($_GET['community'])) {
     $wo['setting'] = Wo_CommunityData($community_id);
 }
 
-//if (Wo_IsGroupOnwer($group_id) === false) {
-if (Wo_IsAdmin() === false && Wo_IsModerator() === false) {
-    header("Location: " . $wo['config']['site_url']);
-    exit();
+if (Wo_IsCommunityUserExists($wo['user']['user_id'], $community_id) === false) {
+    if (Wo_IsAdmin() === false && Wo_IsModerator() === false) {
+        header("Location: " . $wo['config']['site_url']);
+        exit();
+    }
 }
-//}
 
 $array = array('general-setting' => 'general','privacy-setting' => 'privacy','avatar-setting' => 'avatar','community-members' => 'members','analytics' => 'analytics','delete-community' => 'delete_community');
 $s_page = 'general';
 if (!empty($_GET['link3']) && in_array($_GET['link3'], array_keys($array))) {
     $s_page = $array[$_GET['link3']];
 }
-if (!Wo_IsAdmin() && !Wo_IsModerator() && !Wo_IsCanCommunityUpdate($wo['setting']['id'],$s_page)) {
+if (!Wo_IsCanCommunityUpdate($wo['setting']['id'],$s_page)) {
     $allowed = Wo_GetAllowedCommunityPages($community_id);
     if (!empty($allowed) && !empty($allowed[0])) {
         $_GET['link3'] = $allowed[0];

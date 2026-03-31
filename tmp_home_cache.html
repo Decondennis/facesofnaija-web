@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Facesofnaija - Social, Chat, Connect</title>
+      <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+      <meta name="title" content="Facesofnaija - Social, Chat, Connect">
+      <meta name="description" content="Facesofnaija: Connect, share posts, and photos seamlessly on our vibrant social networking platform.">
+      <meta name="keywords" content="social, Facesofnaija, social site">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <meta name="pinterest-rich-pin" content="false" />
+                                          <meta property="og:title" content="Facesofnaija - Social, Chat, Connect" />
+      <meta property="og:type" content="article" />
+      <meta property="og:url" content="http://172.236.19.52" />
+      <meta property="og:image" content="http://172.236.19.52/themes/facesofnaija/img/og.jpg" />
+      <meta property="og:image:secure_url" content="http://172.236.19.52/themes/facesofnaija/img/og.jpg" />
+      <meta property="og:description" content="Facesofnaija: Connect, share posts, and photos seamlessly on our vibrant social networking platform." />
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="Facesofnaija - Social, Chat, Connect" />
+      <meta name="twitter:description" content="Facesofnaija: Connect, share posts, and photos seamlessly on our vibrant social networking platform." />
+      <meta name="twitter:image" content="http://172.236.19.52/themes/facesofnaija/img/og.jpg" />
+                                                         <link rel="canonical" href="http://172.236.19.52/?cache=1774889363" />
+            <link rel="shortcut icon" type="image/png" href="http://172.236.19.52/themes/facesofnaija/img/icon.png"/>
+      <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/stylesheet/general-style-plugins.css?version=4.3.4">
+            
+     
+    
+      <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/stylesheet/style.css?version=4.3.4">
+            <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/stylesheet/welcome.css?version=4.3.4">
+            <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css?version=4.3.4">
+	  
+	      
+     
+      <script src="http://172.236.19.52/themes/facesofnaija/javascript/jquery-3.1.1.min.js?version=4.3.4"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-ui-touch-punch@0.2.3/jquery.ui.touch-punch.min.js?version=4.3.4"></script>
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css?version=4.3.4">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js?version=4.3.4"></script>
+      	  
+	        <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/stylesheet/leaflet.css?version=4.3.4">
+      <script src="http://172.236.19.52/themes/facesofnaija/javascript/leaflet.js?version=4.3.4"></script>
+      
+      
+              <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/stylesheet/movies/style.movies.css?version=4.3.4" />
+            
+                  <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/player/fluidplayer.min.css?version=4.3.4" type="text/css"/>
+      <script src="http://172.236.19.52/themes/facesofnaija/player/fluidplayer.min.js?version=4.3.4"></script>
+            <style>
+      /* 
+
+Add here your custom css styles Example: p { text-align: center; color: red; } 
+
+*/
+.wo_follow_btn {
+  background: linear-gradient(to right,#1da1f2 0,#009343 100%) !important;
+}
+
+.emoji--like {
+  background: #009343 !important;
+}
+
+.active-like-1 {
+  color: #009343 !important;
+}
+
+ul.profile-completion-bar .completion-bar div.completion-bar-status {
+    background: rgb(0 148 68 / 80%) !important;
+}
+
+ul.profile-completion-bar .completion-bar div.completion-bar-wrapper {
+    background: rgb(141 198 63 / 50%) !important;
+}      </style>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+      <script src="http://172.236.19.52/themes/facesofnaija/javascript/qrcode.js"></script>
+      
+      <script type="text/javascript">
+         /* 
+Add here your JavaScript Code. 
+Note. the code entered here will be added in <head> tag 
+
+
+	Example: 
+
+	var x, y, z; 
+	x = 5; 
+	y = 6; 
+	z = x + y;
+
+*/         function Wo_Ajax_Requests_File(){
+            return "http://172.236.19.52/requests.php"
+         }
+               function RunLiveAgora(channelName,DIV_ID,token) {
+  var agoraAppId = 'cc170acfd09e48f6b337dc5b4feb7c9e'; 
+  var token = token;
+
+  var client = AgoraRTC.createClient({mode: 'live', codec: 'vp8'}); 
+  client.init(agoraAppId, function () {
+
+
+      client.setClientRole('audience', function() {
+    }, function(e) {
+    });
+    
+    client.join(token, channelName, 786742, function(uid) {
+    }, function(err) {
+    });
+    }, function (err) {
+    });
+
+    client.on('stream-added', function (evt) {
+    var stream = evt.stream;
+    var streamId = stream.getId();
+    
+    client.subscribe(stream, function (err) {
+    });
+  });
+  client.on('stream-subscribed', function (evt) {
+    var remoteStream = evt.stream;
+    remoteStream.play(DIV_ID);
+    $('#player_'+remoteStream.getId()).addClass('embed-responsive-item');
+  });
+}
+      </script>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EBLZEVLT2X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EBLZEVLT2X');
+</script>      
+    <style>
+@font-face {
+    font-family: OpenSansLight;
+    src: url("http://172.236.19.52/themes/facesofnaija/fonts/OpenSansLight/OpenSansLight.woff") format("woff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: OpenSansRegular;
+    src: url("http://172.236.19.52/themes/facesofnaija/fonts/OpenSansRegular/OpenSansRegular.woff") format("woff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: OpenSansSemiBold;
+    src: url("http://172.236.19.52/themes/facesofnaija/fonts/OpenSansSemiBold/OpenSansSemiBold.woff") format("woff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: OpenSansBold;
+    src: url("http://172.236.19.52/themes/facesofnaija/fonts/OpenSansBold/OpenSansBold.woff") format("woff");
+    font-weight: normal;
+}
+.navbar-default {
+    background: #1e2321; border: none;
+    height: 46px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.round-check input[type="checkbox"]:checked + label:before, .round-check input[type="radio"]:checked + label:before {
+    background: #2e7806 !important;
+}
+.group-messages-wrapper a{
+    color: #2e7806 !important;
+}
+ul.profile-completion-bar li.completion-bar div.completion-bar-status {
+    background: #2e7806 !important;
+}
+.featured-users{
+    background: #fff !important;
+}
+.result-bar {
+    background: #2e7806 !important;
+}
+.featured-users .sidebar-title-back, .featured-users .pro-me-here a {
+    color: #444 !important;
+}
+
+.avtive {
+    border-color: #2e7806 !important;
+}
+#wo_nw_msg_page .msg_under_hood .mobilerightpane .messages-search-users-form .inner-addon .btn_contr {
+	background: #2e7806;
+	color: #ffffff;
+}
+#wo_nw_msg_page .msg_under_hood .mobilerightpane .messages-search-users-form .inner-addon button.btn {
+	color: #ffffff;
+}
+#wo_nw_msg_page .msg_under_hood .mobilerightpane .messages-search-users-form .inner-addon button.btn:hover {
+	background: #2f740a;
+}
+
+.green-audio-player svg path {
+	fill: #2e7806;
+}
+.green-audio-player .slider .gap-progress, .green-audio-player .slider .gap-progress .pin {
+	background-color: #2e7806 !important;
+}
+
+.add_as_cont_list label input:checked+div {
+    background-color: #2e7806;
+    color: #ffffff;
+}
+
+.barloading {
+  background-color: transparent !important;
+}
+.barloading:before {
+    background-color: #8dd9ff;
+}
+.left-sidebar ul li a i {
+    color: #2e7806 !important;
+}
+.cs-loader-inner, .main  {
+    color: #2e7806;
+}
+.login input:focus, ul.profile-completion-bar li.completion-bar div.completion-bar-wrapper, .edit_grp_info_modal input.form-control:not(textarea):focus, .verfy_sett_email_phone input.form-control:not(textarea):focus {
+    border-color: #2e7806 !important;
+}
+.login:not(.loading) button:hover {
+    background: #2f740a !important;
+    color: #ffffff;
+}
+.wo_setting_sidebar ul .list-group-item{
+    background: #2e7806 !important;
+}
+.wo_setting_sidebar ul .list-group-item a{
+    color: #ffffff;
+}
+.wo_settings_page .setting-panel input[type=text]:focus, .wo_settings_page .setting-panel input[type=email]:focus, .wo_settings_page .setting-panel input[type=password]:focus, .wo_settings_page .setting-panel select:focus, .wo_settings_page .setting-panel textarea:focus {
+    border-color: #03A9F4;
+}
+
+#search-nearby-users .nearby-users-relationship-collapse li.active .friends_toggle{
+    border-color: #2e7806;
+}
+#search-nearby-users .nearby-users-relationship-collapse li.active .friends_toggle:after{
+    background: #2e7806;
+}
+.wo_page_hdng_menu > ul li.active a {
+    box-shadow: inset 0px -2.5px #2e7806;
+}
+.login button, .postCategory h5, .wo_search_page .nav-tabs li.active a {
+    background: #2e7806 !important;
+    color: #ffffff !important;
+}
+.mejs-controls .mejs-time-rail .mejs-time-current, .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current, .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-current {
+    background-color: #2e7806 !important;
+    background: #2e7806 !important;
+    background-image: #2e7806 !important;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #ffffff !important;
+    background-color: #333333 !important;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover, .nav-names li:hover {
+    color: #ffffff !important;
+    background-color: #333333 !important;
+}
+body {
+    background-color: #f0f2f5;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+    font-size: 13px;
+}
+a.unread-update {
+    color: #ffffff !important;
+}
+.btn-main {
+    color: #ffffff;
+    background-color: #2e7806;
+    border-color: #2e7806;
+}
+.btn-main:hover {
+    color: #ffffff;
+    background-color: #2f740a;
+    border-color: #2f740a;
+}
+.wow_pops_head {
+    background: #2f740a;
+}
+.btn-main:focus {
+	color: #ffffff;
+}
+.active-wonder {
+    color: #2e7806;
+}
+.admin-panel .col-md-9 .list-group-item:first-child, .setting-panel .col-md-8 .list-group-item:first-child, .profile-lists .list-group-item:first-child, .col-md-8 .list-group-item:first-child, .col-md-3.custom .list-group-item:first-child, .col-sm-4 .list-group-item:first-child, .col-md-7 .list-group-item:first-child, .col-md-9 .list-group-item:first-child, .red-list .list-group-item:first-child, .active.list-group-item:first-child {
+     color: #444;
+     background-color: #fcfcfc;
+     border-bottom: 1px solid #f1f1f1;
+     padding: 18px;
+}
+.admin-panel .col-md-9 .list-group-item:first-child a, .setting-panel .col-md-8 .list-group-item:first-child a, .profile-lists .list-group-item:first-child a, .col-md-8 .list-group-item:first-child a, .col-md-7 .list-group-item:first-child a, .active.list-group-item:first-child a {
+    color: #444 !important;
+}
+.list-group-item.black-list.active-list, .red-list.active-list {
+    color: #ffffff;
+    background-color: #2e7806;
+}
+.list-group-item.black-list {
+    background: #2e7806;
+}
+.profile-top-line {
+    background-color: #2e7806;
+}
+#bar {
+    background-color: #2e7806;
+}
+.list-group-item.black-list a{
+    color: #ffffff;
+}
+.list-group-item.black-list.active-list a{
+    color: #2e7806;
+}
+.main-color, .small-text a {
+    color: #2e7806 !important;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #ffffff;
+    cursor: default;
+    color: #2e7806;
+    border-bottom: 1px solid #2e7806;
+    background-color: transparent
+}
+.btn-active {
+    color: #ffffff;
+    background: #2e7806;
+    outline: none;
+    border: 1px solid #2e7806}
+.btn-active:hover, .btn-active:focus {
+    border: 1px solid #2f740a;
+    color: #ffffff;
+    background: #2f740a;
+}
+.btn-active-color:hover {
+    background: #2f740a;
+}
+.chat-tab .online-toggle-hdr, .wow_thread_head {
+    background: #1e2321;
+	color: #ffffff;
+}
+.chat-tab .online-toggle-hdr a {
+	color: #ffffff;
+}
+.profile-style .user-follow-button button.btn-active, .btn-login, .btn-register {
+    background: #2e7806;
+    color: #ffffff;
+}
+.profile-style .user-follow-button button.btn-active:hover, .btn-login:hover, .btn-login:focus, .btn-register:hover, .btn-register:focus {
+    color: #ffffff;
+    background: #2f740a;
+}
+.panel-login>.panel-heading a.active {
+    color: #2e7806;
+    font-size: 18px;
+}
+.hash {
+    color: #2e7806;
+}
+.message-text .hash {
+    color: #fff !important;
+}
+.search-container .search-input {
+    color: #ffffff !important;
+    background: #0f1110 !important;
+}
+.chat-messages-wrapper .outgoing .message-text {
+    background: #2e7806;
+    color: #ffffff;
+}
+.normal-container {
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
+}
+.active.fa-thumbs-up {
+    color: #2e7806;
+}
+.api-ex-urls {
+    background-color: #2e7806; color: #ffffff;
+}
+.user-username {
+    color: #2e7806;
+}
+.upload-image {
+    border: 3px dashed #2e7806;
+}
+.events-tab-list li { background-color: #2e7806; }
+.events-tab-list li:hover { background-color: #2e7806; }
+.active-e-tab { background-color: #2e7806 !important; }
+.main { color: #2e7806 !important; }
+.events-list-dropup-menu ul li a:hover { background: #2e7806; }
+.usr-offline { color: #2e7806; }
+.blog-dd-ul li span:hover, .blog-dd-ul li a:hover { background: #2e7806 !important; }
+.blog_publ {background: #2e7806 ; border: 1px solid #2e7806 ; }
+.slide-film-desc:hover, .movies-top-breadcrumb li:hover, .movies-top-breadcrumb li a:hover{
+    color: #2e7806 !important;
+}
+.movies h3.latest-movies, h3.recommended-movies {
+    border-left: 3px solid  #2e7806;
+}
+
+.wo_user_profile .user-bottom-nav li .menuactive {
+    border-bottom: 2px solid #2e7806;
+    color:#2e7806;
+}
+.ads-navbar-wrapper ul li a.active {
+	border-color: #2e7806;
+}
+.ads_mini_wallet, .wo_page_hdng_innr span {
+	background-color: #2e7806;
+	color: #ffffff;
+}
+.btn-loading:after {
+	background-color: #2e7806;
+}
+.wow_pub_privacy_menu li label input[type="radio"]:checked+span {
+	background-color: #2e7806;color: #ffffff;
+}
+.order_by ul li.active a {background: #2e7806 !important;color: #ffffff !important;}
+
+
+
+
+#welcomeheader .mdbtn:hover{background-color: #ffffff;color: #1e2321;border-color: #ffffff;}
+
+.post .panel.active_shadow {
+    box-shadow: 0 0 0 1.5px #2e7806 !important;
+}
+
+.ui-widget-header .ui-state-default, .wo_adv_search_filter_side .ui-slider .ui-slider-range, .wo_adv_search_filter_side .ui-slider .ui-slider-handle {
+    background-color: #2e7806;
+}
+.reaction-1::before {
+    content: "Like";
+}
+.reaction-2::before {
+    content: "Love";
+}
+.reaction-3::before {
+    content: "HaHa";
+}
+.reaction-4::before {
+    content: "WoW";
+}
+.reaction-5::before {
+    content: "Sad";
+}
+.reaction-6::before {
+    content: "Angry";
+}
+/*.reaction-like::before {
+    content: "Like";
+}
+.reaction-love::before {
+    content: "Love";
+}
+.reaction-haha::before {
+    content: "HaHa";
+}
+.reaction-wow::before {
+    content: "WoW";
+}
+.reaction-sad::before {
+    content: "Sad";
+}
+.reaction-angry::before {
+    content: "Angry";
+}*/
+
+.navbar-default .dropdown-menu.ani-acc-menu >li>a:hover {
+    color: #ffffff;background-color: #2e7806;
+}
+#wo_nw_msg_page .msg_under_hood .mobilerightpane .messages-search-users-form .wo_msg_tabs li.active a, .text-sender-container .msg_usr_info_top_list .msg_usr_cht_opts_btns > span:hover, .text-sender-container .msg_usr_info_top_list .msg_usr_cht_usr_data a:hover, .wo_chat_tabs li.active a {
+    color: #2e7806;
+}
+.text-sender-container .outgoing .message-model .message {background-color: #2e7806;color: #ffffff;}
+.text-sender-container .outgoing .message-model .message p, .text-sender-container .outgoing .message-model .message a {color: #ffffff;}
+
+#notification-popup {
+     position: fixed;
+     left: 20px;
+     width: 300px;
+     bottom: 20px;
+     z-index: 10000;
+}
+#notification-popup .notifications-popup-list:empty {
+      padding: 0;
+}
+#notification-popup .notifications-popup-list {
+    position: relative;
+    background:  #333333 !important;
+    border-radius: 10px;
+    padding: 6px;
+    width: 100%;
+    margin-bottom: 10px;
+    z-index: 10000;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+#notification-popup .notifications-popup-list, #notification-popup .notifications-popup-list a, #notification-popup .notifications-popup-list .main-color, #notification-popup .notifications-popup-list svg, #notification-popup .notifications-popup-list .notification-text, #notification-popup .notifications-popup-list .notification-time {
+    color: #ffffff !important;
+}
+#notification-popup .notifications-popup-list .notification-list {
+    border-radius: 10px;
+}
+#notification-popup .notifications-popup-list .notification-list:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+</style>    
+          <style>.login_left_combo{color:#ffffff}body{background: #2e7806 !important;}   .wo_regi_features:before{content: '';display: block;background-image: url(http://172.236.19.52/themes/facesofnaija/img/backgrounds/login.jpg);background-repeat: no-repeat;background-size: cover;background-position:center;position: absolute;top: 0;left: 0;right: 0;bottom: 0;opacity: 0.35;}
+    </style>
+      
+            <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+              <script src="http://172.236.19.52/themes/facesofnaija/javascript/agora.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+        <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+    <script src="http://172.236.19.52/themes/facesofnaija/javascript/socket.io.js"></script>
+      <script>
+      let nodejs_system = "1";
+      let socket = null
+      let groupChatListener = {}
+      $(()=>{
+                var main_hash_id = $('.main_session').val();
+                  socket = io("https://172.236.19.52:449/?hash=" + main_hash_id)
+                let recipient_ids = []
+        let recipient_group_ids = []
+        setTimeout(function(){ 
+          var inputs = $("input.chat-user-id");
+          $(".chat-wrapper").each(function(){
+            let id = $(this).attr("class").substr("chat-wrapper".length);
+            let isGroup = $(this).attr("class").substr("chat-wrapper".length).split("_").includes("group")
+            if(isGroup) {
+              id = id.substr(' chat_group_'.length)
+              recipient_group_ids.push(id)
+            } else{
+              id = id.substr(' chat_'.length)
+              recipient_ids.push(id)
+            }
+          });
+          socket.emit('join', {username: "custompaving7", user_id: _getCookie('user_id'), recipient_ids, recipient_group_ids }, ()=>{
+              // setInterval(() => {
+              //   socket.emit("get_user_status", {user_id: _getCookie("user_id")})
+              // }, 2000);
+              setInterval(() => {
+                socket.emit("ping_for_lastseen", {user_id: _getCookie("user_id")})
+              }, 2000);
+          });
+         }, 3000);
+
+        socket.on("reconnect", ()=>{
+          let recipient_ids = []
+          let recipient_group_ids = []
+          setTimeout(function(){ 
+            var inputs = $("input.chat-user-id");
+            $(".chat-wrapper").each(function(){
+              let id = $(this).attr("class").substr("chat-wrapper".length);
+              let isGroup = $(this).attr("class").substr("chat-wrapper".length).split("_").includes("group")
+              if(isGroup) {
+                id = id.substr(' chat_group_'.length)
+                recipient_group_ids.push(id)
+              } else{
+                id = id.substr(' chat_'.length)
+                recipient_ids.push(id)
+              }
+            });
+            socket.emit('join', {username: "custompaving7", user_id: _getCookie('user_id'), recipient_ids, recipient_group_ids }, ()=>{
+                setInterval(() => {
+                  socket.emit("ping_for_lastseen", {user_id: _getCookie("user_id")})
+                }, 2000);
+            });
+          }, 3000);
+        })
+        socket.on("lastseen", (data) => {
+            //$('.messages-text[data-message-id='+data.message_id+']').length > 0
+            if (data.message_id && data.user_id) {
+                  var chat_container = $('.chat-tab').find('#chat_' + data.user_id);
+                  if ($('#messageId_'+data.message_id).length > 0) {
+                        
+                        if (chat_container.length > 0) {
+                              chat_container.find('.message-seen').hide();
+                              
+                        }
+                        else{
+                              $('.message-seen').hide();
+                        }
+                        $('#messageId_'+data.message_id).find('.message-seen').hide().html('<i class="fa fa-check"></i> Seen (<span class="ajax-time" title="' + data.time + '">' + data.seen + '</span>)').fadeIn(300);
+                        if (chat_container.length > 0) {
+                              //chat_container.find('.online-toggle-hdr').attr('style', '');
+                              setTimeout(function(){
+                                 chat_container.find('.chat-messages-wrapper').scrollTop(chat_container.find('.chat-messages-wrapper')[0].scrollHeight);
+                              }, 100);
+                        }
+                        else{
+                           $(".messages-container").animate({
+                               scrollTop: $('.messages-container')[0].scrollHeight
+                           }, 200);
+                        }
+                  }
+                     
+            }
+          })
+         socket.on("register_reaction", (data) => {
+              if(data.status == 200) {
+                  $('.post-reactions-icons-m-'+data.id).html(data.reactions);
+              }
+          });
+          socket.on("on_user_loggedin", (data) => {
+            $('#chat_' + data.user_id).find('.chat-tab-status').addClass('active');
+            $("#online_" + data.user_id).find('svg path').attr('fill', '#60d465');
+            $("#messages-recipient-" + data.user_id).find('.dot').css({"background-color": "#63c666"});
+          });
+          socket.on("on_user_loggedoff", (data) => {
+            $('#chat_' + data.user_id).find('.chat-tab-status').removeClass('active');
+            $("#online_" + data.user_id).find('svg path').attr('fill', '#dddddd');
+            $("#messages-recipient-" + data.user_id).find('.dot').css({"background-color": "lightgray"});
+          });
+          socket.on("update_new_posts", (data) => {
+            Wo_intervalUpdates(1);
+          });
+          socket.on("on_avatar_changed", (data) => {
+            $("#online_" + data.user_id).find('img').attr('src', data.name);
+            $("#messages-recipient-" + data.user_id).find('img').attr('src', data.name);
+          });
+          socket.on("on_name_changed", (data) => {
+            $("#online_" + data.user_id).find('#chat-tab-id').html(data.name);
+            $("#messages-recipient-" + data.user_id).find('.messages-user-name').html(data.name);
+          });
+          socket.on("new_notification", (data) => {
+                         Wo_GetLastNotification();
+                         current_notifications = $('.notification-container').find('.new-update-alert').text();
+            $('.notification-container').find('.new-update-alert').removeClass('hidden');
+            $('.notification-container').find('.sixteen-font-size').addClass('unread-update');
+            $('.notification-container').find('.new-update-alert').text(Number(current_notifications) + 1).show();
+            document.getElementById('notification-sound').play();
+          });
+          socket.on("new_notification_removed", (data) => {
+            current_notifications = $('.notification-container').find('.new-update-alert').text();
+            $('.notification-container').find('.new-update-alert').removeClass('hidden');
+            if (Number(current_notifications) > 0) {
+               if ((Number(current_notifications) - 1) == 0) {
+                  $('.notification-container').find('.new-update-alert').addClass('hidden');
+                  $('.notification-container').find('.new-update-alert').addClass('hidden').text('0').hide();
+               } else {
+                  $('.notification-container').find('.sixteen-font-size').addClass('unread-update');
+                  $('.notification-container').find('.new-update-alert').text(Number(current_notifications) - 1).show();
+               }
+            } else if (Number(current_notifications) == 0) {
+               $('.notification-container').find('.new-update-alert').addClass('hidden');
+               $('.notification-container').find('.new-update-alert').addClass('hidden').text('0').hide();
+            } 
+          });
+
+          socket.on("new_request", (data) => {
+            current_requests= $('.requests-container').find('.new-update-alert').text();
+            $('.requests-container').find('.new-update-alert').removeClass('hidden');
+            $('.requests-container').find('.sixteen-font-size').addClass('unread-update');
+            $('.requests-container').find('.new-update-alert').text(Number(current_requests) + 1).show();
+            document.getElementById('notification-sound').play();
+          });
+          socket.on("new_request_removed", (data) => {
+            current_requests = $('.requests-container').find('.new-update-alert').text();
+            $('.requests-container').find('.new-update-alert').removeClass('hidden');
+            if (Number(current_requests) > 0) {
+               if ((Number(current_requests) - 1) == 0) {
+                  $('.requests-container').find('.new-update-alert').addClass('hidden');
+                  $('.requests-container').find('.new-update-alert').addClass('hidden').text('0').hide();
+               } else {
+                  $('.requests-container').find('.sixteen-font-size').addClass('unread-update');
+                  $('.requests-container').find('.new-update-alert').text(Number(current_requests) - 1).show();
+               }
+            } else if (Number(current_requests) == 0) {
+               $('.requests-container').find('.new-update-alert').addClass('hidden');
+               $('.requests-container').find('.new-update-alert').addClass('hidden').text('0').hide();
+            } 
+          });
+
+          socket.on("messages_count", (data) => {
+             current_messages_number = data.count;
+             if (current_messages_number > 0) {
+               $("[data_messsages_count]").text(current_messages_number).removeClass("hidden");
+               $("[data_messsages_count]").attr('data_messsages_count', current_messages_number);
+             } else {
+               $("[data_messsages_count]").text(current_messages_number).addClass("hidden");
+               $("[data_messsages_count]").attr('data_messsages_count', "0");
+             }
+          });
+          socket.on("new_video_call", (data) => {
+             Wo_intervalUpdates(1);
+          });
+          socket.on("load_comment_replies", (data) => {
+             Wo_ViewMoreReplies(data.comment_id);
+          });
+
+
+        socket.on("color-change", (data)=>{
+          if (data.sender == 158) {
+            $(".chat_" + data.id).find('.outgoing .message-text, .outgoing .message-media').css('background', data.color);
+            $(".chat_" + data.id).find('.outgoing .message-text').css('color', '#fff');
+            $(".chat_" + data.id).find('.select-color path').css('fill', data.color);
+            $(".chat_" + data.id).find('#color').val(data.color);
+          }
+          let user_id = $('#user-id').val();
+          if(""+user_id === ""+data.id) {
+            if(data.sender == 158){
+                  $('.send-button').css('background-color', data.color);
+                  $('.send-button').css('border-color', data.color);
+                  $('#wo_msg_right_prt .message-option-btns .btn svg').css('color', data.color);
+                  $(".messages-container").find(".pull-right").find(".message").css('background-color', data.color);
+                  $(".messages-container").find(".pull-right").find(".message-text").css('background-color', data.color)
+              }
+          }
+        })
+        var new_current_messages = 0;
+        socket.on("private_message", (data)=>{
+         $('#chat_' + data.sender).find('.online-toggle-hdr').attr('style', 'background: '+data.color+';');
+          var chat_container = $('.chat-tab').find('.chat_main_' + data.id);
+          if (chat_container.length > 0) {
+             chat_container.find('.chat-messages-wrapper').find("div[class*='message-seen']").empty();
+             chat_container.find('.chat-messages-wrapper').find("div[class*='message-typing']").empty();
+             chat_container.find('.chat-messages-wrapper').append(data.messages_html);
+             setTimeout(function(){
+                  chat_container.find('.chat-messages-wrapper').scrollTop(chat_container.find('.chat-messages-wrapper')[0].scrollHeight);
+               }, 100);
+             if (data.sender == 158) {
+               $(".chat_" + data.id).find('.outgoing .message-text, .outgoing .message-media').css('background', data.color);
+               $(".chat_" + data.id).find('.outgoing .message-text').css('color', '#fff');
+               $(".chat_" + data.id).find('.select-color path').css('fill', data.color);
+               $(".chat_" + data.id).find('#color').val(data.color);
+               $(".text-sender-container .red-list").css('background', data.color);
+               $(".text-sender-container .btn-file").css('background', data.color);
+               $(".text-sender-container .btn-file").css('border-color', data.color);
+             }
+          } else {
+            current_number = $('#online_' + data.id).find('.new-message-alert').text();
+            $('#online_' + data.id).find('.new-message-alert').html(Number(current_number) + 1).show();
+
+          }
+          if (!chat_container.find("#sendMessage").is(":focus")) {
+            if(data.sender != 158){
+                document.getElementById('message-sound').play();
+            }
+          }
+          if (!chat_container.find('#sendMessage').is(':focus') && chat_container.length == 0) {
+             new_current_messages = new_current_messages + 1;
+             current_messages_number = Number($("[data_messsages_count]").attr('data_messsages_count')) + 1;
+             $("[data_messsages_count]").text(current_messages_number).removeClass("hidden");
+             $("[data_messsages_count]").attr('data_messsages_count', current_messages_number);
+             document.title = 'New Message | ' + document_title;
+          }
+          
+        })
+
+        socket.on("group_message", (data)=>{
+              var chat_messages_wrapper = $('.group-messages-wrapper-'+data.id);
+              if (data.status == 200) {
+              if ($(".group-messages-wrapper-"+data.id).find('.no_message').length > 0) {
+                $(".group-messages-wrapper-"+data.id).find('.chat-messages').html(data.html);
+              }else{
+                $(".group-messages-wrapper-"+data.id).find('.chat-messages').append(data.html);
+              }
+              
+              chat_messages_wrapper.scrollTop(chat_messages_wrapper[0].scrollHeight);
+            }
+          })
+
+              });
+      </script>
+              <script src="http://172.236.19.52/themes/facesofnaija/javascript/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.js"></script>
+      	  
+	  	
+	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+        <link rel="stylesheet" href="http://172.236.19.52/themes/facesofnaija/javascript/green-audio-player/green-audio-player.css?version=4.3.4" />
+      <script src="http://172.236.19.52/themes/facesofnaija/javascript/green-audio-player/green-audio-player.js?version=4.3.4"></script>
+   </head>
+   
+   <body >
+      <input type="hidden" id="get_no_posts_name" value="No more posts">
+        <div id="focus-overlay"></div>
+      <input type="hidden" class="seen_stories_users_ids" value="">
+      <input type="hidden" class="main_session" value="833f0bbd72703484d9f1">
+                  <div class="content-container welcome-container" style="">
+         <div class="ad-placement-header-footer">
+                     </div>
+         <div id="contnet"><div class="wrapper">
+	<div class="login">
+		<div class="login_left_combo_parent">
+			<div class="login_left_combo">
+				<a href="http://172.236.19.52" class="logo"><img src="http://172.236.19.52/themes/facesofnaija/img/logo.png" alt="Logo"> </a>
+				<h1>Connect with friends!</h1>
+				<p>Share what's new and life moments with your friends.</p>
+				<div class="fadeInUp animated animated_6 img"><img src="http://172.236.19.52/themes/facesofnaija/img/backgrounds/welcome.jpg"></div>
+			</div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="793" height="1024" viewBox="0 0 793 1024" preserveAspectRatio="none"> <defs> <linearGradient id="linear-gradient" x1="0.066" y1="0.066" x2="1.068" y2="1.075" gradientUnits="objectBoundingBox"> <stop offset="0"/> <stop offset="1" stop-color="#2e7806"/> </linearGradient> <clipPath id="clip-path"> <rect id="Rectangle_9" data-name="Rectangle 9" width="793" height="1024" fill="#fff"/> </clipPath> <filter id="Path_12714" x="-258.718" y="668.282" width="1450.299" height="710.185" filterUnits="userSpaceOnUse"> <feOffset dy="13" input="SourceAlpha"/> <feGaussianBlur stdDeviation="15.5" result="blur"/> <feFlood flood-opacity="0.161"/> <feComposite operator="in" in2="blur"/> <feComposite in="SourceGraphic"/> </filter> <filter id="Path_12715" x="-105.819" y="797.563" width="1134.181" height="538.486" filterUnits="userSpaceOnUse"> <feOffset dy="15" input="SourceAlpha"/> <feGaussianBlur stdDeviation="17" result="blur-2"/> <feFlood flood-opacity="0.349"/> <feComposite operator="in" in2="blur-2"/> <feComposite in="SourceGraphic"/> </filter> </defs> <g id="Rectangle_8" data-name="Rectangle 8" stroke="#2e7806" stroke-width="1" fill="url(#linear-gradient)" style="mix-blend-mode: multiply;isolation: isolate"> <rect width="793" height="1024" stroke="none"/> <rect x="0.5" y="0.5" width="792" height="1023" fill="none"/> </g> <g id="Mask_Group_4" data-name="Mask Group 4" clip-path="url(#clip-path)"> <g id="Group_13906" data-name="Group 13906" transform="translate(1227.782 1153.043) rotate(180)" opacity="0.54"> <path id="Path_12713" data-name="Path 12713" d="M-5894.321-7099.4s163.513,301.819,384.911,412.243,267.171-29.452,500.682,29.452,205.095,175.206,371.288,195.191,226.553,0,293.483-144.4-39.545-197.743-39.545-346.053,39.545-218.046,39.545-218.046Z" transform="translate(5874.603 7034.028)" fill="#2e7806" opacity="0.68"/> <g transform="matrix(-1, 0, 0, -1, 1227.78, 1153.04)" filter="url(#Path_12714)"> <path id="Path_12714-2" data-name="Path 12714" d="M-5894.321-7109.194s141.139,260.521,332.244,355.836,230.614-25.422,432.174,25.422,177.032,151.232,320.484,168.483,195.554,0,253.326-124.639-34.134-170.686-34.134-298.7,34.134-188.211,34.134-188.211Z" transform="translate(-4749.24 -5852.04) rotate(180)" fill="#2e7806" opacity="0.46"/> </g> <g transform="matrix(-1, 0, 0, -1, 1227.78, 1153.04)" filter="url(#Path_12715)"> <path id="Path_12715-2" data-name="Path 12715" d="M-5894.321-7124s107.332,198.118,252.66,270.6,204.216-38.665,357.5,0,183.031,93.193,210.813,104.632,152.776,42.826,196.709-51.958-25.958-129.8-25.958-227.154,25.958-143.128,25.958-143.128Z" transform="translate(-4916.96 -5900.96) rotate(180)" fill="#2e7806" opacity="0.77"/> </g> </g> </g> </svg>
+		</div>
+		<div class="col-md-6">
+			<div class="login_innre">
+			<form id="login" method="post">
+				<p class="title main">Welcome back!</p>
+				<p class="desc">Create your Facesofnaija Account!</p>
+				<div class="alert alert-danger errors"></div>
+				<div class="wow_form_fields">
+					<label for="username">Username</label>
+					<input id="username" name="username" type="text" autocomplete="off" autofocus>
+				</div>
+				<div class="wow_form_fields">
+					<label for="password">Password</label>
+					<input id="password" name="password" type="password" autocomplete="off">
+				</div>
+				<div class="forgot_password">
+										<div class="terms">
+						<input type="checkbox" name="remember_device" id="remember_device" checked>
+						<label for="remember_device">
+							Remember this device						</label>
+						<div class="clear"></div>
+					</div>
+										<a href="http://172.236.19.52/forgot-password" class="main">Forgot Password?</a>
+				</div>
+
+				<div class="login_signup_combo">
+					<div class="login__">
+						<button type="submit" class="btn btn-main btn-mat add_wow_loader">Login</button>
+					</div>
+
+										<div class="social_btns">
+						<p>Or login with</p>
+													<a href="http://172.236.19.52/login-with.php?provider=Facebook" class="btn no_padd">
+								<svg height="512" viewBox="0 0 152 152" width="512" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 2"><g id="_01.facebook" data-name="01.facebook"><circle id="background" cx="76" cy="76" fill="#334c8c" r="76"/><path id="icon" d="m95.26 68.81-1.26 10.58a2 2 0 0 1 -2 1.78h-11v31.4a1.42 1.42 0 0 1 -1.4 1.43h-11.21a1.42 1.42 0 0 1 -1.4-1.44l.06-31.39h-8.33a2 2 0 0 1 -2-2v-10.58a2 2 0 0 1 2-2h8.28v-10.26c0-11.87 7.06-18.33 17.4-18.33h8.47a2 2 0 0 1 2 2v8.91a2 2 0 0 1 -2 2h-5.19c-5.62.09-6.68 2.78-6.68 6.8v8.85h12.31a2 2 0 0 1 1.95 2.25z" fill="#fff"/></g></g></svg>
+							</a>
+																		<a href="http://172.236.19.52/login-with.php?provider=Google" class="btn no_padd">
+							<svg height="512" viewBox="0 0 152 152" width="512" xmlns="http://www.w3.org/2000/svg"><circle cx="76" cy="76" fill="#fff" r="76"/><g transform="matrix(.8 0 0 .8 15.2 15.2)"><path d="M122.9 76.8c0-4.5-.4-8.8-1.1-13H76v24.6h26.4c-1.1 6-4.6 11.1-9.8 14.5v12.1h15.9c9.2-8.5 14.4-21.1 14.4-38.2z" fill="#4285f4"/><path d="M76 124c13.2 0 24.3-4.4 32.4-11.9l-15.9-12.1c-4.4 3-10 4.7-16.5 4.7-12.7 0-23.5-8.6-27.3-20.1H32.3v12.5C40.4 113.9 57 124 76 124z" fill="#34a853"/><path d="M48.7 84.6c-1-3-1.5-6.2-1.5-9.5s.5-6.5 1.5-9.5V53.1H32.3C28.9 59.8 27 67.2 27 75.1s1.9 15.3 5.3 22z" fill="#fbbc05"/><path d="M76 46.4c7.2 0 13.6 2.5 18.7 7.3L108.8 40C100.6 33.4 89.6 29.2 76 29.2c-19 0-35.4 10.1-43.7 25.1l16.4 12.5C52.5 55 63.3 46.4 76 46.4z" fill="#ea4335"/></g></svg>
+						</a>
+																			<a href="http://172.236.19.52/login-with.php?provider=Twitter" class="btn no_padd">
+								<svg height="512" viewBox="0 0 152 152" width="512" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 2"><g id="_02.twitter" data-name="02.twitter"><circle id="background" cx="76" cy="76" fill="#00a6de" r="76"/><path id="icon" d="m113.85 53a32.09 32.09 0 0 1 -6.51 7.15 2.78 2.78 0 0 0 -1 2.17v.25a45.58 45.58 0 0 1 -2.94 15.86 46.45 46.45 0 0 1 -8.65 14.5 42.73 42.73 0 0 1 -18.75 12.39 46.9 46.9 0 0 1 -14.74 2.29 45 45 0 0 1 -22.6-6.09 1.3 1.3 0 0 1 -.62-1.44 1.25 1.25 0 0 1 1.22-.94h1.9a30.24 30.24 0 0 0 16.94-5.14 16.42 16.42 0 0 1 -13-11.16.86.86 0 0 1 1-1.11 15.08 15.08 0 0 0 2.76.26h.35a16.43 16.43 0 0 1 -9.57-15.11.86.86 0 0 1 1.27-.75 14.44 14.44 0 0 0 3.74 1.45 16.42 16.42 0 0 1 -2.65-19.92.86.86 0 0 1 1.41-.12 42.93 42.93 0 0 0 29.51 15.78h.08a.62.62 0 0 0 .6-.67 17.36 17.36 0 0 1 .38-6 15.91 15.91 0 0 1 10.7-11.44 17.59 17.59 0 0 1 5.19-.8 16.36 16.36 0 0 1 10.84 4.09 2.12 2.12 0 0 0 1.41.54 2.15 2.15 0 0 0 .5-.07 30 30 0 0 0 8-3.31.85.85 0 0 1 1.25 1 16.23 16.23 0 0 1 -4.31 6.87 30.2 30.2 0 0 0 5.24-1.77.86.86 0 0 1 1.05 1.24z" fill="#fff"/></g></g></svg>
+							</a>
+																			<a href="http://172.236.19.52/login-with.php?provider=LinkedIn" class="btn no_padd">
+								<svg height="512" viewBox="0 0 152 152" width="512" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 2"><g id="_10.linkedin" data-name="10.linkedin"><circle id="background" cx="76" cy="76" fill="#0b69c7" r="76"/><g id="icon" fill="#fff"><path d="m59 48.37a10.38 10.38 0 1 1 -10.37-10.37 10.38 10.38 0 0 1 10.37 10.37z"/><rect height="50.93" rx="2.57" width="16.06" x="40.6" y="63.07"/><path d="m113.75 89.47v22.17a2.36 2.36 0 0 1 -2.36 2.36h-11.72a2.36 2.36 0 0 1 -2.36-2.36v-21.48c0-3.21.93-14-8.38-14-7.22 0-8.69 7.42-9 10.75v24.78a2.36 2.36 0 0 1 -2.34 2.31h-11.34a2.35 2.35 0 0 1 -2.36-2.36v-46.2a2.36 2.36 0 0 1 2.36-2.37h11.34a2.37 2.37 0 0 1 2.41 2.37v4c2.68-4 6.66-7.12 15.13-7.12 18.73-.01 18.62 17.52 18.62 27.15z"/></g></g></g></svg>
+							</a>
+																																																					</div>
+				    					<div class="signup__">
+												<p>Don't have an account? <a class="dec main" href="http://172.236.19.52/register">Register</a></p>
+											</div>
+				</div>
+
+
+								<div class="random_users">
+											<div class="users-profiles">
+<div class="user-image image-1">
+    <a href="http://172.236.19.52/toptree" title="Top Tree"><img src="http://172.236.19.52/upload/photos/2024/06/GT6xc1uYkbzYUVjTJy62_06_1d963d4e7172d5798fc0b9ba43185f44_avatar.jpg?cache=0" alt="Top Tree" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-2">
+    <a href="http://172.236.19.52/buyservicepva346" title="buyservice pva"><img src="http://172.236.19.52/upload/photos/2024/06/I7ClH8M9AqImQdUASKPM_02_b1c98f404173f0d7984539bafb979455_avatar.jpg?cache=0" alt="buyservice pva" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-3">
+    <a href="http://172.236.19.52/ellsleylaw" title="The Ellsley Law Firm"><img src="http://172.236.19.52/upload/photos/2024/06/M9nxLeQHUWjjrbxNO2hN_03_e1288d5514fa0fffdb863e698b05ae4e_avatar.jpg?cache=0" alt="The Ellsley Law Firm" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-4">
+    <a href="http://172.236.19.52/Danica" title="Danica"><img src="http://172.236.19.52/upload/photos/f-avatar.jpg?cache=0" alt="Danica" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-5">
+    <a href="http://172.236.19.52/flourtech" title="Flour Tech"><img src="http://172.236.19.52/upload/photos/2024/06/i4EWd7SvfoznWn6r2i6H_06_152b600644492d4cddd987e8d510ceac_avatar.png?cache=0" alt="Flour Tech" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-6">
+    <a href="http://172.236.19.52/nolanvandemark070" title="Nolan Vandemark"><img src="http://172.236.19.52/upload/photos/2024/06/C86MsdjEqNspfKx537rD_11_618c80427389e0f5b28d5939b5cf1157_avatar.png?cache=0" alt="Nolan Vandemark" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-7">
+    <a href="http://172.236.19.52/usasmmpro15" title="Buy Verified Cash App Account"><img src="http://172.236.19.52/upload/photos/2024/06/HjJJelaqqUYjBMuspLuG_02_c483e0859a246f54f5abfe69d1f52e20_avatar.png?cache=0" alt="Buy Verified Cash App Account" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div><div class="user-image image-8">
+    <a href="http://172.236.19.52/custompaving7" title="Custom Paving Sealcoating"><img src="http://172.236.19.52/upload/photos/2024/06/ucQQxECAAwkrHc9wHw7S_04_6ea72d01fe39c80e8ee8492f35355217_avatar.png?cache=0" alt="Custom Paving Sealcoating" onerror="this.onerror=null;this.src='http://172.236.19.52/themes/facesofnaija/img/no-avatar.svg'"></a>
+</div></div>
+									</div>
+
+							</form>
+			</div>
+			<div class="footer">
+				<div class="welcome-footer">
+	┬⌐ 2026 Facesofnaija &nbsp;•&nbsp;
+	<a data-ajax="?link1=terms&type=terms" href="http://172.236.19.52/terms/terms">Terms of Use</a> &nbsp;•&nbsp;
+	<a data-ajax="?link1=terms&type=privacy-policy" href="http://172.236.19.52/terms/privacy-policy">Privacy Policy</a> &nbsp;•&nbsp;
+	<a data-ajax="?link1=contact-us" href="http://172.236.19.52/contact-us">Contact Us</a> &nbsp;•&nbsp;
+	<a data-ajax="?link1=terms&type=about-us" href="http://172.236.19.52/terms/about-us">About</a> &nbsp;•&nbsp;
+			<a href="http://172.236.19.52/blogs">Blog</a> &nbsp;•&nbsp;
+						<span class="lang dropup">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" class="feather feather-translate" style="margin-top: -3px;width: 15px;height: 15px;vertical-align: middle;"><path d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z" /></svg>
+		Language</a>
+		<ul class="dropdown-menu dropdown-menu-right wow_lang_select_menu">
+							<li class="language_select"><a href="?lang=english" rel="nofollow" class="English">English</a></li>
+							<li class="language_select"><a href="?lang=arabic" rel="nofollow" class="Arabic">Arabic</a></li>
+							<li class="language_select"><a href="?lang=dutch" rel="nofollow" class="Dutch">Dutch</a></li>
+							<li class="language_select"><a href="?lang=french" rel="nofollow" class="French">French</a></li>
+							<li class="language_select"><a href="?lang=german" rel="nofollow" class="German">German</a></li>
+							<li class="language_select"><a href="?lang=italian" rel="nofollow" class="Italian">Italian</a></li>
+							<li class="language_select"><a href="?lang=portuguese" rel="nofollow" class="Portuguese">Portuguese</a></li>
+							<li class="language_select"><a href="?lang=russian" rel="nofollow" class="Russian">Russian</a></li>
+							<li class="language_select"><a href="?lang=spanish" rel="nofollow" class="Spanish">Spanish</a></li>
+							<li class="language_select"><a href="?lang=turkish" rel="nofollow" class="Turkish">Turkish</a></li>
+							<li class="language_select"><a href="?lang=hindi" rel="nofollow" class="Hindi">Hindi</a></li>
+							<li class="language_select"><a href="?lang=chinese" rel="nofollow" class="Chinese">Chinese</a></li>
+							<li class="language_select"><a href="?lang=urdu" rel="nofollow" class="Urdu">Urdu</a></li>
+							<li class="language_select"><a href="?lang=indonesian" rel="nofollow" class="Indonesian">Indonesian</a></li>
+							<li class="language_select"><a href="?lang=croatian" rel="nofollow" class="Croatian">Croatian</a></li>
+							<li class="language_select"><a href="?lang=hebrew" rel="nofollow" class="Hebrew">Hebrew</a></li>
+							<li class="language_select"><a href="?lang=bengali" rel="nofollow" class="Bengali">Bengali</a></li>
+							<li class="language_select"><a href="?lang=japanese" rel="nofollow" class="Japanese">Japanese</a></li>
+							<li class="language_select"><a href="?lang=persian" rel="nofollow" class="Persian">Persian</a></li>
+							<li class="language_select"><a href="?lang=swedish" rel="nofollow" class="Swedish">Swedish</a></li>
+							<li class="language_select"><a href="?lang=vietnamese" rel="nofollow" class="Vietnamese">Vietnamese</a></li>
+							<li class="language_select"><a href="?lang=danish" rel="nofollow" class="Danish">Danish</a></li>
+							<li class="language_select"><a href="?lang=filipino" rel="nofollow" class="Filipino">Filipino</a></li>
+							<li class="language_select"><a href="?lang=korean" rel="nofollow" class="Korean">Korean</a></li>
+					</ul>
+	</span>
+</div>				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var working = false;
+var $this = $('#login');
+var $state = $this.find('.errors');
+
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+	  console.log('User signed out.');
+	});
+}
+
+function onSignIn(googleUser) {
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    $.post(Wo_Ajax_Requests_File() + '?f=google_login', {id_token: id_token}, function(data, textStatus, xhr) {
+    	if (data.status == 200) {
+    		signOut();
+    		$state.addClass('success alert-success');
+	        $state.html('Welcome back!');
+			$this.find('.add_wow_loader').removeClass('btn-loading');
+	        setTimeout(function () {
+	        	window.location.href = data.location;
+	        }, 1000);
+    	}
+    	else{
+			$this.find('button').attr("disabled", false);
+			$this.find('.add_wow_loader').removeClass('btn-loading');
+	        $state.html(data.message);
+    	}
+    });
+}
+
+$(function() {
+  $('#login').ajaxForm({
+    url: Wo_Ajax_Requests_File() + '?f=login',
+    beforeSend: function() {
+		working = true;
+		$this.find('button').attr("disabled", true);
+		$this.find('.add_wow_loader').addClass('btn-loading');
+    },
+    success: function(data) {
+      if (data.status == 200 || data.status == 600) {
+				$state.removeClass('alert-danger');
+      	$state.addClass('alert-success');
+
+        $state.html('Welcome back!');
+		$this.find('.add_wow_loader').removeClass('btn-loading');
+        setTimeout(function () {
+        	window.location.href = data.location;
+        }, 1000);
+      } else {
+        var errors = data.errors.join("<br>");
+		$this.find('button').attr("disabled", false);
+		$this.find('.add_wow_loader').removeClass('btn-loading');
+        $state.html(errors);
+      }
+      working = false;
+    }
+  });
+});
+</script>
+</div> 
+                  <footer>
+                     </footer>
+         <div class="second-footer" style="display: none; ">
+            <div class="page-margin">
+	<div class="footer-wrapper">
+		<hr>
+		<div class="footer-powered">
+			<p>
+				┬⌐ 2026 Facesofnaija			</p>
+			<ul class="list-inline">
+				<li><a href="http://172.236.19.52" data-ajax="?link1=home">Home</a></li>
+				<li><a href="http://172.236.19.52/terms/about-us" data-ajax="?link1=terms&type=about-us">About</a></li>
+				<li><a href="http://172.236.19.52/contact-us" data-ajax="?link1=contact-us">Contact Us</a></li>
+				<li><a href="http://172.236.19.52/terms/privacy-policy" data-ajax="?link1=terms&type=privacy-policy">Privacy Policy</a></li>
+				<li><a href="http://172.236.19.52/terms/terms" data-ajax="?link1=terms&type=terms">Terms of Use</a></li>
+									<li><a href="http://172.236.19.52/terms/refund" data-ajax="?link1=terms&type=refund">Request a Refund</a></li>
+								
+									<li><a href="http://172.236.19.52/blogs" data-ajax="?link1=blogs">Blog</a></li>
+													<li><a data-ajax="?link1=developers" href="http://172.236.19.52/developers">Developers</a></li>
+											</ul>
+			<span class="lang_selct dropup">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg> Language				</a>
+				<ul class="dropdown-menu dropdown-menu-right wow_lang_select_menu">
+											<li class="language_select"><a href="?lang=english" rel="nofollow" class="English">English</a></li>
+											<li class="language_select"><a href="?lang=arabic" rel="nofollow" class="Arabic">Arabic</a></li>
+											<li class="language_select"><a href="?lang=dutch" rel="nofollow" class="Dutch">Dutch</a></li>
+											<li class="language_select"><a href="?lang=french" rel="nofollow" class="French">French</a></li>
+											<li class="language_select"><a href="?lang=german" rel="nofollow" class="German">German</a></li>
+											<li class="language_select"><a href="?lang=italian" rel="nofollow" class="Italian">Italian</a></li>
+											<li class="language_select"><a href="?lang=portuguese" rel="nofollow" class="Portuguese">Portuguese</a></li>
+											<li class="language_select"><a href="?lang=russian" rel="nofollow" class="Russian">Russian</a></li>
+											<li class="language_select"><a href="?lang=spanish" rel="nofollow" class="Spanish">Spanish</a></li>
+											<li class="language_select"><a href="?lang=turkish" rel="nofollow" class="Turkish">Turkish</a></li>
+											<li class="language_select"><a href="?lang=hindi" rel="nofollow" class="Hindi">Hindi</a></li>
+											<li class="language_select"><a href="?lang=chinese" rel="nofollow" class="Chinese">Chinese</a></li>
+											<li class="language_select"><a href="?lang=urdu" rel="nofollow" class="Urdu">Urdu</a></li>
+											<li class="language_select"><a href="?lang=indonesian" rel="nofollow" class="Indonesian">Indonesian</a></li>
+											<li class="language_select"><a href="?lang=croatian" rel="nofollow" class="Croatian">Croatian</a></li>
+											<li class="language_select"><a href="?lang=hebrew" rel="nofollow" class="Hebrew">Hebrew</a></li>
+											<li class="language_select"><a href="?lang=bengali" rel="nofollow" class="Bengali">Bengali</a></li>
+											<li class="language_select"><a href="?lang=japanese" rel="nofollow" class="Japanese">Japanese</a></li>
+											<li class="language_select"><a href="?lang=persian" rel="nofollow" class="Persian">Persian</a></li>
+											<li class="language_select"><a href="?lang=swedish" rel="nofollow" class="Swedish">Swedish</a></li>
+											<li class="language_select"><a href="?lang=vietnamese" rel="nofollow" class="Vietnamese">Vietnamese</a></li>
+											<li class="language_select"><a href="?lang=danish" rel="nofollow" class="Danish">Danish</a></li>
+											<li class="language_select"><a href="?lang=filipino" rel="nofollow" class="Filipino">Filipino</a></li>
+											<li class="language_select"><a href="?lang=korean" rel="nofollow" class="Korean">Korean</a></li>
+									</ul>
+			</span>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>         </div>
+         <div class="extra">
+                     </div>
+      </div>
+      <!-- Load modal alerts -->
+    <div class="modal fade in" id="comment_report_box" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 496.158 496.158" xml:space="preserve"> <path style="fill:#32BEA6;" d="M496.158,248.085c0-137.021-111.07-248.082-248.076-248.082C111.07,0.003,0,111.063,0,248.085 c0,137.002,111.07,248.07,248.082,248.07C385.088,496.155,496.158,385.087,496.158,248.085z"/> <path style="fill:#FFFFFF;" d="M384.673,164.968c-5.84-15.059-17.74-12.682-30.635-10.127c-7.701,1.605-41.953,11.631-96.148,68.777 c-22.49,23.717-37.326,42.625-47.094,57.045c-5.967-7.326-12.803-15.164-19.982-22.346c-22.078-22.072-46.699-37.23-47.734-37.867 c-10.332-6.316-23.82-3.066-30.154,7.258c-6.326,10.324-3.086,23.834,7.23,30.174c0.211,0.133,21.354,13.205,39.619,31.475 c18.627,18.629,35.504,43.822,35.67,44.066c4.109,6.178,11.008,9.783,18.266,9.783c1.246,0,2.504-0.105,3.756-0.322 c8.566-1.488,15.447-7.893,17.545-16.332c0.053-0.203,8.756-24.256,54.73-72.727c37.029-39.053,61.723-51.465,70.279-54.908 c0.082-0.014,0.141-0.02,0.252-0.043c-0.041,0.01,0.277-0.137,0.793-0.369c1.469-0.551,2.256-0.762,2.301-0.773 c-0.422,0.105-0.641,0.131-0.641,0.131l-0.014-0.076c3.959-1.727,11.371-4.916,11.533-4.984 C385.405,188.218,389.034,176.214,384.673,164.968z"/></svg>
+          <span class="msg">Comment reported successfully.</span>
+        </p>
+      </div>
+      
+    </div>
+</div>
+
+<div class="modal fade in" id="post-shared" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 496.158 496.158" xml:space="preserve"> <path style="fill:#32BEA6;" d="M496.158,248.085c0-137.021-111.07-248.082-248.076-248.082C111.07,0.003,0,111.063,0,248.085 c0,137.002,111.07,248.07,248.082,248.07C385.088,496.155,496.158,385.087,496.158,248.085z"/> <path style="fill:#FFFFFF;" d="M384.673,164.968c-5.84-15.059-17.74-12.682-30.635-10.127c-7.701,1.605-41.953,11.631-96.148,68.777 c-22.49,23.717-37.326,42.625-47.094,57.045c-5.967-7.326-12.803-15.164-19.982-22.346c-22.078-22.072-46.699-37.23-47.734-37.867 c-10.332-6.316-23.82-3.066-30.154,7.258c-6.326,10.324-3.086,23.834,7.23,30.174c0.211,0.133,21.354,13.205,39.619,31.475 c18.627,18.629,35.504,43.822,35.67,44.066c4.109,6.178,11.008,9.783,18.266,9.783c1.246,0,2.504-0.105,3.756-0.322 c8.566-1.488,15.447-7.893,17.545-16.332c0.053-0.203,8.756-24.256,54.73-72.727c37.029-39.053,61.723-51.465,70.279-54.908 c0.082-0.014,0.141-0.02,0.252-0.043c-0.041,0.01,0.277-0.137,0.793-0.369c1.469-0.551,2.256-0.762,2.301-0.773 c-0.422,0.105-0.641,0.131-0.641,0.131l-0.014-0.076c3.959-1.727,11.371-4.916,11.533-4.984 C385.405,188.218,389.034,176.214,384.673,164.968z"/></svg>
+          Post was successfully added to your timeline!        </p>
+      </div>
+      
+    </div>
+</div>
+<div class="modal fade in" id="modal-alert" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg enable-background="new 0 0 64 64" height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"/></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"/></g><g><path d="m32 38c-2.209 0-4-1.791-4-4v-16c0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4v16c0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g><g><path d="m32 50c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4 0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g></g></g></svg>
+          <span id="modal-alert-msg">
+            You have reached your limit of 5000000000 friends!          </span>
+        </p>
+      </div>
+    </div>
+</div>
+<div class="modal fade in" id="invalid_file" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg enable-background="new 0 0 64 64" height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"/></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"/></g><g><path d="m32 38c-2.209 0-4-1.791-4-4v-16c0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4v16c0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g><g><path d="m32 50c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4 0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g></g></g></svg>
+          File size error: The file exceeds allowed the limit (92 MB) and can not be uploaded.        </p>
+      </div>
+      
+    </div>
+</div>
+<div class="modal fade in" id="ffmpeg_file" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p style="text-align: center;padding: 30px 20px;font-size: 16px;margin: 0;background: linear-gradient(rgb(244 67 54 / 10%), transparent);">
+          <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 0 512 512" width="100px" class="main" style="display: block;margin: 0 auto 30px;"><g fill="currentColor" opacity="0.6"><path d="m71.072 303.9a189.244 189.244 0 0 0 66.661 97.518 186.451 186.451 0 0 0 114.189 38.582c103.707 0 188.078-84.284 188.078-187.884a185.963 185.963 0 0 0 -38.974-114.534 189.368 189.368 0 0 0 -98.448-66.463 24 24 0 1 1 12.883-46.238 237.668 237.668 0 0 1 123.578 83.392 235.9 235.9 0 0 1 -187.117 379.727 234.064 234.064 0 0 1 -143.342-48.444 237.546 237.546 0 0 1 -83.652-122.438z"/><circle cx="200" cy="48" r="24"/><circle cx="56" cy="192" r="24"/><circle cx="109" cy="101" r="24"/></g><path d="m48 480a24 24 0 0 1 -24-24v-144a24 24 0 0 1 29.206-23.429l144 32a24 24 0 1 1 -10.412 46.858l-114.794-25.51v114.081a24 24 0 0 1 -24 24z" fill="currentColor"/></svg>
+          Your video is being processed, WeΓÇÖll let you know when it's ready to view.        </p>
+      </div>
+      
+    </div>
+</div>
+<div class="modal fade in" id="file_not_supported" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg enable-background="new 0 0 64 64" height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"/></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"/></g><g><path d="m32 38c-2.209 0-4-1.791-4-4v-16c0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4v16c0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g><g><path d="m32 50c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4 0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g></g></g></svg>
+          Unable to upload a file: This file type is not supported.        </p>
+      </div>
+      
+    </div>
+</div>
+<div class="modal fade" id="modal_light_box" role="dialog">
+	<button type="button" class="close comm_mod_img_close" data-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+  <div class="modal-dialog" >
+    <div class="modal-content">              
+      <div class="modal-body" style="padding: 0;">
+        <img  class="image" style="width: 100%;" >
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade in" id="adult_image_file" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg enable-background="new 0 0 64 64" height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"/></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"/></g><g><path d="m32 38c-2.209 0-4-1.791-4-4v-16c0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4v16c0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g><g><path d="m32 50c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4 0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g></g></g></svg>
+          We have detected some adult content on the image you uploaded, therefore we have declined your upload process.        </p>
+      </div>
+      
+    </div>
+</div>
+<div class="modal fade" id="share_post_on_group" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+        <h4 class="modal-title">
+          Share post on a group        </h4>
+      </div>
+      <form id="share_post_on_group_form" class="share_post_on_group_form" method="POST">
+        <div class="modal-body">
+          <div id="share_post_on_group_form_alert"></div>
+          <div class="form-group input-group">
+            <span class="input-group-addon pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#03A9F4;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </span>
+            <input onkeydown="SearchFor(this,'group')" type="text" class="form-control" name="name" placeholder="Please write the group name">
+            <input type="hidden" id="SearchForInputGroup" name="group_id">
+            <input type="hidden" id="SearchForInputPostId" name="post_id">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="ball-pulse"><div></div><div></div><div></div></div>
+          <button id="share_post_on_group_form_btn" type="button" class="btn btn-main">
+            Share          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="share_post_on_page" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+        <h4 class="modal-title">
+          Share to a page        </h4>
+      </div>
+      <form id="share_post_on_page_form" class="share_post_on_page_form" method="POST">
+        <div class="modal-body">
+          <div id="share_post_on_page_form_alert"></div>
+          <div class="form-group input-group">
+            <span class="input-group-addon pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#f79f58;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+            </span>
+            <input onkeydown="SearchFor(this,'page')" type="text" class="form-control" name="name" placeholder="Please type the page name">
+            <input type="hidden" id="SearchForInputPage" name="page_id">
+            <input type="hidden" id="SearchForInputPostIdPage" name="post_id">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="ball-pulse"><div></div><div></div><div></div></div>
+          <button id="share_post_on_page_form_btn" type="button" class="btn btn-main">
+            Share          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="share_post_on_user" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+        <h4 class="modal-title">
+          Share to user        </h4>
+      </div>
+      <form id="share_post_on_page_form" class="share_post_on_user_form" method="POST">
+        <div class="modal-body">
+          <div id="share_post_on_user_form_alert"></div>
+          <div class="form-group input-group">
+            <span class="input-group-addon pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share" style="margin-top: -4px;width: 19px;height: 19px;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+            </span>
+            <input onkeydown="SearchFor(this,'user')" type="text" class="form-control" name="name" placeholder="Username">
+            <input type="hidden" id="SearchForInputUser" name="user_id">
+            <input type="hidden" id="SearchForInputUserPostId" name="post_id">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="ball-pulse"><div></div><div></div><div></div></div>
+          <button id="share_post_on_user_form_btn" type="button" class="btn btn-main">
+            Share          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade sun_modal" id="views-info-modal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title"><span id="views_info_title"></span></h4>
+			</div>
+			<div class="modal-body">
+				<div id="views_info" class="wo_react_ursrs_list"></div>
+				<div class="clearfix"></div>
+				<div id="views_info_load" style="display: none;">
+					<div class="load-more views_info_load_ wo_react_ursrs_list_lod_mor">
+						<button class="btn btn-default text-center views_info_load_more" data-type="" post-id="" table-type="" onclick="Wo_LoadViewsInfo(this);"><span id="load_more_info_btn">Load more</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade sun_modal" id="users-reacted-modal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title">
+					<div class="who_react_modal">
+
+                             <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers(1);">
+                                    <div class="inline_post_emoji no_anim"><div class="reaction"><img src="http://172.236.19.52/upload/files/2022/09/EAufYfaIkYQEsYzwvZha_01_4bafb7db09656e1ecb54d195b26be5c3_file.svg"></div></div>
+                                  </span>
+                             <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers(2);">
+                                    <div class="inline_post_emoji no_anim"><div class="reaction"><img src="http://172.236.19.52/upload/files/2022/09/2MRRkhb7rDhUNuClfOfc_01_76c3c700064cfaef049d0bb983655cd4_file.svg"></div></div>
+                                  </span>
+                             <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers(3);">
+                                    <div class="inline_post_emoji no_anim"><div class="reaction"><img src="http://172.236.19.52/upload/files/2022/09/D91CP5YFfv74GVAbYtT7_01_288940ae12acf0198d590acbf11efae0_file.svg"></div></div>
+                                  </span>
+                             <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers(4);">
+                                    <div class="inline_post_emoji no_anim"><div class="reaction"><img src="http://172.236.19.52/upload/files/2022/09/cFNOXZB1XeWRSdXXEdlx_01_7d9c4adcbe750bfc8e864c69cbed3daf_file.svg"></div></div>
+                                  </span>
+                             <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers(5);">
+                                    <div class="inline_post_emoji no_anim"><div class="reaction"><img src="http://172.236.19.52/upload/files/2022/09/yKmDaNA7DpA7RkCRdoM6_01_eb391ca40102606b78fef1eb70ce3c0f_file.svg"></div></div>
+                                  </span>
+                             <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers(6);">
+                                    <div class="inline_post_emoji no_anim"><div class="reaction"><img src="http://172.236.19.52/upload/files/2022/09/iZcVfFlay3gkABhEhtVC_01_771d67d0b8ae8720f7775be3a0cfb51a_file.svg"></div></div>
+                                  </span>
+            
+
+						<!-- <span class="how_reacted like-btn-like pointer" id="_post333" onclick="Wo_LoadReactedUsers('like');">
+							<div class="inline_post_emoji inline_act_emoji no_anim"><div class="emoji emoji--like"><div class="emoji__hand"><div class="emoji__thumb"></div></div></div></div>
+						</span>
+						<span class="how_reacted like-btn-love pointer" id="_post333" onclick="Wo_LoadReactedUsers('love');">
+							<div class="inline_post_emoji inline_act_emoji no_anim"><div class="emoji emoji--love"><div class="emoji__heart"></div></div></div>
+						</span>
+						<span class="how_reacted like-btn-haha pointer" id="_post333" onclick="Wo_LoadReactedUsers('haha');">
+							<div class="inline_post_emoji inline_act_emoji no_anim"><div class="emoji emoji--haha"><div class="emoji__face"><div class="emoji__eyes"></div><div class="emoji__mouth"><div class="emoji__tongue"></div></div></div></div></div>
+						</span>
+						<span class="how_reacted like-btn-wow pointer" id="_post333" onclick="Wo_LoadReactedUsers('wow');">
+							<div class="inline_post_emoji inline_act_emoji no_anim"><div class="emoji emoji--wow"><div class="emoji__face"><div class="emoji__eyebrows"></div><div class="emoji__eyes"></div><div class="emoji__mouth"></div></div></div></div>
+						</span>
+						<span class="how_reacted like-btn-sad pointer" id="_post333" onclick="Wo_LoadReactedUsers('sad');">
+							<div class="inline_post_emoji inline_act_emoji no_anim"><div class="emoji emoji--sad"><div class="emoji__face"><div class="emoji__eyebrows"></div><div class="emoji__eyes"></div><div class="emoji__mouth"></div></div></div></div>
+						</span>
+						<span class="how_reacted like-btn-angry pointer" id="_post333" onclick="Wo_LoadReactedUsers('angry');">
+							<div class="inline_post_emoji inline_act_emoji no_anim"><div class="emoji emoji--angry"><div class="emoji__face"><div class="emoji__eyebrows"></div><div class="emoji__eyes"></div><div class="emoji__mouth"></div></div></div></div>
+						</span> -->
+					</div>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div id="reacted_users_box" class="wo_react_ursrs_list"></div>
+				<div class="clearfix"></div>
+				<div id="reacted_users_load" style="display: none;">
+					<div class="load-more wo_react_ursrs_list_lod_mor">
+						<button class="btn btn-default text-center reacted_users_load_more" data-type="" post-id="" col-type="" onclick="Wo_LoadMoreReactedUsers(this);"><span id="load_more_reacted_btn">Load more</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade in" id="approve_post" role="dialog">
+	<div class="modal-dialog wow_mat_mdl">
+		<div class="modal-content">
+			<div class="empty_state" style="margin: 40px 0;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9,13A3,3 0 0,0 12,16A3,3 0 0,0 15,13A3,3 0 0,0 12,10A3,3 0 0,0 9,13M20,19.59V8L14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18C18.45,22 18.85,21.85 19.19,21.6L14.76,17.17C13.96,17.69 13,18 12,18A5,5 0 0,1 7,13A5,5 0 0,1 12,8A5,5 0 0,1 17,13C17,14 16.69,14.96 16.17,15.75L20,19.59Z" /></svg> Your post was submitted, we will review your content soon.</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade in" id="error_post" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages" id="error_post_text">
+        </p>
+      </div>
+      
+    </div>
+</div>
+
+<div class="modal fade in" id="pro_upload_file" role="dialog">
+    <div class="modal-dialog wow_mat_mdl">
+    
+      <div class="modal-content">
+        <p class="wo_error_messages">
+          <svg enable-background="new 0 0 64 64" height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"/></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"/></g><g><path d="m32 38c-2.209 0-4-1.791-4-4v-16c0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4v16c0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g><g><path d="m32 50c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4 0 2.209-1.791 4-4 4z" fill="#f0f0f0"/></g></g></g></svg>
+          To upload images, videos, and audio files, you have to upgrade to pro member. <a href="http://172.236.19.52/go-pro">Upgrade To Pro</a>
+        </p>
+      </div>
+      
+    </div>
+</div>
+
+<div class="modal fade sun_modal" id="edit-offer-modal" role="dialog">
+<div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+                  <h4 class="modal-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Edit Offer</h4>
+            </div>
+            <div class="modal-body">
+                  <div class="wo_settings_page">
+                        <form class="edit-offer-form form-horizontal" method="post">
+                              <div class="app-offer-alert app-general-alert"></div>
+                              <div class="clear"></div>
+                              <div class="setting-panel row job-setting-panel edit_offer_modal_form">
+                                    
+
+                              </div>
+
+                              <div class="publisher-hidden-option">
+                                    <div id="progress" class="create-offer-progress">
+                                          <span id="percent" class="create-product-percent pull-right">0%</span>
+                                          <div class="progress">
+                                                <div id="bar" class="progress-bar active create-product-bar"></div> 
+                                          </div>
+                                          <div class="clear"></div>
+                                    </div>
+                              </div>
+
+                              
+                              <div class="form-group last-sett-btn modal-footer">
+                                    <div class="ball-pulse"><div></div><div></div><div></div></div>
+                                    <button type="submit" class="btn btn-main setting-panel-mdbtn">Publish</button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</div>
+</div>
+
+
+
+<div class="modal fade" id="add_tier_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+        <h4 class="modal-title">Add tier</h4>
+      </div>
+      <form class="form form-horizontal tier_form" method="post" action="#">
+        <div class="modal-body twocheckout_modal">
+          <div class="modal_add_tier_modal_alert"></div>
+          <div class="clear"></div>
+          <div class="sun_input col-md-6">
+            <input name="title" type="text" class="form-control input-md" autocomplete="off" placeholder="Tier title">
+            <label class="plr15">Tier title</label>  
+          </div>
+          <div class="sun_input col-md-6">
+            <input name="price" type="number" class="form-control input-md" autocomplete="off" placeholder="Tier price">
+            <label class="plr15">Tier price</label>  
+          </div>
+          <div class=" col-lg-12">
+            <label class="plr15">Benefits</label>
+            <br>
+            <input type="checkbox" name="benefits[]" value="chat" onclick="ShowBenefitsChat(this)">
+            <label>Chat</label><br>
+            <div class="add_benefits_chat" style="display: none;">
+              <input type="radio" id="benefits_chat_1" name="chat" value="chat_without_audio_video">
+              <label for="benefits_chat_1">Chat without audio and video call</label><br>
+              <input type="radio" id="benefits_chat_2" name="chat" value="chat_with_audio_without_video">
+              <label for="benefits_chat_2">Chat with audio call and without video call</label><br>  
+              <input type="radio" id="benefits_chat_3" name="chat" value="chat_without_audio_with_video">
+              <label for="benefits_chat_3">Chat without audio call and with video call</label><br>  
+              <input type="radio" id="benefits_chat_4" name="chat" value="chat_with_audio_video">
+              <label for="benefits_chat_4">Chat with audio and video call</label><br>
+            </div>
+            <input type="checkbox" name="benefits[]" value="live_stream">
+            <label>Live Stream</label><br>
+          </div>
+          <div class="sun_input col-md-12">
+            <textarea class="form-control input-md" placeholder="Tier description" name="description"></textarea>
+            <label class="plr15">Tier description</label>  
+          </div>
+          <div class="clear"></div>
+          <div class="form-group col-lg-12">
+            <label class="col-md-12">Tier image:</label>  
+            <div class="col-md-12">
+              <div class="select_ev_covr" id="select_tier_image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" /></svg>
+                Select an image    
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="file" name="image" class="hidden" id="tier_image">
+        <div class="clear"></div>
+        <div class="modal-footer">
+          <div class="ball-pulse"><div></div><div></div><div></div></div>
+          <button type="submit" class="btn btn-main btn-mat">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="delete-tier" tabindex="-1" role="dialog" aria-labelledby="delete-tier" aria-hidden="true" data-id="0">
+  <div class="modal-dialog mat_box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Delete your tier</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this tier?      </div>  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger btn-mat" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade sun_modal" id="show_product_reviews_modal" role="dialog">
+	<div class="modal-dialog wow_mat_mdl">
+		<div class="modal-content check_reviews">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title">Reviews</h4>
+			</div>
+			<div class="modal-body">
+				<div id="show_product_reviews_modal_info" class="wo_react_ursrs_list"></div>
+				<div class="clearfix"></div>
+				<div id="show_product_reviews_modal_info_load" style="display: none;">
+					<div class="load-more">
+						<button class="btn btn-default text-center" data-type="" post-id="" table-type="" onclick="Wo_LoadReviews();"><span id="show_product_reviews_load_text">Load more</span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <!-- <div id="node-js-templates">
+          <div> -->
+    
+        
+        
+        
+      <!-- JS FILES -->
+                  
+      <script type="text/javascript" src="http://172.236.19.52/themes/facesofnaija/javascript/welcome.js?version=4.3.4"></script>
+                     <script type="text/javascript">
+          const node_socket_flow = "1"
+          </script>
+            <script type="text/javascript" src="http://172.236.19.52/themes/facesofnaija/javascript/script.js?version=4.3.4"></script>
+                  <div class="extra-css"></div>
+          
+      <!-- End 'JS FILES' -->
+      <script type="text/javascript">
+  (function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+}(function ($) {
+  $.timeago = function(timestamp) {
+    if (timestamp instanceof Date) {
+      return inWords(timestamp);
+    } else if (typeof timestamp === "string") {
+      return inWords($.timeago.parse(timestamp));
+    } else if (typeof timestamp === "number") {
+      return inWords(new Date(timestamp));
+    } else {
+      return inWords($.timeago.datetime(timestamp));
+    }
+  };
+  var $t = $.timeago;
+
+  $.extend($.timeago, {
+    settings: {
+      refreshMillis: 60000,
+      allowPast: true,
+      allowFuture: false,
+      localeTitle: false,
+      cutoff: 0,
+      strings: {
+        prefixAgo: null,
+        prefixFromNow: null,
+        suffixAgo: "ago",
+        suffixFromNow: "from now",
+        inPast: "any moment now",
+        seconds: "now",
+        minute: "minute",
+        minutes: "minutes",
+        hour: "hour",
+        hours: "hours",
+        day: "day",
+        days: "days",
+        month: "month",
+        months: "months",
+        year: "year",
+        years: "years",
+        wordSeparator: " ",
+        numbers: []
+      }
+    },
+
+    inWords: function(distanceMillis) {
+      if(!this.settings.allowPast && ! this.settings.allowFuture) {
+          throw 'timeago allowPast and allowFuture settings can not both be set to false.';
+      }
+
+      var $l = this.settings.strings;
+      var prefix = $l.prefixAgo;
+      var suffix = $l.suffixAgo;
+      if (this.settings.allowFuture) {
+        if (distanceMillis < 0) {
+          prefix = $l.prefixFromNow;
+          suffix = $l.suffixFromNow;
+        }
+      }
+
+      if(!this.settings.allowPast && distanceMillis >= 0) {
+        return this.settings.strings.inPast;
+      }
+
+      var seconds = Math.abs(distanceMillis) / 1000;
+      var minutes = seconds / 60;
+      var hours = minutes / 60;
+      var days = hours / 24;
+      var weeks = days / 7;
+      var years = days / 365;
+
+      function substitute(stringOrFunction, number) {
+        var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, distanceMillis) : stringOrFunction;
+        var value = ($l.numbers && $l.numbers[number]) || number;
+        return number+' '+string.replace(/%d/i, value);
+        //return string.replace(/%d/i, value);
+      }
+
+        // var words = seconds < 45 && substitute($l.seconds, '') ||
+        // seconds < 90 && substitute('m', 1) ||
+        // minutes < 45 && substitute('m', Math.round(minutes)) ||
+        // minutes < 90 && substitute('h', 1) ||
+        // hours < 24 && substitute('hrs', Math.round(hours)) ||
+        // hours < 42 && substitute('d', 1) ||
+        // days < 7 && substitute('d', Math.round(days)) ||
+        // weeks < 2 && substitute('w', 1) ||
+        // weeks < 52 && substitute('w', Math.round(weeks)) ||
+        // years < 1.5 && substitute('y', 1) ||
+        // substitute('yrs', Math.round(years));
+        var words = '';
+        if (seconds < 45) {
+            words = substitute($l.seconds, '');
+        }
+        else if (seconds < 90) {
+            words = substitute('m', 1);
+        }
+        else if (minutes < 45) {
+            words = substitute('m', Math.round(minutes));
+        }
+        else if (minutes < 90) {
+            words = substitute('h', 1);
+        }
+        else if (hours < 24) {
+            words = substitute('hrs', Math.round(hours));
+        }
+        else if (hours < 42) {
+            words = substitute('d', 1);
+        }
+        else if (days < 7) {
+            words = substitute('d', Math.round(days));
+        }
+        else if (weeks < 2) {
+            words = substitute('w', 1);
+        }
+        else if (weeks < 52) {
+            words = substitute('w', Math.round(weeks));
+        }
+        else if (years < 1.5) {
+            words = substitute('y', 1);
+        }
+        else {
+            words = substitute('yrs', Math.round(years));
+        }
+
+
+
+      var separator = $l.wordSeparator || "";
+      if ($l.wordSeparator === undefined) { separator = " "; }
+
+      
+         return $.trim([prefix, words].join(separator));
+
+          },
+
+    parse: function(iso8601) {
+      var s = $.trim(iso8601);
+      s = s.replace(/\.\d+/,""); // remove milliseconds
+      s = s.replace(/-/,"/").replace(/-/,"/");
+      s = s.replace(/T/," ").replace(/Z/," UTC");
+      s = s.replace(/([\+\-]\d\d)\:?(\d\d)/," $1$2"); // -04:00 -> -0400
+      s = s.replace(/([\+\-]\d\d)$/," $100"); // +09 -> +0900
+      return new Date(s);
+    },
+    datetime: function(elem) {
+      var iso8601 = $t.isTime(elem) ? $(elem).attr("datetime") : $(elem).attr("title");
+      return $t.parse(iso8601);
+    },
+    isTime: function(elem) {
+      // jQuery's `is()` doesn't play well with HTML5 in IE
+      return $(elem).get(0).tagName.toLowerCase() === "time"; // $(elem).is("time");
+    }
+  });
+
+  // functions that can be called via $(el).timeago('action')
+  // init is default when no action is given
+  // functions are called with context of a single element
+  var functions = {
+    init: function(){
+      var refresh_el = $.proxy(refresh, this);
+      refresh_el();
+      var $s = $t.settings;
+      if ($s.refreshMillis > 0) {
+        this._timeagoInterval = setInterval(refresh_el, $s.refreshMillis);
+      }
+    },
+    update: function(time){
+      var parsedTime = $t.parse(time);
+      $(this).data('timeago', { datetime: parsedTime });
+      if($t.settings.localeTitle) $(this).attr("title", parsedTime.toLocaleString());
+      refresh.apply(this);
+    },
+    updateFromDOM: function(){
+      $(this).data('timeago', { datetime: $t.parse( $t.isTime(this) ? $(this).attr("datetime") : $(this).attr("title") ) });
+      refresh.apply(this);
+    },
+    dispose: function () {
+      if (this._timeagoInterval) {
+        window.clearInterval(this._timeagoInterval);
+        this._timeagoInterval = null;
+      }
+    }
+  };
+
+  $.fn.timeago = function(action, options) {
+    var fn = action ? functions[action] : functions.init;
+    if(!fn){
+      throw new Error("Unknown function name '"+ action +"' for timeago");
+    }
+    // each over objects here and call the requested function
+    this.each(function(){
+      fn.call(this, options);
+    });
+    return this;
+  };
+
+  function refresh() {
+    var data = prepareData(this);
+    var $s = $t.settings;
+
+    if (!isNaN(data.datetime)) {
+      if ( $s.cutoff == 0 || Math.abs(distance(data.datetime)) < $s.cutoff) {
+        $(this).text(inWords(data.datetime));
+      }
+    }
+    return this;
+  }
+
+  function prepareData(element) {
+    element = $(element);
+    if (!element.data("timeago")) {
+      element.data("timeago", { datetime: $t.datetime(element) });
+      var text = $.trim(element.text());
+      if ($t.settings.localeTitle) {
+        element.attr("title", element.data('timeago').datetime.toLocaleString());
+      } else if (text.length > 0 && !($t.isTime(element) && element.attr("title"))) {
+        element.attr("title", text);
+      }
+    }
+    return element.data("timeago");
+  }
+
+  function inWords(date) {
+    return $t.inWords(distance(date));
+  }
+
+  function distance(date) {
+    return (new Date().getTime() - date.getTime());
+  }
+
+  // fix for IE6 suckage
+  document.createElement("abbr");
+  document.createElement("time");
+}));
+
+
+$(function () {
+  setInterval(function () {
+    
+    if ( $('.ajax-time').length > 0) {
+      $('.ajax-time').timeago()
+        .removeClass('.ajax-time');
+    }
+  },
+  1000);
+});
+</script>      
+            <!-- Audio FILES -->
+            
+      <!-- End 'Audio FILES' -->
+      <script>
+                  let f = navigator.userAgent.search("Firefox");
+      if (f > -1) {
+            $('.header-brand').attr('href', "http://172.236.19.52/?cache=1774889400");
+      }
+         function ShowCommentGif(id,type) {
+            $( ".gif_post_comment" ).each(function( index ) {
+               if ($( this ).attr('id') != 'gif-form-'+id) {
+                  $( this ).slideUp();
+               }
+            });
+            $('#gif-form-'+id).slideToggle(200);
+            $('.gif_post_comment_gif').html('');
+         }
+         function SearchForGif(keyword,id = 0,type = '') {
+            $('#publisher-box-stickers-cont-'+id).empty();
+            Wo_Delay(function(){
+                $.ajax({
+                  url: 'https://api.giphy.com/v1/gifs/search?',
+                  type: 'GET',
+                  dataType: 'json',
+                  data: {q:keyword,api_key:'420d477a542b4287b2bf91ac134ae041', limit: 20},
+                })
+                .done(function(data) {
+                  if (data.meta.status == 200 && data.data.length > 0) {
+                    var appended = false;
+                    for (var i = 0; i < data.data.length; i++) {
+                        appended = true;
+                        if (appended == true) {
+                          appended = false;
+                          if (type == 'story') {
+                             $('#publisher-box-stickers-cont-'+id).append($('<img alt="gif" src="'+data.data[i].images.fixed_height_small.url+'" data-gif="' + data.data[i].images.fixed_height.url + '" onclick="Wo_PostCommentGif_'+id+'(this,'+id+')" autoplay loop>'));
+                         }
+                         else{
+                           $('#publisher-box-stickers-cont-'+id).append($('<img alt="gif" src="'+data.data[i].images.fixed_height_small.url+'" data-gif="' + data.data[i].images.fixed_height.url + '" onclick="Wo_PostReplyCommentGif_'+id+'(this,'+id+')" autoplay loop>'));
+                         }
+                          appended = true;
+                        }
+                    }
+                    var images = 0;
+                    Wo_ElementLoad($('img[alt=gif]'), function(){
+                      images++;
+                    });
+                    if (data.data.length == images || images >= 5) {
+                     
+                    }
+                  }
+                  else{
+                     $('#publisher-box-stickers-cont-'+id).html('<p class="no_gifs_found"><i class="fa fa-frown-o"></i> No result to show</p>');
+                  }
+                })
+                .fail(function() {
+                  console.log("error");
+                })
+              },100);
+         }
+         function ShowCommentStickers(id,type) {
+            $('.gif_post_comment').slideUp(200);
+            $('.gif_post_comment_gif').html('');
+           $('#sticker-form-'+id).slideToggle(200);
+           $('.chat-box-stickers-cont').empty();
+           functionName = "Wo_PostReplyCommentSticker_"+id+"(this,"+id+");";
+           if (type == 'story') {
+            functionName = "Wo_PostCommentSticker_"+id+"(this,"+id+");";
+           }
+           
+                      sticker = '<div class="empty_state" style="margin: 15px 0 0;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5.5,2C3.56,2 2,3.56 2,5.5V18.5C2,20.44 3.56,22 5.5,22H16L22,16V5.5C22,3.56 20.44,2 18.5,2H5.5M5.75,4H18.25A1.75,1.75 0 0,1 20,5.75V15H18.5C16.56,15 15,16.56 15,18.5V20H5.75A1.75,1.75 0 0,1 4,18.25V5.75A1.75,1.75 0 0,1 5.75,4M14.44,6.77C14.28,6.77 14.12,6.79 13.97,6.83C13.03,7.09 12.5,8.05 12.74,9C12.79,9.15 12.86,9.3 12.95,9.44L16.18,8.56C16.18,8.39 16.16,8.22 16.12,8.05C15.91,7.3 15.22,6.77 14.44,6.77M8.17,8.5C8,8.5 7.85,8.5 7.7,8.55C6.77,8.81 6.22,9.77 6.47,10.7C6.5,10.86 6.59,11 6.68,11.16L9.91,10.28C9.91,10.11 9.89,9.94 9.85,9.78C9.64,9 8.95,8.5 8.17,8.5M16.72,11.26L7.59,13.77C8.91,15.3 11,15.94 12.95,15.41C14.9,14.87 16.36,13.25 16.72,11.26Z"></path></svg> No result to show</div>';
+           $('#publisher-box-sticker-cont-'+id).html(sticker);
+
+         }
+        $(window).on("popstate", function (e) {
+          location.reload();
+      });
+       /*Language Select*/
+        $(document).ready(function(){
+          $("#wo_language_modal .language_select .English").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/united-states.svg"/></span> ');
+          $("#wo_language_modal .language_select .Arabic").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/saudi-arabia.svg"/></span> ');
+          $("#wo_language_modal .language_select .Dutch").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/netherlands.svg"/></span> ');
+          $("#wo_language_modal .language_select .French").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/france.svg"/></span> ');
+          $("#wo_language_modal .language_select .German").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/germany.svg"/></span> ');
+          $("#wo_language_modal .language_select .Hungarian, #wo_language_modal .language_select .Magyar").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/hungary.svg"/></span> ');
+          $("#wo_language_modal .language_select .Italian").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/italy.svg"/></span> ');
+          $("#wo_language_modal .language_select .Portuguese").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/portugal.svg"/></span> ');
+          $("#wo_language_modal .language_select .Russian").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/russia.svg"/></span> ');
+          $("#wo_language_modal .language_select .Spanish").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/spain.svg"/></span> ');
+          $("#wo_language_modal .language_select .Serbian").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/serbia.svg"/></span> ');
+          $("#wo_language_modal .language_select .Turkish").append('<span class="language_initial"><img src="http://172.236.19.52/themes/facesofnaija/img/flags/turkey.svg"/></span> ');
+        });
+        /* 
+
+The code entered here will be added in <footer> tag 
+
+*/
+
+      </script>
+            <script>
+      window.addEventListener("load", function(){
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#1e2321",
+            "text": "#fff"
+          },
+          "button": {
+            "background": "#2e7806"
+          }
+        },
+        "theme": "edgeless",
+         "position": "bottom-left",         "content": {
+          "message": "This website uses cookies to ensure you get the best experience on our website.",
+          "dismiss": "Got It!",
+          "link": "Learn More",
+          "href": "http://172.236.19.52/terms/privacy-policy"
+        }
+      })});
+      </script>
+                <style>.cc-bottom{bottom: 2.5em;}</style>
+      	  
+		      <!-- // NEW STORY -->
+      <script type="text/javascript">
+         $(document).on('mouseover', '.story_lightbox', function(event) {
+                $('.width_').css('width', $('.width_').css('width'));
+                value = $(this).attr('data-post-id');
+                $(this).addClass('dont_close_story_'+value);
+          });
+          $(document).on('mouseleave', '.story_lightbox', function(event) {
+            Wo_Delay(function(){
+                    if ($('#users-reacted-modal').is(':hidden')) {
+                  value = $(this).attr('data-post-id');
+                   $(this).removeClass('dont_close_story_'+value);
+                     setTimeout(function(){
+                             $('.width_').css('width', '100%');
+                     }, 700);
+                     Wo_Delay(function(){
+                             if ($('.dont_close_story_'+value).length == 0) {
+                               $('.story_lightbox').find('.next-btn').click();
+                             }
+                     }, 10000);
+                  }
+            }, 500);
+               
+          });
+          $(document).on('click', '.story-image-wrapper', function(event) {
+          event.preventDefault();
+          $('#contnet').append('<div class="lightbox-container"><div class="lightbox-backgrond" onclick="Wo_CloseLightbox();"></div><div class="lb-preloader" style="display:block"><svg width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke="#676d76" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" from="0" to="502"></animate><animate attributeName="stroke-dasharray" dur="1.5s" repeatCount="indefinite" values="150.6 100.4;1 250;150.6 100.4"></animate></circle></svg></div></div>');
+
+          $value = $(this).parents(".story-container").attr('data-status-id');
+          $.post(Wo_Ajax_Requests_File() + '?f=story_view', {id: $value}, function(data, textStatus, xhr) {
+            if (data.status == 200) {
+              document.body.style.overflow = 'hidden';
+                $('.lightbox-container').html(data.html);
+                $('.width_').addClass('load');
+                setTimeout(function(){
+                    $('.width_').css('width', '100%');
+              }, 200);
+                Wo_Delay(function(){
+                    if ($('.dont_close_story_'+$value).length == 0) {
+                      Get_NextStory(data.story_id);
+                    }
+              }, 10000);
+            }
+            else{
+              Wo_CloseLightbox();
+            }
+          });
+        });
+
+        function Wo_GetMoreStoryViews(story_id,self) {
+          last_view = $('.story_views_').last().attr('id');
+          $(self).addClass('dont_close_story_'+story_id);
+          $(self).find('span').html('Please wait..');
+          $.post(Wo_Ajax_Requests_File() + '?f=story_views_', {last_view:last_view,story_id:story_id}, function(data, textStatus, xhr) {
+            if (data.status == 200) {
+              $(self).find('button').html('<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather"><polyline points="6 9 12 15 18 9"></polyline></svg> Load more');
+              
+              $('.views_container_').append(data.html);
+            }
+            else{
+              $(self).find('button').html('No more views');
+
+            }
+          });
+        }
+        $(document).on('click', '.see_all_stories', function(event) {
+          event.preventDefault();
+          $('#contnet').append('<div class="lightbox-container"><div class="lightbox-backgrond" onclick="Wo_CloseLightbox();"></div><div class="lb-preloader" style="display:block"><svg width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke="#676d76" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" from="0" to="502"></animate><animate attributeName="stroke-dasharray" dur="1.5s" repeatCount="indefinite" values="150.6 100.4;1 250;150.6 100.4"></animate></circle></svg></div></div>');
+          user_id = $(this).attr('data_story_user_id');
+          type = $(this).attr('data_story_type');
+          $.post(Wo_Ajax_Requests_File() + '?f=view_all_stories', {user_id: user_id,type:type}, function(data, textStatus, xhr) {
+            if (node_socket_flow == "1") {
+               socket.emit("user_notification", { to_id: user_id, user_id: _getCookie("user_id"), type: "added" });
+            }
+            document.body.style.overflow = 'hidden';
+            $('.lightbox-container').html(data.html);
+            setTimeout(function(){
+              video_story = $('#video_story').attr('data-story-video');
+                if ($('[data-story-video='+video_story+']').length == 0) {
+
+                  $('.width_').addClass('load');
+                  setTimeout(function(){
+                      $('.width_').css('width', '100%');
+                  }, 200);
+                  Wo_Delay(function(){
+                    value = $('.user_story_').attr('id');
+
+                      if ($('.dont_close_story_'+value).length == 0) {
+                        if (type == 'user') {
+                          Get_NextStory(data.story_id);
+                        }
+                        else{
+                          
+                          Get_NextStory(data.story_id,'friends');
+                        }
+                      }
+                  }, 10000);
+                }
+              }, 200);
+          });
+        });
+        function Get_PreviousStory(story_id,story_type = '') {
+          if ($('.lightbox-container').is(":visible")) {
+            
+            Wo_CloseLightbox();
+            $('#contnet').append('<div class="lightbox-container"><div class="lightbox-backgrond" onclick="Wo_CloseLightbox();"></div><div class="lb-preloader" style="display:block"><svg width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke="#676d76" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" from="0" to="502"></animate><animate attributeName="stroke-dasharray" dur="1.5s" repeatCount="indefinite" values="150.6 100.4;1 250;150.6 100.4"></animate></circle></svg></div></div>');
+            $.post(Wo_Ajax_Requests_File() + '?f=view_story_by_id', {story_id: story_id,type:'previous',story_type:story_type}, function(data, textStatus, xhr) {
+               user_id = $(this).attr('data_story_user_id');
+               if (node_socket_flow == "1") {
+               socket.emit("user_notification", { to_id: user_id, user_id: _getCookie("user_id"), type: "added" });
+            }
+              if (data.status == 200) {
+                document.body.style.overflow = 'hidden';
+                  $('.lightbox-container').html(data.html);
+                  video_story = $('#video_story').attr('data-story-video');
+                if ($('[data-story-video='+video_story+']').length == 0) {
+                    $('.width_').addClass('load');
+                    setTimeout(function(){
+                        $('.width_').css('width', '100%');
+                  }, 200);
+                    Wo_Delay(function(){
+                      value = $('.user_story_').attr('id');
+                        if ($('.dont_close_story_'+value).length == 0) {
+                          if (story_type == 'user') {
+                            if ($('.lightpost-'+data.story_id).length > 0) {
+                              Get_NextStory(data.story_id);
+                            }
+                          }
+                          else{
+                            if ($('.lightpost-'+data.story_id).length > 0) {
+                              Get_NextStory(data.story_id,'friends');
+                            }
+                          }
+                        }
+                  }, 10000);
+                }
+              }
+              else{
+                Wo_CloseLightbox();
+              }
+            });
+          }
+        }
+        function Get_NextStory(story_id,story_type = '') {
+          if ($('.lightbox-container').is(":visible")) {
+            
+            Wo_CloseLightbox();
+            $('#contnet').append('<div class="lightbox-container"><div class="lightbox-backgrond" onclick="Wo_CloseLightbox();"></div><div class="lb-preloader" style="display:block"><svg width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke="#676d76" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" from="0" to="502"></animate><animate attributeName="stroke-dasharray" dur="1.5s" repeatCount="indefinite" values="150.6 100.4;1 250;150.6 100.4"></animate></circle></svg></div></div>');
+            $.post(Wo_Ajax_Requests_File() + '?f=view_story_by_id', {story_id: story_id,type:'next',story_type:story_type}, function(data, textStatus, xhr) {
+              if (data.status == 200) {
+               user_id = $(this).attr('data_story_user_id');
+               if (node_socket_flow == "1") {
+               socket.emit("user_notification", { to_id: user_id, user_id: _getCookie("user_id"), type: "added" });
+            }
+                document.body.style.overflow = 'hidden';
+                  $('.lightbox-container').html(data.html);
+                  video_story = $('#video_story').attr('data-story-video');
+                if ($('[data-story-video='+video_story+']').length == 0) {
+                    $('.width_').addClass('load');
+                    setTimeout(function(){
+                        $('.width_').css('width', '100%');
+                  }, 200);
+                    Wo_Delay(function(){
+                      value = $('.user_story_').attr('id');
+                        if ($('.dont_close_story_'+value).length == 0) {
+                          if (story_type == 'user') {
+                            if ($('.lightpost-'+data.story_id).length > 0) {
+                              Get_NextStory(data.story_id);
+                            }
+                      }
+                      else{
+                        if ($('.lightpost-'+data.story_id).length > 0) {
+                          Get_NextStory(data.story_id,'friends');
+                        }
+                      }
+                        }
+                  }, 10000);
+                }
+              }
+              else{
+                if (story_type == 'user') {
+                  if($('.unseen_story').length > 0){
+                    $('.unseen_story').addClass('seen_story');
+                    $('.unseen_story').removeClass('unseen_story');
+
+                  }
+                }
+                Wo_CloseLightbox();
+              }
+            });
+          }
+      }
+      function Get_CurrentStory(story_id,story_type = '') {
+            
+            Wo_CloseLightbox();
+            $('#contnet').append('<div class="lightbox-container"><div class="lightbox-backgrond" onclick="Wo_CloseLightbox();"></div><div class="lb-preloader" style="display:block"><svg width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke="#676d76" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" from="0" to="502"></animate><animate attributeName="stroke-dasharray" dur="1.5s" repeatCount="indefinite" values="150.6 100.4;1 250;150.6 100.4"></animate></circle></svg></div></div>');
+            $.post(Wo_Ajax_Requests_File() + '?f=view_story_by_id', {story_id: story_id,type:'current',story_type:story_type}, function(data, textStatus, xhr) {
+              if (data.status == 200) {
+                  user_id = $(this).attr('data_story_user_id');
+               if (node_socket_flow == "1") {
+               socket.emit("user_notification", { to_id: user_id, user_id: _getCookie("user_id"), type: "added" });
+            }
+                document.body.style.overflow = 'hidden';
+                  $('.lightbox-container').html(data.html);
+                  video_story = $('#video_story').attr('data-story-video');
+                if ($('[data-story-video='+video_story+']').length == 0) {
+                    $('.width_').addClass('load');
+                    setTimeout(function(){
+                        $('.width_').css('width', '100%');
+                  }, 200);
+                    Wo_Delay(function(){
+                      value = $('.user_story_').attr('id');
+                        if ($('.dont_close_story_'+value).length == 0) {
+                          if (story_type == 'user') {
+                            if ($('.lightpost-'+data.story_id).length > 0) {
+                              Get_NextStory(data.story_id);
+                            }
+                      }
+                      else{
+                        if ($('.lightpost-'+data.story_id).length > 0) {
+                          Get_NextStory(data.story_id,'friends');
+                        }
+                      }
+                        }
+                  }, 10000);
+                }
+              }
+              else{
+                if (story_type == 'user') {
+                  if($('.unseen_story').length > 0){
+                    $('.unseen_story').addClass('seen_story');
+                    $('.unseen_story').removeClass('unseen_story');
+
+                  }
+                }
+                Wo_CloseLightbox();
+              }
+            });
+      }
+    </script>
+      <!-- // NEW STORY -->
+	  
+	          <div class="modal fade sun_modal" id="apply-job-modal" role="dialog">
+    </div>
+    <div id="pay_modal_wallet">
+      <div class="modal fade wow_mat_pops" id="pay-go-pro" role="dialog" data-keyboard="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="wow_pops_head">
+              <svg height="100px" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100" width="300px" xmlns="http://www.w3.org/2000/svg"><path d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729 c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z" fill="currentColor" opacity="0.6"></path> <path d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729 c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z" fill="currentColor" opacity="0.6"></path> <path d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428 c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z" fill="currentColor"></path></svg>
+              <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path></svg> Pay By Wallet</h4>
+            </div>
+            <div class="modal-body">
+              <div class="pay_modal_wallet_alert"></div>
+              <h4 class="pay_modal_wallet_text"></h4>
+            </div>
+            <div class="clear"></div>
+            <div class="modal-footer">
+              <div class="ball-pulse"><div></div><div></div><div></div></div>
+              <button type="button" class="btn btn-main" id="pay_modal_wallet_btn">Pay Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- HTML NOTIFICATION POPUP -->
+    <div id="notification-popup"></div>
+    <!-- HTML NOTIFICATION POPUP -->
+    <div class="modal fade" id="add_address_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+		<div class="modal-dialog wow_mat_mdl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+					<h4 class="modal-title">Add New Address</h4>
+				</div>
+				<form class="form form-horizontal address_form" method="post" action="#">
+					<div class="modal-body twocheckout_modal">
+						<div class="modal_add_address_modal_alert"></div>
+						<div class="clear"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="wow_form_fields">
+									<label for="name">Name</label>
+									<input id="name" name="name" type="text" autocomplete="off" placeholder="Name" value="Custom Paving Sealcoating">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="wow_form_fields">
+									<label for="phone">Phone</label>
+									<input id="phone" name="phone" type="text" autocomplete="off" placeholder="Phone" value="">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="wow_form_fields">
+									<label for="country">Country</label>
+									<input id="country" name="country" type="text" autocomplete="off" placeholder="Country">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="wow_form_fields">
+									<label for="city">City</label>
+									<input id="city" name="city" type="text" autocomplete="off" placeholder="City">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="wow_form_fields">
+									<label for="zip">Zip Code</label>
+									<input id="zip" name="zip" type="text" autocomplete="off" placeholder="Zip Code">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="wow_form_fields">
+									<label for="address">Name</label>
+									<textarea id="address" placeholder="Address" name="address" rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+					<div class="modal-footer">
+						<div class="ball-pulse"><div></div><div></div><div></div></div>
+						<button type="submit" class="btn btn-main btn-mat">Add</button>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+    <div class="modal fade" id="delete-address" tabindex="-1" role="dialog" aria-labelledby="delete-address" aria-hidden="true" data-id="0">
+		<div class="modal-dialog modal-md mat_box wow_mat_mdl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+					<h4 class="modal-title">Delete your address</h4>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to delete this address?				</div>  
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger btn-mat" data-dismiss="modal">Delete</button>
+				</div>
+			</div>
+		</div>
+    </div>
+    
+    <div class="modal fade ch_payment_box" id="buy_product_modal" tabindex="-1" role="dialog" aria-labelledby="buy_product" aria-hidden="true" data-id="0">
+		<div class="modal-dialog modal-md mat_box" role="document">
+			<div class="modal-content">
+				<div class="ch_payment_head">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,13A5,5 0 0,1 7,8H9A3,3 0 0,0 12,11A3,3 0 0,0 15,8H17A5,5 0 0,1 12,13M12,3A3,3 0 0,1 15,6H9A3,3 0 0,1 12,3M19,6H17A5,5 0 0,0 12,1A5,5 0 0,0 7,6H5C3.89,6 3,6.89 3,8V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V8C21,6.89 20.1,6 19,6Z"></path></svg>
+					<h4>Payment Alert</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal_product_pay_alert"></div>
+					You are about to purchase the items, do you want to proceed?				</div>  
+				<div class="modal-footer">
+					<input type="hidden" id="product_id">
+					<input type="hidden" id="product_price">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-main btn-mat">Pay Now</button>
+				</div>
+			</div>
+		</div>
+    </div>
+	<div class="modal fade" id="refund_order" tabindex="-1" role="dialog" aria-labelledby="refund_order" aria-hidden="true" data-id="0">
+		<div class="modal-dialog mat_box wow_mat_mdl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Request a Refund</h5>
+				</div>
+				<form class="refund_order_form" method="post">
+					<div class="modal-body">
+						<div class="modal_refund_order_modal_alert"></div>
+						<div class="wow_form_fields">
+							<label class="form-label">Please explain the reason</label>
+							<textarea placeholder="Please explain the reason" rows="5" name="message" id="refund_order_message"></textarea>
+						</div>
+					</div>  
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-mat" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-main btn-mat get_refnd">Request</button>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+    
+    <a href="http://172.236.19.52/checkout" data-ajax="?link1=checkout" id="load_checkout" style="display: none;"></a>
+   </body>
+</html>

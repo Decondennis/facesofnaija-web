@@ -157,11 +157,11 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                     case 'create-community':
                         include('sources/create_community.php');
                         break;
+                    case 'request-community':
+                        include('sources/create_community.php');
+                        break;
                     case 'community-setting':
                         include('sources/community_setting.php');
-                        break;
-                    case 'request-community':
-                        include('sources/request-community.php');
                         break;
                     /** stopped here */ 
                     case 'create-page':
@@ -738,6 +738,9 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                 include('sources/community.php');
                 break;
             case 'create-community':
+                include('sources/create_community.php');
+                break;
+            case 'request-community':
                 include('sources/create_community.php');
                 break;
             case 'community-setting':

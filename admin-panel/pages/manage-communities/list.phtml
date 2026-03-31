@@ -8,9 +8,19 @@
       </a>
    </td>
    <td><?php echo $wo['communitylist']['category'];?></td>
+   <td>
+      <?php if (!empty($wo['communitylist']['active']) && $wo['communitylist']['active'] == 1) { ?>
+      <span class="badge badge-success community-status-badge">Active</span>
+      <?php } else { ?>
+      <span class="badge badge-warning community-status-badge">Pending Approval</span>
+      <?php } ?>
+   </td>
    <td><?php echo $wo['communitylist']['members'];?></td>
    <td>
       <a target = "_blank" class="btn bg-info admn_table_btn" href="<?php echo Wo_SeoLink('index.php?link1=community-setting&community=' . $wo['communitylist']['community_name']) ?>">Edit</a>
+      <?php if (empty($wo['communitylist']['active']) || $wo['communitylist']['active'] != 1) { ?>
+      <button onclick="Wo_ApproveCommunity(<?php echo $wo['communitylist']['id']?>, this);" type="button" class="btn bg-success admn_table_btn">Approve</button>
+      <?php } ?>
       <button onclick="Wo_DeleteCommunity(<?php echo $wo['communitylist']['id']?>,'hide');" type="button" class="btn bg-danger admn_table_btn">Delete</button>
    </td>
 </tr>

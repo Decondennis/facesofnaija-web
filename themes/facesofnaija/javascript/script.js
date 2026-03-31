@@ -1187,7 +1187,8 @@ function Wo_DeleteReplyComment(reply_id) {
 // community here 
 
 function Wo_AcceptJoinCommunity(user_id, community_id) {
-  $.get(Wo_Ajax_Requests_File(), {f:'communities', s:'accept_request', user_id:user_id, community_id:community_id}, function(data) {
+  var hash_id = $('#hash_id').val();
+  $.get(Wo_Ajax_Requests_File(), {f:'communities', s:'accept_request', user_id:user_id, community_id:community_id, hash_id: hash_id}, function(data) {
     if (data.status == 200) {
       if (node_socket_flow == "1") {
          socket.emit("user_notification", { to_id: user_id, user_id: _getCookie("user_id"), type: "added" });
@@ -1219,7 +1220,8 @@ function Wo_RegisterAddCommunity(user_id, community_id) {
 
 
 function Wo_DeleteJoinCommunity(user_id, community_id) {
-  $.get(Wo_Ajax_Requests_File(), {f:'communities', s:'delete_request', user_id:user_id, community_id:community_id}, function(data) {
+  var hash_id = $('#hash_id').val();
+  $.get(Wo_Ajax_Requests_File(), {f:'communities', s:'delete_request', user_id:user_id, community_id:community_id, hash_id: hash_id}, function(data) {
     if (data.status == 200) {
       if (node_socket_flow == "1") {
          socket.emit("user_notification", { to_id: user_id, user_id: _getCookie("user_id"), type: "added" });
@@ -1231,15 +1233,27 @@ function Wo_DeleteJoinCommunity(user_id, community_id) {
   });
 }
 
+function Wo_DeleteJoinedCommunityUser(user_id, community_id) {
+  var hash_id = $('#hash_id').val();
+  $.get(Wo_Ajax_Requests_File(), {f:'communities', s:'delete_joined_user', user_id:user_id, community_id:community_id, hash_id: hash_id}, function(data) {
+    if (data.status == 200) {
+      $('#member-' + user_id).fadeOut(300, function () {
+        $(this).remove();
+      });
+    }
+  });
+}
+
 function Wo_AddCommunityUserModerator(member_id, community_id, self){
   if (!member_id || !community_id || !self) {
     return false;
   }
+  var hash_id = $('#hash_id').val();
   $.ajax({
     url: Wo_Ajax_Requests_File(),
     type: 'GET',
     dataType: 'json',
-    data: {f: 'communities',s:'add_moderator',user_id:member_id,community_id:community_id},
+    data: {f: 'communities',s:'add_moderator',user_id:member_id,community_id:community_id,hash_id: hash_id},
   })
   .done(function(data) {
     if (data.status == 200 && data.code == 1) {

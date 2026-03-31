@@ -592,9 +592,10 @@ function Wo_UpdateCommunityData($community_id = 0, $update_data) {
     }
     $community_id = Wo_Secure($community_id);
     if (Wo_IsAdmin() === false && Wo_IsModerator() === false) {
-        //if (Wo_IsCommunityOnwer($community_id) === false) {
+        $user_id = !empty($wo['user']['user_id']) ? (int) $wo['user']['user_id'] : 0;
+        if (Wo_IsCommunityUserExists($user_id, $community_id) === false) {
             return false;
-        //}
+        }
     }
     if (!empty($update_data['category'])) {
         if (!array_key_exists($update_data['category'], $wo['community_categories'])) {
@@ -885,8 +886,8 @@ function Wo_IsCanCommunityUpdate($community_id,$page)
         return false;
     }
     
-    if (!Wo_IsAdmin() && !Wo_IsModerator()) {
-        return false;
+    if (Wo_IsAdmin() || Wo_IsModerator()) {
+        return true;
     }
 
     $user_id = $wo['user']['id'];

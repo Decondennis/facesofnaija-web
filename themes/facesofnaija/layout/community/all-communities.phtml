@@ -30,7 +30,10 @@
 			<div class="row">
 				<?php
 					$pages = Wo_GetMyCommunities();
-					if (count($pages) > 0) {
+					if (!is_array($pages)) {
+						$pages = array();
+					}
+					if (!empty($pages)) {
 						foreach ($pages as $wo['community']) {
 							echo Wo_LoadPage('community/community-list');
 						}

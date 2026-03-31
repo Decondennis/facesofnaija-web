@@ -1,8 +1,82 @@
+# FacesOfNaija .gitignore
+
+# Configuration Files (IMPORTANT: Don't commit config files with credentials!)
+config.php
+config.local.php
+
+# Changes directory
 /changes
+
+# Cache Files
 /cache
+cache/*
+!cache/.htaccess
+!cache/index.html
+
+# Upload Directories (Keep structure, ignore uploaded files)
 /upload
 /upload/photos/2018
 /upload/photos/2017
 /upload/videos/
 /upload/sounds/
 /upload/photos/
+upload/photos/*
+upload/videos/*
+upload/files/*
+upload/avatars/*
+!upload/.htaccess
+!upload/index.html
+!upload/photos/d-avatar.jpg
+!upload/photos/f-avatar.jpg
+!upload/photos/d-cover.jpg
+!upload/photos/d-page.jpg
+!upload/photos/d-group.jpg
+
+# Logs
+*.log
+error_log
+access_log
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.buildpath
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Database backups (except initialization files)
+*.sql
+!database_init.sql
+!assets/includes/schema.sql
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+tmp/
+temp/
+
+# Session files
+sessions/*
+
+# Development/Test files
+phpinfo.php
+test.php
+debug.php

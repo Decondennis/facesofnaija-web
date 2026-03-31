@@ -655,6 +655,7 @@ $wo['lang'] = array(
     'suggested_groups' => 'Suggested groups',
     'accepted_join_request' => 'accepted your request to join ({group_name})',
     'requested_to_join_group' => 'requested to join your group',
+    'community_approved' => 'approved your community "{community_name}"',
     'no_one_posted' => 'No one posted yet',
     'add_your_frineds' => 'Add your friends to this group',
     'added_all_friends' => 'There are no friends to add them',

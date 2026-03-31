@@ -8,18 +8,37 @@
 // | WoWonder - The Ultimate PHP Social Networking Platform
 // | Copyright (c) 2016 WoWonder. All rights reserved.
 // +------------------------------------------------------------------------+
-// MySQL Hostname
-$sql_db_host = "localhost";
-// MySQL Database User
-$sql_db_user = "28305c3bb5c9";
-// MySQL Database Password
-$sql_db_pass = "c2009812d087e5c0";
-// MySQL Database Name
-$sql_db_name = "facesofnaija";
 
-// Site URL
-$site_url = "https://facesofnaija.com"; // e.g (http://example.com)
+// ==========================================================================
+// ENVIRONMENT AUTO-DETECTION
+// ==========================================================================
+$_detected_host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
-// Purchase code
-$purchase_code = "330ec2fb-f1e5-4229-b7d4-866894cff196"; // Your purchase code, don't give it to anyone. 
+if ($_detected_host === '172.236.19.52') {
+    // Live server (IP address - DNS not yet pointed)
+    $site_url    = "http://172.236.19.52";
+    $sql_db_host = "localhost";
+    $sql_db_user = "facesofnaija_user";
+    $sql_db_pass = "facesofnaija_pass123";
+    $sql_db_name = "facesofnaija";
+} else {
+    // Local development
+    $site_url    = "http://localhost/facesofnaija-web";
+    $sql_db_host = "localhost";
+    $sql_db_user = "facesofnaija_user";
+    $sql_db_pass = "facesofnaija_pass123";
+    $sql_db_name = "facesofnaija";
+}
+
+// Purchase code (Don't share this with anyone)
+$purchase_code = "330ec2fb-f1e5-4229-b7d4-866894cff196";
+
+// ==========================================================================
+// DEVELOPMENT MODE (Enable errors for debugging)
+// ==========================================================================
+if (strpos($site_url, 'localhost') !== false) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+}
 ?>

@@ -3723,8 +3723,8 @@ function Wo_IsNameExist($username, $active = 0) {
         $active_text = "AND `active` = '1'";
     }
     $username = Wo_Secure($username);
-    $query    = mysqli_query($sqlConnect, "SELECT COUNT(`user_id`) as users,`user_id` as id FROM " . T_USERS . " WHERE `username` = '{$username}' {$active_text}");
-    if (mysqli_num_rows($query)) {
+    $query    = mysqli_query($sqlConnect, "SELECT COUNT(`user_id`) as users, MIN(`user_id`) as id FROM " . T_USERS . " WHERE `username` = '{$username}' {$active_text}");
+    if ($query && mysqli_num_rows($query)) {
         $fetched_data = mysqli_fetch_assoc($query);
         if ($fetched_data["users"] == 1) {
             return array(
@@ -3734,8 +3734,8 @@ function Wo_IsNameExist($username, $active = 0) {
             );
         }
     }
-    $query = mysqli_query($sqlConnect, "SELECT COUNT(`page_id`) as pages,`page_id` as id FROM " . T_PAGES . " WHERE `page_name` = '{$username}' {$active_text}");
-    if (mysqli_num_rows($query)) {
+    $query = mysqli_query($sqlConnect, "SELECT COUNT(`page_id`) as pages, MIN(`page_id`) as id FROM " . T_PAGES . " WHERE `page_name` = '{$username}' {$active_text}");
+    if ($query && mysqli_num_rows($query)) {
         $fetched_data = mysqli_fetch_assoc($query);
         if ($fetched_data["pages"] == 1) {
             return array(
@@ -3745,8 +3745,8 @@ function Wo_IsNameExist($username, $active = 0) {
             );
         }
     }
-    ($query = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usergroups,`id` as id FROM " . T_GROUPS . " WHERE `group_name` = '{$username}' {$active_text}")) or die(mysqli_error($sqlConnect));
-    if (mysqli_num_rows($query)) {
+    ($query = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usergroups, MIN(`id`) as id FROM " . T_GROUPS . " WHERE `group_name` = '{$username}' {$active_text}")) or die(mysqli_error($sqlConnect));
+    if ($query && mysqli_num_rows($query)) {
         $fetched_data = mysqli_fetch_assoc($query);
         if ($fetched_data["usergroups"] > 0) {
             return array(
@@ -3756,8 +3756,8 @@ function Wo_IsNameExist($username, $active = 0) {
             );
         }
     }
-    $query   = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usercommunities FROM " . T_COMMUNITIES . " WHERE `community_name` = '{$username}' {$active_text}") or die(mysqli_error($sqlConnect));
-    if (mysqli_num_rows($query)) {
+    $query   = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as usercommunities, MIN(`id`) as id FROM " . T_COMMUNITIES . " WHERE `community_name` = '{$username}' {$active_text}") or die(mysqli_error($sqlConnect));
+    if ($query && mysqli_num_rows($query)) {
         $fetched_data = mysqli_fetch_assoc($query);
         if ($fetched_data['usercommunities'] > 0) {
            return array(
@@ -7607,5 +7607,26 @@ function send_bulksms_message ( $post_body, $url, $username, $password) {
   $output['error'] = curl_error($ch);
   curl_close( $ch );
   return $output;
+}
+function Wo_GetCommunitiesForCarousel($limit = 20) {
+    global $sqlConnect, $wo;
+    $limit  = (int) $limit;
+    if ($limit < 1) {
+        $limit = 20;
+    }
+
+    $result = array();
+    $query  = mysqli_query($sqlConnect, "SELECT `community_name`, `community_title`, `avatar` FROM " . T_COMMUNITIES . " WHERE `active` = '1' ORDER BY `id` DESC LIMIT {$limit}");
+    if (!$query) {
+        return $result;
+    }
+
+    $base_url = rtrim($wo['config']['site_url'], '/');
+    while ($row = mysqli_fetch_assoc($query)) {
+        $row['avatar'] = $base_url . '/' . ltrim($row['avatar'], '/');
+        $result[]      = $row;
+    }
+
+    return $result;
 }
 ?>

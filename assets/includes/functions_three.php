@@ -4248,14 +4248,18 @@ function Wo_AddMovieCommReplyDisLikes($id, $movie) {
 function Wo_GetSideBarAds() {
     global $sqlConnect, $wo;
     if ($wo['loggedin'] == false) {
-        return false;
+        return array();
     }
     $user_gender  = $wo['user']['gender'];
     $user_id      = $wo['user']['user_id'];
     $user_country = $wo['user']['country_id'];
     $query_one    = '';
-    $con_list     = implode(',', $wo['ad-con']['ads']);
-    if ($con_list) {
+    $ad_con_ads = array();
+    if (!empty($wo['ad-con']) && is_array($wo['ad-con']) && !empty($wo['ad-con']['ads']) && is_array($wo['ad-con']['ads'])) {
+        $ad_con_ads = $wo['ad-con']['ads'];
+    }
+    $con_list = !empty($ad_con_ads) ? implode(',', array_map('intval', $ad_con_ads)) : '';
+    if (!empty($con_list)) {
         $query_one .= " AND `id` NOT IN ({$con_list}) ";
     }
     $start       = date('Y-m-d');
@@ -4269,7 +4273,7 @@ function Wo_GetSideBarAds() {
     //SELECT * FROM Wo_UserAds WHERE `user_id` IN (SELECT `user_id` FROM Wo_Users WHERE `wallet` > 0) AND `status` = '1' AND (`appears` = 'sidebar' OR `appears` = 'entire' ) AND (`gender` = 'male' OR `gender` = 'all') AND `audience` LIKE '%0%' AND ((start = '') OR (start <= '2022-11-08' && end >= '2022-11-08')) AND ((budget = 0) OR (spent < budget)) ORDER BY RAND() LIMIT 2
     $query       = mysqli_query($sqlConnect, $sql);
     $data        = array();
-    if (mysqli_num_rows($query)) {
+    if ($query && mysqli_num_rows($query)) {
         while ($fetched_data = mysqli_fetch_assoc($query)) {
             $fetched_data['ad_media']    = Wo_GetMedia($fetched_data['ad_media']);
             $fetched_data['headline']    = Wo_GetShortTitle($fetched_data['headline'], false, 30);
@@ -6351,7 +6355,7 @@ function Wo_GetFriendsStatus($data_array = array('limit' => 8, 'user_id' => 0, '
         $offset_query = " AND `id` < $offset ";
     }
     // $query     = "SELECT * FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $group_by ORDER BY id DESC";
-    $query     = "SELECT DISTINCT user_id,title,description,posted,expire,thumbnail,(SELECT MAX(us.id) FROM " . T_USER_STORY . " us WHERE us.user_id = " . T_USER_STORY . ".user_id) AS id  FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $offset_query $group_by ORDER BY id DESC LIMIT " . $data_array['limit'];
+    $query     = "SELECT DISTINCT user_id,ANY_VALUE(title) AS title,ANY_VALUE(description) AS description,ANY_VALUE(posted) AS posted,ANY_VALUE(expire) AS expire,ANY_VALUE(thumbnail) AS thumbnail,(SELECT MAX(us.id) FROM " . T_USER_STORY . " us WHERE us.user_id = " . T_USER_STORY . ".user_id) AS id  FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $offset_query $group_by ORDER BY id DESC LIMIT " . $data_array['limit'];
    
     $query_run = mysqli_query($sqlConnect, $query);
     while ($fetched_data = mysqli_fetch_assoc($query_run)) {

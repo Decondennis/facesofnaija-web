@@ -2,7 +2,7 @@
 	<div class="avatar-holder design">
 		<img src="<?php echo $wo['setting']['avatar']?>" alt="<?php echo $wo['setting']['name']?> Profile Picture" class="avatar">
 		<div class="infoz">
-			<h5 title="<?php echo $wo['setting']['name']?>"><a href="<?php echo Wo_SeoLink('index.php?link1=timeline&u=' . $wo['setting']['username'] . '');?>" data-ajax="?link1=timeline&u=<?php echo $wo['setting']['username'] ?>"><?php echo $wo['setting']['name']?></a></h5>
+      <h5 title="<?php echo $wo['setting']['name']?>"><a href="<?php echo Wo_SeoLink('index.php?link1=setting&' . $wo['user_setting'] . 'page=avatar-setting');?>" data-ajax="?link1=setting&<?php echo $wo['user_setting'];?>page=avatar-setting"><?php echo $wo['setting']['name']?></a></h5>
 			<p><?php echo $wo['lang']['avatar_and_cover']; ?></p>
 		</div>
 	</div>
@@ -86,6 +86,17 @@ $(function() {
           });
         });
       } 
+      else if (data.errors) {
+        var errors = data.errors.join("<br>");
+        scrollToTop();
+        $('.setting-profile-alert').html('<div class="alert alert-danger">' + errors + '</div>');
+        $('.alert-danger').fadeIn(300);
+      }
+      else {
+        scrollToTop();
+        $('.setting-profile-alert').html('<div class="alert alert-danger"><?php echo $wo['lang']['please_check_details']; ?></div>');
+        $('.alert-danger').fadeIn(300);
+      }
       $('.wo_settings_page').find('.add_wow_loader').removeClass('btn-loading');
     }
   });

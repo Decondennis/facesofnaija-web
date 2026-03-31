@@ -29,7 +29,7 @@
 		<div class="text-center">
 			<button class="btn btn-main btn-mat btn-mat-raised add_wow_loader" type="submit"><?php echo $wo['lang']['save']; ?></button>
 		</div>
-		<input type="hidden" name="group_id" id="group-id" value="<?php echo $wo['setting']['id'];?>">
+    <input type="hidden" name="community_id" id="community-id" value="<?php echo $wo['setting']['id'];?>">
 		<input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
 	</form>
 </div>
@@ -65,8 +65,7 @@ $(function() {
       if (data.status == 200) {
         scrollToTop();
         if (data.avatar) {
-          var page_id = $('form.setting-profile-form').find('#group-id').val();
-          $('[id^=updateGroupImage-' + page_id + ']').fadeOut(300, function () { $('[id^=updateGroupImage-' + page_id + ']').attr("src", data.avatar)}).fadeIn(300);
+          $('[id^=community-avatar-image]').fadeOut(300, function () { $('[id^=community-avatar-image]').attr("src", data.avatar)}).fadeIn(300);
         }
         if (data.cover) {
           $('[id^=cover-image]').fadeOut(300, function () { $('[id^=cover-image]').attr("src", data.cover)}).fadeIn(300);

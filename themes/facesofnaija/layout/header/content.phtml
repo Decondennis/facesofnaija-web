@@ -220,4 +220,25 @@ function smokeTheHash(str) {
     return false;
   }
 }
+
+jQuery(function ($) {
+  $(document).on('click', '.head_name_links > .dropdown-toggle', function (event) {
+    if (typeof $.fn.dropdown === 'function') {
+      return true;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    var dropdown = $(this).parent('.head_name_links');
+    $('.head_name_links').not(dropdown).removeClass('open');
+    dropdown.toggleClass('open');
+  });
+
+  $(document).on('click', function (event) {
+    if ($(event.target).closest('.head_name_links').length === 0) {
+      $('.head_name_links').removeClass('open');
+    }
+  });
+});
 </script>

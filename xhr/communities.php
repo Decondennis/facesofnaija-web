@@ -28,6 +28,10 @@ if ($f == 'communities') {
             }
         }
         if (empty($errors)) {
+            $parent_id = 0;
+            if (!empty($_POST['parent_id']) && is_numeric($_POST['parent_id'])) {
+                $parent_id = Wo_Secure($_POST['parent_id']);
+            }
             $sub_category = '';
             if (!empty($_POST['community_sub_category']) && !empty($wo['community_sub_categories'][$_POST['category']])) {
                 foreach ($wo['community_sub_categories'][$_POST['category']] as $key => $value) {
@@ -38,13 +42,13 @@ if ($f == 'communities') {
             }
             $re_community_data = array(
                 'community_name' => Wo_Secure($_POST['community_name']),
-                'parent_id' => Wo_Secure($_POST['parent_id']),
+                'parent_id' => $parent_id,
                 'community_title' => Wo_Secure($_POST['community_title']),
                 'about' => Wo_Secure($_POST['about']),
                 'category' => Wo_Secure($_POST['category']),
                 'sub_category' => $sub_category,
                 'privacy' => Wo_Secure($privacy),
-                'active' => '1',
+                'active' => '0',
                 'time' => time()
             );
             if ($privacy == 2) {
@@ -70,18 +74,13 @@ if ($f == 'communities') {
             $register_community = Wo_RegisterCommunity($re_community_data);
 
             if ($register_community) {
-                //if ($privacy == 2) {
-                    //$community_id            = Wo_CommunityIdFromCommunityname(Wo_Secure($_POST['community_name']));
-                    //$user_id = $wo['user']['id'];
-                    //$active = 1;
-                    //$query = mysqli_query($sqlConnect, " INSERT INTO " . T_COMMUNITY_MEMBERS . " (`user_id`,`community_id`,`active`,`time`) VALUES ({$user_id},{$community_id},'{$active}'," . time() . ")");
-
-                    //$query = mysqli_query($sqlConnect, " INSERT INTO " . T_COMMUNITY_MODERATORS . " (`user_id`,`community_id`,`members`,`delete_community`) VALUES ({$user_id},{$community_id}, 1,1)");
-                //}
                 $data = array(
                     'status' => 200,
-                    'location' => Wo_SeoLink('index.php?link1=timeline&u=' . Wo_Secure($_POST['community_name']))
+                    'message' => $success_icon . ' Community submitted and is pending admin approval.',
+                    'location' => Wo_SeoLink('index.php?link1=joined-communities')
                 );
+            } else {
+                $errors[] = $error_icon . ' Error submitting request. Please try again.';
             }
         }
         header("Content-type: application/json");
@@ -147,7 +146,7 @@ if ($f == 'communities') {
                     $join_privacy = $_POST['join_privacy'];
                 }
             }
-            if ($community_data['user_id'] == $wo['user']['id'] || Wo_IsCanCommunityUpdate($_POST['community_id'],'privacy')) {
+            if (Wo_IsCanCommunityUpdate($_POST['community_id'],'privacy')) {
                 if (empty($errors)) {
                     $Update_data = array(
                         'privacy' => $privacy,
@@ -173,17 +172,18 @@ if ($f == 'communities') {
         if (isset($_POST['community_id']) && is_numeric($_POST['community_id']) && $_POST['community_id'] > 0 && Wo_CheckSession($hash_id) === true) {
             $Userdata = Wo_CommunityData($_POST['community_id']);
             if (!empty($Userdata['id'])) {
-                if (!empty($_FILES['avatar']['name'])) {
-                    if (Wo_UploadImage($_FILES["avatar"]["tmp_name"], $_FILES['avatar']['name'], 'avatar', $_FILES['avatar']['type'], $_POST['community_id'], 'community') === true) {
-                        $page_data = Wo_CommunityData($_POST['community_id']);
+                $can_update_community_media = Wo_IsCanCommunityUpdate($_POST['community_id'], 'avatar') || Wo_IsCommunityUserExists($wo['user']['user_id'], $_POST['community_id']);
+                if ($can_update_community_media) {
+                    if (!empty($_FILES['avatar']['name'])) {
+                        if (Wo_UploadImage($_FILES["avatar"]["tmp_name"], $_FILES['avatar']['name'], 'avatar', $_FILES['avatar']['type'], $_POST['community_id'], 'community') === true) {
+                            $page_data = Wo_CommunityData($_POST['community_id']);
+                        }
                     }
-                }
-                if (!empty($_FILES['cover']['name'])) {
-                    if (Wo_UploadImage($_FILES["cover"]["tmp_name"], $_FILES['cover']['name'], 'cover', $_FILES['cover']['type'], $_POST['community_id'], 'community') === true) {
-                        $page_data = Wo_CommunityData($_POST['community_id']);
+                    if (!empty($_FILES['cover']['name'])) {
+                        if (Wo_UploadImage($_FILES["cover"]["tmp_name"], $_FILES['cover']['name'], 'cover', $_FILES['cover']['type'], $_POST['community_id'], 'community') === true) {
+                            $page_data = Wo_CommunityData($_POST['community_id']);
+                        }
                     }
-                }
-                if ($Userdata['user_id'] == $wo['user']['id'] || Wo_IsCanCommunityUpdate($_POST['community_id'],'avatar')) {
                     if (empty($errors)) {
                         $Update_data = array(
                             'active' => '1'
@@ -303,7 +303,7 @@ if ($f == 'communities') {
                 $errors[] = $error_icon . $wo['lang']['current_password_mismatch'];
             }
             $community_data = Wo_CommunityData($_POST['community_id']);
-            if ($community_data['user_id'] == $wo['user']['id'] || Wo_IsCanCommunityUpdate($_POST['community_id'],'delete_community')) {
+            if (Wo_IsCanCommunityUpdate($_POST['community_id'],'delete_community')) {
 
                 if (empty($errors)) {
                     if (Wo_DeleteCommunity($_POST['community_id']) === true) {
@@ -330,11 +330,13 @@ if ($f == 'communities') {
         exit();
     }
     if ($s == 'accept_request') {
-        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0) {
-            if (Wo_AcceptJoinCommunityRequest($_GET['user_id'], $_GET['community_id']) === true) {
-                $data = array(
-                    'status' => 200
-                );
+        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0 && Wo_CheckSession($hash_id) === true) {
+            if (Wo_IsCanCommunityUpdate($_GET['community_id'],'members')) {
+                if (Wo_AcceptJoinCommunityRequest($_GET['user_id'], $_GET['community_id']) === true) {
+                    $data = array(
+                        'status' => 200
+                    );
+                }
             }
         }
         header("Content-type: application/json");
@@ -342,12 +344,13 @@ if ($f == 'communities') {
         exit();
     }
     if ($s == 'delete_request') {
-        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0) {
-            
-        if (Wo_DeleteJoinCommunityRequest($_GET['user_id'], $_GET['community_id']) === true) {
-                $data = array(
-                    'status' => 200
-                );
+        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0 && Wo_CheckSession($hash_id) === true) {
+            if (Wo_IsCanCommunityUpdate($_GET['community_id'],'members')) {
+                if (Wo_DeleteJoinCommunityRequest($_GET['user_id'], $_GET['community_id']) === true) {
+                    $data = array(
+                        'status' => 200
+                    );
+                }
             }
         }
         header("Content-type: application/json");
@@ -355,9 +358,9 @@ if ($f == 'communities') {
         exit();
     }
     if ($s == 'delete_joined_user') {
-        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0) {
+        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0 && Wo_CheckSession($hash_id) === true) {
             $community_data = Wo_CommunityData($_GET['community_id']);
-            if ($community_data['user_id'] == $wo['user']['id'] || Wo_IsCanCommunityUpdate($_GET['community_id'],'members')) {
+            if (Wo_IsCanCommunityUpdate($_GET['community_id'],'members')) {
                 if (Wo_LeaveCommunity($_GET['community_id'], $_GET['user_id']) === true) {
                     $data = array(
                         'status' => 200
@@ -370,7 +373,7 @@ if ($f == 'communities') {
         exit();
     }
     if ($s == 'add_moderator') {
-        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0) {
+        if (isset($_GET['user_id']) && is_numeric($_GET['user_id']) && $_GET['user_id'] > 0 && !empty($_GET['community_id']) && is_numeric($_GET['community_id']) && $_GET['community_id'] > 0 && Wo_CheckSession($hash_id) === true) {
             $community_data = Wo_CommunityData($_GET['community_id']);
             //var_dump($community_data);
             if (Wo_IsCanCommunityUpdate($_GET['community_id'],'members')) {
@@ -397,7 +400,7 @@ if ($f == 'communities') {
     if ($s == 'privileges') {
         if (!empty($_POST['community_id']) && is_numeric($_POST['community_id']) && $_POST['community_id'] > 0 && !empty($_POST['user_id']) && is_numeric($_POST['user_id']) && $_POST['user_id'] > 0) {
             $community_data = Wo_CommunityData($_POST['community_id']);
-            if ($community_data['user_id'] == $wo['user']['id'] || Wo_IsCanCommunityUpdate($_POST['community_id'],'members')) {
+            if (Wo_IsCanCommunityUpdate($_POST['community_id'],'members')) {
 
                 $update_array = array('general' => 0 , 'privacy' => 0 , 'avatar' => 0 , 'members' => 0 , 'analytics' => 0 ,'delete_community' => 0);
                 if (!empty($_POST['general']) && $_POST['general'] == 1) {

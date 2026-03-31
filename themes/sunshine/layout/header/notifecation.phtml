@@ -273,7 +273,7 @@ if (!empty($wo['notification']['type'])) {
     if ($wo['notification']['type'] == 'admin_notification') {
         $theme                                    = $wo['config']['theme'];
         $wo['notification']['type_text']          = $wo['notification']['text'];
-        if ($wo['notification']['type2'] != 'no_name' && $wo['notification']['type2'] != 'approve_post'  && $wo['notification']['type2'] != 'approve_blog'  && $wo['notification']['type2'] != 'ffmpeg'   && $wo['notification']['type2'] != 'admin_status_changed' && $wo['notification']['type2'] != 'approve_product') {
+        if ($wo['notification']['type2'] != 'no_name' && $wo['notification']['type2'] != 'approve_post'  && $wo['notification']['type2'] != 'approve_blog'  && $wo['notification']['type2'] != 'ffmpeg'   && $wo['notification']['type2'] != 'admin_status_changed' && $wo['notification']['type2'] != 'approve_product' && $wo['notification']['type2'] != 'approve_community') {
             $wo['notification']['url']                = $wo['notification']['full_link']; 
             $wo['notification']['ajax_url']           = $wo['notification']['full_link']; 
             $wo['notification']['wo_url']             = false; 
@@ -291,6 +291,15 @@ if (!empty($wo['notification']['type'])) {
         if ($wo['notification']['type2'] == 'approve_blog') {
             $wo['notification']['type_text'] = $wo['lang']['approve_blog'];
             $wo['notification']['icon'] .= '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus active"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>';
+        }
+        if ($wo['notification']['type2'] == 'approve_community') {
+            $community_approved_lang = (!empty($wo['lang']['community_approved'])) ? $wo['lang']['community_approved'] : 'approved your community "{community_name}"';
+            $community_name = trim($wo['notification']['text']);
+            if ($community_name === '') {
+                $community_name = 'Community';
+            }
+            $wo['notification']['type_text'] = str_replace('{community_name}', $community_name, $community_approved_lang);
+            $wo['notification']['icon'] .= '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users active"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>';
         }
         if ($wo['notification']['type2'] == 'refund_decline') {
             $wo['notification']['type_text'] = $wo['lang']['refund_decline'];

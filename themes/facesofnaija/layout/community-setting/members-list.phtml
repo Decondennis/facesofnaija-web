@@ -14,13 +14,11 @@
       <?php echo Wo_UserStatus($wo['member']['user_id'],$wo['member']['lastseen']); ?>
    </div>
    <div>
-   <?php if ($wo['setting']['user_id'] == $wo['user']['user_id']): ?>
-      <span onclick="Wo_DeleteJoinedUser(<?php echo $wo['member']['user_id']?>, <?php echo $wo['setting']['id']?>);" class="btn btn-default btn-sm"><?php echo $wo['lang']['remove']; ?></span>
-   <?php elseif($wo['setting']['user_id'] != $wo['member']['user_id']): ?>
-      <span onclick="Wo_DeleteJoinedUser(<?php echo $wo['member']['user_id']?>, <?php echo $wo['setting']['id']?>);" class="btn btn-default btn-sm"><?php echo $wo['lang']['remove']; ?></span>
+   <?php if (Wo_IsCanCommunityUpdate($wo['setting']['id'],'members') && $wo['member']['user_id'] != $wo['user']['user_id']): ?>
+      <span onclick="Wo_DeleteJoinedCommunityUser(<?php echo $wo['member']['user_id']?>, <?php echo $wo['setting']['id']?>);" class="btn btn-default btn-sm"><?php echo $wo['lang']['remove']; ?></span>
    <?php endif; ?>
 
-   <?php if ($wo['setting']['user_id'] != $wo['member']['user_id']): ?> 
+   <?php if (Wo_IsCanCommunityUpdate($wo['setting']['id'],'members') && $wo['member']['user_id'] != $wo['user']['user_id']): ?> 
       
       <span onclick="Wo_AddCommunityUserModerator(<?php echo $wo['member']['user_id']?>, <?php echo $wo['setting']['id']?>,this);" class="btn btn-default btn-sm">
       <?php if (Wo_IsCommunityUserExists($wo['member']['user_id'],$wo['setting']['id'])): ?>

@@ -167,13 +167,14 @@
       <script src="<?php echo $wo['config']['theme_url'];?>/javascript/tinymce/js/tinymce/tinymce.min.js?version=<?php echo $wo['config']['version']; ?>"></script>
       <?php } ?>
 
+      <link rel="stylesheet" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/style.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>">
+
      
     
-      <?php if ($wo['page'] == 'welcome') { ?>
+      <?php if ($wo['page'] == 'welcome' && $wo['loggedin'] == false) { ?>
       <link rel="stylesheet" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/welcome.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>">
       <?php } else { ?>
       <script src="//sdk.twilio.com/js/video/releases/2.18.1/twilio-video.min.js"></script>
-      <link rel="stylesheet" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/style.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>">
       <?php } ?>
       <link rel="stylesheet" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>">
 	  
@@ -181,7 +182,7 @@
 	  <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
 	  <?php } ?>
     
-     <?php if ($wo['page'] == 'welcome' && $wo['language_type'] == 'rtl') { ?>
+    <?php if ($wo['page'] == 'welcome' && $wo['loggedin'] == false && $wo['language_type'] == 'rtl') { ?>
       <link rel="stylesheet" href="<?php echo $wo['config']['theme_url'];?>/stylesheet/welcome_rtl.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>">
       <?php } ?>
 

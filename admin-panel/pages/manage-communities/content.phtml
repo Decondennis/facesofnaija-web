@@ -1,6 +1,7 @@
 <?php
 $page           = (!empty($_GET['page-id']) && is_numeric($_GET['page-id'])) ? $_GET['page-id'] : 1;
 $filter_keyword = (!empty($_GET['query'])) ? Wo_Secure($_GET['query']) : '';
+$filter_status  = (!empty($_GET['status']) && in_array($_GET['status'], array('active', 'pending'))) ? Wo_Secure($_GET['status']) : 'all';
 $filter_type    = '';
 $db->pageLimit  = 50;
 $link = '';
@@ -16,6 +17,15 @@ if (!empty($filter_keyword)) {
   
   $db->where($sql);
 } 
+if ($filter_status == 'active') {
+    $db->where('active', '1');
+    $link .= '&status=active';
+}
+else if ($filter_status == 'pending') {
+    $db->where('active', '0');
+    $link .= '&status=pending';
+}
+
 $sort_link = $link;
 $sort_array = array('DESC_i' => array('id' , 'DESC'),
                     'ASC_i'  => array('id' , 'ASC'),
@@ -133,7 +143,7 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                       <div class="col-md-4" style="margin-bottom:0;">
                         <form method="get" action="<?php echo Wo_LoadAdminLinkSettings('manage-communities'); ?>">
                           <div class="row">
-                            <div class="col-md-11">
+                                                        <div class="col-md-7">
                               <div class="form-group form-float">
                                   <div class="form-line">
                                     <label class="form-label search-form">
@@ -143,7 +153,15 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                                   </div>
                               </div>
                             </div>
-                            <div class="col-md-1">
+                                                        <div class="col-md-3">
+                                                            <label>Status</label>
+                                                            <select class="form-control" name="status">
+                                                                <option value="all" <?php echo ($filter_status == 'all') ? 'selected' : ''; ?>>All</option>
+                                                                <option value="pending" <?php echo ($filter_status == 'pending') ? 'selected' : ''; ?>>Pending</option>
+                                                                <option value="active" <?php echo ($filter_status == 'active') ? 'selected' : ''; ?>>Active</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2">
                               <label>&nbsp;</label>
                                <button class="btn btn-info">Search</button>
                             </div>
@@ -177,6 +195,7 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                                   <?php }else{ ?>
                                       <svg onclick="location.href = '<?php echo(Wo_LoadAdminLinkSettings('manage-communities?page-id=1').$sort_link."&sort=DESC_c") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                                   <?php } ?></th>
+                                            <th>Status</th>
                                     <th>Memebers</th>
 					                <th>Action</th>
                                 </tr>
@@ -333,6 +352,34 @@ function Wo_DeleteCommunity(community_id,type = 'show') {
     $(this).remove();
   });
   $.get(Wo_Ajax_Requests_File(),{f:'admin_setting',s:'delete_community',community_id: community_id, hash_id:hash_id});
+}
+
+function Wo_ApproveCommunity(community_id, btn) {
+    var hash_id = $('#hash_id').val();
+    var $btn = $(btn);
+    $btn.prop('disabled', true).text('Approving...');
+    $.ajax({
+        url: Wo_Ajax_Requests_File(),
+        type: 'GET',
+        dataType: 'json',
+        timeout: 15000,
+        data: {f:'admin_setting', s:'approve_community', community_id: community_id, hash_id: hash_id}
+    }).done(function(response) {
+        if (response.status == 200) {
+            $('#CommunityID_' + community_id + ' .community-status-badge')
+                .removeClass('badge-warning')
+                .addClass('badge-success')
+                .text('Active');
+            $btn.remove();
+            return;
+        }
+
+        $btn.prop('disabled', false).text('Approve');
+        alert((response && response.message) ? response.message : 'Unable to approve community right now.');
+    }).fail(function() {
+        $btn.prop('disabled', false).text('Approve');
+        alert('Approval failed or timed out. Please try again.');
+    });
 }
 
 </script>

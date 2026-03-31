@@ -531,19 +531,19 @@ function Wo_IsReportExists($id = false, $type = 'user') {
     if ($type == 'user') {
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `profile_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     } else if ($type == 'page') {
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `page_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     } else if ($type == 'group') {
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `group_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     } else if ($type == 'community') { // added this
         $sql       = " SELECT `id` FROM " . T_REPORTS . " WHERE `community_id` = '{$id}' AND `user_id` = '{$user}'";
         $data_rows = mysqli_query($sqlConnect, $sql);
-        $match     = mysqli_num_rows($data_rows) > 0;
+        $match     = ($data_rows && mysqli_num_rows($data_rows) > 0);
     }
     return $match;
 }
@@ -1401,7 +1401,7 @@ function Wo_UploadImage($file, $name, $type, $type_file, $user_id = 0, $placemen
     if (!file_exists('upload/photos/' . date('Y') . '/' . date('m'))) {
         mkdir('upload/photos/' . date('Y') . '/' . date('m'), 0777, true);
     }
-    $allowed           = 'jpg,png,jpeg,gif';
+    $allowed           = 'jpg,png,jpeg,gif,webp';
     $new_string        = pathinfo($name, PATHINFO_FILENAME) . '.' . strtolower(pathinfo($name, PATHINFO_EXTENSION));
     $extension_allowed = explode(',', $allowed);
     $file_extension    = pathinfo($new_string, PATHINFO_EXTENSION);
@@ -1412,7 +1412,10 @@ function Wo_UploadImage($file, $name, $type, $type_file, $user_id = 0, $placemen
         'image/png',
         'image/jpeg',
         'image/gif',
-        'image/jpg'
+        'image/jpg',
+        'image/webp',
+        'image/x-png',
+        'image/pjpeg'
     );
     if (!in_array($type_file, $ar)) {
         return false;
@@ -4474,6 +4477,7 @@ function Wo_GetMessageButton($user_id = 0) {
 }
 function Wo_MarkupAPI($text, $link = true, $hashtag = true, $mention = true, $post_id = 0) {
     global $sqlConnect;
+    $text = (string)($text ?? '');
     if ($mention == true) {
         $Orginaltext   = $text;
         $mention_regex = '/@\[([0-9]+)\]/i';
@@ -4533,6 +4537,7 @@ function Wo_MarkupAPI($text, $link = true, $hashtag = true, $mention = true, $po
 }
 function Wo_Markup($text, $link = true, $hashtag = true, $mention = true, $post_id = 0, $comment_id = 0, $reply_id = 0) {
     global $sqlConnect;
+    $text = (string)($text ?? '');
     if ($mention == true) {
         $Orginaltext   = $text;
         $mention_regex = '/@\[([0-9]+)\]/i';
@@ -4596,6 +4601,7 @@ function Wo_Markup($text, $link = true, $hashtag = true, $mention = true, $post_
 }
 function Wo_EditMarkup($text, $link = true, $hashtag = true, $mention = true, $post_id = 0, $comment_id = 0, $reply_id = 0) {
     global $sqlConnect;
+    $text = (string)($text ?? '');
     if ($mention == true) {
         $Orginaltext   = $text;
         $mention_regex = '/@\[([0-9]+)\]/i';
@@ -4654,6 +4660,7 @@ function Wo_EditMarkup($text, $link = true, $hashtag = true, $mention = true, $p
 }
 function Wo_Emo($string = '') {
     global $emo, $wo;
+    $string = (string)($string ?? '');
     foreach ($emo as $code => $name) {
         $code   = $code;
         $name   = '<i class="twa-lg twa twa-' . $name . '"></i>';
@@ -4663,6 +4670,7 @@ function Wo_Emo($string = '') {
 }
 function Wo_EmoPhone($string = '') {
     global $emo_full;
+    $string = (string)($string ?? '');
     foreach ($emo_full as $code => $name) {
         $code   = $code;
         $string = str_replace($code, $name, $string);
@@ -4917,7 +4925,7 @@ function Wo_DisplaySharedFile($media, $placement = '', $cache = false, $is_video
         $file_extension = pathinfo($wo['media']['filename'], PATHINFO_EXTENSION);
         $file           = '';
         $media_file     = '';
-        $start_link     = "<a href=" . $wo['media']['filename'] . ">";
+        $start_link     = '<a href="' . $wo['media']['filename'] . '">';
         $end_link       = '</a>';
         $file_extension = strtolower($file_extension);
         if (!empty($cache)) {
@@ -4971,7 +4979,11 @@ function Wo_DisplaySharedFile($media, $placement = '', $cache = false, $is_video
             } else {
                 $t_users    = T_USERS;
                 $lats_ad_id = (!empty($_GET['ad_id']) && is_numeric($_GET['ad_id'])) ? $_GET['ad_id'] : false;
-                $con_list   = implode(',', $wo['ad-con']['ads']);
+                $ad_con_ads = array();
+                if (!empty($wo['ad-con']['ads']) && is_array($wo['ad-con']['ads'])) {
+                    $ad_con_ads = $wo['ad-con']['ads'];
+                }
+                $con_list   = implode(',', $ad_con_ads);
                 if ($con_list) {
                     $db->where(" `id` NOT IN ({$con_list}) ");
                 }

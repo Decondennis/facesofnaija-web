@@ -1,5 +1,6 @@
 <?php
 if ($f == 'register') {
+    try {
     if (!empty($_SESSION['user_id'])) {
         $_SESSION['user_id'] = '';
         unset($_SESSION['user_id']);
@@ -262,4 +263,12 @@ if ($f == 'register') {
         echo json_encode($data);
     }
     exit();
+    } catch (Throwable $e) {
+        error_log('REGISTER_FATAL: ' . $e->getMessage() . ' @ ' . $e->getFile() . ':' . $e->getLine());
+        header("Content-type: application/json");
+        echo json_encode(array(
+            'errors' => $error_icon . ' Registration failed. Please try again.'
+        ));
+        exit();
+    }
 }

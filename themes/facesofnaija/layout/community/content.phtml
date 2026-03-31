@@ -1,4 +1,5 @@
 <?php 
+	$can_update_community_media = Wo_IsCanCommunityUpdate($wo['community_profile']['id'], 'avatar') || Wo_IsCommunityUserExists($wo['user']['user_id'], $wo['community_profile']['id']);
 	$show_list = false;
 	if ($wo['community_profile']['privacy'] == 1) {
 		$show_list = true;
@@ -19,12 +20,29 @@
 	if($wo['community_profile']['parent_id'] > 0) {
 		$parent_data = Wo_CommunityData($wo['community_profile']['parent_id']);
 	}
+
+	$community_members = Wo_GetCommunityMembers($wo['community_profile']['id']);
+	if (!is_array($community_members)) {
+		$community_members = array();
+	}
+	$pinedstory = Wo_GetPinnedPost($wo['community_profile']['id'], 'community');
+	if (!is_array($pinedstory)) {
+		$pinedstory = array();
+	}
+	$stories = Wo_GetPosts(array('filter_by' => 'all', 'community_id' => $wo['community_profile']['id'],'placement' => 'multi_image_post'));
+	if (!is_array($stories)) {
+		$stories = array();
+	}
+	$communities = Wo_CommunitySug(5);
+	if (!is_array($communities)) {
+		$communities = array();
+	}
 ?>
 <div class="row page-margin wo_group_profile" data-page="community" data-id="<?php echo $wo['community_profile']['id'];?>">
 	<div class="profile-container">
 		<div class="card hovercard">
 			<div class="cardheader user-cover">
-				<?php if(Wo_IsAdmin() === true || Wo_IsModerator() === true) { ?>
+				<?php if ($can_update_community_media) { ?>
 					<form action="#" method="post" class="profile-cover-changer">
 						<div class="input-group">
 							<span class="input-group-btn profile_cover">
@@ -54,7 +72,7 @@
 							</div>
 						</div>
 						<img id="community-avatar-image" alt="<?php echo $wo['community_profile']['name']?> Profile Picture" src="<?php echo $wo['community_profile']['avatar']?>"/>
-						<?php if(Wo_IsAdmin() === true || Wo_IsModerator() === true) { ?>
+						<?php if ($can_update_community_media) { ?>
 							<form action="#" method="post" class="profile-avatar-changer">
 								<div class="input-group profile_avatar">
 									<span class="input-group-btn">
@@ -80,7 +98,7 @@
 						<span class="user-follow-button group-join-btn">
 							<?php //echo Wo_GetCommunityJoinButton($wo['community_profile']['id']);?>
 						</span>
-						<?php if (Wo_IsAdmin() || Wo_IsModerator()) { ?>
+						<?php if ($can_update_community_media) { ?>
 							<a href="<?php echo Wo_SeoLink('index.php?link1=community-setting&community=' .  $wo['community_profile']['community_name']); ?>" data-ajax="?link1=community-setting&community=<?php echo $wo['community_profile']['community_name'];?>" class="btn btn-default"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg> <?php echo $wo['lang']['edit']; ?></a>
 						<?php } ?>
 					</div>
@@ -109,7 +127,7 @@
 					if (Wo_CountCommunityMembers($wo['community_profile']['id']) == 0) {
 						echo '<h5 class="search-filter-center-text empty_state"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>' . $wo['lang']['no_members_found'] . '</h5>';
 					} else {
-					foreach (Wo_GetCommunityMembers($wo['community_profile']['id']) as $wo['UsersList']) {
+					foreach ($community_members as $wo['UsersList']) {
 						echo Wo_LoadPage('timeline/follow-list');
 					}
 					}
@@ -131,7 +149,7 @@
 					if (Wo_CountCommunityMembers($wo['community_profile']['id']) == 0) {
 						echo '<h5 class="search-filter-center-text empty_state"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>' . $wo['lang']['added_all_friends_to_community'] . '</h5>';
 					} else {
-					foreach (Wo_GetCommunityMembers($wo['community_profile']['id']) as $wo['UsersList']) {
+					foreach ($community_members as $wo['UsersList']) {
 						echo Wo_LoadPage('community/add-list');
 					}
 					}
@@ -148,7 +166,6 @@
 		<div id="posts" data-story-community="<?php echo $wo['community_profile']['id'];?>">
 			<div class="pinned-post-container">
 				<?php
-					$pinedstory = Wo_GetPinnedPost($wo['community_profile']['id'], 'community');
 					if (count($pinedstory) == 1) {
 					foreach ($pinedstory  as $wo['story']) {
 					echo Wo_LoadPage('story/content');
@@ -157,7 +174,6 @@
 				?>
 			</div>
 			<?php
-				$stories = Wo_GetPosts(array('filter_by' => 'all', 'community_id' => $wo['community_profile']['id'],'placement' => 'multi_image_post')); 
 				if (count($stories) == 0 && count($pinedstory) == 0) {
 				echo Wo_LoadPage('story/community-no-stories');
 				} else {
@@ -281,7 +297,6 @@
 		
 		<?php if($wo['loggedin'] == true) {  ?>
 		<?php
-			$communities = Wo_CommunitySug(5);
 			if (count($communities) > 0) {
 		?>
 			<ul class="page-margin wow_content negg_padd list-unstyled event-options-list right_user_info" id="sidebar-group-list-container">

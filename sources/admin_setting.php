@@ -3703,6 +3703,48 @@ if ($f == 'admin_setting' AND (Wo_IsAdmin() || Wo_IsModerator())) {
         echo json_encode($data);
         exit();
     }
+    if ($s == 'approve_community' && isset($_GET['community_id'])) {
+        $community_id = Wo_Secure($_GET['community_id']);
+        $community    = Wo_CommunityData($community_id);
+        if (!empty($community)) {
+            $was_pending = (isset($community['active']) && $community['active'] == '0');
+            if (Wo_UpdateCommunityData($community_id, array('active' => '1')) === true) {
+                $recipient_id = 0;
+                $community_moderators_table = defined('T_COMMUNITY_MODERATORS') ? T_COMMUNITY_MODERATORS : 'Wo_Community_Moderators';
+                $community_members_table    = defined('T_COMMUNITY_MEMBERS') ? T_COMMUNITY_MEMBERS : 'Wo_Community_Members';
+                if ($was_pending) {
+                    $owner_query = mysqli_query($sqlConnect, "SELECT `user_id` FROM " . $community_moderators_table . " WHERE `community_id` = {$community_id} ORDER BY `id` ASC LIMIT 1");
+                    if ($owner_query && mysqli_num_rows($owner_query) > 0) {
+                        $owner_row    = mysqli_fetch_assoc($owner_query);
+                        $recipient_id = (int) $owner_row['user_id'];
+                    }
+                    if (empty($recipient_id)) {
+                        $member_query = mysqli_query($sqlConnect, "SELECT `user_id` FROM " . $community_members_table . " WHERE `community_id` = {$community_id} ORDER BY `id` ASC LIMIT 1");
+                        if ($member_query && mysqli_num_rows($member_query) > 0) {
+                            $member_row   = mysqli_fetch_assoc($member_query);
+                            $recipient_id = (int) $member_row['user_id'];
+                        }
+                    }
+                }
+                if ($was_pending && !empty($recipient_id)) {
+                    $community_approved_lang = (!empty($wo['lang']['community_approved'])) ? $wo['lang']['community_approved'] : 'approved your community "{community_name}"';
+                    $community_display_name  = !empty($community['name']) ? $community['name'] : (!empty($community['community_name']) ? $community['community_name'] : 'Community');
+                    $notification_data_array = array(
+                        'recipient_id' => $recipient_id,
+                        'type' => 'admin_notification',
+                        'url' => 'index.php?link1=timeline&u=' . $community['community_name'],
+                        'text' => $community_display_name,
+                        'type2' => 'approve_community'
+                    );
+                    Wo_RegisterNotification($notification_data_array);
+                }
+                $data['status'] = 200;
+            }
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
     if ($s == 'delete_community' && isset($_GET['community_id'])) { //added this
         if (Wo_DeleteCommunity($_GET['community_id']) === true) {
             $data['status'] = 200;
