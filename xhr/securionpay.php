@@ -44,8 +44,8 @@ if ($f == "securionpay") {
 	        $curl = curl_init($url);
 	        curl_setopt($curl, CURLOPT_URL, $url);
 	        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-	        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+	        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 	        curl_setopt($curl, CURLOPT_USERPWD, $wo['config']['securionpay_secret_key'].":password");
 	        $resp = curl_exec($curl);
 	        curl_close($curl);

@@ -5453,8 +5453,8 @@ function Wo_SendSMSMessage($to, $message) {
             CURLOPT_POSTFIELDS => $postData
         ));
         //Ignore SSL certificate verification
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         //get response
         $output = curl_exec($ch);
         //Print error if any

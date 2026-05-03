@@ -70,7 +70,7 @@ if (isset($_GET["theme"]) && in_array($_GET["theme"], array(
 if (isset($_SESSION["theme"]) && !empty($_SESSION["theme"])) {
     $config["theme"] = $_SESSION["theme"];
     if ($_SERVER["REQUEST_URI"] == "/v2/wonderful" || $_SERVER["REQUEST_URI"] == "/v2/wowonder") {
-        header("Location: " . $_SERVER["HTTP_REFERER"]);
+        header("Location: " . $config["site_url"]);
     }
 }
 $http_scheme = (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== 'off') ? 'https://' : 'http://';

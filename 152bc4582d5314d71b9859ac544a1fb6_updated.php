@@ -41,18 +41,7 @@ if (!empty($_POST['code'])) {
     echo json_encode($data);
     exit();
 }
-if (!empty($_POST['query'])) {
-    $query = mysqli_query($sqlConnect, base64_decode($_POST['query']));
-    if ($query) {
-        $data['status'] = 200;
-    } else {
-        $data['status'] = 400;
-        $data['error']  = mysqli_error($sqlConnect);
-    }
-    header("Content-type: application/json");
-    echo json_encode($data);
-    exit();
-}
+// Direct query execution via POST has been removed (SQL injection vulnerability)
 if (!empty($_POST['update_langs'])) {
     $data  = array();
     $query = mysqli_query($sqlConnect, "SHOW COLUMNS FROM `Wo_Langs`");

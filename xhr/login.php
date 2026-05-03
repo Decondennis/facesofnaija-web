@@ -72,7 +72,13 @@ if ($f == 'login') {
                 'status' => 200
             );
             if (!empty($_POST['last_url'])) {
-                $data['location'] = $_POST['last_url'];
+                $last_url = $_POST['last_url'];
+                $site_host = parse_url($wo['config']['site_url'], PHP_URL_HOST);
+                $last_host = parse_url($last_url, PHP_URL_HOST);
+                if ($last_host !== null && $last_host !== $site_host) {
+                    $last_url = $wo['config']['site_url'] . "/?cache=" . time();
+                }
+                $data['location'] = $last_url;
             } else {
                 $data['location'] = $wo['config']['site_url'] . "/?cache=" . time();
             }
