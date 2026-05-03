@@ -75,7 +75,7 @@ if ($f == 'login') {
                 $last_url = $_POST['last_url'];
                 $site_host = parse_url($wo['config']['site_url'], PHP_URL_HOST);
                 $last_host = parse_url($last_url, PHP_URL_HOST);
-                if ($last_host !== null && $last_host !== $site_host) {
+                if ($last_host === null || $last_host !== $site_host) {
                     $last_url = $wo['config']['site_url'] . "/?cache=" . time();
                 }
                 $data['location'] = $last_url;
