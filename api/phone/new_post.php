@@ -417,8 +417,17 @@ if ($type == 'new_post') {
                 if (!empty($_POST['answer']) && array_filter($_POST['answer'])) {
                     $is_option = true;
                 }
+
+                $community_id = 0;
+                if (!empty($_POST['community_id']) && is_numeric($_POST['community_id'])) {
+                    $community_id = (int) $_POST['community_id'];
+                } else if (!empty($wo['user']['community_id']) && is_numeric($wo['user']['community_id'])) {
+                    $community_id = (int) $wo['user']['community_id'];
+                }
+
                 $post_data = array(
                     'user_id' => Wo_Secure($user_id),
+                    'community_id' => Wo_Secure($community_id),
                     'page_id' => Wo_Secure($page_id),
                     'event_id' => Wo_Secure($event_id),
                     'group_id' => Wo_Secure($group_id),

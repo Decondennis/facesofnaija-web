@@ -6345,24 +6345,37 @@ function Wo_GetFriendsStatus($data_array = array('limit' => 8, 'user_id' => 0, '
     }
     $data     = array();
     $user_id  = Wo_Secure($data_array['user_id']);
-    $group_by = "GROUP BY user_id";
-    if (!empty($data_array['api'])) {
-        $group_by = "";
-    }
     $offset_query = "";
     if (!empty($data_array['offset'])) {
         $offset       = Wo_Secure($data_array['offset']);
         $offset_query = " AND `id` < $offset ";
     }
-    // $query     = "SELECT * FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $group_by ORDER BY id DESC";
-    $query     = "SELECT DISTINCT user_id,ANY_VALUE(title) AS title,ANY_VALUE(description) AS description,ANY_VALUE(posted) AS posted,ANY_VALUE(expire) AS expire,ANY_VALUE(thumbnail) AS thumbnail,(SELECT MAX(us.id) FROM " . T_USER_STORY . " us WHERE us.user_id = " . T_USER_STORY . ".user_id) AS id  FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $offset_query $group_by ORDER BY id DESC LIMIT " . $data_array['limit'];
+    $query     = "SELECT s.user_id, s.title, s.description, s.posted, s.expire, s.thumbnail, s.id
+                  FROM " . T_USER_STORY . " s
+                  INNER JOIN (
+                      SELECT us.user_id, MAX(us.id) AS last_id
+                      FROM " . T_USER_STORY . " us
+                      WHERE (us.user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR us.user_id = $user_id)
+                        AND us.user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1')
+                        $offset_query
+                      GROUP BY us.user_id
+                  ) latest ON latest.last_id = s.id
+                  ORDER BY s.id DESC
+                  LIMIT " . $data_array['limit'];
    
     $query_run = mysqli_query($sqlConnect, $query);
+    if (!$query_run) {
+        return $data;
+    }
     while ($fetched_data = mysqli_fetch_assoc($query_run)) {
         $story_images              = Wo_GetStoryMedia($fetched_data['id'], 'image');
         $fetched_data['user_data'] = Wo_UserData($fetched_data['user_id']);
+        if (empty($fetched_data['user_data']) || empty($fetched_data['user_data']['user_id'])) {
+            continue;
+        }
+        $default_avatar = !empty($fetched_data['user_data']['avatar']) ? $fetched_data['user_data']['avatar'] : $fetched_data['user_data']['avatar_org'];
         if (empty($fetched_data['thumbnail'])) {
-            $fetched_data['thumb']['filename'] = $fetched_data['user_data']['avatar_org'];
+            $fetched_data['thumb']['filename'] = $default_avatar;
         } else {
             $fetched_data['thumb']             = array();
             $fetched_data['thumb']['filename'] = $fetched_data['thumbnail'];
@@ -6384,23 +6397,36 @@ function Wo_GetFriendsStatusAPI($data_array = array('limit' => 8, 'user_id' => 0
     }
     $data     = array();
     $user_id  = Wo_Secure($data_array['user_id']);
-    $group_by = "GROUP BY user_id";
-    if (!empty($data_array['api'])) {
-        $group_by = "";
-    }
     $offset_query = "";
     if (!empty($data_array['offset'])) {
         $offset       = Wo_Secure($data_array['offset']);
-        $offset_query = " AND `user_id` < $offset ";
+        $offset_query = " AND `id` < $offset ";
     }
-    // $query     = "SELECT * FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $group_by ORDER BY id DESC";
-    $query     = "SELECT DISTINCT user_id,title,description,posted,expire,thumbnail,(SELECT MAX(us.id) FROM " . T_USER_STORY . " us WHERE us.user_id = " . T_USER_STORY . ".user_id) AS id  FROM " . T_USER_STORY . " WHERE (user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR user_id = $user_id) AND user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1') $offset_query $group_by ORDER BY user_id DESC LIMIT " . $data_array['limit'];
+    $query     = "SELECT s.user_id, s.title, s.description, s.posted, s.expire, s.thumbnail, s.id
+                  FROM " . T_USER_STORY . " s
+                  INNER JOIN (
+                      SELECT us.user_id, MAX(us.id) AS last_id
+                      FROM " . T_USER_STORY . " us
+                      WHERE (us.user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR us.user_id = $user_id)
+                        AND us.user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1')
+                        $offset_query
+                      GROUP BY us.user_id
+                  ) latest ON latest.last_id = s.id
+                  ORDER BY s.id DESC
+                  LIMIT " . $data_array['limit'];
     $query_run = mysqli_query($sqlConnect, $query);
+    if (!$query_run) {
+        return $data;
+    }
     while ($fetched_data = mysqli_fetch_assoc($query_run)) {
         $story_images              = Wo_GetStoryMedia($fetched_data['id'], 'image');
         $fetched_data['user_data'] = Wo_UserData($fetched_data['user_id']);
+        if (empty($fetched_data['user_data']) || empty($fetched_data['user_data']['user_id'])) {
+            continue;
+        }
+        $default_avatar = !empty($fetched_data['user_data']['avatar']) ? $fetched_data['user_data']['avatar'] : $fetched_data['user_data']['avatar_org'];
         if (empty($fetched_data['thumbnail'])) {
-            $fetched_data['thumb']['filename'] = $fetched_data['user_data']['avatar_org'];
+            $fetched_data['thumb']['filename'] = $default_avatar;
         } else {
             $fetched_data['thumb']             = array();
             $fetched_data['thumb']['filename'] = $fetched_data['thumbnail'];

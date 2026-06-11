@@ -2464,7 +2464,7 @@ function Wo_GetMutualFriends($user_id, $type = '', $limit = '', $after_user_id =
     $user_id        = Wo_Secure($user_id);
     $after_user_id  = Wo_Secure($after_user_id);
     $logged_user_id = Wo_Secure($wo['user']['user_id']);
-    $query          = "SELECT f1.*
+    $query          = "SELECT f1.following_id
 FROM " . T_FOLLOWERS . " f1 INNER JOIN " . T_FOLLOWERS . " f2
   ON f1.following_id = f2.following_id
 WHERE f1.follower_id = {$user_id}
@@ -2491,7 +2491,7 @@ WHERE f1.follower_id = {$user_id}
         }
     }
     $sql_query = mysqli_query($sqlConnect, $query);
-    if (mysqli_num_rows($sql_query)) {
+    if ($sql_query !== false && mysqli_num_rows($sql_query)) {
         while ($fetched_data = mysqli_fetch_assoc($sql_query)) {
             $user_data = Wo_UserData($fetched_data['following_id'], false);
             $data[]    = $user_data;
@@ -5457,6 +5457,7 @@ function Wo_RegisterPost($re_data = array('recipient_id' => 0)) {
         }
         return $post_id;
     }
+
 }
 function Wo_GetHashtag($tag = '', $type = true) {
     global $sqlConnect;
