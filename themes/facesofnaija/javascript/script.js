@@ -614,7 +614,10 @@ function Wo_GetNewPosts() {
 function Wo_GetMorePosts() {
   var more_posts = $('#load-more-posts');
   var filter_by_more = $('#load-more-filter').find('.filter-by-more').attr('data-filter-by');
-  var after_post_id = $('div.post:last').attr('data-post-id');
+  var after_post_id = $('#posts .post-container > .post:not(.boosted):last').attr('data-post-id');
+  if (typeof after_post_id === 'undefined' || after_post_id === null) {
+    after_post_id = $('div.post:last').attr('data-post-id');
+  }
   var page_id = 0;
   var user_id = 0;
   var group_id = 0;

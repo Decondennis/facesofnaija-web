@@ -23,10 +23,10 @@ if ($_detected_host === '172.236.19.52') {
     $sql_db_name = "facesofnaija";
 } else {
     // Local development
-    $site_url    = "http://localhost/facesofnaija-web";
+    $site_url    = "http://localhost:8080";
     $sql_db_host = "localhost";
-    $sql_db_user = "facesofnaija_user";
-    $sql_db_pass = "facesofnaija_pass123";
+    $sql_db_user = "root";
+    $sql_db_pass = "";
     $sql_db_name = "facesofnaija";
 }
 
@@ -37,8 +37,8 @@ $purchase_code = "330ec2fb-f1e5-4229-b7d4-866894cff196";
 // DEVELOPMENT MODE (Enable errors for debugging)
 // ==========================================================================
 if (strpos($site_url, 'localhost') !== false) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED);
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
 }
 ?>

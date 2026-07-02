@@ -1112,7 +1112,7 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
             include('sources/banned.php');
             break;
         case 'home':
-            include('sources/banned.php');
+            include('sources/home.php');
             break;
         default:
             include('sources/banned.php');

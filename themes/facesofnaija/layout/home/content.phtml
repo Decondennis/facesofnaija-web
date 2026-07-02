@@ -2,10 +2,10 @@
 	<div class="row">
 		<div class="col-md-2 leftcol"><?php if($wo['loggedin']){echo Wo_LoadPage("sidebar/left-sidebar"); }elseif($wo['config']['directory_system']){ ?><div class="post_prnt"><?php echo Wo_LoadPage("directory/left-sidebar"); ?></div><?php } ?></div>
 		<div class="col-md-7 middlecol">
-			<?php if ($wo['config']['user_status'] == 1 && $wo['loggedin']) { ?>
+			<?php if ($wo['loggedin']) { ?>
 				<div class="user-status-home wow_home_stories">
 					<ul class="status-list">
-						<?php if ($wo['config']['can_use_story']) { ?>
+						<?php if ($wo['loggedin']) { ?>
 						<li class="create_new">
 							<a href="<?php echo Wo_SeoLink('index.php?link1=create-status'); ?>" data-ajax="?link1=create-status">
 								<img src="<?php echo $wo['user']['avatar'];?>" alt="<?php echo $wo['user']['name'];?>">
@@ -14,14 +14,15 @@
 						</li>
 					  <?php } ?>
 						<?php
+							$get_user_status = array();
 							if ($wo['config']['user_status'] == 1) {
 								$get_user_status = Wo_GetFriendsStatus(array('limit' => 4));
-								if (!empty($get_user_status)) {
+							}
+							if (!empty($get_user_status)) {
 						?>
 						<?php
 							foreach ($get_user_status as $key => $wo['user_status']) {
 								echo Wo_LoadPage('home/user-status');
-							}
 							}
 						?>
 						<?php } ?>

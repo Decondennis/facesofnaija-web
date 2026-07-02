@@ -607,7 +607,7 @@ $(document).on('click', '#night_mode_toggle', function(event) {
   $.post(Wo_Ajax_Requests_File() + '?mode=' + mode);
 });
 
-$(document).on('click', '#share_post_on_btn', function(event) {
+$(document).off('click.sharePostOn', '#share_post_on_btn').on('click.sharePostOn', '#share_post_on_btn', function(event) {
   text = $('#share_post_text').val();
   type = $('#SearchForInputType').val();
   post_id = $('#SearchForInputPostId').val();
@@ -632,7 +632,8 @@ $(document).on('click', '#share_post_on_btn', function(event) {
 
         setTimeout(function () {
           $('#share_post_modal').modal('hide');
-        },2000);
+          window.location.reload();
+        },700);
       }
       else{
         $('.share_post_modal_alert').html("<div class='alert alert-danger'><?php echo($wo['lang']['cant_share_own']) ?></div>");

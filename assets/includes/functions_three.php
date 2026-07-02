@@ -6350,13 +6350,15 @@ function Wo_GetFriendsStatus($data_array = array('limit' => 8, 'user_id' => 0, '
         $offset       = Wo_Secure($data_array['offset']);
         $offset_query = " AND `id` < $offset ";
     }
-    $query     = "SELECT s.user_id, s.title, s.description, s.posted, s.expire, s.thumbnail, s.id
+        $current_time = time();
+        $query     = "SELECT s.user_id, s.title, s.description, s.posted, s.expire, s.thumbnail, s.id
                   FROM " . T_USER_STORY . " s
                   INNER JOIN (
                       SELECT us.user_id, MAX(us.id) AS last_id
                       FROM " . T_USER_STORY . " us
                       WHERE (us.user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR us.user_id = $user_id)
                         AND us.user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1')
+                                                AND CAST(us.expire AS UNSIGNED) > $current_time
                         $offset_query
                       GROUP BY us.user_id
                   ) latest ON latest.last_id = s.id
@@ -6369,22 +6371,66 @@ function Wo_GetFriendsStatus($data_array = array('limit' => 8, 'user_id' => 0, '
     }
     while ($fetched_data = mysqli_fetch_assoc($query_run)) {
         $story_images              = Wo_GetStoryMedia($fetched_data['id'], 'image');
+        $story_videos              = Wo_GetStoryMedia($fetched_data['id'], 'video');
         $fetched_data['user_data'] = Wo_UserData($fetched_data['user_id']);
         if (empty($fetched_data['user_data']) || empty($fetched_data['user_data']['user_id'])) {
             continue;
         }
         $default_avatar = !empty($fetched_data['user_data']['avatar']) ? $fetched_data['user_data']['avatar'] : $fetched_data['user_data']['avatar_org'];
-        if (empty($fetched_data['thumbnail'])) {
-            $fetched_data['thumb']['filename'] = $default_avatar;
-        } else {
+        if (!empty($fetched_data['thumbnail'])) {
             $fetched_data['thumb']             = array();
             $fetched_data['thumb']['filename'] = $fetched_data['thumbnail'];
+            if (!Wo_IsUrl($fetched_data['thumb']['filename'])) {
+                $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
+            }
+        } else if (!empty($story_images) && !empty($story_images[0]['filename'])) {
+            $fetched_data['thumb']             = array();
+            $fetched_data['thumb']['filename'] = $story_images[0]['filename'];
+        } else {
+            $fetched_data['thumb']             = array();
+            $fetched_data['thumb']['filename'] = $default_avatar;
+            if (!Wo_IsUrl($fetched_data['thumb']['filename'])) {
+                $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
+            }
         }
-        $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
-        $fetched_data['videos']            = Wo_GetStoryMedia($fetched_data['id'], 'video');
+        $fetched_data['videos']            = $story_videos;
         $fetched_data['is_owner']          = ($fetched_data['user_id'] == $wo['user']['id'] || Wo_IsAdmin() || Wo_IsModerator()) ? true : false;
         $data[]                            = $fetched_data;
     }
+
+    if (empty($data)) {
+        $fallback_query = "SELECT id, user_id, title, description, posted, expire, thumbnail FROM " . T_USER_STORY . " WHERE user_id = '$user_id' AND CAST(expire AS UNSIGNED) > $current_time ORDER BY id DESC LIMIT 1";
+        $fallback_run   = mysqli_query($sqlConnect, $fallback_query);
+        if ($fallback_run && mysqli_num_rows($fallback_run) > 0) {
+            $fetched_data = mysqli_fetch_assoc($fallback_run);
+            $story_images = Wo_GetStoryMedia($fetched_data['id'], 'image');
+            $story_videos = Wo_GetStoryMedia($fetched_data['id'], 'video');
+            $fetched_data['user_data'] = Wo_UserData($fetched_data['user_id']);
+            if (!empty($fetched_data['user_data']) && !empty($fetched_data['user_data']['user_id'])) {
+                $default_avatar = !empty($fetched_data['user_data']['avatar']) ? $fetched_data['user_data']['avatar'] : $fetched_data['user_data']['avatar_org'];
+                if (!empty($fetched_data['thumbnail'])) {
+                    $fetched_data['thumb']             = array();
+                    $fetched_data['thumb']['filename'] = $fetched_data['thumbnail'];
+                    if (!Wo_IsUrl($fetched_data['thumb']['filename'])) {
+                        $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
+                    }
+                } else if (!empty($story_images) && !empty($story_images[0]['filename'])) {
+                    $fetched_data['thumb']             = array();
+                    $fetched_data['thumb']['filename'] = $story_images[0]['filename'];
+                } else {
+                    $fetched_data['thumb']             = array();
+                    $fetched_data['thumb']['filename'] = $default_avatar;
+                    if (!Wo_IsUrl($fetched_data['thumb']['filename'])) {
+                        $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
+                    }
+                }
+                $fetched_data['videos']            = $story_videos;
+                $fetched_data['is_owner']          = true;
+                $data[]                            = $fetched_data;
+            }
+        }
+    }
+
     return $data;
 }
 function Wo_GetFriendsStatusAPI($data_array = array('limit' => 8, 'user_id' => 0, 'offset' => 0)) {
@@ -6395,13 +6441,14 @@ function Wo_GetFriendsStatusAPI($data_array = array('limit' => 8, 'user_id' => 0
     if (empty($data_array['user_id'])) {
         $data_array['user_id'] = $wo['user']['user_id'];
     }
-    $data     = array();
-    $user_id  = Wo_Secure($data_array['user_id']);
+    $data         = array();
+    $user_id      = Wo_Secure($data_array['user_id']);
     $offset_query = "";
     if (!empty($data_array['offset'])) {
         $offset       = Wo_Secure($data_array['offset']);
         $offset_query = " AND `id` < $offset ";
     }
+    $current_time = time();
     $query     = "SELECT s.user_id, s.title, s.description, s.posted, s.expire, s.thumbnail, s.id
                   FROM " . T_USER_STORY . " s
                   INNER JOIN (
@@ -6409,6 +6456,7 @@ function Wo_GetFriendsStatusAPI($data_array = array('limit' => 8, 'user_id' => 0
                       FROM " . T_USER_STORY . " us
                       WHERE (us.user_id IN (SELECT following_id FROM " . T_FOLLOWERS . " WHERE follower_id = '$user_id') OR us.user_id = $user_id)
                         AND us.user_id IN (SELECT user_id FROM " . T_USERS . " WHERE active = '1')
+                        AND CAST(us.expire AS UNSIGNED) > $current_time
                         $offset_query
                       GROUP BY us.user_id
                   ) latest ON latest.last_id = s.id
@@ -6420,19 +6468,29 @@ function Wo_GetFriendsStatusAPI($data_array = array('limit' => 8, 'user_id' => 0
     }
     while ($fetched_data = mysqli_fetch_assoc($query_run)) {
         $story_images              = Wo_GetStoryMedia($fetched_data['id'], 'image');
+        $story_videos              = Wo_GetStoryMedia($fetched_data['id'], 'video');
         $fetched_data['user_data'] = Wo_UserData($fetched_data['user_id']);
         if (empty($fetched_data['user_data']) || empty($fetched_data['user_data']['user_id'])) {
             continue;
         }
         $default_avatar = !empty($fetched_data['user_data']['avatar']) ? $fetched_data['user_data']['avatar'] : $fetched_data['user_data']['avatar_org'];
-        if (empty($fetched_data['thumbnail'])) {
-            $fetched_data['thumb']['filename'] = $default_avatar;
-        } else {
+        if (!empty($fetched_data['thumbnail'])) {
             $fetched_data['thumb']             = array();
             $fetched_data['thumb']['filename'] = $fetched_data['thumbnail'];
+            if (!Wo_IsUrl($fetched_data['thumb']['filename'])) {
+                $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
+            }
+        } else if (!empty($story_images) && !empty($story_images[0]['filename'])) {
+            $fetched_data['thumb']             = array();
+            $fetched_data['thumb']['filename'] = $story_images[0]['filename'];
+        } else {
+            $fetched_data['thumb']             = array();
+            $fetched_data['thumb']['filename'] = $default_avatar;
+            if (!Wo_IsUrl($fetched_data['thumb']['filename'])) {
+                $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
+            }
         }
-        $fetched_data['thumb']['filename'] = Wo_GetMedia($fetched_data['thumb']['filename']);
-        $fetched_data['videos']            = Wo_GetStoryMedia($fetched_data['id'], 'video');
+        $fetched_data['videos']            = $story_videos;
         $fetched_data['is_owner']          = ($fetched_data['user_id'] == $wo['user']['id'] || Wo_IsAdmin() || Wo_IsModerator()) ? true : false;
         $data[]                            = $fetched_data;
     }
@@ -6828,12 +6886,25 @@ function Wo_SharePostOn($id = false, $type_id = 0, $type = '') {
     $user      = $wo['user']['id'];
     $time      = time();
     $sql       = '';
+    $source_id = (int) $id;
+    $source_row = mysqli_query($sqlConnect, "SELECT `id`, `parent_id`, `post_id`, `postShare` FROM " . T_POSTS . " WHERE `id` = {$source_id} LIMIT 1");
+    if ($source_row && mysqli_num_rows($source_row) > 0) {
+        $source_data = mysqli_fetch_assoc($source_row);
+        if (!empty($source_data['parent_id'])) {
+            $source_id = (int) $source_data['parent_id'];
+        } else if (!empty($source_data['postShare']) && !empty($source_data['post_id'])) {
+            $source_id = (int) $source_data['post_id'];
+        }
+    }
+    if ($source_id < 1) {
+        return false;
+    }
     // if (Wo_IsPostShared($id)) {
     //     $shared_post = Wo_PostData($id);
     //     $post = mysqli_query($sqlConnect, "SELECT * FROM " . T_POSTS . " WHERE `id` = {$shared_post['parent_id']}");
     //     $post_data = mysqli_fetch_assoc($post);
     // } else {
-    $post      = mysqli_query($sqlConnect, "SELECT * FROM " . T_POSTS . " WHERE `id` = {$id}");
+    $post      = mysqli_query($sqlConnect, "SELECT * FROM " . T_POSTS . " WHERE `id` = {$source_id}");
     $post_data = mysqli_fetch_assoc($post);
     //}
     if ($post) {
@@ -6850,15 +6921,46 @@ function Wo_SharePostOn($id = false, $type_id = 0, $type = '') {
             $post_data['page_id']  = 0;
             $post_data['group_id'] = 0;
         }
+
+        // Guard against duplicate shares when frontend triggers duplicate requests.
+        $dupe_time = $time - 15;
+        $existing  = mysqli_query($sqlConnect, "SELECT `id` FROM " . T_POSTS . " WHERE `parent_id` = {$source_id} AND `user_id` = " . intval($post_data['user_id']) . " AND `page_id` = " . intval($post_data['page_id']) . " AND `group_id` = " . intval($post_data['group_id']) . " AND `time` >= {$dupe_time} ORDER BY `id` DESC LIMIT 1");
+        if ($existing && mysqli_num_rows($existing) > 0) {
+            $existing_row = mysqli_fetch_assoc($existing);
+            if (!empty($existing_row['id'])) {
+                return (int) $existing_row['id'];
+            }
+        }
+
         $post_data['id']              = 0;
         $post_data['post_id']         = 0;
-        $post_data['post_url']        = Wo_SeoLink('index.php?link1=post&id=' . $id);
-        $post_data['parent_id']       = $id;
+        $post_data['post_url']        = Wo_SeoLink('index.php?link1=post&id=' . $source_id);
+        $post_data['parent_id']       = $source_id;
         $post_data['boosted']         = 0;
         $post_data['time']            = time();
         $post_data['postText']        = '';
         $post_data['postType']        = '';
         $post_data['comments_status'] = 1;
+        // Shared rows should not keep source media fields; parent post renders media.
+        $post_data['postFile']        = '';
+        $post_data['postFileName']    = '';
+        $post_data['postFileThumb']   = '';
+        $post_data['postPhoto']       = '';
+        $post_data['postRecord']      = '';
+        $post_data['postSticker']     = '';
+        $post_data['album_name']      = '';
+        $post_data['multi_image']     = 0;
+        $post_data['multi_image_post']= 0;
+        $post_data['postLink']        = '';
+        $post_data['postLinkTitle']   = '';
+        $post_data['postLinkImage']   = '';
+        $post_data['postLinkContent'] = '';
+        $post_data['postVine']        = '';
+        $post_data['postSoundCloud']  = '';
+        $post_data['postYoutube']     = '';
+        $post_data['postPlaytube']    = '';
+        $post_data['postDeepsound']   = '';
+        $post_data['postMap']         = '';
         // $post_data['stream_name']    = '';
         // $post_data['live_time']    = 0;
         $fields                       = '`' . implode('`, `', array_keys($post_data)) . '`';
@@ -6867,7 +6969,7 @@ function Wo_SharePostOn($id = false, $type_id = 0, $type = '') {
         $query1                       = mysqli_query($sqlConnect, $sql);
         $last                         = mysqli_insert_id($sqlConnect);
         if (!empty($post_data['album_name'])) {
-            $query = mysqli_query($sqlConnect, "SELECT `id`,`image`,`post_id` FROM " . T_ALBUMS_MEDIA . " WHERE `post_id` = {$id} ORDER BY `id` DESC");
+            $query = mysqli_query($sqlConnect, "SELECT `id`,`image`,`post_id` FROM " . T_ALBUMS_MEDIA . " WHERE `post_id` = {$source_id} ORDER BY `id` DESC");
             if (mysqli_num_rows($query)) {
                 while ($fetched_data = mysqli_fetch_assoc($query)) {
                     $media = $fetched_data['image'];
