@@ -69,6 +69,48 @@ if (!empty($_POST['type']) && in_array($_POST['type'], $required_fields)) {
             	$postsData['filter_by'] = Wo_Secure($_POST['post_type']);
             }
 			$posts = Wo_GetPosts($postsData);
+			if (empty($after_post_id) || empty($posts)) {
+				$latest_feed = Wo_GetPosts(array(
+					'limit' => 1,
+					'publisher_id' => 0,
+					'after_post_id' => 0,
+					'placement' => 'multi_image_post',
+					'anonymous' => true
+				));
+				if (!empty($latest_feed) && !empty($latest_feed[0]['id'])) {
+					$latest_feed_id = (int) $latest_feed[0]['id'];
+					$latest_exists  = false;
+					foreach ($posts as $feed_post) {
+						if (!empty($feed_post['id']) && (int) $feed_post['id'] === $latest_feed_id) {
+							$latest_exists = true;
+							break;
+						}
+					}
+					if ($latest_exists == false) {
+						array_unshift($posts, $latest_feed[0]);
+					}
+				}
+
+				$my_latest = Wo_GetPosts(array(
+					'limit' => 1,
+					'publisher_id' => $wo['user']['user_id'],
+					'placement' => 'multi_image_post',
+					'anonymous' => true
+				));
+				if (!empty($my_latest) && !empty($my_latest[0]['id'])) {
+					$my_post_id = (int) $my_latest[0]['id'];
+					$exists_in_feed = false;
+					foreach ($posts as $feed_post) {
+						if (!empty($feed_post['id']) && (int) $feed_post['id'] === $my_post_id) {
+							$exists_in_feed = true;
+							break;
+						}
+					}
+					if ($exists_in_feed == false) {
+						array_unshift($posts, $my_latest[0]);
+					}
+				}
+			}
 			foreach ($posts as $key => $value) {
 				$posts[$key]['shared_info'] = null;
 
@@ -350,6 +392,25 @@ if (!empty($_POST['type']) && in_array($_POST['type'], $required_fields)) {
                 'placement' => 'multi_image_post'
             );
 			$posts = Wo_GetPosts($postsData);
+			$latest_community_post = Wo_GetPosts(array(
+				'limit' => 1,
+				'community_id' => $community_id,
+				'after_post_id' => 0,
+				'placement' => 'multi_image_post'
+			));
+			if (!empty($latest_community_post) && !empty($latest_community_post[0]['id'])) {
+				$latest_community_post_id = (int) $latest_community_post[0]['id'];
+				$community_post_exists    = false;
+				foreach ($posts as $community_post) {
+					if (!empty($community_post['id']) && (int) $community_post['id'] === $latest_community_post_id) {
+						$community_post_exists = true;
+						break;
+					}
+				}
+				if ($community_post_exists == false) {
+					array_unshift($posts, $latest_community_post[0]);
+				}
+			}
 			foreach ($posts as $key => $value) {
 				$posts[$key]['shared_info'] = null;
 
@@ -682,7 +743,7 @@ if (!empty($_POST['type']) && in_array($_POST['type'], $required_fields)) {
 	        if (empty($post['user_id'])) {
 	            $user_id = $page['user_id'];
 	        }
-	        if (!empty($post) && !empty($page) && $page['user_id'] == $wo['user']['id']) {
+	        if (!empty($post) && !empty($page) && (Wo_IsPageOnwer($page['page_id']) || Wo_IsAdmin())) {
 	            $result = Wo_SharePostOn($post['id'],$page['id'],'page');
 	            if (!empty($_POST['text'])) {
 		            $updatePost = Wo_UpdatePost(array(
@@ -729,9 +790,9 @@ if (!empty($_POST['type']) && in_array($_POST['type'], $required_fields)) {
 	        $post = Wo_PostData(Wo_Secure($_POST['id']));
 	        $user_id = $post['user_id'];
 	        if (empty($post['user_id'])) {
-	            $user_id = $page['user_id'];
+	            $user_id = $group['user_id'];
 	        }
-	        if (!empty($post) && !empty($group) && $group['user_id'] == $wo['user']['id']) {
+	        if (!empty($post) && !empty($group) && (Wo_IsGroupOnwer($group['id']) || Wo_IsAdmin())) {
 	            $result = Wo_SharePostOn($post['id'],$group['id'],'group');
 	            if (!empty($_POST['text'])) {
 		            $updatePost = Wo_UpdatePost(array(

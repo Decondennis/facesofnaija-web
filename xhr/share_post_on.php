@@ -8,7 +8,7 @@ if ($f == 'share_post_on') {
         $group = Wo_GroupData(Wo_Secure($_GET['type_id']));
         $post = Wo_PostData(Wo_Secure($_GET['post_id']));
         $user_id = $post['user_id'];
-        if (!empty($post) && !empty($group) && $group['user_id'] == $wo['user']['id']) {
+        if (!empty($post) && !empty($group) && (Wo_IsGroupOnwer($group['id']) || Wo_IsAdmin())) {
             $result = Wo_SharePostOn($post['id'],$group['id'],'group');
         }
     }
@@ -19,7 +19,7 @@ if ($f == 'share_post_on') {
         if (empty($post['user_id'])) {
             $user_id = $page['user_id'];
         }
-        if (!empty($post) && !empty($page) && $page['user_id'] == $wo['user']['id']) {
+        if (!empty($post) && !empty($page) && (Wo_IsPageOnwer($page['page_id']) || Wo_IsAdmin())) {
             $result = Wo_SharePostOn($post['id'],$page['id'],'page');
         }
     }
