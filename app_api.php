@@ -29,6 +29,7 @@ if (!empty($_GET['application'])) {
 if (!empty($_GET['type'])) {
     $type = Wo_Secure($_GET['type']);
 }
+@file_put_contents('/tmp/faces_entry.log', date('Y-m-d H:i:s') . " | script=app_api.php | application=" . $application . " | type=" . $type . " | keys=" . implode(',', array_keys($_POST)) . " | ua=" . (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '') . "\n", FILE_APPEND);
 include_once('assets/libraries/twilio/vendor/autoload.php');
 require_once('./api/' . $application . '/core/functions.php');
 require_once('assets/libraries/social-login/config.php');

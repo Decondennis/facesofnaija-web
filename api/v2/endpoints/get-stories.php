@@ -9,6 +9,8 @@
 // | Copyright (c) 2018 WoWonder. All rights reserved.
 // +------------------------------------------------------------------------+
 $stories = array();
+$my_stories = array();
+@file_put_contents('/tmp/faces_trace.log', date('Y-m-d H:i:s') . " | v2/get-stories | keys=" . implode(',', array_keys($_POST)) . "\n", FILE_APPEND);
 
 $options['limit'] = (!empty($_POST['limit'])) ? (int) $_POST['limit'] : 35;
 $options['api'] = true;
@@ -17,7 +19,7 @@ $get_all_stories = Wo_GetFriendsStatus($options);
 
 foreach ($get_all_stories as $key => $one_story) {
     $is_muted = $db->where('user_id',$wo['user']['id'])->where('story_user_id',$one_story['user_id'])->getValue(T_MUTE_STORY,'COUNT(*)');
-    if ($is_muted == 0 && $wo['user']['id'] != $one_story['user_id']) {
+    if ($is_muted == 0) {
         $get_stories = Wo_GetStroies(array('id' => $one_story['id']));
         foreach ($get_stories as $key => $story) {
             foreach ($non_allowed as $key => $value) {
@@ -29,12 +31,18 @@ foreach ($get_all_stories as $key => $one_story) {
             } else {
                 $story['thumbnail'] = $story['user_data']['avatar'];
             }
-            $stories[] = $story;
+            if ($wo['user']['id'] == $one_story['user_id']) {
+                $my_stories[] = $story;
+            } else {
+                $stories[] = $story;
+            }
         }
     } 
 }
 
 $response_data = array(
     'api_status' => 200,
-    'stories' => $stories
+    'stories' => $stories,
+    'my_stories' => $my_stories,
+    'my_story' => (!empty($my_stories[0]) ? $my_stories[0] : array())
 );

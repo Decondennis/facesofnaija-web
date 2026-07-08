@@ -65,7 +65,7 @@ if ($type == 'get_stories') {
             header("Content-type: application/json");
             echo json_encode($json_error_data, JSON_PRETTY_PRINT);
             exit();
-        } else if ($wo['loggedin'] == false) {
+        } else if (Wo_CheckUserSessionID($user_id, $s, 'phone') === false) {
             $json_error_data = array(
                 'api_status' => '400',
                 'api_text' => 'failed',

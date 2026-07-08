@@ -648,7 +648,7 @@ $(document).off('click.sharePostOn', '#share_post_on_btn').on('click.sharePostOn
     });
 });
 
-$(document).on('change', '#share_type_select', function(event) {
+$(document).on('change', 'input[name="share_type_select"]', function(event) {
   var type = $(this).val();
   if (type == 'user') {
     $('.search_for_form').hide(400);

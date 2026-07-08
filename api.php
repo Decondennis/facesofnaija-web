@@ -10,6 +10,7 @@
 // +------------------------------------------------------------------------+
 require_once('assets/init.php');
 $api_version = '1.3.1';
+@file_put_contents('/tmp/faces_entry.log', date('Y-m-d H:i:s') . " | script=api.php | type=" . (!empty($_GET['type']) ? $_GET['type'] : '') . " | keys=" . implode(',', array_keys($_POST)) . " | ua=" . (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '') . "\n", FILE_APPEND);
 if (empty($_GET['type']) || !isset($_GET['type'])) {
     $json_error_data = array(
         'api_status' => 'failed',

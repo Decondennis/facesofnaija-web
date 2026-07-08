@@ -105,6 +105,28 @@ if ($type == 'get_user_posts') {
                 $post_info['filter_by'] = $_POST['filter_by'];
             }
             $stories  = Wo_GetPosts($post_info);
+
+            if ($user_profile_id == $user_id) {
+                $latest_own = Wo_GetPosts(array(
+                    'filter_by' => 'all',
+                    'publisher_id' => $user_id,
+                    'limit' => 1
+                ));
+                if (!empty($latest_own) && !empty($latest_own[0]['id'])) {
+                    $latest_id = (int) $latest_own[0]['id'];
+                    $exists    = false;
+                    foreach ($stories as $existing_story) {
+                        if (!empty($existing_story['id']) && (int) $existing_story['id'] === $latest_id) {
+                            $exists = true;
+                            break;
+                        }
+                    }
+                    if ($exists == false) {
+                        array_unshift($stories, $latest_own[0]);
+                    }
+                }
+            }
+
             $continue = true;
             if (count($stories) == 0) {
                 $continue = false;

@@ -80,7 +80,68 @@ if ($type == 'get_news_list') {
         } else {
             $wo['lang'] = Wo_LangsFromDB($user_login_data['language']);
             $timezone = new DateTimeZone($user_login_data['timezone']);
-            
+
+            $limit = 20;
+            if (!empty($_POST['limit']) && is_numeric($_POST['limit']) && $_POST['limit'] > 0 && $_POST['limit'] <= 50) {
+                $limit = Wo_Secure($_POST['limit']);
+            }
+            $after_post_id = 0;
+            if (!empty($_POST['after_post_id']) && is_numeric($_POST['after_post_id']) && $_POST['after_post_id'] > 0) {
+                $after_post_id = Wo_Secure($_POST['after_post_id']);
+            } else if (!empty($_POST['offset']) && is_numeric($_POST['offset']) && $_POST['offset'] > 0) {
+                $after_post_id = Wo_Secure($_POST['offset']);
+            }
+
+            $posts_data = array(
+                'limit' => $limit,
+                'publisher_id' => 0,
+                'after_post_id' => $after_post_id,
+                'placement' => 'multi_image_post',
+                'anonymous' => true
+            );
+            if (!empty($_POST['post_type']) && in_array($_POST['post_type'], array('photos', 'video', 'music', 'files', 'maps', 'text'))) {
+                $posts_data['filter_by'] = Wo_Secure($_POST['post_type']);
+            }
+
+            $stories = Wo_GetPosts($posts_data);
+
+            if (empty($after_post_id) || empty($stories)) {
+                $latest_feed = Wo_GetPosts(array(
+                    'limit' => 1,
+                    'publisher_id' => 0,
+                    'after_post_id' => 0,
+                    'placement' => 'multi_image_post',
+                    'anonymous' => true
+                ));
+                if (!empty($latest_feed) && !empty($latest_feed[0]['id'])) {
+                    $latest_feed_id = (int) $latest_feed[0]['id'];
+                    $exists_in_feed = false;
+                    foreach ($stories as $feed_post) {
+                        if (!empty($feed_post['id']) && (int) $feed_post['id'] === $latest_feed_id) {
+                            $exists_in_feed = true;
+                            break;
+                        }
+                    }
+                    if ($exists_in_feed == false) {
+                        array_unshift($stories, $latest_feed[0]);
+                    }
+                }
+            }
+
+            foreach ($stories as $story) {
+                foreach ($non_allowed as $value) {
+                    unset($story['publisher'][$value]);
+                }
+                $story['get_post_comments'] = array();
+                if (!empty($story['postFile'])) {
+                    $story['postFile'] = Wo_GetMedia($story['postFile']);
+                }
+                if (!empty($story['postFileThumb'])) {
+                    $story['postFileThumb'] = Wo_GetMedia($story['postFileThumb']);
+                }
+                $story['time_text'] = Wo_Time_Elapsed_String($story['time']);
+                array_push($json_success_data, $story);
+            }
         }
     } else {
         header("Content-type: application/json");
@@ -89,6 +150,12 @@ if ($type == 'get_news_list') {
     }
 }
 header("Content-type: application/json");
-echo json_encode($json_success_data);
+echo json_encode(array(
+    'api_status' => '200',
+    'api_text' => 'success',
+    'api_version' => $api_version,
+    'posts' => $json_success_data,
+    'stories' => $json_success_data
+));
 exit();
 ?>

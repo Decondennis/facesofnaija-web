@@ -9,6 +9,7 @@ $response_data  = array();
 $error_code     = 0;
 $error_message  = '';
 $type           = (!empty($_GET['type'])) ? Wo_Secure($_GET['type'], 0) : false;
+@file_put_contents('/tmp/faces_entry.log', date('Y-m-d H:i:s') . " | script=api-v2.php | type=" . (!empty($_GET['type']) ? $_GET['type'] : '') . " | keys=" . implode(',', array_keys($_POST)) . " | ua=" . (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '') . "\n", FILE_APPEND);
 // DEBUG: Log and bypass server key validation
 $server_key = (!empty($_POST['server_key'])) ? Wo_Secure($_POST['server_key'], 0) : 'dev_bypass';
 
