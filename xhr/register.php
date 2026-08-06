@@ -78,6 +78,15 @@ if ($f == 'register') {
         if ($_POST['password'] != $_POST['confirm_password']) {
             $errors = $error_icon . $wo['lang']['password_mismatch'];
         }
+        if (empty($_POST['birthday'])) {
+            $errors = $error_icon . $wo['lang']['birthday'] . ' is required';
+        } else {
+            $birthday_valid = preg_match('@^\s*(3[01]|[12][0-9]|0?[1-9])\-(1[012]|0?[1-9])\-((?:19|20)\d{2})\s*$@', $_POST['birthday'])
+                           || preg_match('@^\s*((?:19|20)\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])\s*$@', $_POST['birthday']);
+            if (!$birthday_valid) {
+                $errors = $error_icon . $wo['lang']['please_choose_correct_date'];
+            }
+        }
         if ($config['reCaptcha'] == 1) {
             if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
                 $errors = $error_icon . $wo['lang']['reCaptcha_error'];
@@ -114,6 +123,14 @@ if ($f == 'register') {
         }
         $activate = ($wo['config']['emailValidation'] == '1') ? '0' : '1';
         $code     = md5(rand(1111, 9999) . time());
+        $birthday = '0000-00-00';
+        if (!empty($_POST['birthday'])) {
+            if (preg_match('@^\s*(3[01]|[12][0-9]|0?[1-9])\-(1[012]|0?[1-9])\-((?:19|20)\d{2})\s*$@', $_POST['birthday'])) {
+                $birthday = date("Y-m-d", strtotime($_POST['birthday']));
+            } elseif (preg_match('@^\s*((?:19|20)\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])\s*$@', $_POST['birthday'])) {
+                $birthday = trim($_POST['birthday']);
+            }
+        }
         $re_data  = array(
             'email' => Wo_Secure($_POST['email'], 0),
             'username' => Wo_Secure($_POST['username'], 0),
@@ -123,7 +140,7 @@ if ($f == 'register') {
             'gender' => Wo_Secure($gender),
             'lastseen' => time(),
             'active' => Wo_Secure($activate),
-            'birthday' => '0000-00-00'
+            'birthday' => Wo_Secure($birthday)
         );
         if ($wo['config']['website_mode'] == 'linkedin' && !empty($_POST['currently_working']) && in_array($_POST['currently_working'], array(
             'yes',

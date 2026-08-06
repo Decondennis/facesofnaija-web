@@ -231,11 +231,22 @@ $(function() {
         	window.location.href = data.location;
         }, 1000);
       } else {
-        var errors = data.errors.join("<br>");
+        var errors = (data && data.errors) ? data.errors : 'Login failed, please try again';
+        if (typeof errors !== 'string') {
+          errors = errors.join("<br>");
+        }
 		$this.find('button').attr("disabled", false);
 		$this.find('.add_wow_loader').removeClass('btn-loading');
+        $state.removeClass('alert-success').addClass('alert-danger');
         $state.html(errors);
       }
+      working = false;
+    },
+    error: function(xhr, status, error) {
+      $this.find('button').attr("disabled", false);
+      $this.find('.add_wow_loader').removeClass('btn-loading');
+      $state.removeClass('alert-success').addClass('alert-danger');
+      $state.html('Login failed. Please check your connection and try again.');
       working = false;
     }
   });

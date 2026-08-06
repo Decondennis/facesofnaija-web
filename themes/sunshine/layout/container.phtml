@@ -266,11 +266,11 @@
       <script type="text/javascript">
          <?php echo $wo['config']['header_cc']; ?>
          function Wo_Ajax_Requests_File(){
-            return "<?php echo $wo['config']['site_url'].'/requests.php';?>"
+            return "/requests.php"
          }
          <?php if ($wo['config']['smooth_loading'] == 1 && $wo['loggedin'] == true) { ?>
          function Wo_Ajax_Requests_Filee(){
-            return "<?php echo $wo['config']['site_url'].'/ajax_loading.php';?>"
+            return "/ajax_loading.php"
          }
          
          var websiteUrl = "<?php echo $wo['config']['site_url'];?>";

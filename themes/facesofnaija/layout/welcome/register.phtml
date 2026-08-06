@@ -59,6 +59,10 @@ $fields = Wo_GetWelcomeFileds();
 					<label for="confirm_password"><?php echo $wo['lang']['confirm_password']?></label>
 					<input id="confirm_password" name="confirm_password" type="password" />
 				</div>
+				<div class="wow_form_fields">
+					<label for="usr_birthday"><?php echo $wo['lang']['birthday']?></label>
+					<input id="usr_birthday" name="birthday" type="date" max="<?php echo date('Y')-14; ?>-12-31" min="<?php echo date('Y')-129; ?>-01-01" required>
+				</div>
 				<?php
 					if (!empty($fields) && count($fields) > 0) {
 						foreach ($fields as $key => $wo['field']) {
