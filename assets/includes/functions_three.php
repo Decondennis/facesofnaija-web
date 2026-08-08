@@ -6798,12 +6798,25 @@ function Wo_SharePostOn($id = false, $type_id = 0, $type = '') {
     $user      = $wo['user']['id'];
     $time      = time();
     $sql       = '';
+    $source_id = (int) $id;
+    $source_row = mysqli_query($sqlConnect, "SELECT `id`, `parent_id`, `post_id`, `postShare` FROM " . T_POSTS . " WHERE `id` = {$source_id} LIMIT 1");
+    if ($source_row && mysqli_num_rows($source_row) > 0) {
+        $source_data = mysqli_fetch_assoc($source_row);
+        if (!empty($source_data['parent_id'])) {
+            $source_id = (int) $source_data['parent_id'];
+        } elseif (!empty($source_data['postShare']) && !empty($source_data['post_id'])) {
+            $source_id = (int) $source_data['post_id'];
+        }
+    }
+    if ($source_id < 1) {
+        return false;
+    }
     // if (Wo_IsPostShared($id)) {
     //     $shared_post = Wo_PostData($id);
     //     $post = mysqli_query($sqlConnect, "SELECT * FROM " . T_POSTS . " WHERE `id` = {$shared_post['parent_id']}");
     //     $post_data = mysqli_fetch_assoc($post);
     // } else {
-    $post      = mysqli_query($sqlConnect, "SELECT * FROM " . T_POSTS . " WHERE `id` = {$id}");
+    $post      = mysqli_query($sqlConnect, "SELECT * FROM " . T_POSTS . " WHERE `id` = {$source_id}");
     $post_data = mysqli_fetch_assoc($post);
     //}
     if ($post) {
@@ -6822,8 +6835,8 @@ function Wo_SharePostOn($id = false, $type_id = 0, $type = '') {
         }
         $post_data['id']              = 0;
         $post_data['post_id']         = 0;
-        $post_data['post_url']        = Wo_SeoLink('index.php?link1=post&id=' . $id);
-        $post_data['parent_id']       = $id;
+        $post_data['post_url']        = Wo_SeoLink('index.php?link1=post&id=' . $source_id);
+        $post_data['parent_id']       = $source_id;
         $post_data['boosted']         = 0;
         $post_data['time']            = time();
         $post_data['postText']        = '';
@@ -6837,7 +6850,7 @@ function Wo_SharePostOn($id = false, $type_id = 0, $type = '') {
         $query1                       = mysqli_query($sqlConnect, $sql);
         $last                         = mysqli_insert_id($sqlConnect);
         if (!empty($post_data['album_name'])) {
-            $query = mysqli_query($sqlConnect, "SELECT `id`,`image`,`post_id` FROM " . T_ALBUMS_MEDIA . " WHERE `post_id` = {$id} ORDER BY `id` DESC");
+            $query = mysqli_query($sqlConnect, "SELECT `id`,`image`,`post_id` FROM " . T_ALBUMS_MEDIA . " WHERE `post_id` = {$source_id} ORDER BY `id` DESC");
             if (mysqli_num_rows($query)) {
                 while ($fetched_data = mysqli_fetch_assoc($query)) {
                     $media = $fetched_data['image'];

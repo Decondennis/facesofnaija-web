@@ -265,9 +265,35 @@
          function Wo_Ajax_Requests_Filee(){
             return "<?php echo $wo['config']['site_url'].'/ajax_loading.php';?>"
          }
+
+         function Wo_EnsureCoreThemeStyles() {
+           try {
+             var themeUrl = '<?php echo $wo['config']['theme_url'];?>';
+             var version = '<?php echo $wo['config']['version']; ?>';
+             var cacheBust = '<?php echo $wo['update_cache']; ?>';
+             var styles = [
+               themeUrl + '/stylesheet/general-style-plugins.css' + cacheBust + '?version=' + version,
+               themeUrl + '/stylesheet/style.css' + cacheBust + '?version=' + version,
+               themeUrl + '/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css' + cacheBust + '?version=' + version
+             ];
+
+             if ($('head').length == 0) {
+               $('html').prepend('<head></head>');
+             }
+
+             styles.forEach(function (href) {
+               if ($('head link[href="' + href + '"]').length == 0) {
+                 $('<link rel="stylesheet" href="' + href + '">').appendTo('head');
+               }
+             });
+           } catch (err) {
+             console && console.warn && console.warn('theme style bootstrap failed', err);
+           }
+         }
          
          var websiteUrl = "<?php echo $wo['config']['site_url'];?>";
          $(function() {
+            Wo_EnsureCoreThemeStyles();
             <?php if ($wo['loggedin'] == true && $wo['config']['find_friends'] == 1) {?>
               <?php if ($wo['user']['last_location_update'] < time()): ?>
                 if (navigator.geolocation) {
@@ -311,29 +337,13 @@
                var url = $(this).attr('data-ajax');
                e.preventDefault();
                if (!ISAPI) {
-                 if (url == '?index.php?link1=home') {
-                    $get_value = $('#json-data').val();
-                    if ($get_value) {
-                        $('#load-more-posts').hide();
-                        json_data = JSON.parse($('#json-data').val());
-                        if (json_data.page == 'home') {
-                            document.getElementById('posts').innerHTML = '<div class="posts_load"><div class="wo_loading_post"><div class="lightui1-shimmer"> <div class="_2iwr"></div> <div class="_2iws"></div> <div class="_2iwt"></div> <div class="_2iwu"></div> <div class="_2iwv"></div> <div class="_2iww"></div> <div class="_2iwx"></div> <div class="_2iwy"></div> <div class="_2iwz"></div> <div class="_2iw-"></div> <div class="_2iw_"></div> <div class="_2ix0"></div> </div></div><div class="wo_loading_post"><div class="lightui1-shimmer"> <div class="_2iwr"></div> <div class="_2iws"></div> <div class="_2iwt"></div> <div class="_2iwu"></div> <div class="_2iwv"></div> <div class="_2iww"></div> <div class="_2iwx"></div> <div class="_2iwy"></div> <div class="_2iwz"></div> <div class="_2iw-"></div> <div class="_2iw_"></div> <div class="_2ix0"></div> </div></div></div>';
-                            loadposts();
-                            window.history.pushState({state:'new'},'', websiteUrl);
-                            $("html, body").animate({ scrollTop: 0 }, 100);
-                            $('.user-details, .pac-container, .lightbox-container').remove();
-                            Wo_clearPRecording();
-                            Wo_CleanRecordNodes();
-                            Wo_stopRecording();
-                            Wo_StopLocalStream();
-                            
-                            return false;
-                        }
-                    }
-                 }
                  $.post(Wo_Ajax_Requests_Filee() + url, {url:url}, function (data) {
                      $('.user-details').remove();
                      json_data = JSON.parse($(data).filter('#json-data').val());
+                   if (json_data.page == 'home') {
+                     window.location.href = websiteUrl;
+                     return false;
+                   }
                      if (json_data.welcome_page == 1 || json_data.redirect == 1) {
                          window.location.href = websiteUrl;
                          return false;
@@ -348,6 +358,7 @@
                      }
                      //document.getElementById('#contnet').innerHTML = data;
                      box.html(data);
+                     Wo_EnsureCoreThemeStyles();
                      if (json_data.is_css_file == 1) {
                        $('.styled-profile').remove();
                        $('footer').append(json_data.css_file);
@@ -355,15 +366,6 @@
                      } else {
                        $('.styled-profile').attr('href', '');
                        $('.extra-css').empty();
-                     }
-                     // Ensure main theme stylesheet is present (fallback for AJAX fragments)
-                     try {
-                       if ($('head link[href*="/stylesheet/style.css"]').length == 0) {
-                         var _href = '<?php echo $wo['config']['theme_url'];?>/stylesheet/style.css<?php echo $wo['update_cache']; ?>?version=<?php echo $wo['config']['version']; ?>';
-                         $('<link rel="stylesheet" href="' + _href + '">').appendTo('head');
-                       }
-                     } catch (err) {
-                       console && console.warn && console.warn('style fallback injection failed', err);
                      }
                      Wo_clearPRecording();
                      Wo_CleanRecordNodes();
@@ -766,7 +768,38 @@
       <script src="<?php echo $wo['config']['theme_url'];?>/javascript/green-audio-player/green-audio-player.js?version=<?php echo $wo['config']['version']; ?>"></script>
    </head>
    
-   <body <?php if ($wo['config']['chatSystem'] == 0) { ?> chat-off="true" <?php } ?>>
+  <body <?php if ($wo['config']['chatSystem'] == 0) { ?> chat-off="true" <?php } ?>>
+      <script>
+      (function () {
+        try {
+          var themeUrl = '<?php echo $wo['config']['theme_url'];?>';
+          var version = '<?php echo $wo['config']['version']; ?>';
+          var cacheBust = '<?php echo $wo['update_cache']; ?>';
+          var styles = [
+            themeUrl + '/stylesheet/general-style-plugins.css' + cacheBust + '?version=' + version,
+            themeUrl + '/stylesheet/style.css' + cacheBust + '?version=' + version,
+            themeUrl + '/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css' + cacheBust + '?version=' + version
+          ];
+          var head = document.head || document.getElementsByTagName('head')[0];
+          if (!head) {
+            head = document.createElement('head');
+            document.documentElement.insertBefore(head, document.body || null);
+          }
+          styles.forEach(function (href) {
+            if (!document.querySelector('link[rel="stylesheet"][href="' + href + '"]')) {
+              var link = document.createElement('link');
+              link.rel = 'stylesheet';
+              link.href = href;
+              head.appendChild(link);
+            }
+          });
+        } catch (err) {
+          if (window.console && console.warn) {
+            console.warn('core css injector failed', err);
+          }
+        }
+      }());
+      </script>
       <input type="hidden" id="get_no_posts_name" value="<?php echo($wo['lang']['no_more_posts']); ?>">
     <?php $loadPage = Wo_LoadPage('thirdparty/theme-changer'); echo (!empty($loadPage)) ? $loadPage : '';?>
     <div id="focus-overlay"></div>

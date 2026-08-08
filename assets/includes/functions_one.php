@@ -5959,11 +5959,7 @@ function Wo_GetPosts($data = array('filter_by' => 'all', 'after_post_id' => 0, '
         $data['event_id']   = Wo_Secure($data['event_id']);
         $Wo_event_publisher = Wo_EventData($data['event_id']);
     }
-    $multi_image_post = '';
-    if (!empty($data['placement']) && $data['placement'] == 'multi_image_post') {
-        $multi_image_post = ' AND `multi_image_post` = 0 ';
-    }
-    $query_text = "SELECT `id` FROM " . T_POSTS . " WHERE {$subquery_one} AND `postType` <> 'profile_picture_deleted' {$multi_image_post}";
+    $query_text = "SELECT `id` FROM " . T_POSTS . " WHERE {$subquery_one} AND `postType` <> 'profile_picture_deleted'";
     if (isset($Wo_publisher['user_id'])) {
         $user_id = Wo_Secure($Wo_publisher['user_id']);
         $query_text .= " AND (`user_id` = {$user_id} OR `recipient_id` = {$user_id}) AND postShare IN (0,1) AND `id` NOT IN (SELECT `post_id` from " . T_PINNED_POSTS . " WHERE `user_id` = {$user_id})  AND `page_id` NOT IN (SELECT `page_id` from " . T_PAGES . " WHERE user_id = {$user_id}) AND `group_id` = 0 AND `event_id` = 0";
@@ -6202,6 +6198,14 @@ function Wo_GetPosts($data = array('filter_by' => 'all', 'after_post_id' => 0, '
         $data['limit'] = 5;
     }
     $limit   = Wo_Secure($data['limit']);
+    $after_post_id = (!empty($data['after_post_id']) && is_numeric($data['after_post_id']) && $data['after_post_id'] > 0) ? Wo_Secure($data['after_post_id']) : 0;
+    $is_news_feed_scope = (
+        empty($data['publisher_id']) &&
+        empty($data['page_id']) &&
+        empty($data['group_id']) &&
+        empty($data['community_id']) &&
+        empty($data['event_id'])
+    );
     $last_ad = 0;
     if (!empty($data['ad-id'])) {
         $last_ad = $data['ad-id'];
@@ -6247,6 +6251,21 @@ function Wo_GetPosts($data = array('filter_by' => 'all', 'after_post_id' => 0, '
     }
     $data = array();
     $sql  = mysqli_query($sqlConnect, $query_text);
+    if (
+        $is_news_feed_scope &&
+        $after_post_id > 0 &&
+        mysqli_num_rows($sql) < 1
+    ) {
+        $fallback_query = "SELECT `id` FROM " . T_POSTS . " WHERE `id` < {$after_post_id} AND `postType` <> 'profile_picture_deleted' AND `postPrivacy` = '0' AND `postShare` NOT IN (1) ";
+        if ($wo['config']['job_system'] != 1) {
+            $fallback_query .= " AND `job_id` = '0' ";
+        }
+        if ($wo['config']['post_approval'] == 1 || $wo['config']['blog_approval'] == 1) {
+            $fallback_query .= " AND `active` = '1' ";
+        }
+        $fallback_query .= " ORDER BY `id` DESC LIMIT {$limit}";
+        $sql             = mysqli_query($sqlConnect, $fallback_query);
+    }
     $ids  = array();
     if (mysqli_num_rows($sql)) {
         while ($fetched_data = mysqli_fetch_assoc($sql)) {
