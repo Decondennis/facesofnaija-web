@@ -764,6 +764,12 @@ input[readonly]{background-color:#fff!important;cursor:text!important}
 .image-file{max-width:100%;margin:0 auto;text-align:center;border:1px solid #e3e4e8}
 .message-details{color:#888;font-size: 12px;margin-right:10px;clear: both;}
 .message-details:empty{padding-top:0}
+.msg_meta{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:2px 0 0!important;color:#9aa0a6;font-size:11px}
+.msg_meta .msg-time{white-space:nowrap}
+.msg_meta .msg-ticks{color:#34b7f1;display:inline-flex}
+.msg_meta .msg-ticks.msg-read{color:#53d769}
+.chat-messages-wrapper .msg_meta{font-size:10px;justify-content:flex-end}
+.wo_cht_msgs_wrap .msg_meta{justify-content:flex-end}
 .media-video-file{width:100%;border-radius:5px;padding:3px;border:1px solid #e3e4e8}
 .media-download-btn{font-size:15px;margin-left:10px}
 .tab-container{background-color:#fff;padding:15px;border-top:0;border-bottom:1px solid #ededed;border-left:1px solid #ededed;border-right:1px solid #ededed}

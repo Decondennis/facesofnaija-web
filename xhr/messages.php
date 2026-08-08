@@ -40,15 +40,11 @@ if ($f == 'messages') {
             if ($wo['config']['user_lastseen'] == 1 && $recipient['showlastseen'] != 0) {
                 $data['lastseen'] = Wo_UserStatus($recipient['user_id'], $recipient['lastseen']);
             }
-            if ($wo['config']['video_chat'] == 1) {
-                if ($recipient['lastseen'] > time() - 60) {
-                    $data['video_call'] = 200;
-                }
+            if ($wo['config']['video_chat'] == 1 && ($wo['config']['twilio_video_chat'] == 1 || $wo['config']['agora_chat_video'] == 1)) {
+                $data['video_call'] = 200;
             }
-            if ($wo['config']['audio_chat'] == 1) {
-                if ($recipient['lastseen'] > time() - 60) {
-                    $data['audio_call'] = 200;
-                }
+            if ($wo['config']['audio_chat'] == 1 && ($wo['config']['twilio_video_chat'] == 1 || $wo['config']['agora_chat_video'] == 1)) {
+                $data['audio_call'] = 200;
             }
             $attachments      = Wo_GetLastAttachments($user_id);
             $attachments_html = '';
