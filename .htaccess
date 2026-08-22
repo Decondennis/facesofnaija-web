@@ -1,4 +1,8 @@
 RewriteEngine On
+RewriteCond %{HTTP_HOST} !^localhost
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1
+RewriteCond %{HTTP_HOST} !^10\.0\.2\.2
+RewriteCond %{HTTP_HOST} !\.local$
 RewriteCond %{HTTPS} off
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 <ifModule mod_headers.c>

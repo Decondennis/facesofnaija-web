@@ -23,7 +23,8 @@ if ($_detected_host === '172.236.19.52') {
     $sql_db_name = "facesofnaija";
 } else {
     // Local development
-    $site_url    = "http://localhost:8080";
+    $http_protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) ? "https://" : "http://";
+    $site_url    = $http_protocol . $_detected_host;
     $sql_db_host = "localhost";
     $sql_db_user = "root";
     $sql_db_pass = "";
