@@ -159,27 +159,29 @@ if ($type == 'user_registration') {
             	    $json_success_data['user_id'] = $user_id;
                 }
             } else {
-                $wo['user']        = $_POST;
-                $body              = Wo_LoadPage('emails/activate');
+                $wo['user'] = array('username' => $username, 'email' => $email);
+                $wo['code'] = $code;
+                $body = Wo_LoadPage('emails/activate');
+                $subject = (isset($wo['lang']['account_activation']) && !empty($wo['lang']['account_activation'])) ? $wo['lang']['account_activation'] : 'Account Activation';
                 $send_message_data = array(
                     'from_email' => $wo['config']['siteEmail'],
                     'from_name' => $wo['config']['siteName'],
                     'to_email' => $email,
-                    'to_name' => $password,
-                    'subject' => $wo['lang']['account_activation'],
+                    'to_name' => $username,
+                    'subject' => $subject,
                     'charSet' => 'utf-8',
                     'message_body' => $body,
                     'is_html' => true
                 );
-                $send              = Wo_SendMessage($send_message_data);
-                $json_success_data  = array(
-                	'api_status' => '200',
+                $send = Wo_SendMessage($send_message_data);
+                $json_success_data = array(
+                    'api_status' => '220',
                     'api_text' => 'success',
                     'api_version' => $api_version,
                     'message' => 'Registration successful! We have sent you an email, Please check your inbox/spam to verify your email.',
                     'success_type' => 'verification',
                     'session_id' => 0,
-                    'user_id' => 0
+                    'user_id' => $user_id
                 );
             }
         }

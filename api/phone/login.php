@@ -79,6 +79,19 @@ if ($type == 'user_login') {
             header("Content-type: application/json");
             echo json_encode($json_error_data, JSON_PRETTY_PRINT);
             exit();
+        } else if (isset($user_login_data['active']) && $user_login_data['active'] == 0) {
+            $json_error_data = array(
+                'api_status' => '220',
+                'api_text' => 'failed',
+                'api_version' => $api_version,
+                'errors' => array(
+                    'error_id' => '8',
+                    'error_text' => 'Your account is not activated yet. Please check your email to activate your account.'
+                )
+            );
+            header("Content-type: application/json");
+            echo json_encode($json_error_data, JSON_PRETTY_PRINT);
+            exit();
         } else {
             $login = Wo_Login($username, $password);
             if (!$login) {

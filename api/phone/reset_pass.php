@@ -36,7 +36,7 @@ if ($type == 'reset_pass') {
     } 
     if (empty($json_error_data)) {
         $user_recover_data         = Wo_UserData(Wo_UserIdFromEmail($_POST['email']));
-        $subject                   = $config['siteName'] . ' ' . $wo['lang']['password_rest_request'];
+        $subject                   = (isset($wo['config']['siteName']) ? $wo['config']['siteName'] : 'Facesofnaija') . ' ' . (isset($wo['lang']['password_rest_request']) ? $wo['lang']['password_rest_request'] : 'Password Reset Request');
         $user_recover_data['link'] = Wo_Link('index.php?link1=reset-password&code=' . $user_recover_data['user_id'] . '_' . $user_recover_data['password']);
         $wo['recover']             = $user_recover_data;
         $body                      = Wo_LoadPage('emails/recover');
@@ -44,13 +44,17 @@ if ($type == 'reset_pass') {
             'from_email' => $wo['config']['siteEmail'],
             'from_name' => $wo['config']['siteName'],
             'to_email' => $_POST['email'],
-            'to_name' => '',
+            'to_name' => $user_recover_data['username'],
             'subject' => $subject,
             'charSet' => 'utf-8',
             'message_body' => $body,
             'is_html' => true
         );
         $send                      = Wo_SendMessage($send_message_data);
+        if ($send) {
+            $time = time();
+            mysqli_query($sqlConnect, "UPDATE " . T_USERS . " SET `time_code_sent` = '{$time}' WHERE `user_id` = '{$user_recover_data['user_id']}'");
+        }
     } else {
         header("Content-type: application/json");
         echo json_encode($json_error_data, JSON_PRETTY_PRINT);
