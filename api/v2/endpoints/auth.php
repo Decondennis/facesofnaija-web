@@ -36,7 +36,17 @@ if (empty($error_code)) {
     elseif (Wo_IsBanned($username)) {
         $error_code    = 7;
         $error_message = 'this user is banned';
-     } else {
+    } elseif (isset($recipient_data['active']) && $recipient_data['active'] == 0) {
+        $error_code    = 8;
+        $error_message = 'Your account is not activated yet. Please check your email inbox or spam folder to activate your account.';
+        $response_data = array(
+            'api_status' => 220,
+            'errors' => array(
+                'error_id' => '8',
+                'error_text' => 'Your account is not activated yet. Please check your email inbox or spam folder to activate your account.'
+            )
+        );
+    } else {
         $login = Wo_Login($username, $password);
         if (!$login) {
             $error_code    = 5;
