@@ -1,0 +1,133 @@
+<?php
+// Schema.org Structured Data (JSON-LD) for FacesOfNaija
+$site_url = rtrim($wo['config']['site_url'], '/');
+$site_name = !empty($wo['config']['siteName']) ? $wo['config']['siteName'] : 'FacesOfNaija';
+$site_desc = !empty($wo['config']['siteDesc']) ? $wo['config']['siteDesc'] : 'Nigeria\'s Premier Social Network & Community Hub';
+$site_logo = $wo['config']['theme_url'] . '/img/icon.png';
+
+$schemas = array();
+
+// 1. WebSite Schema with Sitelinks SearchBox
+$website_schema = array(
+    "@context" => "https://schema.org",
+    "@type" => "WebSite",
+    "name" => $site_name,
+    "alternateName" => "Faces of Naija",
+    "url" => $site_url . "/",
+    "description" => $site_desc,
+    "potentialAction" => array(
+        "@type" => "SearchAction",
+        "target" => array(
+            "@type" => "EntryPoint",
+            "urlTemplate" => $site_url . "/search?query={search_term_string}"
+        ),
+        "query-input" => "required name=search_term_string"
+    )
+);
+$schemas[] = $website_schema;
+
+// 2. Organization Schema
+$org_schema = array(
+    "@context" => "https://schema.org",
+    "@type" => "Organization",
+    "name" => $site_name,
+    "url" => $site_url . "/",
+    "logo" => array(
+        "@type" => "ImageObject",
+        "url" => $site_logo
+    ),
+    "contactPoint" => array(
+        "@type" => "ContactPoint",
+        "contactType" => "customer support",
+        "email" => $wo['config']['siteEmail']
+    )
+);
+$schemas[] = $org_schema;
+
+// 3. Page-Specific Schema Markup
+if ($wo['page'] == 'timeline' && !empty($wo['user_profile'])) {
+    // ProfilePage Schema
+    $profile_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "ProfilePage",
+        "mainEntity" => array(
+            "@type" => "Person",
+            "name" => $wo['user_profile']['name'],
+            "alternateName" => $wo['user_profile']['username'],
+            "url" => $wo['user_profile']['url'],
+            "image" => $wo['user_profile']['avatar'],
+            "description" => !empty($wo['user_profile']['about']) ? $wo['user_profile']['about'] : $wo['user_profile']['name'] . ' on ' . $site_name
+        )
+    );
+    $schemas[] = $profile_schema;
+} elseif ($wo['page'] == 'read-blog' && !empty($wo['article'])) {
+    // Article / BlogPosting Schema
+    $article_image = !empty($wo['article']['thumbnail']) ? $wo['article']['thumbnail'] : $site_logo;
+    $author_name = !empty($wo['article']['author']['name']) ? $wo['article']['author']['name'] : $site_name;
+    $date_published = !empty($wo['article']['posted']) ? date('c', $wo['article']['posted']) : date('c');
+    
+    $article_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "BlogPosting",
+        "headline" => $wo['article']['title'],
+        "description" => $wo['article']['description'],
+        "image" => $article_image,
+        "url" => $wo['article']['url'],
+        "datePublished" => $date_published,
+        "dateModified" => $date_published,
+        "author" => array(
+            "@type" => "Person",
+            "name" => $author_name
+        ),
+        "publisher" => array(
+            "@type" => "Organization",
+            "name" => $site_name,
+            "logo" => array(
+                "@type" => "ImageObject",
+                "url" => $site_logo
+            )
+        ),
+        "mainEntityOfPage" => array(
+            "@type" => "WebPage",
+            "@id" => $wo['article']['url']
+        )
+    );
+    $schemas[] = $article_schema;
+} elseif (!empty($wo['story']['id'])) {
+    // SocialMediaPosting Schema for posts
+    $post_url = $site_url . '/post/' . $wo['story']['id'];
+    $post_author = !empty($wo['story']['publisher']['name']) ? $wo['story']['publisher']['name'] : $site_name;
+    $post_text = !empty($wo['story']['Orginaltext']) ? $wo['story']['Orginaltext'] : $wo['title'];
+    $post_date = !empty($wo['story']['time']) ? date('c', $wo['story']['time']) : date('c');
+    
+    $post_schema = array(
+        "@context" => "https://schema.org",
+        "@type" => "SocialMediaPosting",
+        "headline" => mb_substr(strip_tags($post_text), 0, 110),
+        "articleBody" => strip_tags($post_text),
+        "url" => $post_url,
+        "datePublished" => $post_date,
+        "author" => array(
+            "@type" => "Person",
+            "name" => $post_author
+        ),
+        "publisher" => array(
+            "@type" => "Organization",
+            "name" => $site_name,
+            "logo" => array(
+                "@type" => "ImageObject",
+                "url" => $site_logo
+            )
+        )
+    );
+    if (!empty($wo['story']['postFile'])) {
+        $post_schema['image'] = Wo_GetMedia($wo['story']['postFile']);
+    }
+    $schemas[] = $post_schema;
+}
+
+// Render JSON-LD Tags
+foreach ($schemas as $schema_item) {
+    echo "\n" . '<script type="application/ld+json">' . "\n" . json_encode($schema_item, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n" . '</script>' . "\n";
+}
+?>

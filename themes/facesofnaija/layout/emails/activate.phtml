@@ -1,6 +1,6 @@
 <?php 
 $data = $db->where('name','activate')->getOne(T_HTML_EMAILS);
-$html = $data->value;
+$html = is_object($data) ? $data->value : ($data['value'] ?? '');
 $replaces = array('USERNAME' => $wo['user']['username'],
                  'SITE_URL' => $wo['config']['site_url'],
                  'EMAIL' => $wo['user']['email'],
