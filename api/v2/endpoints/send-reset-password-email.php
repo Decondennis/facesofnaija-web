@@ -28,6 +28,7 @@ if (empty($error_code)) {
         $query                     = mysqli_query($sqlConnect, "UPDATE " . T_USERS . " SET `email_code` = '$code' , `time_code_sent` = '".$time."' WHERE `user_id` = {$user_recover_data['user_id']}");
         $wo['recover']             = $user_recover_data;
         $body                      = Wo_LoadPage('emails/recover');
+        $body                      = str_replace(array('\r\n', '\r', '\n', "\r\n", "\r", "\n"), '', $body);
         $send_message_data         = array(
             'from_email' => $wo['config']['siteEmail'],
             'from_name' => $wo['config']['siteName'],

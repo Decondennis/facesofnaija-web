@@ -17,10 +17,10 @@ if ($f == 'create_new_video_call') {
 
     if ($wo['config']['agora_chat_video'] == 1) {
         $wo['AgoraToken'] = null;
-        if (!empty($wo['config']['agora_chat_app_certificate'])) {
+        $appCertificate = !empty($wo['config']['agora_chat_app_certificate']) ? $wo['config']['agora_chat_app_certificate'] : (!empty($wo['config']['agora_app_certificate']) ? $wo['config']['agora_app_certificate'] : '');
+        if (!empty($appCertificate)) {
             include_once 'assets/libraries/AgoraDynamicKey/src/RtcTokenBuilder.php';
-            $appID = $wo['config']['agora_chat_app_id'];
-            $appCertificate = $wo['config']['agora_chat_app_certificate'];
+            $appID = !empty($wo['config']['agora_chat_app_id']) ? $wo['config']['agora_chat_app_id'] : $wo['config']['agora_app_id'];
             $uid = 0;
             $uidStr = "0";
             $role = RtcTokenBuilder::RoleAttendee;

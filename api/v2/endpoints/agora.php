@@ -17,10 +17,10 @@ if (!empty($_POST['type']) && in_array($_POST['type'], $required_fields)) {
 		    $user_2       = Wo_UserData(Wo_Secure($_POST['recipient_id']));
 		    $room_script  = sha1(rand(1111111, 9999999999));
     		$wo['AgoraToken'] = null;
-	        if (!empty($wo['config']['agora_chat_app_certificate']) && empty($_POST['token'])) {
+            $appCertificate = !empty($wo['config']['agora_chat_app_certificate']) ? $wo['config']['agora_chat_app_certificate'] : (!empty($wo['config']['agora_app_certificate']) ? $wo['config']['agora_app_certificate'] : '');
+	        if (!empty($appCertificate) && empty($_POST['token'])) {
 	            include_once 'assets/libraries/AgoraDynamicKey/src/RtcTokenBuilder.php';
-	            $appID = $wo['config']['agora_chat_app_id'];
-	            $appCertificate = $wo['config']['agora_chat_app_certificate'];
+	            $appID = !empty($wo['config']['agora_chat_app_id']) ? $wo['config']['agora_chat_app_id'] : $wo['config']['agora_app_id'];
 	            $uid = 0;
 	            $uidStr = "0";
 	            $role = RtcTokenBuilder::RoleAttendee;
