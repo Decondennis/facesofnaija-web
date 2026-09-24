@@ -25,7 +25,7 @@ if (empty($_GET['type']) || !isset($_GET['type'])) {
     exit();
 }
 $type = Wo_Secure($_GET['type'], 0);
-if ($type == 'get_news_list') {
+if ($type == 'get_news_list' || $type == 'get_news_feed') {
     if (empty($_POST['user_id'])) {
         $json_error_data = array(
             'api_status' => '400',

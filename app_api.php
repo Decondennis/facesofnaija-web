@@ -178,6 +178,10 @@ if ($application == 'windows_app') {
         case 'set_profile_picture':
             include "api/$application/update_profile_picture.php";
             break;
+        case 'get_news_feed':
+        case 'get_news_list':
+            include "api/$application/get_news_feed.php";
+            break;
         case 'get_users_list':
             include "api/$application/get_users_list.php";
             break;
