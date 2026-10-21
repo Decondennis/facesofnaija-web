@@ -160,104 +160,66 @@
 				</div>
 			</div>
 
-			<!-- News & Announcements Section -->
-			<div class="home-announcement alert alert-dismissible greetalert" role="alert" style="border-color: #0288d1 !important; background-color: #e1f5fe; color: #01579b; margin-top: 10px; position: relative;">
-				<div class="fon-news-top-actions">
-					<a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>" data-ajax="?link1=announcements" class="fon-news-megaphone-link" title="View all news announcements">
-						<img src="<?php echo $wo['config']['theme_url'];?>/img/megaphone.gif" alt="News announcements" width="28" height="28" />
+			<!-- News RSS Ticker Section (Current Div with 24 Headlines) -->
+			<div class="home-announcement" style="position: relative; height: 50px; overflow: hidden; margin-top: 10px; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+				<div class="alert alert-success" style="background-color: #ffffff; color: #333333; height: 50px; padding: 0 45px 0 115px; margin: 0; display: flex; align-items: center; position: relative; border-left: 4px solid #4CAF50; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; border-radius: 6px;">
+
+					<!-- NEWS Header with Spinning Globe -->
+					<a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>" data-ajax="?link1=announcements" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer; z-index: 5;" title="View all news announcements">
+						<div class="announcement-globe" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+							<img src="<?php echo $wo['config']['theme_url']; ?>/img/globe.svg" alt="Globe" style="width: 100%; height: 100%; animation: spin 8s linear infinite;">
+						</div>
+						<span style="font-weight: 800; color: #4CAF50; font-size: 15px; letter-spacing: 1px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">NEWS</span>
 					</a>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="setCookie('news_alert_status', '1', 3);" title="Dismiss"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div id="daynightmsg_news">
-					<div class="small-texts">
-						<h4><a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>" data-ajax="?link1=announcements" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="View all announcements">News <span style="font-size: 11px; font-weight: 600; background: #0288d1; color: #ffffff; padding: 2px 8px; border-radius: 12px; margin-left: 4px; display: inline-block; vertical-align: middle;">View All &raquo;</span></a></h4> 
-					</div>
-					<div class="fon-news-marquee" style="overflow: hidden; width: 100%; white-space: nowrap; margin-top: 4px; padding-right: 85px;">
+
+					<!-- Dismiss Close Button -->
+					<span class="close announcements-option" data-toggle="tooltip" onclick="$('.home-announcement').slideUp(200); setCookie('news_alert_status', '1', 3);" title="<?php echo $wo['lang']['hide'];?>" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer; color: #94a3b8; font-size: 18px; line-height: 1;">
+						<i class="fa fa-remove"></i>
+					</span>
+
+					<!-- Continuous GPU Smooth Scrolling 24 RSS Headlines Track -->
+					<div id="fon-news-ticker" class="fon-smooth-ticker" style="overflow: hidden; width: 100%; white-space: nowrap; line-height: 1.5; font-size: 13.5px; color: #1e293b;">
 						<?php
-							$dbAnnouncements = function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(10) : array();
-							$rssHeadlines    = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : (function_exists('Wo_GetNewsForMarquee') ? Wo_GetNewsForMarquee(30) : array());
-
-							$newsList = array();
-							if (!empty($dbAnnouncements)) {
-								foreach ($dbAnnouncements as $ann) {
-									$newsList[] = array(
-										'id'     => $ann['id'],
-										'title'  => $ann['text'],
-										'source' => 'Notice',
-										'link'   => Wo_SeoLink('index.php?link1=announcements') . '#announcement-' . $ann['id']
-									);
-								}
-							}
+							$rssHeadlines = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : array();
 							if (!empty($rssHeadlines)) {
-								foreach ($rssHeadlines as $rss) {
-									$newsList[] = $rss;
-								}
-							}
-							if (empty($newsList)) {
-								$fallbackNews = function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(30) : array();
-								if (!empty($fallbackNews)) {
-									foreach ($fallbackNews as $fn) {
-										$newsList[] = array(
-											'id'     => $fn['id'],
-											'title'  => $fn['text'],
-											'source' => 'Notice',
-											'link'   => Wo_SeoLink('index.php?link1=announcements') . '#announcement-' . $fn['id']
-										);
-									}
-								}
-							}
-
-							if (!empty($newsList)) {
-								$newsCount = count($newsList);
-								if ($newsCount < 5) {
-									$newsRepeat = (int)ceil(5 / max(1, $newsCount));
-									$expandedNews = array();
-									for ($nr = 0; $nr < $newsRepeat; $nr++) {
-										$expandedNews = array_merge($expandedNews, $newsList);
-									}
-									$newsList = $expandedNews;
-								}
+								$newsList = $rssHeadlines;
 						?>
-						<div id="fon-news-ticker" class="fon-smooth-ticker" style="line-height: 1.6; font-size: 13.5px; color: #01579b;">
-							<div class="fon-news-track">
-								<div class="fon-ticker-segment">
-									<?php foreach ($newsList as $idx => $newsItem) { 
-										$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
-										$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
-										$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements') . (!empty($newsItem['id']) ? '#announcement-' . $newsItem['id'] : '');
-										$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
-										$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
-										$isNotice   = (strtolower($itemSource) === 'notice' || strtolower($itemSource) === 'announcement');
-										$badgeBg    = $isNotice ? '#d97706' : ($isNigerian ? '#008751' : '#0288d1');
-									?>
-										<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
-											<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
-											<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
-											<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
-										</span>
-									<?php } ?>
-								</div>
-								<div class="fon-ticker-segment" aria-hidden="true">
-									<?php foreach ($newsList as $idx => $newsItem) { 
-										$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
-										$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
-										$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements') . (!empty($newsItem['id']) ? '#announcement-' . $newsItem['id'] : '');
-										$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
-										$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
-										$isNotice   = (strtolower($itemSource) === 'notice' || strtolower($itemSource) === 'announcement');
-										$badgeBg    = $isNotice ? '#d97706' : ($isNigerian ? '#008751' : '#0288d1');
-									?>
-										<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
-											<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
-											<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> tabindex="-1" title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
-											<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
-										</span>
-									<?php } ?>
-								</div>
+						<div class="fon-news-track">
+							<div class="fon-ticker-segment">
+								<?php foreach ($newsList as $idx => $newsItem) { 
+									$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
+									$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
+									$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements');
+									$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
+									$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
+									$badgeBg    = $isNigerian ? '#008751' : '#0288d1';
+								?>
+									<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
+										<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
+										<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
+										<span style="color: #4CAF50; padding: 0 10px;">&bull;</span>
+									</span>
+								<?php } ?>
+							</div>
+							<div class="fon-ticker-segment" aria-hidden="true">
+								<?php foreach ($newsList as $idx => $newsItem) { 
+									$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
+									$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
+									$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements');
+									$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
+									$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
+									$badgeBg    = $isNigerian ? '#008751' : '#0288d1';
+								?>
+									<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
+										<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
+										<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> tabindex="-1" title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
+										<span style="color: #4CAF50; padding: 0 10px;">&bull;</span>
+									</span>
+								<?php } ?>
 							</div>
 						</div>
 						<?php } else { ?>
-							<p style="margin: 0; font-size: 13px; color: #01579b;">No news announcements available yet.</p>
+							<p style="margin: 0; font-size: 13px; color: #64748b;">Loading Nigerian &amp; World News headlines...</p>
 						<?php } ?>
 					</div>
 				</div>
