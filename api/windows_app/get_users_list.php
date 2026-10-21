@@ -279,6 +279,14 @@ if ($type == 'get_users_list') {
                         }
                         $wo['notification']['icon'] .= 'user-plus';
                     }
+                    if ($wo['notification']['type'] == 'sent_u_request') {
+                        if ($wo['config']['connectivitySystem'] == 1) {
+                            $wo['notification']['type_text'] = !empty($wo['lang']['sent_u_friend_request']) ? $wo['lang']['sent_u_friend_request'] : 'sent you a friend request.';
+                        } else {
+                            $wo['notification']['type_text'] = !empty($wo['lang']['sent_u_follow_request']) ? $wo['lang']['sent_u_follow_request'] : 'sent you a follow request.';
+                        }
+                        $wo['notification']['icon'] .= 'user-plus';
+                    }
                 }
                 $wo['notification']['time_text_string'] = Wo_Time_Elapsed_String($wo['notification']['time']);
                 $wo['notification']['time_text']        = Wo_Time_Elapsed_String($wo['notification']['time']);

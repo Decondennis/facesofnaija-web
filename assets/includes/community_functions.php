@@ -257,25 +257,113 @@ function Wo_GetMyCommunities() {
 }
 
 
-function Wo_GetCommunitiesNames($total = 100) {
+function Wo_GetRegisteredCommunities($total = 100) {
     global $sqlConnect, $wo;
-    if ($wo['loggedin'] == false) {
-        return false;
+    $data = array();
+    $total = (int)$total;
+    if ($total <= 0) {
+        $total = 100;
     }
-    $data       = array();
-    $query_text = "SELECT `community_title` FROM " . T_COMMUNITIES . " LIMIT 0, {$total}";
-    
+    $query_text = "SELECT `id`, `community_name`, `community_title` FROM " . T_COMMUNITIES . " ORDER BY `id` DESC LIMIT 0, {$total}";
     $query_one  = mysqli_query($sqlConnect, $query_text);
-    if (mysqli_num_rows($query_one)) {
+    if ($query_one && mysqli_num_rows($query_one)) {
         while ($fetched_data = mysqli_fetch_assoc($query_one)) {
-            if (is_array($fetched_data)) {
-                $data[] = $fetched_data['community_title'];
+            if (!empty($fetched_data['community_title'])) {
+                $title = html_entity_decode(strip_tags($fetched_data['community_title']), ENT_QUOTES, 'UTF-8');
+                $uname = !empty($fetched_data['community_name']) ? $fetched_data['community_name'] : $fetched_data['id'];
+                $url   = Wo_SeoLink('index.php?link1=timeline&u=' . $uname);
+                $data[] = array(
+                    'id'    => $fetched_data['id'],
+                    'name'  => $uname,
+                    'title' => $title,
+                    'url'   => $url
+                );
             }
         }
     }
-        
+    return $data;
+}
 
-    return  $data;
+function Wo_GetCommunitiesNames($total = 100) {
+    $communities = Wo_GetRegisteredCommunities($total);
+    $data = array();
+    foreach ($communities as $c) {
+        $data[] = $c['title'];
+    }
+    return $data;
+}
+
+function Wo_GetNewsFromAnnouncements($total = 30) {
+    global $sqlConnect, $wo;
+    $data = array();
+    $total = (int)$total;
+    if ($total <= 0) {
+        $total = 30;
+    }
+    $query = mysqli_query($sqlConnect, "SELECT `id`, `text` FROM " . T_ANNOUNCEMENT . " WHERE `active` = '1' ORDER BY `id` DESC LIMIT {$total}");
+    if ($query && mysqli_num_rows($query)) {
+        while ($row = mysqli_fetch_assoc($query)) {
+            if (!empty($row['text'])) {
+                $clean_text = trim(html_entity_decode(strip_tags($row['text']), ENT_QUOTES, 'UTF-8'));
+                $clean_text = trim(str_replace("\xc2\xa0", ' ', $clean_text));
+                if (!empty($clean_text)) {
+                    $data[] = array(
+                        'id'   => $row['id'],
+                        'text' => $clean_text
+                    );
+                }
+            }
+        }
+    }
+    return $data;
+}
+
+function Wo_GetNewsForMarquee($total = 30) {
+    return Wo_GetNewsFromAnnouncements($total);
+}
+
+function Wo_GetAllUserAnnouncements($limit = 100, $offset = 0) {
+    global $sqlConnect, $wo;
+    $data = array();
+    $limit = (int)$limit;
+    if ($limit <= 0) {
+        $limit = 100;
+    }
+    $offset = (int)$offset;
+    $offset_query = '';
+    if ($offset > 0) {
+        $offset_query = " AND `id` < {$offset} ";
+    }
+    $query = mysqli_query($sqlConnect, "SELECT * FROM " . T_ANNOUNCEMENT . " WHERE `active` = '1' {$offset_query} ORDER BY `id` DESC LIMIT {$limit}");
+    if ($query && mysqli_num_rows($query)) {
+        while ($row = mysqli_fetch_assoc($query)) {
+            $formatted_text = $row['text'];
+            if (function_exists('Wo_Markup')) {
+                $formatted_text = Wo_Markup($formatted_text);
+            }
+            if (function_exists('Wo_Emo')) {
+                $formatted_text = Wo_Emo($formatted_text);
+            }
+            $views = 0;
+            if (function_exists('Wo_GetAnnouncementViews')) {
+                $views = (int)Wo_GetAnnouncementViews($row['id']);
+            }
+            $row['formatted_text'] = $formatted_text;
+            $row['views'] = $views;
+            $data[] = $row;
+        }
+    }
+    return $data;
+}
+
+function Wo_CountActiveAnnouncements() {
+    global $sqlConnect;
+    $query = mysqli_query($sqlConnect, "SELECT COUNT(`id`) as `count` FROM " . T_ANNOUNCEMENT . " WHERE `active` = '1'");
+    if ($query && mysqli_num_rows($query)) {
+        $row = mysqli_fetch_assoc($query);
+        return (int)$row['count'];
+    }
+    return 0;
 }
 
 function Wo_GetMyCommunitiesAPI($limit = 0,$offset = 0,$sort = '') {

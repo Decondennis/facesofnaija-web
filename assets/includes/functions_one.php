@@ -1353,7 +1353,7 @@ function Wo_UpdateUsernameInNotifications($user_id = 0, $username = '') {
     if (empty($username)) {
         return false;
     }
-    $query_one = "UPDATE " . T_NOTIFICATION . " SET `url` = 'index.php?link1=timeline&u={$username}' WHERE `notifier_id` = {$user_id} AND (`type` = 'following' OR `type` = 'visited_profile' OR `type` = 'accepted_request')";
+    $query_one = "UPDATE " . T_NOTIFICATION . " SET `url` = 'index.php?link1=timeline&u={$username}' WHERE `notifier_id` = {$user_id} AND (`type` = 'following' OR `type` = 'visited_profile' OR `type` = 'accepted_request' OR `type` = 'sent_u_request')";
     $query     = mysqli_query($sqlConnect, $query_one);
     if ($query) {
         return true;
@@ -2127,6 +2127,14 @@ function Wo_RegisterFollow($following_id = 0, $followers_id = 0) {
                     'activity_type' => 'following'
                 );
                 $add_activity  = Wo_RegisterActivity($activity_data);
+            } else {
+                $notification_data = array(
+                    'recipient_id' => $following_id,
+                    'notifier_id' => $follower_id,
+                    'type' => 'sent_u_request',
+                    'url' => 'index.php?link1=timeline&u=' . $follower_data['username']
+                );
+                Wo_RegisterNotification($notification_data);
             }
         }
     }
@@ -2210,6 +2218,7 @@ function Wo_DeleteFollow($following_id = 0, $follower_id = 0) {
             Wo_DeleteSelectedActivity($follower_id, 'following', $following_id);
         }
         if ($query) {
+            @mysqli_query($sqlConnect, "DELETE FROM " . T_NOTIFICATION . " WHERE (`recipient_id` = {$following_id} AND `notifier_id` = {$follower_id} AND (`type` = 'following' OR `type` = 'sent_u_request')) OR (`recipient_id` = {$follower_id} AND `notifier_id` = {$following_id} AND (`type` = 'following' OR `type` = 'sent_u_request'))");
             return true;
         }
     }
@@ -2274,7 +2283,7 @@ function Wo_AcceptFollowRequest($following_id = 0, $follower_id = 0) {
     }
     $following_id = Wo_Secure($following_id);
     $follower_id  = Wo_Secure($follower_id);
-    if (Wo_IsFollowRequested($following_id, $follower_id) === false) {
+    if (Wo_IsFollowRequested($following_id, $follower_id) === false && Wo_IsFollowRequested($follower_id, $following_id) === false) {
         return false;
     }
     $follower_data = Wo_UserData($follower_id);
@@ -2286,6 +2295,7 @@ function Wo_AcceptFollowRequest($following_id = 0, $follower_id = 0) {
         $query_two = mysqli_query($sqlConnect, "INSERT INTO " . T_FOLLOWERS . " (`following_id`,`follower_id`,`active`) VALUES ({$following_id},{$follower_id},'1') ");
     }
     if ($query) {
+        @mysqli_query($sqlConnect, "DELETE FROM " . T_NOTIFICATION . " WHERE (`recipient_id` = {$follower_id} AND `notifier_id` = {$following_id} AND `type` = 'sent_u_request') OR (`recipient_id` = {$following_id} AND `notifier_id` = {$follower_id} AND `type` = 'sent_u_request')");
         $notification_data = array(
             'recipient_id' => $following_id,
             'type' => 'accepted_request',
@@ -2323,11 +2333,12 @@ function Wo_DeleteFollowRequest($following_id, $follower_id) {
     }
     $following_id = Wo_Secure($following_id);
     $follower_id  = Wo_Secure($follower_id);
-    if (Wo_IsFollowRequested($following_id, $follower_id) === false) {
+    if (Wo_IsFollowRequested($following_id, $follower_id) === false && Wo_IsFollowRequested($follower_id, $following_id) === false) {
         return false;
     } else {
         $query = mysqli_query($sqlConnect, " DELETE FROM " . T_FOLLOWERS . " WHERE `following_id` = {$follower_id} AND `follower_id` = {$following_id} ");
         if ($query) {
+            @mysqli_query($sqlConnect, "DELETE FROM " . T_NOTIFICATION . " WHERE (`recipient_id` = {$follower_id} AND `notifier_id` = {$following_id} AND `type` = 'sent_u_request') OR (`recipient_id` = {$following_id} AND `notifier_id` = {$follower_id} AND `type` = 'sent_u_request')");
             return true;
         }
     }
@@ -2758,7 +2769,7 @@ function Wo_RegisterNotification($data = array()) {
     if ($data['type'] == 'comment' && $recipient['notification_settings']['e_commented'] != 1) {
         $send_notification = false;
     }
-    if ($data['type'] == 'following' && $recipient['notification_settings']['e_followed'] != 1) {
+    if (($data['type'] == 'following' || $data['type'] == 'sent_u_request') && isset($recipient['notification_settings']['e_followed']) && $recipient['notification_settings']['e_followed'] != 1) {
         $send_notification = false;
     }
     if ($data['type'] == 'wondered_post' && $recipient['notification_settings']['e_wondered'] != 1) {
@@ -2919,7 +2930,7 @@ function Wo_RegisterNotification($data = array()) {
                 if ($data['type'] == 'comment' && $recipient['e_commented'] == 1) {
                     $send_mail = true;
                 }
-                if ($data['type'] == 'following' && $recipient['e_followed'] == 1) {
+                if (($data['type'] == 'following' || $data['type'] == 'sent_u_request') && isset($recipient['e_followed']) && $recipient['e_followed'] == 1) {
                     $send_mail = true;
                 }
                 if ($data['type'] == 'wondered_post' && $recipient['e_wondered'] == 1) {

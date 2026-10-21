@@ -2670,6 +2670,13 @@ function Wo_NotificationWebPushNotifier() {
                                 $sql_get_notification_for_push['type_text'] = $wo['lang']['accepted_follow_request'];
                             }
                         }
+                        if ($sql_get_notification_for_push['type'] == 'sent_u_request') {
+                            if ($wo['config']['connectivitySystem'] == 1) {
+                                $sql_get_notification_for_push['type_text'] = (!empty($wo['lang']['sent_u_friend_request'])) ? $wo['lang']['sent_u_friend_request'] : 'sent you a friend request.';
+                            } else {
+                                $sql_get_notification_for_push['type_text'] = (!empty($wo['lang']['sent_u_follow_request'])) ? $wo['lang']['sent_u_follow_request'] : 'sent you a follow request.';
+                            }
+                        }
                         if ($sql_get_notification_for_push['type'] == 'admin_notification') {
                             $sql_get_notification_for_push['type_text'] = $sql_get_notification_for_push['text'];
                             $sql_get_notification_for_push['url']       = $sql_get_notification_for_push['full_link'];

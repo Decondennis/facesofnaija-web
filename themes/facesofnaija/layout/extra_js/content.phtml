@@ -332,7 +332,7 @@ function Wo_RegisterFollow(id, is_confirm,show_modal= false) {
 
   _follow_con.html(html_);
 
-  $.get(Wo_Ajax_Requests_File(), {f: 'follow_user', following_id: id}, function(data) {
+  $.get(Wo_Ajax_Requests_File(), {f: 'follow_user', following_id: id, hash_id: $('.main_session').val()}, function(data) {
 
     <?php if ($wo['config']['connectivitySystem'] == 0): ?>
 

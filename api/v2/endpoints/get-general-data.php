@@ -252,6 +252,14 @@ if (empty($error_code)) {
                     }
                     $wo['notification']['icon'] .= 'user-plus';
                 }
+                if ($wo['notification']['type'] == 'sent_u_request') {
+                    if ($wo['config']['connectivitySystem'] == 1) {
+                        $wo['notification']['type_text'] = !empty($wo['lang']['sent_u_friend_request']) ? $wo['lang']['sent_u_friend_request'] : 'sent you a friend request.';
+                    } else {
+                        $wo['notification']['type_text'] = !empty($wo['lang']['sent_u_follow_request']) ? $wo['lang']['sent_u_follow_request'] : 'sent you a follow request.';
+                    }
+                    $wo['notification']['icon'] .= 'user-plus';
+                }
                 if ($wo['notification']['type'] == 'interested_event') {
                     $event_data                      = Wo_EventData($wo['notification']['event_id']);
                     $wo['notification']['type_text'] = str_replace('{event_name}', $event_data['name'], $wo['lang']['is_interested']);

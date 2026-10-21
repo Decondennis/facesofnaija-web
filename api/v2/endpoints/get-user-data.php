@@ -96,7 +96,7 @@ if (empty($error_code)) {
 			$followers_latest = array();
 			$followers = Wo_GetFollowers($recipient_data['user_id'], 'profile', 50);
 			foreach ($followers as $key => $follower) {
-				$follower['is_following'] = (Wo_IsFollowing($follower['user_id'], $wo['user']['user_id'])) ? 1 : 0;
+				$follower['is_following'] = (Wo_IsFollowing($follower['user_id'], $wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($follower['user_id'], $wo['user']['user_id'])) ? 2 : 0);
 				//$follower['notification_settings'] = (Array)json_decode(html_entity_decode($follower['notification_settings']));
 				$followers_latest[] = $follower;
 			}
@@ -106,7 +106,7 @@ if (empty($error_code)) {
 			$followings_latest = array();
 			$followings = Wo_GetFollowing($recipient_data['user_id'], 'profile', 50);
 			foreach ($followings as $key => $following) {
-				$following['is_following'] = (Wo_IsFollowing($following['user_id'], $wo['user']['user_id'])) ? 1 : 0;
+				$following['is_following'] = (Wo_IsFollowing($following['user_id'], $wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($following['user_id'], $wo['user']['user_id'])) ? 2 : 0);
 				//$following['notification_settings'] = (Array)json_decode(html_entity_decode($following['notification_settings']));
 				$followings_latest[] = $following;
 			}

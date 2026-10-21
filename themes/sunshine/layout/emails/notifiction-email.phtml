@@ -52,6 +52,10 @@ if ($wo['emailNotification']['type'] == 'accepted_request') {
     $request_type = ($wo['config']['connectivitySystem'] == 1) ? 'friend' : 'follow';
     $wo['emailNotification']['type_text'] .= "accepted your {$request_type} request.";
 }
+if ($wo['emailNotification']['type'] == 'sent_u_request') {
+    $request_type = ($wo['config']['connectivitySystem'] == 1) ? 'friend' : 'follow';
+    $wo['emailNotification']['type_text'] .= "sent you a {$request_type} request.";
+}
 if ($wo['emailNotification']['type'] == 'liked_page') {
     $page = Wo_PageData($wo['emailNotification']['page_id']);
     $wo['emailNotification']['type_text'] = 'liked your page (' . $page['name'] . ')';

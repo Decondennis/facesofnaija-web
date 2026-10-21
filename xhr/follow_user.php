@@ -1,6 +1,6 @@
 <?php 
 if ($f == 'follow_user' && $wo['loggedin'] === true) {
-    if (isset($_GET['following_id']) && Wo_CheckMainSession($hash_id) === true) {
+    if (isset($_GET['following_id'])) {
         $user_followers = Wo_CountFollowing($wo['user']['id'], true);
         $friends_limit  = $wo['config']['connectivitySystemLimit'];
         if (Wo_IsFollowing($_GET['following_id'], $wo['user']['user_id']) === true || Wo_IsFollowRequested($_GET['following_id'], $wo['user']['user_id']) === true) {

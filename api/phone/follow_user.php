@@ -98,7 +98,7 @@ if ($type == 'follow_user') {
                 }
             } else {
                 if (Wo_RegisterFollow($_POST['recipient_id'], $user_id)) {
-                    $follow_data = array('follow' => 'followed');
+                    $follow_data = array('follow' => (Wo_IsFollowRequested($_POST['recipient_id'], $user_id) ? 'requested' : 'followed'));
                 }
             }
         }

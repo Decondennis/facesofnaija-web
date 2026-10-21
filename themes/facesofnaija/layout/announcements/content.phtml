@@ -1,0 +1,287 @@
+<div class="page-margin">
+	<div class="row">
+		<div class="col-md-2 leftcol"><?php echo Wo_LoadPage("sidebar/left-sidebar"); ?></div>
+		<div class="col-md-7 middlecol">
+			<!-- Header Card -->
+			<div class="page-margin wow_content mt-0 fon-announcements-hero" style="border-radius: 12px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); background: #ffffff;">
+				<div class="wo_page_hdng pag_neg_padd pag_alone" style="padding: 20px; border-bottom: 1px solid #f0f0f0;">
+					<div class="wo_page_hdng_innr big_size" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+						<div style="display: flex; align-items: center; gap: 14px;">
+							<div class="fon-ann-icon-box" style="width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #0288d1, #01579b); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 10px rgba(2,136,209,0.3);">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6m-6 4h10"/></svg>
+							</div>
+							<div>
+								<h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #1a1a1a;"><?php echo !empty($wo['lang']['announcements']) ? $wo['lang']['announcements'] : 'News & Announcements'; ?></h2>
+								<p style="margin: 3px 0 0 0; font-size: 13px; color: #777;">Stay updated with the latest news, notices, and community bulletins</p>
+							</div>
+						</div>
+						<div style="display: flex; align-items: center; gap: 8px;">
+							<span class="badge" style="background-color: #e1f5fe; color: #01579b; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 20px; border: 1px solid #b3e5fc;">
+								<span id="fon-ann-count"><?php echo !empty($wo['announcements_count']) ? $wo['announcements_count'] : count($wo['announcements']); ?></span> Announcements
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Search and Filter Bar -->
+				<div style="padding: 12px 20px; background-color: #fcfcfc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+					<div style="position: relative; flex: 1; min-width: 220px; max-width: 360px;">
+						<i class="fa fa-search" style="position: absolute; left: 12px; top: 11px; color: #999; font-size: 14px;"></i>
+						<input type="text" id="fon-ann-search" class="form-control" placeholder="Search announcements..." style="padding-left: 34px; height: 36px; border-radius: 20px; border: 1px solid #ddd; font-size: 13px; box-shadow: none;">
+					</div>
+					<div style="display: flex; align-items: center; gap: 8px;">
+						<button type="button" class="btn btn-default btn-sm" id="fon-sort-order-btn" onclick="fonToggleSortOrder();" style="border-radius: 18px; border: 1px solid #ddd; background: #fff; font-size: 12px; font-weight: 600; color: #555; padding: 6px 14px;">
+							<i class="fa fa-sort-amount-desc" id="fon-sort-icon"></i> <span id="fon-sort-label">Newest First</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Announcements List Container -->
+			<div id="fon-announcements-container" style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+				<?php
+					$announcements = !empty($wo['announcements']) ? $wo['announcements'] : array();
+					if (!empty($announcements)) {
+						foreach ($announcements as $announcement) {
+							$ann_id = $announcement['id'];
+							$ann_time = !empty($announcement['time']) ? $announcement['time'] : time();
+							$ann_views = isset($announcement['views']) ? $announcement['views'] : 0;
+							$ann_content = !empty($announcement['formatted_text']) ? $announcement['formatted_text'] : (!empty($announcement['text']) ? $announcement['text'] : '');
+				?>
+				<article class="wow_content fon-announcement-card" id="announcement-<?php echo $ann_id; ?>" data-id="<?php echo $ann_id; ?>" data-time="<?php echo $ann_time; ?>" style="background: #ffffff; border-radius: 12px; border: 1px solid #e3e8ee; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.25s ease; padding: 0; overflow: hidden; position: relative;">
+					<!-- Card Header -->
+					<div class="fon-ann-card-header" style="background: #f8fafc; padding: 12px 18px; border-bottom: 1px solid #edf2f7; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+						<div style="display: flex; align-items: center; gap: 10px;">
+							<span style="background: linear-gradient(135deg, #0288d1, #039be5); color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 9px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+								Notice #<?php echo $ann_id; ?>
+							</span>
+							<span style="color: #64748b; font-size: 12.5px; display: inline-flex; align-items: center; gap: 5px;">
+								<i class="fa fa-clock-o" style="color: #94a3b8;"></i>
+								<span title="<?php echo date('r', $ann_time); ?>">
+									<?php echo function_exists('Wo_Time_Elapsed_String') ? Wo_Time_Elapsed_String($ann_time) : date('M j, Y', $ann_time); ?>
+								</span>
+								<span style="color: #cbd5e1;">&bull;</span>
+								<span style="color: #94a3b8; font-size: 11.5px;"><?php echo date('M j, Y', $ann_time); ?></span>
+							</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 10px;">
+							<span style="color: #64748b; font-size: 12px; background: #ffffff; padding: 3px 8px; border-radius: 12px; border: 1px solid #e2e8f0; display: inline-flex; align-items: center; gap: 4px;">
+								<i class="fa fa-eye" style="color: #0288d1;"></i> <?php echo number_format($ann_views); ?> views
+							</span>
+							<button type="button" class="btn btn-default btn-xs fon-copy-link-btn" onclick="fonCopyAnnouncementLink(<?php echo $ann_id; ?>);" title="Copy link to this announcement" style="border-radius: 6px; border: 1px solid #e2e8f0; background: #fff; color: #64748b; font-size: 11.5px; padding: 3px 8px;">
+								<i class="fa fa-link"></i> <span class="hidden-xs">Share</span>
+							</button>
+						</div>
+					</div>
+
+					<!-- Card Body Content -->
+					<div class="fon-ann-body" style="padding: 20px 22px; color: #2d3748; font-size: 14.5px; line-height: 1.7; word-break: break-word;">
+						<?php echo $ann_content; ?>
+					</div>
+				</article>
+				<?php
+						}
+					} else {
+				?>
+				<div class="empty_state" id="fon-empty-state" style="background: #ffffff; border-radius: 12px; padding: 40px 20px; text-align: center; border: 1px dashed #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+					<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 15px auto; display: block;"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6m-6 4h10"/></svg>
+					<h3 style="font-size: 18px; font-weight: 600; color: #334155; margin-bottom: 6px;">No Announcements Yet</h3>
+					<p style="font-size: 13.5px; color: #64748b; max-width: 400px; margin: 0 auto;">There are currently no active announcements. Check back later for the latest news and community updates!</p>
+				</div>
+				<?php } ?>
+			</div>
+
+			<!-- Dynamic search empty state (hidden by default) -->
+			<div id="fon-no-search-results" style="display: none; background: #ffffff; border-radius: 12px; padding: 35px 20px; text-align: center; border: 1px dashed #d1d5db; margin-top: 15px;">
+				<i class="fa fa-search" style="font-size: 32px; color: #94a3b8; margin-bottom: 12px;"></i>
+				<h4 style="font-size: 16px; font-weight: 600; color: #334155; margin-bottom: 4px;">No matching announcements found</h4>
+				<p style="font-size: 13px; color: #64748b;">Try adjusting your search terms.</p>
+			</div>
+
+		</div>
+		<?php echo Wo_LoadPage('sidebar/content'); ?>
+	</div>
+</div>
+
+<style>
+/* Announcement card responsive styling */
+.fon-announcement-card:hover {
+	border-color: #cbd5e1 !important;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+}
+
+.fon-announcement-card:target,
+.fon-announcement-card.fon-highlight-active {
+	border-color: #0288d1 !important;
+	box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.25), 0 8px 24px rgba(2, 136, 209, 0.15) !important;
+	animation: fonTargetGlow 2.5s ease-out;
+}
+
+@keyframes fonTargetGlow {
+	0% {
+		background-color: #f0f9ff;
+		box-shadow: 0 0 0 4px rgba(2, 136, 209, 0.4), 0 8px 24px rgba(2, 136, 209, 0.2);
+	}
+	100% {
+		background-color: #ffffff;
+		box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.25), 0 8px 24px rgba(2, 136, 209, 0.15);
+	}
+}
+
+.fon-ann-body img {
+	max-width: 100% !important;
+	height: auto !important;
+	border-radius: 8px;
+	margin: 8px 0;
+}
+
+.fon-ann-body a {
+	color: #0288d1;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.fon-ann-body a:hover {
+	color: #01579b;
+}
+
+.fon-ann-body p:last-child {
+	margin-bottom: 0;
+}
+
+.fon-copy-link-btn:hover {
+	background: #f1f5f9 !important;
+	color: #0288d1 !important;
+	border-color: #cbd5e1 !important;
+}
+
+/* Toast message for link copied */
+#fon-ann-toast {
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	background: #1e293b;
+	color: #fff;
+	padding: 10px 18px;
+	border-radius: 8px;
+	font-size: 13px;
+	font-weight: 500;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+	z-index: 99999;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	opacity: 0;
+	transform: translateY(10px);
+	transition: all 0.25s ease;
+	pointer-events: none;
+}
+#fon-ann-toast.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+</style>
+
+<div id="fon-ann-toast"><i class="fa fa-check-circle" style="color: #4ade80;"></i> Link copied to clipboard!</div>
+
+<script type="text/javascript">
+var fonSortAscending = false;
+
+function fonToggleSortOrder() {
+	fonSortAscending = !fonSortAscending;
+	var container = $('#fon-announcements-container');
+	var cards = container.children('.fon-announcement-card').get();
+	
+	cards.sort(function(a, b) {
+		var timeA = parseInt($(a).attr('data-time')) || parseInt($(a).attr('data-id')) || 0;
+		var timeB = parseInt($(b).attr('data-time')) || parseInt($(b).attr('data-id')) || 0;
+		return fonSortAscending ? (timeA - timeB) : (timeB - timeA);
+	});
+	
+	$.each(cards, function(idx, item) {
+		container.append(item);
+	});
+	
+	if (fonSortAscending) {
+		$('#fon-sort-label').text('Oldest First');
+		$('#fon-sort-icon').removeClass('fa-sort-amount-desc').addClass('fa-sort-amount-asc');
+	} else {
+		$('#fon-sort-label').text('Newest First');
+		$('#fon-sort-icon').removeClass('fa-sort-amount-asc').addClass('fa-sort-amount-desc');
+	}
+}
+
+function fonCopyAnnouncementLink(id) {
+	var currentUrl = window.location.href.split('#')[0];
+	var shareUrl = currentUrl + '#announcement-' + id;
+	
+	if (navigator.clipboard && window.isSecureContext) {
+		navigator.clipboard.writeText(shareUrl).then(function() {
+			fonShowToast();
+		});
+	} else {
+		var tempInput = document.createElement("input");
+		tempInput.value = shareUrl;
+		document.body.appendChild(tempInput);
+		tempInput.select();
+		document.execCommand("copy");
+		document.body.removeChild(tempInput);
+		fonShowToast();
+	}
+}
+
+function fonShowToast() {
+	var toast = $('#fon-ann-toast');
+	toast.addClass('show');
+	setTimeout(function() {
+		toast.removeClass('show');
+	}, 2500);
+}
+
+$(function() {
+	// Search filter
+	$('#fon-ann-search').on('keyup', function() {
+		var query = $(this).val().toLowerCase().trim();
+		var visibleCount = 0;
+		
+		$('.fon-announcement-card').each(function() {
+			var cardText = $(this).text().toLowerCase();
+			if (cardText.indexOf(query) !== -1 || query === '') {
+				$(this).show();
+				visibleCount++;
+			} else {
+				$(this).hide();
+			}
+		});
+		
+		if (visibleCount === 0 && $('.fon-announcement-card').length > 0) {
+			$('#fon-no-search-results').show();
+		} else {
+			$('#fon-no-search-results').hide();
+		}
+		
+		$('#fon-ann-count').text(visibleCount);
+	});
+
+	// Smooth scroll and highlight if hash exists in URL
+	function checkHashAnchor() {
+		var hash = window.location.hash;
+		if (hash && hash.indexOf('#announcement-') === 0) {
+			var target = $(hash);
+			if (target.length) {
+				$('html, body').animate({
+					scrollTop: target.offset().top - 90
+				}, 400);
+				target.addClass('fon-highlight-active');
+				setTimeout(function() {
+					target.removeClass('fon-highlight-active');
+				}, 4000);
+			}
+		}
+	}
+	
+	setTimeout(checkHashAnchor, 250);
+	$(window).on('hashchange', checkHashAnchor);
+});
+</script>

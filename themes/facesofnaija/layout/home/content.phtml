@@ -39,47 +39,111 @@
 			<?php } ?>
 
 
-			<!-- .added this section -->
-			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: rgb(255, 193, 7); background-color: rgb(231, 239, 221); color:#517322;">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="setCookie('day_status', '1', 3);"><span aria-hidden="true">×</span></button>
-				<div id="daynightmsg1"><div class="small-texts">
-					<h4><a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities">Communities</a></h4> 
-						<!--img src="<?php echo $wo['config']['theme_url'];?>/img/sidebar/forum.svg" --> </div><p>
+			<!-- Communities Section -->
+			<style>
+				.fon-comm-top-actions { position: absolute; right: 12px; top: 9px; display: inline-flex; align-items: center; gap: 16px; z-index: 5; }
+				.fon-comm-globe-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer; background: transparent !important; border: none !important; padding: 0; line-height: 1; margin-right: 6px; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+				.fon-comm-globe-link:hover { transform: scale(1.18); }
+				.greetalert .fon-comm-top-actions img,
+				.fon-comm-globe-link img { position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(81, 115, 34, 0.25)); border-radius: 50%; pointer-events: auto !important; }
+				.greetalert .fon-comm-top-actions .close { position: static !important; top: auto !important; right: auto !important; float: none !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 22px !important; height: 22px !important; line-height: 1 !important; font-size: 21px !important; color: #517322 !important; opacity: 0.6 !important; padding: 0 !important; margin: 0 !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+				.fon-comm-top-actions .close:hover { opacity: 1 !important; }
+			</style>
+			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: rgb(255, 193, 7) !important; background-color: rgb(231, 239, 221); color:#517322; position: relative;">
+				<div class="fon-comm-top-actions">
+					<a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities" class="fon-comm-globe-link" title="Explore all communities">
+						<img src="<?php echo $wo['config']['theme_url'];?>/img/globe.gif" alt="Communities" width="28" height="28" />
+					</a>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="setCookie('day_status', '1', 3);" title="Dismiss"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div id="daynightmsg1">
+					<div class="small-texts">
+						<h4><a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities">Communities</a></h4> 
+					</div>
+					<div class="fon-communities-marquee" style="overflow: hidden; width: 100%; white-space: nowrap; margin-top: 4px; padding-right: 85px;">
 						<?php
-							$communitiesNames = Wo_GetCommunitiesNames();
-
-							shuffle($communitiesNames);
-							$namesStr = '';
-							for ($i=0; $i < count($communitiesNames); $i++) { 
-								if ($i >= 10) {
-									break;
+							$registeredCommunities = function_exists('Wo_GetRegisteredCommunities') ? Wo_GetRegisteredCommunities(50) : array();
+							if (!empty($registeredCommunities)) {
+								$displayList = $registeredCommunities;
+								$count = count($registeredCommunities);
+								if ($count < 8) {
+									$repeat = (int)ceil(8 / max(1, $count));
+									$displayList = array();
+									for ($r = 0; $r < $repeat; $r++) {
+										$displayList = array_merge($displayList, $registeredCommunities);
+									}
 								}
-								
-								if ($namesStr != '') {
-									$namesStr .= ', ';
-								}
-								$namesStr .= $communitiesNames[$i];
-							}
-							echo $namesStr;
 						?>
-						</p></div>
-			</div>
-
-			<?php
-				if (Wo_IsThereAnnouncement() === true) {
-				$announcement = Wo_GetHomeAnnouncements();
-			?>
-			<div class="home-announcement">
-				<div class="alert alert-success" style="background-color: white; color: #333;">
-					<span class="close announcements-option" data-toggle="tooltip" onclick="Wo_ViewAnnouncement(<?php echo $announcement['id']; ?>);" title="<?php echo $wo['lang']['hide'];?>">
-						<i class="fa fa-remove"></i>
-					</span>
-					<?php echo $announcement['text']; ?>
+						<div id="fon-comm-ticker" class="fon-smooth-ticker" style="overflow: hidden; width: 100%; white-space: nowrap; line-height: 1.6; font-size: 13.5px; color: #517322;">
+							<div class="fon-ticker-track" style="display: inline-flex; white-space: nowrap; align-items: center;">
+								<div class="fon-ticker-segment" style="display: inline-flex; white-space: nowrap; align-items: center; padding-right: 12px;">
+									<?php foreach ($displayList as $idx => $comm) { ?>
+										<a href="<?php echo $comm['url']; ?>" style="color: #2e5602; font-weight: 600; text-decoration: none; padding: 0 4px;" title="<?php echo htmlspecialchars($comm['title']); ?>"><?php echo htmlspecialchars($comm['title']); ?></a>
+										<span style="color: #8fa860; padding: 0 6px;">&bull;</span>
+									<?php } ?>
+								</div>
+							</div>
+						</div>
+						<?php } else { ?>
+							<p style="margin: 0; font-size: 13px; color: #517322;">No communities registered yet.</p>
+						<?php } ?>
+					</div>
 				</div>
 			</div>
-			<!-- .home-announcement -->
+
+			<!-- News Section -->
+			<style>
+				.fon-news-top-actions { position: absolute; right: 12px; top: 9px; display: inline-flex; align-items: center; gap: 16px; z-index: 5; }
+				.fon-news-megaphone-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer; background: transparent !important; border: none !important; padding: 0; line-height: 1; margin-right: 6px; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+				.fon-news-megaphone-link:hover { transform: scale(1.18); }
+				.greetalert .fon-news-top-actions img,
+				.fon-news-megaphone-link img { position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(2, 136, 209, 0.25)); pointer-events: auto !important; }
+				.greetalert .fon-news-top-actions .close { position: static !important; top: auto !important; right: auto !important; float: none !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 22px !important; height: 22px !important; line-height: 1 !important; font-size: 21px !important; color: #01579b !important; opacity: 0.6 !important; padding: 0 !important; margin: 0 !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+				.fon-news-top-actions .close:hover { opacity: 1 !important; }
+			</style>
+			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: #0288d1 !important; background-color: #e1f5fe; color: #01579b; margin-top: 10px; position: relative;">
+				<div class="fon-news-top-actions">
+					<a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>" data-ajax="?link1=announcements" class="fon-news-megaphone-link" title="View all news announcements">
+						<img src="<?php echo $wo['config']['theme_url'];?>/img/megaphone.gif" alt="News announcements" width="28" height="28" />
+					</a>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="setCookie('news_alert_status', '1', 3);" title="Dismiss"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div id="daynightmsg_news">
+					<div class="small-texts">
+						<h4><a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>" data-ajax="?link1=announcements" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="View all announcements">News <span style="font-size: 11px; font-weight: 600; background: #0288d1; color: #ffffff; padding: 2px 8px; border-radius: 12px; margin-left: 4px; display: inline-block; vertical-align: middle;">View All &raquo;</span></a></h4> 
+					</div>
+					<div class="fon-news-marquee" style="overflow: hidden; width: 100%; white-space: nowrap; margin-top: 4px; padding-right: 85px;">
+						<?php
+							$latestNews = function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(30) : (function_exists('Wo_GetNewsForMarquee') ? Wo_GetNewsForMarquee(30) : array());
+							if (!empty($latestNews)) {
+								$newsList = $latestNews;
+								$newsCount = count($latestNews);
+								if ($newsCount < 5) {
+									$newsRepeat = (int)ceil(5 / max(1, $newsCount));
+									$newsList = array();
+									for ($nr = 0; $nr < $newsRepeat; $nr++) {
+										$newsList = array_merge($newsList, $latestNews);
+									}
+								}
+						?>
+						<div id="fon-news-ticker" class="fon-smooth-ticker" style="overflow: hidden; width: 100%; white-space: nowrap; line-height: 1.6; font-size: 13.5px; color: #01579b;">
+							<div class="fon-ticker-track" style="display: inline-flex; white-space: nowrap; align-items: center;">
+								<div class="fon-ticker-segment" style="display: inline-flex; white-space: nowrap; align-items: center; padding-right: 12px;">
+									<?php foreach ($newsList as $idx => $newsItem) { ?>
+										<a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>#announcement-<?php echo $newsItem['id']; ?>" data-ajax="?link1=announcements" style="font-weight: 500; padding: 0 4px; color: inherit; text-decoration: none;" title="<?php echo htmlspecialchars($newsItem['text']); ?>"><?php echo htmlspecialchars($newsItem['text']); ?></a>
+										<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
+									<?php } ?>
+								</div>
+							</div>
+						</div>
+						<?php } else { ?>
+							<p style="margin: 0; font-size: 13px; color: #01579b;">No news announcements available yet.</p>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+
 			<?php
-				}
 				if($wo['loggedin'] == true) {
 						echo Wo_LoadPage('story/publisher-box');
 				}
@@ -305,6 +369,66 @@ function Wo_ViewAnnouncement(id) {
     });
 }
 
+function fonInitSmoothTicker(containerId, normalSpeed, slowSpeed) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    
+    if (container.dataset.tickerRunning === "true") return;
+    container.dataset.tickerRunning = "true";
+
+    var track = container.querySelector('.fon-ticker-track');
+    if (!track) return;
+    
+    var segment = track.querySelector('.fon-ticker-segment');
+    if (!segment) return;
+    
+    var minWidth = Math.max(container.clientWidth || 0, window.innerWidth || 800) * 2;
+    var safety = 0;
+    while (track.scrollWidth < minWidth && safety < 8) {
+        track.appendChild(segment.cloneNode(true));
+        safety++;
+    }
+    if (track.children.length < 2) {
+        track.appendChild(segment.cloneNode(true));
+    }
+    
+    var isHovered = false;
+    var alertBox = $(container).closest('.greetalert');
+    if (alertBox.length) {
+        alertBox.on('mouseenter', function() { isHovered = true; });
+        alertBox.on('mouseleave', function() { isHovered = false; });
+    }
+    container.addEventListener('mouseenter', function() { isHovered = true; });
+    container.addEventListener('mouseleave', function() { isHovered = false; });
+    
+    var scrollPos = 0;
+    function step() {
+        if (!document.body.contains(container)) return;
+        
+        var currentSpeed = isHovered ? slowSpeed : normalSpeed;
+        scrollPos += currentSpeed;
+        
+        var firstSeg = track.firstElementChild;
+        if (firstSeg) {
+            var segW = firstSeg.offsetWidth;
+            if (segW > 0 && scrollPos >= segW) {
+                scrollPos -= segW;
+                track.appendChild(firstSeg);
+            }
+        }
+        
+        container.scrollLeft = scrollPos;
+        requestAnimationFrame(step);
+    }
+    
+    requestAnimationFrame(step);
+}
+
+$(function() {
+    fonInitSmoothTicker('fon-comm-ticker', 1.1, 0.25);
+    fonInitSmoothTicker('fon-news-ticker', 1.1, 0.25);
+});
+
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*60*60*1000));
@@ -317,31 +441,123 @@ function getCookieValue(a) {
     return b ? b.pop() : '';
 }
 <?php if ($wo['loggedin']) { ?>
+function stripHtml(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+}
+
+function fonFindNaturalVoice(voices) {
+    if (!voices || !voices.length) return null;
+    
+    // 1. Natural / Neural / Enhanced / Premium English voices
+    for (var i = 0; i < voices.length; i++) {
+        var v = voices[i];
+        var name = (v.name || '').toLowerCase();
+        var lang = (v.lang || '').toLowerCase();
+        if (lang.indexOf('en') === 0) {
+            if (name.indexOf('natural') !== -1 || name.indexOf('neural') !== -1 || name.indexOf('enhanced') !== -1 || name.indexOf('premium') !== -1) {
+                return v;
+            }
+        }
+    }
+    
+    // 2. High-quality preferred English voices
+    var preferred = ['jenny', 'aria', 'google us english', 'google uk english female', 'samantha', 'serena', 'guy', 'christopher'];
+    for (var p = 0; p < preferred.length; p++) {
+        for (var i = 0; i < voices.length; i++) {
+            var v = voices[i];
+            var name = (v.name || '').toLowerCase();
+            var lang = (v.lang || '').toLowerCase();
+            if (lang.indexOf('en') === 0 && name.indexOf(preferred[p]) !== -1) {
+                return v;
+            }
+        }
+    }
+    
+    // 3. Standard English (US or GB)
+    for (var i = 0; i < voices.length; i++) {
+        var v = voices[i];
+        var lang = (v.lang || '').toLowerCase();
+        if (lang === 'en-us' || lang === 'en-gb') {
+            return v;
+        }
+    }
+    
+    // 4. Any English voice
+    for (var i = 0; i < voices.length; i++) {
+        var v = voices[i];
+        var lang = (v.lang || '').toLowerCase();
+        if (lang.indexOf('en') === 0) {
+            return v;
+        }
+    }
+    
+    return voices[0] || null;
+}
+
 $(function () {
     var is_day_enabled = getCookieValue('day_status');
     var myDate = new Date();
     var hrs = myDate.getHours();
     var greet;
     var color;
-	var quote;
+    var quote;
     if (hrs < 12) {
         greet = "<?php echo $wo['lang']['good_morning']?>" + ', <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/park.png"/>';
         color = '#7FC583';
-		quote = "<?php echo $wo['lang']['good_morning_quote']?>";
+        quote = "<?php echo function_exists('Wo_RandomMorningGreeting') ? addslashes(Wo_RandomMorningGreeting()) : addslashes($wo['lang']['good_morning_quote']); ?>";
     } else if (hrs >= 12 && hrs <= 18) {
         greet = "<?php echo $wo['lang']['good_afternoon']?>" + ', <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/desert.png"/>';
         color = '#ffc107';
-		quote = "<?php echo $wo['lang']['good_afternoon_quote']?>";
+        quote = "<?php echo function_exists('Wo_RandomAfternoonGreeting') ? addslashes(Wo_RandomAfternoonGreeting()) : addslashes($wo['lang']['good_afternoon_quote']); ?>";
     } else if (hrs >= 18 && hrs <= 24) {
         greet = "<?php echo $wo['lang']['good_evening']?>"+', <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/sea.png"/>';
         color = '#FF4F70';
-		quote = "<?php echo $wo['lang']['good_evening_quote']?>";
+        quote = "<?php echo function_exists('Wo_RandomEveningGreeting') ? addslashes(Wo_RandomEveningGreeting()) : addslashes($wo['lang']['good_evening_quote']); ?>";
     }
+
+    window.fonSpeakGreeting = function() {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        var speechText = stripHtml(greet) + ". " + stripHtml(quote);
+        var utterance = new SpeechSynthesisUtterance(speechText);
+        var voices = window.speechSynthesis.getVoices();
+        var naturalVoice = fonFindNaturalVoice(voices);
+        if (naturalVoice) {
+            utterance.voice = naturalVoice;
+            utterance.lang = naturalVoice.lang || 'en-US';
+        } else {
+            utterance.lang = 'en-US';
+        }
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        window.speechSynthesis.speak(utterance);
+    };
+
     if (is_day_enabled != 1) {
       setTimeout(function () {
-        $('.greetalert').css('border-color', color );
-        $('#daynightmsg').html('<div class="small-texts">' + greet + '</div><p>' + quote + '</p>');
-        $('.greetalert').removeClass('hidden');
+        $('#daynightmsg').closest('.greetalert').css('border-color', color );
+        $('#daynightmsg').html('<div class="small-texts">' + greet + ' <button type="button" class="btn btn-default btn-xs fon-tts-speaker" onclick="fonSpeakGreeting();" title="Listen to greeting" style="border: none; background: transparent; color: inherit; font-size: 15px; margin-left: 8px; cursor: pointer; padding: 0 4px; vertical-align: middle;"><i class="fa fa-volume-up"></i></button></div><p>' + quote + '</p>');
+        $('#daynightmsg').closest('.greetalert').removeClass('hidden');
+
+        if ('speechSynthesis' in window) {
+            var voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                fonSpeakGreeting();
+            } else {
+                window.speechSynthesis.onvoiceschanged = function() {
+                    window.speechSynthesis.onvoiceschanged = null;
+                    fonSpeakGreeting();
+                };
+                setTimeout(function() {
+                    if (!window.speechSynthesis.speaking) {
+                        fonSpeakGreeting();
+                    }
+                }, 400);
+            }
+        }
       }, 100);
     }
 });

@@ -30,7 +30,7 @@ if (!empty($_POST['type'])) {
             $following[$key2]['lastseen_time_text'] = Wo_Time_Elapsed_String($user_list['lastseen']);
             $following[$key2]['lastseen'] = $lastseen;
             $following[$key2]['user_platform'] = Wo_GetPlatformFromUser_ID($user_list['user_id']);
-            $following[$key2]['is_following'] = (Wo_IsFollowing($user_list['user_id'],$wo['user']['user_id'])) ? 1 : 0;
+            $following[$key2]['is_following'] = (Wo_IsFollowing($user_list['user_id'],$wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($user_list['user_id'],$wo['user']['user_id'])) ? 2 : 0);
 
 			foreach ($non_allowed as $key => $value) {
 	            unset($following[$key2][$value]);
@@ -50,7 +50,7 @@ if (!empty($_POST['type'])) {
             $following[$key2]['lastseen_time_text'] = Wo_Time_Elapsed_String($user_list['lastseen']);
             $following[$key2]['lastseen'] = $lastseen;
             $following[$key2]['user_platform'] = Wo_GetPlatformFromUser_ID($user_list['user_id']);
-            $following[$key2]['is_following'] = (Wo_IsFollowing($user_list['user_id'],$wo['user']['user_id'])) ? 1 : 0;
+            $following[$key2]['is_following'] = (Wo_IsFollowing($user_list['user_id'],$wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($user_list['user_id'],$wo['user']['user_id'])) ? 2 : 0);
 
 			foreach ($non_allowed as $key => $value) {
 	            unset($following[$key2][$value]);

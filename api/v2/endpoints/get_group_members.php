@@ -16,7 +16,7 @@ if (empty($error_code)) {
         foreach ($non_allowed as $key2 => $value2) {
            unset($members[$key][$value2]);
         }
-        $members[$key]['is_following'] = (Wo_IsFollowing($members[$key]['user_id'], $wo['user']['user_id'])) ? 1 : 0;
+        $members[$key]['is_following'] = (Wo_IsFollowing($members[$key]['user_id'], $wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($members[$key]['user_id'], $wo['user']['user_id'])) ? 2 : 0);
         $members[$key]['is_admin'] = Wo_IsGroupOnwer($group_id,$members[$key]['user_id']) === true ? 1 : 0;
     }
         

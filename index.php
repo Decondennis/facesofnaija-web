@@ -169,6 +169,10 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                         include('sources/group_setting.php');
                         break;
                     /** added from */
+                    case 'announcements':
+                    case 'news':
+                        include('sources/announcements.php');
+                        break;
                     case 'joined-communities':
                         include('sources/joined_communities.php');
                         break;
@@ -752,6 +756,10 @@ if ((!$wo['loggedin'] || ($wo['loggedin'] && $wo['user']['banned'] != 1))) {
                 include('sources/group_setting.php');
                 break;
             /** added from */
+            case 'announcements':
+            case 'news':
+                include('sources/announcements.php');
+                break;
             case 'joined-communities':
                 include('sources/joined_communities.php');
                 break;

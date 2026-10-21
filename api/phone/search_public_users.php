@@ -125,7 +125,7 @@ if ($type == 'search_public_users') {
                     'lastseen_unix_time' => $user_list['lastseen'],
                     'lastseen_time_text' => Wo_Time_Elapsed_String($user_list['lastseen']),
                     'url' => $user_list['url'],
-                    'is_following' => (Wo_IsFollowing($user_list['user_id'],$wo['user']['user_id'])) ? 'yes' : 'no'
+                    'is_following' => (Wo_IsFollowing($user_list['user_id'],$wo['user']['user_id'])) ? 'yes' : ((Wo_IsFollowRequested($user_list['user_id'],$wo['user']['user_id'])) ? 'requested' : 'no')
                 );
                 array_push($search_users, $json_data);
             }

@@ -72,7 +72,7 @@ if (empty($error_code)) {
 			$followers_latest = array();
 			$followers = Wo_GetFollowers($recipient_data['user_id'], 'profile', 50);
 			foreach ($followers as $key => $follower) {
-				$follower['is_following'] = (Wo_IsFollowing($follower['user_id'], $wo['user']['user_id'])) ? 1 : 0;
+				$follower['is_following'] = (Wo_IsFollowing($follower['user_id'], $wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($follower['user_id'], $wo['user']['user_id'])) ? 2 : 0);
 				$followers_latest[] = $follower;
 			}
 			$response_data['followers'] = $followers_latest;
@@ -81,7 +81,7 @@ if (empty($error_code)) {
 			$followings_latest = array();
 			$followings = Wo_GetFollowing($recipient_data['user_id'], 'profile', 50);
 			foreach ($followings as $key => $following) {
-				$following['is_following'] = (Wo_IsFollowing($following['user_id'], $wo['user']['user_id'])) ? 1 : 0;
+				$following['is_following'] = (Wo_IsFollowing($following['user_id'], $wo['user']['user_id'])) ? 1 : ((Wo_IsFollowRequested($following['user_id'], $wo['user']['user_id'])) ? 2 : 0);
 				$followings_latest[] = $following;
 			}
 			$response_data['following'] = $followings_latest;

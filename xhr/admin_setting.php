@@ -1551,6 +1551,21 @@ if ($f == 'admin_setting' AND (Wo_IsAdmin() || Wo_IsModerator())) {
             exit();
         }
     }
+    if ($s == 'remove_multi_community') {
+        if (!empty($_POST['ids'])) {
+            foreach ($_POST['ids'] as $key => $value) {
+                if (!empty($value) && is_numeric($value) && $value > 0) {
+                    Wo_DeleteCommunity(Wo_Secure($value));
+                }
+            }
+            $data = array(
+                'status' => 200
+            );
+            header("Content-type: application/json");
+            echo json_encode($data);
+            exit();
+        }
+    }
     if ($s == 'remove_multi_app') {
         if (!empty($_POST['ids'])) {
             foreach ($_POST['ids'] as $key => $value) {
@@ -3697,6 +3712,14 @@ if ($f == 'admin_setting' AND (Wo_IsAdmin() || Wo_IsModerator())) {
     }
     if ($s == 'delete_group' && isset($_GET['group_id'])) {
         if (Wo_DeleteGroup($_GET['group_id']) === true) {
+            $data['status'] = 200;
+        }
+        header("Content-type: application/json");
+        echo json_encode($data);
+        exit();
+    }
+    if ($s == 'delete_community' && isset($_GET['community_id'])) {
+        if (Wo_DeleteCommunity($_GET['community_id']) === true) {
             $data['status'] = 200;
         }
         header("Content-type: application/json");
