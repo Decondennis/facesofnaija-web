@@ -449,7 +449,7 @@
             </a>
         </div>
         <?php } ?>
-        <?php if(!empty($wo['story']['postFile'])) { ?>
+        <?php if(!empty($wo['story']['postFile']) && empty($wo['story']['photo_album']) && (empty($wo['story']['photo_multi']) || $wo['story']['multi_image'] != 1)) { ?>
 
         <div class="post-file" id="fullsizeimg">
           <!-- <div style="width: 100%;height: 100%;position: absolute;background-color: rgba(0,0,0,0.3);filter: blur(5px);"></div> -->
@@ -475,7 +475,7 @@
             <?php } ?>
           </div>
         <?php endif; ?>
-        <?php if (Wo_IsUrl($wo['story']['postPhoto'])): ?>
+        <?php if (empty($wo['story']['postFile']) && empty($wo['story']['photo_album']) && (empty($wo['story']['photo_multi']) || $wo['story']['multi_image'] != 1) && Wo_IsUrl($wo['story']['postPhoto'])): ?>
           <div class="post-file" id="fullsizeimg">
             <img src="<?php echo $wo['story']['postPhoto']; ?>" alt="Picture">
           </div>

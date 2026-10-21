@@ -474,7 +474,7 @@ if ($type == 'new_post') {
                         }
                     }
                     if (isset($_FILES['postPhotos']['name'])) {
-                        if (count($_FILES['postPhotos']['name']) > 0) {
+                        if (count($_FILES['postPhotos']['name']) > 1) {
                             for ($i = 0; $i < count($_FILES['postPhotos']['name']); $i++) {
                                 $fileInfo = array(
                                     'file' => $_FILES["postPhotos"]["tmp_name"][$i],

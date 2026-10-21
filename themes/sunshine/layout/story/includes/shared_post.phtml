@@ -613,7 +613,7 @@
    </a>
 </div>
 <?php } ?>
-        <?php if(!empty($wo['story']['postFile'])) { ?>
+        <?php if(!empty($wo['story']['postFile']) && empty($wo['story']['photo_album']) && (empty($wo['story']['photo_multi']) || $wo['story']['multi_image'] != 1)) { ?>
           <div class="post-file" id="fullsizeimg" style="width: 100%;margin-left:0;">
             <?php
               $media = array(
@@ -636,7 +636,7 @@
             <?php } ?>
           </div>
         <?php endif; ?>
-        <?php if (Wo_IsUrl($wo['story']['postPhoto'])): ?>
+        <?php if (empty($wo['story']['postFile']) && empty($wo['story']['photo_album']) && (empty($wo['story']['photo_multi']) || $wo['story']['multi_image'] != 1) && Wo_IsUrl($wo['story']['postPhoto'])): ?>
           <div class="post-file" id="fullsizeimg" style="width: 100%;margin-left:0;">
             <img src="<?php echo $wo['story']['postPhoto']; ?>" alt="Picture">
           </div>
