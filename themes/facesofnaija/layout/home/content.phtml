@@ -39,16 +39,81 @@
 			<?php } ?>
 
 
-			<!-- Communities Section -->
+			<!-- Communities & News Tickers Styles -->
 			<style>
-				.fon-comm-top-actions { position: absolute; right: 12px; top: 9px; display: inline-flex; align-items: center; gap: 16px; z-index: 5; }
-				.fon-comm-globe-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer; background: transparent !important; border: none !important; padding: 0; line-height: 1; margin-right: 6px; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
-				.fon-comm-globe-link:hover { transform: scale(1.18); }
-				.greetalert .fon-comm-top-actions img,
-				.fon-comm-globe-link img { position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(81, 115, 34, 0.25)); border-radius: 50%; pointer-events: auto !important; }
-				.greetalert .fon-comm-top-actions .close { position: static !important; top: auto !important; right: auto !important; float: none !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 22px !important; height: 22px !important; line-height: 1 !important; font-size: 21px !important; color: #517322 !important; opacity: 0.6 !important; padding: 0 !important; margin: 0 !important; background: transparent !important; border: none !important; cursor: pointer !important; }
-				.fon-comm-top-actions .close:hover { opacity: 1 !important; }
+				@keyframes fonCommTickerMove {
+					0% { transform: translate3d(0, 0, 0); }
+					100% { transform: translate3d(-50%, 0, 0); }
+				}
+				@keyframes fonNewsTickerMove {
+					0% { transform: translate3d(0, 0, 0); }
+					100% { transform: translate3d(-50%, 0, 0); }
+				}
+				.fon-smooth-ticker {
+					overflow: hidden !important;
+					width: 100% !important;
+					position: relative !important;
+					white-space: nowrap !important;
+					mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+					-webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+				}
+				.fon-comm-track {
+					display: inline-flex !important;
+					white-space: nowrap !important;
+					width: max-content !important;
+					will-change: transform;
+					animation: fonCommTickerMove 35s linear infinite !important;
+				}
+				.fon-news-track {
+					display: inline-flex !important;
+					white-space: nowrap !important;
+					width: max-content !important;
+					will-change: transform;
+					animation: fonNewsTickerMove 60s linear infinite !important;
+				}
+				.fon-smooth-ticker:hover .fon-comm-track,
+				.fon-smooth-ticker:hover .fon-news-track,
+				.greetalert:hover .fon-comm-track,
+				.greetalert:hover .fon-news-track {
+					animation-play-state: paused !important;
+				}
+				.fon-ticker-segment {
+					display: inline-flex !important;
+					white-space: nowrap !important;
+					align-items: center !important;
+					flex-shrink: 0 !important;
+					padding-right: 14px;
+				}
+				.fon-comm-top-actions, .fon-news-top-actions {
+					position: absolute; right: 12px; top: 9px; display: inline-flex; align-items: center; gap: 16px; z-index: 5;
+				}
+				.fon-comm-globe-link, .fon-news-megaphone-link {
+					display: inline-flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer; background: transparent !important; border: none !important; padding: 0; line-height: 1; margin-right: 6px; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+				}
+				.fon-comm-globe-link:hover, .fon-news-megaphone-link:hover { transform: scale(1.18); }
+				.greetalert .fon-comm-top-actions img, .fon-comm-globe-link img {
+					position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(81, 115, 34, 0.25)); border-radius: 50%; pointer-events: auto !important;
+				}
+				.greetalert .fon-news-top-actions img, .fon-news-megaphone-link img {
+					position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(2, 136, 209, 0.25)); pointer-events: auto !important;
+				}
+				.greetalert .close {
+					position: static !important; top: auto !important; right: auto !important; float: none !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 22px !important; height: 22px !important; line-height: 1 !important; font-size: 21px !important; opacity: 0.6 !important; padding: 0 !important; margin: 0 !important; background: transparent !important; border: none !important; cursor: pointer !important;
+				}
+				.greetalert .close:hover { opacity: 1 !important; }
+				.fon-news-source-badge {
+					font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-right: 6px; text-transform: uppercase; letter-spacing: 0.4px; display: inline-block; vertical-align: middle; line-height: 1.25; color: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+				}
+				.fon-news-headline-link {
+					color: inherit; text-decoration: none; font-weight: 500; transition: color 0.15s ease;
+				}
+				.fon-news-headline-link:hover {
+					text-decoration: underline !important; color: #008751 !important;
+				}
+				body.active .fon-news-headline-link:hover { color: #34d399 !important; }
 			</style>
+
+			<!-- Communities Section -->
 			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: rgb(255, 193, 7) !important; background-color: rgb(231, 239, 221); color:#517322; position: relative;">
 				<div class="fon-comm-top-actions">
 					<a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities" class="fon-comm-globe-link" title="Explore all communities">
@@ -58,7 +123,7 @@
 				</div>
 				<div id="daynightmsg1">
 					<div class="small-texts">
-						<h4><a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities">Communities</a></h4> 
+						<h4><a href="<?php echo Wo_SeoLink('index.php?link1=joined-communities'); ?>" data-ajax="?link1=joined-communities" style="color: inherit; text-decoration: none;">Communities</a></h4> 
 					</div>
 					<div class="fon-communities-marquee" style="overflow: hidden; width: 100%; white-space: nowrap; margin-top: 4px; padding-right: 85px;">
 						<?php
@@ -66,19 +131,25 @@
 							if (!empty($registeredCommunities)) {
 								$displayList = $registeredCommunities;
 								$count = count($registeredCommunities);
-								if ($count < 8) {
-									$repeat = (int)ceil(8 / max(1, $count));
+								if ($count < 6) {
+									$repeat = (int)ceil(6 / max(1, $count));
 									$displayList = array();
 									for ($r = 0; $r < $repeat; $r++) {
 										$displayList = array_merge($displayList, $registeredCommunities);
 									}
 								}
 						?>
-						<div id="fon-comm-ticker" class="fon-smooth-ticker" style="overflow: hidden; width: 100%; white-space: nowrap; line-height: 1.6; font-size: 13.5px; color: #517322;">
-							<div class="fon-ticker-track" style="display: inline-flex; white-space: nowrap; align-items: center;">
-								<div class="fon-ticker-segment" style="display: inline-flex; white-space: nowrap; align-items: center; padding-right: 12px;">
+						<div id="fon-comm-ticker" class="fon-smooth-ticker" style="line-height: 1.6; font-size: 13.5px; color: #517322;">
+							<div class="fon-comm-track">
+								<div class="fon-ticker-segment">
 									<?php foreach ($displayList as $idx => $comm) { ?>
 										<a href="<?php echo $comm['url']; ?>" style="color: #2e5602; font-weight: 600; text-decoration: none; padding: 0 4px;" title="<?php echo htmlspecialchars($comm['title']); ?>"><?php echo htmlspecialchars($comm['title']); ?></a>
+										<span style="color: #8fa860; padding: 0 6px;">&bull;</span>
+									<?php } ?>
+								</div>
+								<div class="fon-ticker-segment" aria-hidden="true">
+									<?php foreach ($displayList as $idx => $comm) { ?>
+										<a href="<?php echo $comm['url']; ?>" tabindex="-1" style="color: #2e5602; font-weight: 600; text-decoration: none; padding: 0 4px;" title="<?php echo htmlspecialchars($comm['title']); ?>"><?php echo htmlspecialchars($comm['title']); ?></a>
 										<span style="color: #8fa860; padding: 0 6px;">&bull;</span>
 									<?php } ?>
 								</div>
@@ -92,19 +163,6 @@
 			</div>
 
 			<!-- News Section -->
-			<style>
-				.fon-news-top-actions { position: absolute; right: 12px; top: 9px; display: inline-flex; align-items: center; gap: 16px; z-index: 5; }
-				.fon-news-megaphone-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer; background: transparent !important; border: none !important; padding: 0; line-height: 1; margin-right: 6px; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
-				.fon-news-megaphone-link:hover { transform: scale(1.18); }
-				.greetalert .fon-news-top-actions img,
-				.fon-news-megaphone-link img { position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(2, 136, 209, 0.25)); pointer-events: auto !important; }
-				.greetalert .fon-news-top-actions .close { position: static !important; top: auto !important; right: auto !important; float: none !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 22px !important; height: 22px !important; line-height: 1 !important; font-size: 21px !important; color: #01579b !important; opacity: 0.6 !important; padding: 0 !important; margin: 0 !important; background: transparent !important; border: none !important; cursor: pointer !important; }
-				.fon-news-top-actions .close:hover { opacity: 1 !important; }
-				.fon-news-source-badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-right: 6px; text-transform: uppercase; letter-spacing: 0.4px; display: inline-block; vertical-align: middle; line-height: 1.25; color: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-				.fon-news-headline-link { color: inherit; text-decoration: none; font-weight: 500; transition: color 0.15s ease; }
-				.fon-news-headline-link:hover { text-decoration: underline !important; color: #008751 !important; }
-				body.active .fon-news-headline-link:hover { color: #34d399 !important; }
-			</style>
 			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: #0288d1 !important; background-color: #e1f5fe; color: #01579b; margin-top: 10px; position: relative;">
 				<div class="fon-news-top-actions">
 					<a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>" data-ajax="?link1=announcements" class="fon-news-megaphone-link" title="View all news announcements">
@@ -118,32 +176,82 @@
 					</div>
 					<div class="fon-news-marquee" style="overflow: hidden; width: 100%; white-space: nowrap; margin-top: 4px; padding-right: 85px;">
 						<?php
-							$latestNews = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : (function_exists('Wo_GetNewsForMarquee') ? Wo_GetNewsForMarquee(30) : (function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(30) : array()));
-							if (!empty($latestNews)) {
-								$newsList = $latestNews;
-								$newsCount = count($latestNews);
-								if ($newsCount < 5) {
-									$newsRepeat = (int)ceil(5 / max(1, $newsCount));
-									$newsList = array();
-									for ($nr = 0; $nr < $newsRepeat; $nr++) {
-										$newsList = array_merge($newsList, $latestNews);
+							$dbAnnouncements = function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(10) : array();
+							$rssHeadlines    = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : (function_exists('Wo_GetNewsForMarquee') ? Wo_GetNewsForMarquee(30) : array());
+
+							$newsList = array();
+							if (!empty($dbAnnouncements)) {
+								foreach ($dbAnnouncements as $ann) {
+									$newsList[] = array(
+										'id'     => $ann['id'],
+										'title'  => $ann['text'],
+										'source' => 'Notice',
+										'link'   => Wo_SeoLink('index.php?link1=announcements') . '#announcement-' . $ann['id']
+									);
+								}
+							}
+							if (!empty($rssHeadlines)) {
+								foreach ($rssHeadlines as $rss) {
+									$newsList[] = $rss;
+								}
+							}
+							if (empty($newsList)) {
+								$fallbackNews = function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(30) : array();
+								if (!empty($fallbackNews)) {
+									foreach ($fallbackNews as $fn) {
+										$newsList[] = array(
+											'id'     => $fn['id'],
+											'title'  => $fn['text'],
+											'source' => 'Notice',
+											'link'   => Wo_SeoLink('index.php?link1=announcements') . '#announcement-' . $fn['id']
+										);
 									}
 								}
+							}
+
+							if (!empty($newsList)) {
+								$newsCount = count($newsList);
+								if ($newsCount < 5) {
+									$newsRepeat = (int)ceil(5 / max(1, $newsCount));
+									$expandedNews = array();
+									for ($nr = 0; $nr < $newsRepeat; $nr++) {
+										$expandedNews = array_merge($expandedNews, $newsList);
+									}
+									$newsList = $expandedNews;
+								}
 						?>
-						<div id="fon-news-ticker" class="fon-smooth-ticker" style="overflow: hidden; width: 100%; white-space: nowrap; line-height: 1.6; font-size: 13.5px; color: #01579b;">
-							<div class="fon-ticker-track" style="display: inline-flex; white-space: nowrap; align-items: center;">
-								<div class="fon-ticker-segment" style="display: inline-flex; white-space: nowrap; align-items: center; padding-right: 12px;">
+						<div id="fon-news-ticker" class="fon-smooth-ticker" style="line-height: 1.6; font-size: 13.5px; color: #01579b;">
+							<div class="fon-news-track">
+								<div class="fon-ticker-segment">
 									<?php foreach ($newsList as $idx => $newsItem) { 
 										$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
 										$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
 										$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements') . (!empty($newsItem['id']) ? '#announcement-' . $newsItem['id'] : '');
 										$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
 										$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
-										$badgeBg    = $isNigerian ? '#008751' : '#0288d1';
+										$isNotice   = (strtolower($itemSource) === 'notice' || strtolower($itemSource) === 'announcement');
+										$badgeBg    = $isNotice ? '#d97706' : ($isNigerian ? '#008751' : '#0288d1');
 									?>
 										<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
 											<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
 											<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
+											<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
+										</span>
+									<?php } ?>
+								</div>
+								<div class="fon-ticker-segment" aria-hidden="true">
+									<?php foreach ($newsList as $idx => $newsItem) { 
+										$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
+										$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
+										$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements') . (!empty($newsItem['id']) ? '#announcement-' . $newsItem['id'] : '');
+										$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
+										$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
+										$isNotice   = (strtolower($itemSource) === 'notice' || strtolower($itemSource) === 'announcement');
+										$badgeBg    = $isNotice ? '#d97706' : ($isNigerian ? '#008751' : '#0288d1');
+									?>
+										<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
+											<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
+											<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> tabindex="-1" title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
 											<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
 										</span>
 									<?php } ?>
@@ -383,65 +491,7 @@ function Wo_ViewAnnouncement(id) {
     });
 }
 
-function fonInitSmoothTicker(containerId, normalSpeed, slowSpeed) {
-    var container = document.getElementById(containerId);
-    if (!container) return;
-    
-    if (container.dataset.tickerRunning === "true") return;
-    container.dataset.tickerRunning = "true";
-
-    var track = container.querySelector('.fon-ticker-track');
-    if (!track) return;
-    
-    var segment = track.querySelector('.fon-ticker-segment');
-    if (!segment) return;
-    
-    var minWidth = Math.max(container.clientWidth || 0, window.innerWidth || 800) * 2;
-    var safety = 0;
-    while (track.scrollWidth < minWidth && safety < 8) {
-        track.appendChild(segment.cloneNode(true));
-        safety++;
-    }
-    if (track.children.length < 2) {
-        track.appendChild(segment.cloneNode(true));
-    }
-    
-    var isHovered = false;
-    var alertBox = $(container).closest('.greetalert');
-    if (alertBox.length) {
-        alertBox.on('mouseenter', function() { isHovered = true; });
-        alertBox.on('mouseleave', function() { isHovered = false; });
-    }
-    container.addEventListener('mouseenter', function() { isHovered = true; });
-    container.addEventListener('mouseleave', function() { isHovered = false; });
-    
-    var scrollPos = 0;
-    function step() {
-        if (!document.body.contains(container)) return;
-        
-        var currentSpeed = isHovered ? slowSpeed : normalSpeed;
-        scrollPos += currentSpeed;
-        
-        var firstSeg = track.firstElementChild;
-        if (firstSeg) {
-            var segW = firstSeg.offsetWidth;
-            if (segW > 0 && scrollPos >= segW) {
-                scrollPos -= segW;
-                track.appendChild(firstSeg);
-            }
-        }
-        
-        container.scrollLeft = scrollPos;
-        requestAnimationFrame(step);
-    }
-    
-    requestAnimationFrame(step);
-}
-
-$(function() {
-    fonInitSmoothTicker('fon-comm-ticker', 1.1, 0.25);
-    fonInitSmoothTicker('fon-news-ticker', 1.1, 0.25);
-});
+// Tickers are driven by GPU-accelerated CSS keyframe animations (fonCommTickerMove and fonNewsTickerMove) with dual segments
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();

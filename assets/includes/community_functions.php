@@ -260,6 +260,9 @@ function Wo_GetMyCommunities() {
 function Wo_GetRegisteredCommunities($total = 100) {
     global $sqlConnect, $wo;
     $data = array();
+    if (empty($sqlConnect) || !($sqlConnect instanceof mysqli)) {
+        return $data;
+    }
     $total = (int)$total;
     if ($total <= 0) {
         $total = 100;
@@ -296,6 +299,9 @@ function Wo_GetCommunitiesNames($total = 100) {
 function Wo_GetNewsFromAnnouncements($total = 30) {
     global $sqlConnect, $wo;
     $data = array();
+    if (empty($sqlConnect) || !($sqlConnect instanceof mysqli)) {
+        return $data;
+    }
     $total = (int)$total;
     if ($total <= 0) {
         $total = 30;
