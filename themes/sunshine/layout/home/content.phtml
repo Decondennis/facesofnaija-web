@@ -234,15 +234,15 @@ $(function () {
     if (hrs < 12) {
         greet = '<?php echo $wo['lang']['good_morning']?>, <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/sunrise.png"/>';
         color = '#7FC583';
-        quote = '<?php echo $wo['lang']['good_morning_quote']?>';
+        quote = "<?php echo function_exists('Wo_RandomMorningGreeting') ? addslashes(Wo_RandomMorningGreeting()) : addslashes($wo['lang']['good_morning_quote']); ?>";
     } else if (hrs >= 12 && hrs <= 18) {
         greet = '<?php echo $wo['lang']['good_afternoon']?>, <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/sun.png"/>';
         color = '#ffc107';
-        quote = '<?php echo $wo['lang']['good_afternoon_quote']?>';
+        quote = "<?php echo function_exists('Wo_RandomAfternoonGreeting') ? addslashes(Wo_RandomAfternoonGreeting()) : addslashes($wo['lang']['good_afternoon_quote']); ?>";
     } else if (hrs >= 18 && hrs <= 24) {
         greet = '<?php echo $wo['lang']['good_evening']?>, <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/sunset.png"/>';
         color = '#FF4F70';
-        quote = '<?php echo $wo['lang']['good_evening_quote']?>';
+        quote = "<?php echo function_exists('Wo_RandomEveningGreeting') ? addslashes(Wo_RandomEveningGreeting()) : addslashes($wo['lang']['good_evening_quote']); ?>";
     }
     if (is_day_enabled != 1) {
       setTimeout(function () {
