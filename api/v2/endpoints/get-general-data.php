@@ -494,7 +494,31 @@ if (empty($error_code)) {
         if (!empty($response_data['announcement'])) {
             $response_data['announcement']['text_decode'] = strip_tags($response_data['announcement']['text']);
             $response_data['announcement']['time_text'] = Wo_Time_Elapsed_String($response_data['announcement']['time']);
-        } 
+        } else {
+            // Fallback to live RSS headlines ticker if no admin announcement is in database
+            if (function_exists('Wo_GetRssNewsHeadlines')) {
+                $rss = Wo_GetRssNewsHeadlines(4);
+                if (!empty($rss) && is_array($rss)) {
+                    $ticker_parts = array();
+                    foreach ($rss as $r) {
+                        $src = !empty($r['source']) ? strtoupper($r['source']) : 'NEWS';
+                        $tit = !empty($r['title']) ? $r['title'] : '';
+                        if (!empty($tit)) {
+                            $ticker_parts[] = "[$src] $tit";
+                        }
+                    }
+                    $ticker_text = implode('   •   ', $ticker_parts);
+                    $response_data['announcement'] = array(
+                        'id' => 999999,
+                        'text' => $ticker_text,
+                        'text_decode' => $ticker_text,
+                        'time' => time(),
+                        'time_text' => 'Just now',
+                        'active' => '1'
+                    );
+                }
+            }
+        }
     }
     if (!empty($data['news_ticker']) || !empty($data['rss_news']) || !empty($data['announcement'])) {
         $response_data['news_ticker'] = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : array();

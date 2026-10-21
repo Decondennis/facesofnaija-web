@@ -42,7 +42,10 @@ $pages_without_access_token = array(
     'is-active',
     'two-factor',
     'reset_password',
-    'validation_user'
+    'validation_user',
+    'get_news_ticker',
+    'get-news-ticker',
+    'get_announcements'
 );
 $pages_without_loggedin     = array(
     'get-site-settings',
@@ -55,7 +58,10 @@ $pages_without_loggedin     = array(
     'is-active',
     'two-factor',
     'reset_password',
-    'validation_user'
+    'validation_user',
+    'get_news_ticker',
+    'get-news-ticker',
+    'get_announcements'
 );
 if (!file_exists($api)) {
     $response_data = array(
