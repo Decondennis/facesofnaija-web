@@ -318,9 +318,192 @@ function Wo_GetNewsFromAnnouncements($total = 30) {
     return $data;
 }
 
+/**
+ * Nigerian & World News RSS Ticker with 15-Minute Caching
+ * Sources: PunchNG, Vanguard, PremiumTimes, ChannelsTV, BBCWorld, AlJazeera
+ */
+function Wo_GetRssNewsHeadlines($limit_per_feed = 4, $force_refresh = false) {
+    global $wo;
+
+    $cache_dir = __DIR__ . '/../../cache';
+    if (!is_dir($cache_dir) || !is_writable($cache_dir)) {
+        $cache_dir = __DIR__ . '/../..';
+    }
+    $cache_file = rtrim($cache_dir, '/\\') . '/rss_ticker_cache.json';
+    $cache_time = 900; // 15 minutes (900 seconds)
+
+    // 1. Check valid cache first
+    if (!$force_refresh && file_exists($cache_file) && (time() - filemtime($cache_file) < $cache_time)) {
+        $cached = json_decode(@file_get_contents($cache_file), true);
+        if (!empty($cached) && is_array($cached)) {
+            return $cached;
+        }
+    }
+
+    // 2. Define RSS Feeds (Nigeria & World)
+    $feeds = array(
+        'PunchNG'      => 'https://rss.punchng.com/v1/category/latest_news',
+        'Vanguard'     => 'https://www.vanguardngr.com/feed/',
+        'PremiumTimes' => 'https://www.premiumtimesng.com/feed',
+        'ChannelsTV'   => 'https://www.channelstv.com/feed/',
+        'BBCWorld'     => 'https://feeds.bbci.co.uk/news/world/rss.xml',
+        'AlJazeera'    => 'https://www.aljazeera.com/xml/rss/all.xml'
+    );
+
+    $limit_per_feed = max(1, (int)$limit_per_feed);
+    $headlines = array();
+
+    // 3. Fetch feeds in parallel using curl_multi for fast performance
+    if (function_exists('curl_multi_init') && function_exists('curl_init')) {
+        $mh = curl_multi_init();
+        $curl_handles = array();
+
+        foreach ($feeds as $source => $url) {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+            curl_multi_add_handle($mh, $ch);
+            $curl_handles[$source] = $ch;
+        }
+
+        $running = null;
+        do {
+            $status = curl_multi_exec($mh, $running);
+            if ($running) {
+                curl_multi_select($mh, 0.1);
+            }
+        } while ($running > 0 && $status == CURLM_OK);
+
+        $id_counter = 1;
+        foreach ($curl_handles as $source => $ch) {
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $xml_data = curl_multi_getcontent($ch);
+            curl_multi_remove_handle($mh, $ch);
+            curl_close($ch);
+
+            if ($http_code === 200 && !empty($xml_data)) {
+                libxml_use_internal_errors(true);
+                $xml = simplexml_load_string($xml_data, 'SimpleXMLElement', LIBXML_NOCDATA);
+                if ($xml && isset($xml->channel->item)) {
+                    $count = 0;
+                    foreach ($xml->channel->item as $item) {
+                        if ($count >= $limit_per_feed) break;
+                        $raw_title = (string)$item->title;
+                        $clean_title = html_entity_decode(strip_tags($raw_title), ENT_QUOTES, 'UTF-8');
+                        $clean_title = trim(str_replace("\xc2\xa0", ' ', $clean_title));
+                        $link = trim((string)$item->link);
+                        $pub_time = strtotime((string)$item->pubDate) ?: time();
+
+                        if (!empty($clean_title) && !empty($link)) {
+                            $headlines[] = array(
+                                'id'     => $id_counter++,
+                                'source' => $source,
+                                'title'  => $clean_title,
+                                'text'   => $clean_title, // For backward compatibility
+                                'link'   => $link,
+                                'time'   => $pub_time
+                            );
+                            $count++;
+                        }
+                    }
+                }
+                libxml_clear_errors();
+            }
+        }
+        curl_multi_close($mh);
+    } else {
+        // Fallback to sequential cURL
+        $id_counter = 1;
+        foreach ($feeds as $source => $url) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+            $xml_data = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($http_code === 200 && !empty($xml_data)) {
+                libxml_use_internal_errors(true);
+                $xml = simplexml_load_string($xml_data, 'SimpleXMLElement', LIBXML_NOCDATA);
+                if ($xml && isset($xml->channel->item)) {
+                    $count = 0;
+                    foreach ($xml->channel->item as $item) {
+                        if ($count >= $limit_per_feed) break;
+                        $raw_title = (string)$item->title;
+                        $clean_title = html_entity_decode(strip_tags($raw_title), ENT_QUOTES, 'UTF-8');
+                        $clean_title = trim(str_replace("\xc2\xa0", ' ', $clean_title));
+                        $link = trim((string)$item->link);
+                        $pub_time = strtotime((string)$item->pubDate) ?: time();
+
+                        if (!empty($clean_title) && !empty($link)) {
+                            $headlines[] = array(
+                                'id'     => $id_counter++,
+                                'source' => $source,
+                                'title'  => $clean_title,
+                                'text'   => $clean_title,
+                                'link'   => $link,
+                                'time'   => $pub_time
+                            );
+                            $count++;
+                        }
+                    }
+                }
+                libxml_clear_errors();
+            }
+        }
+    }
+
+    // 4. Sort all headlines by newest first
+    if (!empty($headlines)) {
+        usort($headlines, function($a, $b) {
+            return $b['time'] <=> $a['time'];
+        });
+        foreach ($headlines as $k => $v) {
+            $headlines[$k]['id'] = $k + 1;
+        }
+
+        @file_put_contents($cache_file, json_encode($headlines));
+        return $headlines;
+    }
+
+    // 5. Fallback to expired cache if network fails
+    if (file_exists($cache_file)) {
+        $cached = json_decode(@file_get_contents($cache_file), true);
+        if (!empty($cached) && is_array($cached)) {
+            return $cached;
+        }
+    }
+
+    // 6. Fallback to database announcements
+    if (function_exists('Wo_GetNewsFromAnnouncements')) {
+        return Wo_GetNewsFromAnnouncements(30);
+    }
+
+    return array();
+}
+
 function Wo_GetNewsForMarquee($total = 30) {
+    $rss = Wo_GetRssNewsHeadlines(4);
+    if (!empty($rss) && is_array($rss)) {
+        $total = (int)$total;
+        if ($total > 0 && count($rss) > $total) {
+            return array_slice($rss, 0, $total);
+        }
+        return $rss;
+    }
     return Wo_GetNewsFromAnnouncements($total);
 }
+
 
 function Wo_GetAllUserAnnouncements($limit = 100, $offset = 0) {
     global $sqlConnect, $wo;

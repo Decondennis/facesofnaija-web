@@ -496,4 +496,7 @@ if (empty($error_code)) {
             $response_data['announcement']['time_text'] = Wo_Time_Elapsed_String($response_data['announcement']['time']);
         } 
     }
+    if (!empty($data['news_ticker']) || !empty($data['rss_news'])) {
+        $response_data['news_ticker'] = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : array();
+    }
 }

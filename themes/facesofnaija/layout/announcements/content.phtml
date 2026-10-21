@@ -16,8 +16,13 @@
 							</div>
 						</div>
 						<div style="display: flex; align-items: center; gap: 8px;">
+							<?php
+								$announcements = !empty($wo['announcements']) ? $wo['announcements'] : array();
+								$rss_news = !empty($wo['rss_news']) ? $wo['rss_news'] : (function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : array());
+								$total_items = count($announcements) + count($rss_news);
+							?>
 							<span class="badge" style="background-color: #e1f5fe; color: #01579b; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 20px; border: 1px solid #b3e5fc;">
-								<span id="fon-ann-count"><?php echo !empty($wo['announcements_count']) ? $wo['announcements_count'] : count($wo['announcements']); ?></span> Announcements
+								<span id="fon-ann-count"><?php echo $total_items; ?></span> Updates
 							</span>
 						</div>
 					</div>
@@ -25,11 +30,16 @@
 
 				<!-- Search and Filter Bar -->
 				<div style="padding: 12px 20px; background-color: #fcfcfc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-					<div style="position: relative; flex: 1; min-width: 220px; max-width: 360px;">
+					<div style="position: relative; flex: 1; min-width: 200px; max-width: 320px;">
 						<i class="fa fa-search" style="position: absolute; left: 12px; top: 11px; color: #999; font-size: 14px;"></i>
-						<input type="text" id="fon-ann-search" class="form-control" placeholder="Search announcements..." style="padding-left: 34px; height: 36px; border-radius: 20px; border: 1px solid #ddd; font-size: 13px; box-shadow: none;">
+						<input type="text" id="fon-ann-search" class="form-control" placeholder="Search news & updates..." style="padding-left: 34px; height: 36px; border-radius: 20px; border: 1px solid #ddd; font-size: 13px; box-shadow: none;">
 					</div>
-					<div style="display: flex; align-items: center; gap: 8px;">
+					<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+						<div class="btn-group btn-group-sm" role="group" style="box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+							<button type="button" class="btn btn-primary btn-sm fon-type-filter active" data-type="all" onclick="fonFilterType('all', this);" style="border-radius: 18px 0 0 18px; font-size: 12px; font-weight: 600; padding: 6px 12px;">All (<?php echo $total_items; ?>)</button>
+							<button type="button" class="btn btn-default btn-sm fon-type-filter" data-type="news" onclick="fonFilterType('news', this);" style="border-radius: 0; font-size: 12px; font-weight: 600; padding: 6px 12px; border-left: 0; border-right: 0;">Live News (<?php echo count($rss_news); ?>)</button>
+							<button type="button" class="btn btn-default btn-sm fon-type-filter" data-type="announcement" onclick="fonFilterType('announcement', this);" style="border-radius: 0 18px 18px 0; font-size: 12px; font-weight: 600; padding: 6px 12px;">Notices (<?php echo count($announcements); ?>)</button>
+						</div>
 						<button type="button" class="btn btn-default btn-sm" id="fon-sort-order-btn" onclick="fonToggleSortOrder();" style="border-radius: 18px; border: 1px solid #ddd; background: #fff; font-size: 12px; font-weight: 600; color: #555; padding: 6px 14px;">
 							<i class="fa fa-sort-amount-desc" id="fon-sort-icon"></i> <span id="fon-sort-label">Newest First</span>
 						</button>
@@ -40,7 +50,53 @@
 			<!-- Announcements List Container -->
 			<div id="fon-announcements-container" style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
 				<?php
-					$announcements = !empty($wo['announcements']) ? $wo['announcements'] : array();
+					// 1. Output Live News items
+					if (!empty($rss_news)) {
+						foreach ($rss_news as $news_item) {
+							$news_id     = !empty($news_item['id']) ? $news_item['id'] : 0;
+							$news_source = !empty($news_item['source']) ? $news_item['source'] : 'News';
+							$news_title  = !empty($news_item['title']) ? $news_item['title'] : (!empty($news_item['text']) ? $news_item['text'] : '');
+							$news_link   = !empty($news_item['link']) ? $news_item['link'] : '#';
+							$news_time   = !empty($news_item['time']) ? $news_item['time'] : time();
+							$isNigerian  = in_array(strtolower($news_source), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
+							$badgeBg     = $isNigerian ? '#008751' : '#0288d1';
+				?>
+				<article class="wow_content fon-announcement-card fon-news-card" id="news-headline-<?php echo $news_id; ?>" data-type="news" data-id="<?php echo $news_id; ?>" data-time="<?php echo $news_time; ?>" style="background: #ffffff; border-radius: 12px; border: 1px solid #e3e8ee; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.25s ease; padding: 0; overflow: hidden; position: relative;">
+					<!-- Card Header -->
+					<div class="fon-ann-card-header" style="background: #f8fafc; padding: 12px 18px; border-bottom: 1px solid #edf2f7; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+						<div style="display: flex; align-items: center; gap: 10px;">
+							<span style="background-color: <?php echo $badgeBg; ?>; color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 9px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+								<?php echo htmlspecialchars($news_source); ?>
+							</span>
+							<span style="color: #64748b; font-size: 12.5px; display: inline-flex; align-items: center; gap: 5px;">
+								<i class="fa fa-clock-o" style="color: #94a3b8;"></i>
+								<span title="<?php echo date('r', $news_time); ?>">
+									<?php echo function_exists('Wo_Time_Elapsed_String') ? Wo_Time_Elapsed_String($news_time) : date('M j, Y', $news_time); ?>
+								</span>
+								<span style="color: #cbd5e1;">&bull;</span>
+								<span style="color: #94a3b8; font-size: 11.5px;"><?php echo date('M j, Y', $news_time); ?></span>
+							</span>
+						</div>
+						<div style="display: flex; align-items: center; gap: 8px;">
+							<a href="<?php echo htmlspecialchars($news_link); ?>" target="_blank" rel="noopener noreferrer" class="btn btn-default btn-xs" style="border-radius: 6px; border: 1px solid <?php echo $badgeBg; ?>; background: <?php echo $badgeBg; ?>; color: #fff; font-size: 11.5px; font-weight: 600; padding: 4px 10px; display: inline-flex; align-items: center; gap: 5px; text-decoration: none;">
+								<i class="fa fa-external-link"></i> <span>Read Full Story</span>
+							</a>
+						</div>
+					</div>
+
+					<!-- Card Body Content -->
+					<div class="fon-ann-body" style="padding: 18px 22px; color: #1e293b; font-size: 15px; font-weight: 600; line-height: 1.6;">
+						<a href="<?php echo htmlspecialchars($news_link); ?>" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+							<?php echo htmlspecialchars($news_title); ?>
+						</a>
+					</div>
+				</article>
+				<?php
+						}
+					}
+
+					// 2. Output Database Announcements
 					if (!empty($announcements)) {
 						foreach ($announcements as $announcement) {
 							$ann_id = $announcement['id'];
@@ -48,7 +104,7 @@
 							$ann_views = isset($announcement['views']) ? $announcement['views'] : 0;
 							$ann_content = !empty($announcement['formatted_text']) ? $announcement['formatted_text'] : (!empty($announcement['text']) ? $announcement['text'] : '');
 				?>
-				<article class="wow_content fon-announcement-card" id="announcement-<?php echo $ann_id; ?>" data-id="<?php echo $ann_id; ?>" data-time="<?php echo $ann_time; ?>" style="background: #ffffff; border-radius: 12px; border: 1px solid #e3e8ee; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.25s ease; padding: 0; overflow: hidden; position: relative;">
+				<article class="wow_content fon-announcement-card" id="announcement-<?php echo $ann_id; ?>" data-type="announcement" data-id="<?php echo $ann_id; ?>" data-time="<?php echo $ann_time; ?>" style="background: #ffffff; border-radius: 12px; border: 1px solid #e3e8ee; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.25s ease; padding: 0; overflow: hidden; position: relative;">
 					<!-- Card Header -->
 					<div class="fon-ann-card-header" style="background: #f8fafc; padding: 12px 18px; border-bottom: 1px solid #edf2f7; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
 						<div style="display: flex; align-items: center; gap: 10px;">
@@ -82,12 +138,15 @@
 				</article>
 				<?php
 						}
-					} else {
+					}
+					
+					// 3. Empty state if no news and no announcements
+					if (empty($announcements) && empty($rss_news)) {
 				?>
 				<div class="empty_state" id="fon-empty-state" style="background: #ffffff; border-radius: 12px; padding: 40px 20px; text-align: center; border: 1px dashed #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
 					<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 15px auto; display: block;"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6m-6 4h10"/></svg>
-					<h3 style="font-size: 18px; font-weight: 600; color: #334155; margin-bottom: 6px;">No Announcements Yet</h3>
-					<p style="font-size: 13.5px; color: #64748b; max-width: 400px; margin: 0 auto;">There are currently no active announcements. Check back later for the latest news and community updates!</p>
+					<h3 style="font-size: 18px; font-weight: 600; color: #334155; margin-bottom: 6px;">No Updates Available</h3>
+					<p style="font-size: 13.5px; color: #64748b; max-width: 400px; margin: 0 auto;">There are currently no active headlines or notices. Check back soon for the latest updates!</p>
 				</div>
 				<?php } ?>
 			</div>
@@ -239,29 +298,46 @@ function fonShowToast() {
 	}, 2500);
 }
 
+var fonCurrentFilter = 'all';
+
+function fonFilterType(type, btn) {
+	fonCurrentFilter = type;
+	$('.fon-type-filter').removeClass('btn-primary active').addClass('btn-default');
+	$(btn).removeClass('btn-default').addClass('btn-primary active');
+	fonApplyFilters();
+}
+
+function fonApplyFilters() {
+	var query = $('#fon-ann-search').val().toLowerCase().trim();
+	var visibleCount = 0;
+	
+	$('.fon-announcement-card').each(function() {
+		var cardType = $(this).attr('data-type') || 'announcement';
+		var cardText = $(this).text().toLowerCase();
+		var typeMatch = (fonCurrentFilter === 'all' || cardType === fonCurrentFilter);
+		var textMatch = (query === '' || cardText.indexOf(query) !== -1);
+		
+		if (typeMatch && textMatch) {
+			$(this).show();
+			visibleCount++;
+		} else {
+			$(this).hide();
+		}
+	});
+	
+	if (visibleCount === 0 && $('.fon-announcement-card').length > 0) {
+		$('#fon-no-search-results').show();
+	} else {
+		$('#fon-no-search-results').hide();
+	}
+	
+	$('#fon-ann-count').text(visibleCount);
+}
+
 $(function() {
 	// Search filter
 	$('#fon-ann-search').on('keyup', function() {
-		var query = $(this).val().toLowerCase().trim();
-		var visibleCount = 0;
-		
-		$('.fon-announcement-card').each(function() {
-			var cardText = $(this).text().toLowerCase();
-			if (cardText.indexOf(query) !== -1 || query === '') {
-				$(this).show();
-				visibleCount++;
-			} else {
-				$(this).hide();
-			}
-		});
-		
-		if (visibleCount === 0 && $('.fon-announcement-card').length > 0) {
-			$('#fon-no-search-results').show();
-		} else {
-			$('#fon-no-search-results').hide();
-		}
-		
-		$('#fon-ann-count').text(visibleCount);
+		fonApplyFilters();
 	});
 
 	// Smooth scroll and highlight if hash exists in URL

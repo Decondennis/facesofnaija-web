@@ -14,5 +14,6 @@ if (empty($wo['title']) || $wo['title'] == 'announcements') {
 
 $wo['announcements']       = function_exists('Wo_GetAllUserAnnouncements') ? Wo_GetAllUserAnnouncements(100) : array();
 $wo['announcements_count'] = function_exists('Wo_CountActiveAnnouncements') ? Wo_CountActiveAnnouncements() : count($wo['announcements']);
+$wo['rss_news']            = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : array();
 
 $wo['content']     = Wo_LoadPage('announcements/content');

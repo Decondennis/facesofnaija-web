@@ -100,6 +100,10 @@
 				.fon-news-megaphone-link img { position: static !important; top: auto !important; right: auto !important; transform: none !important; width: 28px !important; height: 28px !important; object-fit: contain !important; display: block !important; border: none !important; background: transparent !important; filter: drop-shadow(0 1px 3px rgba(2, 136, 209, 0.25)); pointer-events: auto !important; }
 				.greetalert .fon-news-top-actions .close { position: static !important; top: auto !important; right: auto !important; float: none !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 22px !important; height: 22px !important; line-height: 1 !important; font-size: 21px !important; color: #01579b !important; opacity: 0.6 !important; padding: 0 !important; margin: 0 !important; background: transparent !important; border: none !important; cursor: pointer !important; }
 				.fon-news-top-actions .close:hover { opacity: 1 !important; }
+				.fon-news-source-badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-right: 6px; text-transform: uppercase; letter-spacing: 0.4px; display: inline-block; vertical-align: middle; line-height: 1.25; color: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+				.fon-news-headline-link { color: inherit; text-decoration: none; font-weight: 500; transition: color 0.15s ease; }
+				.fon-news-headline-link:hover { text-decoration: underline !important; color: #008751 !important; }
+				body.active .fon-news-headline-link:hover { color: #34d399 !important; }
 			</style>
 			<div class="alert alert-dismissible greetalert" role="alert" style="border-color: #0288d1 !important; background-color: #e1f5fe; color: #01579b; margin-top: 10px; position: relative;">
 				<div class="fon-news-top-actions">
@@ -114,7 +118,7 @@
 					</div>
 					<div class="fon-news-marquee" style="overflow: hidden; width: 100%; white-space: nowrap; margin-top: 4px; padding-right: 85px;">
 						<?php
-							$latestNews = function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(30) : (function_exists('Wo_GetNewsForMarquee') ? Wo_GetNewsForMarquee(30) : array());
+							$latestNews = function_exists('Wo_GetRssNewsHeadlines') ? Wo_GetRssNewsHeadlines(4) : (function_exists('Wo_GetNewsForMarquee') ? Wo_GetNewsForMarquee(30) : (function_exists('Wo_GetNewsFromAnnouncements') ? Wo_GetNewsFromAnnouncements(30) : array()));
 							if (!empty($latestNews)) {
 								$newsList = $latestNews;
 								$newsCount = count($latestNews);
@@ -129,9 +133,19 @@
 						<div id="fon-news-ticker" class="fon-smooth-ticker" style="overflow: hidden; width: 100%; white-space: nowrap; line-height: 1.6; font-size: 13.5px; color: #01579b;">
 							<div class="fon-ticker-track" style="display: inline-flex; white-space: nowrap; align-items: center;">
 								<div class="fon-ticker-segment" style="display: inline-flex; white-space: nowrap; align-items: center; padding-right: 12px;">
-									<?php foreach ($newsList as $idx => $newsItem) { ?>
-										<a href="<?php echo Wo_SeoLink('index.php?link1=announcements'); ?>#announcement-<?php echo $newsItem['id']; ?>" data-ajax="?link1=announcements" style="font-weight: 500; padding: 0 4px; color: inherit; text-decoration: none;" title="<?php echo htmlspecialchars($newsItem['text']); ?>"><?php echo htmlspecialchars($newsItem['text']); ?></a>
-										<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
+									<?php foreach ($newsList as $idx => $newsItem) { 
+										$itemTitle  = !empty($newsItem['title']) ? $newsItem['title'] : (!empty($newsItem['text']) ? $newsItem['text'] : '');
+										$itemSource = !empty($newsItem['source']) ? $newsItem['source'] : 'News';
+										$itemLink   = !empty($newsItem['link']) ? $newsItem['link'] : Wo_SeoLink('index.php?link1=announcements') . (!empty($newsItem['id']) ? '#announcement-' . $newsItem['id'] : '');
+										$isExternal = (!empty($newsItem['link']) && preg_match('/^https?:\/\//i', $newsItem['link']));
+										$isNigerian = in_array(strtolower($itemSource), array('punchng', 'vanguard', 'premiumtimes', 'channelstv', 'punch', 'channels tv', 'premium times'));
+										$badgeBg    = $isNigerian ? '#008751' : '#0288d1';
+									?>
+										<span class="fon-ticker-item" style="display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap;">
+											<span class="fon-news-source-badge" style="background-color: <?php echo $badgeBg; ?>;"><?php echo htmlspecialchars($itemSource); ?></span>
+											<a class="fon-news-headline-link" href="<?php echo htmlspecialchars($itemLink); ?>" <?php echo $isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'data-ajax="?link1=announcements"'; ?> title="<?php echo htmlspecialchars($itemTitle); ?>"><?php echo htmlspecialchars($itemTitle); ?></a>
+											<span style="color: #4fc3f7; padding: 0 10px;">&bull;</span>
+										</span>
 									<?php } ?>
 								</div>
 							</div>
