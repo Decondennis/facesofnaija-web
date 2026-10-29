@@ -1,0 +1,317 @@
+<?php
+if ($wo['loggedin'] == false || empty($wo['user']['user_id'])) {
+    return;
+}
+
+if (!function_exists('Wo_GetFeatureDiscoveryStatus')) {
+    if (file_exists('assets/includes/feature_discovery.php')) {
+        require_once('assets/includes/feature_discovery.php');
+    } else {
+        return;
+    }
+}
+
+$user_id = (int)$wo['user']['user_id'];
+$discovery = Wo_GetFeatureDiscoveryStatus($user_id);
+
+// Check if user explicitly wants to preview/test intro via ?test_welcome=1 or ?welcome_intro=1
+$is_test_preview = (!empty($_GET['test_welcome']) || !empty($_GET['welcome_intro']));
+
+// If all 5 introductions have been completed and not in test preview, stop permanently
+if (!$is_test_preview && (empty($discovery['should_show']) || empty($discovery['current_intro']))) {
+    return;
+}
+
+// Current session identifier
+$session_id = !empty($_SESSION['user_id']) ? $_SESSION['user_id'] : (!empty($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '');
+
+// Distinct login session rule:
+// 1. If already shown in this PHP session, do not show on page refresh or navigation
+$session_key = 'fon_discovery_seen_' . ($session_id ? md5($session_id) : $user_id);
+if (!$is_test_preview && !empty($_SESSION[$session_key])) {
+    return;
+}
+
+// 2. If the user reopened the app/browser with an existing session where this intro step was already acknowledged, do not show
+if (!$is_test_preview && !empty($session_id) && !empty($discovery['last_login_id']) && $discovery['last_login_id'] === $session_id) {
+    return;
+}
+
+// Mark this session as having displayed the intro so page refresh or navigation never displays it again
+$_SESSION[$session_key] = true;
+
+$intro = $discovery['current_intro'];
+if (empty($intro)) {
+    $all_intros = Wo_GetFeatureDiscoveryIntros();
+    $intro = $all_intros[1];
+}
+
+$intro_id = (int)$intro['id'];
+$step = (int)$intro['step'];
+$total = (int)$intro['total'];
+$title = htmlspecialchars($intro['title'], ENT_QUOTES, 'UTF-8');
+$description = htmlspecialchars($intro['description'], ENT_QUOTES, 'UTF-8');
+$icon = htmlspecialchars($intro['icon'], ENT_QUOTES, 'UTF-8');
+$accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
+?>
+
+<div class="modal fade fon-feature-discovery-modal" id="fon-feature-discovery-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="fon-discovery-heading" aria-describedby="fon-discovery-desc" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content fon-discovery-card">
+            <button type="button" class="close fon-discovery-close-btn" data-dismiss="modal" aria-label="Close" title="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <!-- Branded Accent Header -->
+            <div class="fon-discovery-header-accent" style="background: linear-gradient(135deg, <?php echo $accent; ?>, #a84849);">
+                <div class="fon-discovery-brand-tag">Welcome to FacesOfNaija</div>
+                <div class="fon-discovery-icon-wrapper" style="color: <?php echo $accent; ?>;">
+                    <i class="fa fa-<?php echo $icon; ?>" id="fon-discovery-icon" aria-hidden="true"></i>
+                </div>
+            </div>
+            
+            <!-- Modal Body Content -->
+            <div class="modal-body fon-discovery-body">
+                <!-- Progress Indicator (e.g. 1 of 5) -->
+                <div class="fon-discovery-progress-wrap">
+                    <span class="fon-discovery-step-pill" style="color: <?php echo $accent; ?>; border-color: <?php echo $accent; ?>33;">
+                        <span class="fon-discovery-step-dots" aria-hidden="true">
+                            <?php for ($i = 1; $i <= $total; $i++): ?>
+                                <span class="fon-dot <?php echo ($i <= $step) ? 'active' : ''; ?>" style="<?php echo ($i <= $step) ? 'background-color:' . $accent . ';' : ''; ?>"></span>
+                            <?php endfor; ?>
+                        </span>
+                        <?php echo $step; ?> of <?php echo $total; ?>
+                    </span>
+                </div>
+
+                <h3 class="fon-discovery-heading" id="fon-discovery-heading">
+                    <?php echo $title; ?>
+                </h3>
+
+                <p class="fon-discovery-desc" id="fon-discovery-desc">
+                    <?php echo $description; ?>
+                </p>
+
+                <div class="fon-discovery-footer">
+                    <button type="button" class="btn btn-main fon-discovery-confirm-btn" id="fon-discovery-ok-btn" style="background-color: <?php echo $accent; ?>; border-color: <?php echo $accent; ?>;">
+                        OK, Got It
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.fon-feature-discovery-modal {
+    z-index: 10500 !important;
+}
+.fon-feature-discovery-modal .modal-dialog {
+    max-width: 440px;
+    margin: 48px auto;
+}
+.fon-discovery-card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.28), 0 4px 16px rgba(0,0,0,0.08);
+    background: #ffffff;
+    text-align: center;
+    position: relative;
+    animation: fonDiscoveryModalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes fonDiscoveryModalPop {
+    0% { transform: scale(0.92); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.fon-discovery-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 10;
+    color: #ffffff;
+    opacity: 0.85;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    outline: none !important;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.fon-discovery-close-btn:hover {
+    opacity: 1;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+.fon-discovery-header-accent {
+    padding: 32px 20px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.fon-discovery-brand-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 14px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.fon-discovery-icon-wrapper {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+    font-size: 32px;
+}
+.fon-discovery-body {
+    padding: 24px 30px 30px;
+}
+.fon-discovery-progress-wrap {
+    margin-bottom: 14px;
+}
+.fon-discovery-step-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: #f8fafc;
+    border: 1px solid rgba(0,0,0,0.06);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.fon-discovery-step-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.fon-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #cbd5e1;
+    display: inline-block;
+}
+.fon-dot.active {
+    width: 7px;
+    height: 7px;
+}
+.fon-discovery-heading {
+    font-size: 21px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 10px;
+    line-height: 1.35;
+    letter-spacing: -0.3px;
+}
+.fon-discovery-desc {
+    font-size: 14.5px;
+    color: #475569;
+    line-height: 1.55;
+    margin: 0 auto 26px;
+    max-width: 360px;
+}
+.fon-discovery-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fon-discovery-confirm-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff !important;
+    outline: none !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+.fon-discovery-confirm-btn:hover,
+.fon-discovery-confirm-btn:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+    color: #ffffff !important;
+}
+.fon-discovery-confirm-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 480px) {
+    .fon-feature-discovery-modal .modal-dialog {
+        margin: 24px 16px;
+    }
+    .fon-discovery-body {
+        padding: 20px 20px 24px;
+    }
+    .fon-discovery-heading {
+        font-size: 19px;
+    }
+    .fon-discovery-desc {
+        font-size: 13.5px;
+        margin-bottom: 20px;
+    }
+}
+</style>
+
+<script>
+$(document).ready(function() {
+    var $modal = $('#fon-feature-discovery-modal');
+    if ($modal.length) {
+        $modal.modal({
+            backdrop: 'static',
+            keyboard: true,
+            show: true
+        });
+
+        // Set focus to the OK button for accessibility
+        setTimeout(function() {
+            $('#fon-discovery-ok-btn').focus();
+        }, 300);
+
+        var introId = <?php echo $intro_id; ?>;
+        var sessionId = '<?php echo addslashes($session_id); ?>';
+        var acknowledged = false;
+
+        function recordAcknowledgment() {
+            if (acknowledged) return;
+            acknowledged = true;
+
+            $.ajax({
+                url: Wo_Ajax_Requests_File() + '?f=feature_discovery&action=ack',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    intro_id: introId,
+                    login_id: sessionId
+                }
+            });
+        }
+
+        // Clicking "OK, Got It" closes modal immediately and saves acknowledgment
+        $('#fon-discovery-ok-btn').on('click', function(e) {
+            e.preventDefault();
+            recordAcknowledgment();
+            $modal.modal('hide');
+        });
+
+        // Closing via X button or Esc also safely dismisses modal and acknowledges
+        $modal.on('hidden.bs.modal', function() {
+            recordAcknowledgment();
+        });
+    }
+});
+</script>

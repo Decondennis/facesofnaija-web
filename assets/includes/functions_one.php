@@ -282,6 +282,9 @@ function Wo_CreateLoginSession($user_id = 0) {
         $delete_same_session = $db->where('user_id', $user_id)->where('platform_details', $ua)->delete(T_APP_SESSIONS);
         $query_three         = mysqli_query($sqlConnect, "INSERT INTO " . T_APP_SESSIONS . " (`user_id`, `session_id`, `platform`, `platform_details`, `time`) VALUES('{$user_id}', '{$hash}', 'web', '$ua'," . time() . ")");
         if ($query_three) {
+            if (session_status() === PHP_SESSION_ACTIVE) {
+                $_SESSION['new_login_event'] = $hash;
+            }
             return $hash;
         }
     }
@@ -4494,7 +4497,10 @@ function Wo_GetMessageButton($user_id = 0) {
 }
 function Wo_MarkupAPI($text, $link = true, $hashtag = true, $mention = true, $post_id = 0) {
     global $sqlConnect;
-    $text = (string)($text ?? '');
+    if ($text === null || $text === '') {
+        return '';
+    }
+    $text = (string)$text;
     if ($mention == true) {
         $Orginaltext   = $text;
         $mention_regex = '/@\[([0-9]+)\]/i';
@@ -4554,7 +4560,10 @@ function Wo_MarkupAPI($text, $link = true, $hashtag = true, $mention = true, $po
 }
 function Wo_Markup($text, $link = true, $hashtag = true, $mention = true, $post_id = 0, $comment_id = 0, $reply_id = 0) {
     global $sqlConnect;
-    $text = (string)($text ?? '');
+    if ($text === null || $text === '') {
+        return '';
+    }
+    $text = (string)$text;
     if ($mention == true) {
         $Orginaltext   = $text;
         $mention_regex = '/@\[([0-9]+)\]/i';
@@ -4618,7 +4627,10 @@ function Wo_Markup($text, $link = true, $hashtag = true, $mention = true, $post_
 }
 function Wo_EditMarkup($text, $link = true, $hashtag = true, $mention = true, $post_id = 0, $comment_id = 0, $reply_id = 0) {
     global $sqlConnect;
-    $text = (string)($text ?? '');
+    if ($text === null || $text === '') {
+        return '';
+    }
+    $text = (string)$text;
     if ($mention == true) {
         $Orginaltext   = $text;
         $mention_regex = '/@\[([0-9]+)\]/i';
@@ -4677,7 +4689,10 @@ function Wo_EditMarkup($text, $link = true, $hashtag = true, $mention = true, $p
 }
 function Wo_Emo($string = '') {
     global $emo, $wo;
-    $string = (string)($string ?? '');
+    if ($string === null || $string === '') {
+        return '';
+    }
+    $string = (string)$string;
     foreach ($emo as $code => $name) {
         $code   = $code;
         $name   = '<i class="twa-lg twa twa-' . $name . '"></i>';
@@ -4687,7 +4702,10 @@ function Wo_Emo($string = '') {
 }
 function Wo_EmoPhone($string = '') {
     global $emo_full;
-    $string = (string)($string ?? '');
+    if ($string === null || $string === '') {
+        return '';
+    }
+    $string = (string)$string;
     foreach ($emo_full as $code => $name) {
         $code   = $code;
         $string = str_replace($code, $name, $string);
@@ -5665,6 +5683,7 @@ function Wo_PostData($post_id, $placement = '', $limited = '', $comments_limit =
         }
     }
     $story['post_is_promoted'] = 0;
+    $story['postText']         = (string)($story['postText'] ?? '');
     $story['postText_API']     = Wo_MarkupAPI($story['postText'], true, true, true, $story['post_id']);
     $story['postText_API']     = Wo_Emo($story['postText_API']);
     $story['Orginaltext']      = Wo_EditMarkup($story['postText'], true, true, true, $story['post_id']);
@@ -8195,8 +8214,7 @@ function Wo_RegisterPostComment($data = array()) {
                 $mentions[]   = $match_user['user_id'];
             }
         }
-    }
-    $hashtag_regex = '/#([^`~!@$%^&*\#()\-+=\\|\/\.,<>?\'\":;{}\[\]* ]+)/i';
+        $hashtag_regex = '/#([^`~!@$%^&*\#()\-+=\\|\/\.,<>?\'\":;{}\[\]* ]+)/i';
     preg_match_all($hashtag_regex, $data['text'], $matches);
     foreach ($matches[1] as $match) {
         if (!is_numeric($match)) {
@@ -8215,6 +8233,7 @@ function Wo_RegisterPostComment($data = array()) {
                 // $hashtag_sql_query = mysqli_query($sqlConnect, $hashtag_query);
             }
         }
+    }
     }
     $post    = Wo_PostData($data['post_id']);
     $text    = '';
@@ -8688,8 +8707,7 @@ function Wo_UpdateComment($data = array()) {
                     $mentions[]   = $match_user['user_id'];
                 }
             }
-        }
-        $hashtag_regex = '/#([^`~!@$%^&*\#()\-+=\\|\/\.,<>?\'\":;{}\[\]* ]+)/i';
+            $hashtag_regex = '/#([^`~!@$%^&*\#()\-+=\\|\/\.,<>?\'\":;{}\[\]* ]+)/i';
         preg_match_all($hashtag_regex, $comment_text, $matches);
         foreach ($matches[1] as $match) {
             if (!is_numeric($match)) {
@@ -8707,6 +8725,7 @@ function Wo_UpdateComment($data = array()) {
                     // $hashtag_sql_query = mysqli_query($sqlConnect, $hashtag_query);
                 }
             }
+        }
         }
         $query_one = mysqli_query($sqlConnect, "UPDATE " . T_COMMENTS . " SET `text` = '{$comment_text}' WHERE `id` = {$comment_id}");
         if ($query_one) {
@@ -8806,8 +8825,7 @@ function Wo_UpdatePost($data = array()) {
                 $mentions[] = $match_user['user_id'];
             }
         }
-    }
-    $hashtag_regex = '/#([^`~!@$%^&*\#()\-+=\\|\/\.,<>?\'\":;{}\[\]* ]+)/i';
+        $hashtag_regex = '/#([^`~!@$%^&*\#()\-+=\\|\/\.,<>?\'\":;{}\[\]* ]+)/i';
     preg_match_all($hashtag_regex, $post_text, $matches);
     foreach ($matches[1] as $match) {
         if (!is_numeric($match)) {
@@ -8824,6 +8842,7 @@ function Wo_UpdatePost($data = array()) {
                 $hashtag_sql_query = mysqli_query($sqlConnect, $hashtag_query);
             }
         }
+    }
     }
     $query_one = mysqli_query($sqlConnect, "UPDATE " . T_POSTS . " SET `postText` = '{$post_text}' WHERE `id` = {$post_id}");
     if ($query_one) {

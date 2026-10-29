@@ -61,6 +61,7 @@ if ($f == 'login') {
             $update              = mysqli_query($sqlConnect, "UPDATE " . T_USERS . " SET `ip_address` = '{$ip}' WHERE `user_id` = '{$userid}'");
             $session             = Wo_CreateLoginSession(Wo_UserIdForLogin($username));
             $_SESSION['user_id'] = $session;
+            $_SESSION['new_login_event'] = $session;
             if ($wo['config']['remember_device'] == 1 && !empty($_POST['remember_device']) && $_POST['remember_device'] == 'on') {
                 setcookie("user_id", $session, time() + (10 * 365 * 24 * 60 * 60));
             }

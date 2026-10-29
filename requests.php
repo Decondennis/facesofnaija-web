@@ -1,6 +1,20 @@
 <?php
 require_once('assets/init.php');
-$f = '';
+
+// Ensure $wo is an array to avoid stdClass vs array access issues and null offsets
+if (!isset($wo) || $wo === null) {
+    $wo = array();
+} elseif (is_object($wo)) {
+    $wo = json_decode(json_encode($wo), true);
+}
+// Provide safe defaults used throughout this router
+$wo['config'] = $wo['config'] ?? array();
+$wo['loggedin'] = $wo['loggedin'] ?? false;
+$wo['user'] = $wo['user'] ?? array('banned' => 0);
+
+@ini_set('display_errors', 0);
+@error_reporting(0);
+
 $s = '';
 if (isset($_GET['f'])) {
     $f = Wo_Secure($_GET['f'], 0);
@@ -37,6 +51,7 @@ $allow_array     = array(
     'load_more_products',
     'yoomoney',
     'iyzipay',
+    'feature_discovery',
 );
 if ($f == 'certification' && $s == 'download_user_certification' && !empty($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
     $allow_array[] = 'certification';
