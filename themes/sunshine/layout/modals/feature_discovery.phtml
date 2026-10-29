@@ -13,6 +13,7 @@ if (!function_exists('Wo_GetFeatureDiscoveryStatus')) {
 
 $user_id = (int)$wo['user']['user_id'];
 $discovery = Wo_GetFeatureDiscoveryStatus($user_id);
+$all_intros = Wo_GetFeatureDiscoveryIntros();
 
 // Check if user explicitly wants to preview/test intro via ?test_welcome=1 or ?welcome_intro=1
 $is_test_preview = (!empty($_GET['test_welcome']) || !empty($_GET['welcome_intro']));
@@ -40,11 +41,7 @@ if (!$is_test_preview && !empty($session_id) && !empty($discovery['last_login_id
 // Mark this session as having displayed the intro so page refresh or navigation never displays it again
 $_SESSION[$session_key] = true;
 
-$intro = $discovery['current_intro'];
-if (empty($intro)) {
-    $all_intros = Wo_GetFeatureDiscoveryIntros();
-    $intro = $all_intros[1];
-}
+$intro = !empty($discovery['current_intro']) ? $discovery['current_intro'] : $all_intros[1];
 
 $intro_id = (int)$intro['id'];
 $step = (int)$intro['step'];
@@ -63,39 +60,52 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
             </button>
 
             <!-- Branded Accent Header -->
-            <div class="fon-discovery-header-accent" style="background: linear-gradient(135deg, <?php echo $accent; ?>, #a84849);">
+            <div class="fon-discovery-header-accent" id="fon-discovery-header-accent" style="background: linear-gradient(135deg, <?php echo $accent; ?>, #a84849);">
                 <div class="fon-discovery-brand-tag">Welcome to FacesOfNaija</div>
-                <div class="fon-discovery-icon-wrapper" style="color: <?php echo $accent; ?>;">
+                <div class="fon-discovery-icon-wrapper" id="fon-discovery-icon-wrapper" style="color: <?php echo $accent; ?>;">
                     <i class="fa fa-<?php echo $icon; ?>" id="fon-discovery-icon" aria-hidden="true"></i>
                 </div>
             </div>
             
             <!-- Modal Body Content -->
             <div class="modal-body fon-discovery-body">
-                <!-- Progress Indicator (e.g. 1 of 5) -->
+                <!-- Progress Indicator (e.g. 1 of 5) and Dots -->
                 <div class="fon-discovery-progress-wrap">
-                    <span class="fon-discovery-step-pill" style="color: <?php echo $accent; ?>; border-color: <?php echo $accent; ?>33;">
-                        <span class="fon-discovery-step-dots" aria-hidden="true">
+                    <span class="fon-discovery-step-pill" id="fon-discovery-step-pill" style="color: <?php echo $accent; ?>; border-color: <?php echo $accent; ?>33;">
+                        <span class="fon-discovery-step-dots" id="fon-discovery-step-dots" aria-hidden="true">
                             <?php for ($i = 1; $i <= $total; $i++): ?>
-                                <span class="fon-dot <?php echo ($i <= $step) ? 'active' : ''; ?>" style="<?php echo ($i <= $step) ? 'background-color:' . $accent . ';' : ''; ?>"></span>
+                                <span class="fon-dot <?php echo ($i == $step) ? 'active' : ''; ?>" data-step="<?php echo $i; ?>" style="<?php echo ($i <= $step) ? 'background-color:' . $accent . ';' : ''; ?>"></span>
                             <?php endfor; ?>
                         </span>
-                        <?php echo $step; ?> of <?php echo $total; ?>
+                        <span id="fon-discovery-step-text"><?php echo $step; ?> of <?php echo $total; ?></span>
                     </span>
                 </div>
 
-                <h3 class="fon-discovery-heading" id="fon-discovery-heading">
-                    <?php echo $title; ?>
-                </h3>
+                <div class="fon-discovery-text-content">
+                    <h3 class="fon-discovery-heading" id="fon-discovery-heading">
+                        <?php echo $title; ?>
+                    </h3>
 
-                <p class="fon-discovery-desc" id="fon-discovery-desc">
-                    <?php echo $description; ?>
-                </p>
+                    <p class="fon-discovery-desc" id="fon-discovery-desc">
+                        <?php echo $description; ?>
+                    </p>
+                </div>
 
+                <!-- Footer with Next / OK Button and Navigation -->
                 <div class="fon-discovery-footer">
-                    <button type="button" class="btn btn-main fon-discovery-confirm-btn" id="fon-discovery-ok-btn" style="background-color: <?php echo $accent; ?>; border-color: <?php echo $accent; ?>;">
-                        OK, Got It
+                    <button type="button" class="btn btn-main fon-discovery-primary-btn" id="fon-discovery-next-btn" style="background-color: <?php echo $accent; ?>; border-color: <?php echo $accent; ?>;">
+                        <span id="fon-discovery-btn-label"><?php echo ($step < $total) ? 'Next' : 'OK, Got It'; ?></span>
+                        <i class="fa fa-arrow-right fon-discovery-btn-arrow" id="fon-discovery-btn-arrow" style="<?php echo ($step >= $total) ? 'display:none;' : ''; ?>"></i>
                     </button>
+
+                    <div class="fon-discovery-nav-row">
+                        <button type="button" class="btn btn-link fon-discovery-back-btn" id="fon-discovery-back-btn" style="<?php echo ($step <= 1) ? 'display:none;' : ''; ?>">
+                            <i class="fa fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-link fon-discovery-skip-btn" id="fon-discovery-skip-btn">
+                            Skip for now
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -150,6 +160,7 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: background 0.35s ease;
 }
 .fon-discovery-brand-tag {
     font-size: 11px;
@@ -170,9 +181,10 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
     justify-content: center;
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
     font-size: 32px;
+    transition: color 0.35s ease, transform 0.25s ease;
 }
 .fon-discovery-body {
-    padding: 24px 30px 30px;
+    padding: 24px 30px 26px;
 }
 .fon-discovery-progress-wrap {
     margin-bottom: 14px;
@@ -189,22 +201,31 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    transition: color 0.35s ease;
 }
 .fon-discovery-step-dots {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
 }
 .fon-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background-color: #cbd5e1;
     display: inline-block;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 .fon-dot.active {
-    width: 7px;
-    height: 7px;
+    width: 16px;
+    border-radius: 4px;
+}
+.fon-discovery-text-content {
+    min-height: 104px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .fon-discovery-heading {
     font-size: 21px;
@@ -213,20 +234,22 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
     margin: 0 0 10px;
     line-height: 1.35;
     letter-spacing: -0.3px;
+    transition: opacity 0.2s ease;
 }
 .fon-discovery-desc {
     font-size: 14.5px;
     color: #475569;
     line-height: 1.55;
-    margin: 0 auto 26px;
+    margin: 0 auto 20px;
     max-width: 360px;
+    transition: opacity 0.2s ease;
 }
 .fon-discovery-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.fon-discovery-confirm-btn {
+.fon-discovery-primary-btn {
     width: 100%;
     height: 48px;
     border-radius: 24px;
@@ -235,19 +258,51 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
     color: #ffffff !important;
     outline: none !important;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.35s ease;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
-.fon-discovery-confirm-btn:hover,
-.fon-discovery-confirm-btn:focus {
+.fon-discovery-primary-btn:hover,
+.fon-discovery-primary-btn:focus {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
     color: #ffffff !important;
 }
-.fon-discovery-confirm-btn:active {
+.fon-discovery-primary-btn:active {
     transform: translateY(1px);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+}
+.fon-discovery-btn-arrow {
+    font-size: 13px;
+    transition: transform 0.2s ease;
+}
+.fon-discovery-primary-btn:hover .fon-discovery-btn-arrow {
+    transform: translateX(3px);
+}
+.fon-discovery-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 4px;
+}
+.fon-discovery-back-btn,
+.fon-discovery-skip-btn {
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none !important;
+    outline: none !important;
+    padding: 4px 6px;
+    transition: color 0.2s ease;
+}
+.fon-discovery-back-btn:hover,
+.fon-discovery-skip-btn:hover {
+    color: #0f172a;
 }
 
 @media (max-width: 480px) {
@@ -255,14 +310,14 @@ $accent = htmlspecialchars($intro['accent_color'], ENT_QUOTES, 'UTF-8');
         margin: 24px 16px;
     }
     .fon-discovery-body {
-        padding: 20px 20px 24px;
+        padding: 20px 20px 22px;
     }
     .fon-discovery-heading {
         font-size: 19px;
     }
     .fon-discovery-desc {
         font-size: 13.5px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
 }
 </style>
@@ -277,40 +332,138 @@ $(document).ready(function() {
             show: true
         });
 
-        // Set focus to the OK button for accessibility
+        // Set focus to the primary button for accessibility
         setTimeout(function() {
-            $('#fon-discovery-ok-btn').focus();
+            $('#fon-discovery-next-btn').focus();
         }, 300);
 
-        var introId = <?php echo $intro_id; ?>;
+        var allIntros = <?php echo json_encode($all_intros); ?>;
+        var currentStep = <?php echo $step; ?>;
+        var totalSteps = <?php echo $total; ?>;
         var sessionId = '<?php echo addslashes($session_id); ?>';
-        var acknowledged = false;
 
-        function recordAcknowledgment() {
-            if (acknowledged) return;
-            acknowledged = true;
-
+        function sendAck(stepId) {
             $.ajax({
                 url: Wo_Ajax_Requests_File() + '?f=feature_discovery&action=ack',
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    intro_id: introId,
+                    intro_id: stepId,
                     login_id: sessionId
                 }
             });
         }
 
-        // Clicking "OK, Got It" closes modal immediately and saves acknowledgment
-        $('#fon-discovery-ok-btn').on('click', function(e) {
+        function renderStep(step) {
+            if (!allIntros[step]) return;
+            var data = allIntros[step];
+
+            // 1. Text transition
+            var $heading = $('#fon-discovery-heading');
+            var $desc = $('#fon-discovery-desc');
+            $heading.css('opacity', '0');
+            $desc.css('opacity', '0');
+
+            setTimeout(function() {
+                $heading.text(data.title).css('opacity', '1');
+                $desc.text(data.description).css('opacity', '1');
+            }, 150);
+
+            // 2. Icon & Header Accent
+            $('#fon-discovery-icon').attr('class', 'fa fa-' + data.icon);
+            $('#fon-discovery-icon-wrapper').css({
+                'color': data.accent_color,
+                'transform': 'scale(1.08)'
+            });
+            setTimeout(function() {
+                $('#fon-discovery-icon-wrapper').css('transform', 'scale(1)');
+            }, 200);
+
+            $('#fon-discovery-header-accent').css('background', 'linear-gradient(135deg, ' + data.accent_color + ', #a84849)');
+
+            // 3. Step pill and text
+            $('#fon-discovery-step-text').text(data.step + ' of ' + data.total);
+            $('#fon-discovery-step-pill').css({
+                'color': data.accent_color,
+                'border-color': data.accent_color + '33'
+            });
+
+            // 4. Progress dots
+            $('#fon-discovery-step-dots .fon-dot').each(function() {
+                var dotStep = parseInt($(this).attr('data-step'), 10);
+                if (dotStep === step) {
+                    $(this).addClass('active').css('background-color', data.accent_color);
+                } else if (dotStep < step) {
+                    $(this).removeClass('active').css('background-color', data.accent_color);
+                } else {
+                    $(this).removeClass('active').css('background-color', '#cbd5e1');
+                }
+            });
+
+            // 5. Buttons
+            var $primaryBtn = $('#fon-discovery-next-btn');
+            $primaryBtn.css({
+                'background-color': data.accent_color,
+                'border-color': data.accent_color
+            });
+
+            if (step >= totalSteps) {
+                $('#fon-discovery-btn-label').text('OK, Got It');
+                $('#fon-discovery-btn-arrow').hide();
+                $('#fon-discovery-skip-btn').hide();
+            } else {
+                $('#fon-discovery-btn-label').text('Next');
+                $('#fon-discovery-btn-arrow').show();
+                $('#fon-discovery-skip-btn').show();
+            }
+
+            if (step > 1) {
+                $('#fon-discovery-back-btn').show();
+            } else {
+                $('#fon-discovery-back-btn').hide();
+            }
+        }
+
+        // Primary Button Click: Next step OR Finish
+        $('#fon-discovery-next-btn').on('click', function(e) {
             e.preventDefault();
-            recordAcknowledgment();
-            $modal.modal('hide');
+            
+            // Record acknowledgment for the current step
+            sendAck(currentStep);
+
+            if (currentStep < totalSteps) {
+                currentStep++;
+                renderStep(currentStep);
+            } else {
+                // Completed all 5 steps!
+                $modal.modal('hide');
+            }
         });
 
-        // Closing via X button or Esc also safely dismisses modal and acknowledges
-        $modal.on('hidden.bs.modal', function() {
-            recordAcknowledgment();
+        // Back Button Click
+        $('#fon-discovery-back-btn').on('click', function(e) {
+            e.preventDefault();
+            if (currentStep > 1) {
+                currentStep--;
+                renderStep(currentStep);
+            }
+        });
+
+        // Click on progress dots to jump directly to any step
+        $('#fon-discovery-step-dots .fon-dot').on('click', function() {
+            var targetStep = parseInt($(this).attr('data-step'), 10);
+            if (targetStep >= 1 && targetStep <= totalSteps && targetStep !== currentStep) {
+                sendAck(currentStep);
+                currentStep = targetStep;
+                renderStep(currentStep);
+            }
+        });
+
+        // Skip button
+        $('#fon-discovery-skip-btn').on('click', function(e) {
+            e.preventDefault();
+            sendAck(currentStep);
+            $modal.modal('hide');
         });
     }
 });
