@@ -468,86 +468,161 @@ function getCookieValue(a) {
     return b ? b.pop() : '';
 }
 <?php if ($wo['loggedin']) { ?>
+<style>
+@keyframes fonSpeakerPulse {
+    0% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.85; }
+}
+.fon-pulse-speaking {
+    display: inline-block !important;
+    animation: fonSpeakerPulse 1.1s infinite ease-in-out !important;
+    color: #28a745 !important;
+}
+</style>
 function stripHtml(html) {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
 }
 
+function fonExtractFriendlyName(fullName, firstName) {
+    var raw = (firstName || '').trim();
+    if (!raw) raw = (fullName || '').trim();
+    raw = raw.replace(/[_.-]+/g, ' ').replace(/\d+/g, '').trim();
+    var words = raw.split(/\s+/).filter(Boolean);
+    if (!words.length) return '';
+    var titles = ['dr', 'mr', 'mrs', 'ms', 'prof', 'engr', 'barr', 'pastor', 'chief'];
+    function cap(w) { return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }
+    if (words.length >= 2 && titles.indexOf(words[0].toLowerCase()) !== -1) {
+        return cap(words[0]) + ' ' + cap(words[1]);
+    }
+    return cap(words[0]);
+}
+
 function fonFindNaturalVoice(voices) {
     if (!voices || !voices.length) return null;
-    
-    // 1. Natural / Neural / Enhanced / Premium English voices
-    for (var i = 0; i < voices.length; i++) {
-        var v = voices[i];
+
+    function scoreVoice(v) {
         var name = (v.name || '').toLowerCase();
         var lang = (v.lang || '').toLowerCase();
-        if (lang.indexOf('en') === 0) {
-            if (name.indexOf('natural') !== -1 || name.indexOf('neural') !== -1 || name.indexOf('enhanced') !== -1 || name.indexOf('premium') !== -1) {
-                return v;
+        var score = 0;
+
+        // Must be English
+        if (lang.indexOf('en') !== 0) return -2000;
+
+        // 1. Nigerian English neural/natural voice (+1500)
+        if (lang === 'en-ng' || lang.indexOf('en-ng') === 0 || name.indexOf('nigeria') !== -1) {
+            score += 1500;
+        }
+
+        // 2. Neural / Natural / Premium / Online indicators (+900 to +1000)
+        if (name.indexOf('natural') !== -1) score += 1000;
+        if (name.indexOf('neural') !== -1) score += 950;
+        if (name.indexOf('online') !== -1) score += 700;
+        if (name.indexOf('enhanced') !== -1) score += 600;
+        if (name.indexOf('premium') !== -1) score += 600;
+
+        // 3. Known high-fidelity human-sounding voices (+500)
+        var topVoices = [
+            'jenny', 'aria', 'sonia', 'ryan', 'guy', 'ezinne', 'abeo',
+            'google uk english female', 'google us english', 'google uk english male',
+            'samantha', 'serena', 'karen', 'daniel', 'olivia', 'ava', 'allison', 'victoria'
+        ];
+        for (var i = 0; i < topVoices.length; i++) {
+            if (name.indexOf(topVoices[i]) !== -1) {
+                score += 500;
+                break;
             }
         }
-    }
-    
-    // 2. High-quality preferred English voices
-    var preferred = ['jenny', 'aria', 'google us english', 'google uk english female', 'samantha', 'serena', 'guy', 'christopher'];
-    for (var p = 0; p < preferred.length; p++) {
-        for (var i = 0; i < voices.length; i++) {
-            var v = voices[i];
-            var name = (v.name || '').toLowerCase();
-            var lang = (v.lang || '').toLowerCase();
-            if (lang.indexOf('en') === 0 && name.indexOf(preferred[p]) !== -1) {
-                return v;
-            }
+
+        // 4. Windows SAPI fallback preference: Zira >> David
+        // Microsoft Zira is smooth and clear, avoiding the harsh robotic monotone of David
+        if (name.indexOf('zira') !== -1) {
+            score += 400;
         }
+
+        // Female voices in standard TTS have significantly less mechanical distortion
+        if (name.indexOf('female') !== -1) {
+            score += 150;
+        }
+
+        // 5. Preferred English locales (British, Nigerian, US, Canadian, Australian)
+        if (lang === 'en-gb') score += 120;
+        if (lang === 'en-us') score += 100;
+        if (lang === 'en-ca' || lang === 'en-au') score += 80;
+
+        // 6. PENALTY: Severe penalty for legacy robotic / monotone SAPI5 voices
+        if (name.indexOf('david') !== -1) score -= 800; // David is the robotic default on Windows
+        if (name.indexOf('desktop') !== -1) score -= 150;
+        if (name.indexOf('mark') !== -1) score -= 400;
+        if (name.indexOf('hazel') !== -1) score -= 300;
+        if (name.indexOf('george') !== -1) score -= 300;
+
+        return score;
     }
-    
-    // 3. Standard English (US or GB)
+
+    var bestVoice = voices[0];
+    var bestScore = -99999;
     for (var i = 0; i < voices.length; i++) {
-        var v = voices[i];
-        var lang = (v.lang || '').toLowerCase();
-        if (lang === 'en-us' || lang === 'en-gb') {
-            return v;
+        var s = scoreVoice(voices[i]);
+        if (s > bestScore) {
+            bestScore = s;
+            bestVoice = voices[i];
         }
     }
-    
-    // 4. Any English voice
-    for (var i = 0; i < voices.length; i++) {
-        var v = voices[i];
-        var lang = (v.lang || '').toLowerCase();
-        if (lang.indexOf('en') === 0) {
-            return v;
-        }
-    }
-    
-    return voices[0] || null;
+    return bestVoice;
 }
 
 $(function () {
     var is_day_enabled = getCookieValue('day_status');
     var myDate = new Date();
     var hrs = myDate.getHours();
+    var greetingWord = "";
     var greet;
     var color;
     var quote;
     if (hrs < 12) {
-        greet = "<?php echo $wo['lang']['good_morning']?>" + ', <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/park.png"/>';
+        greetingWord = "<?php echo addslashes($wo['lang']['good_morning']); ?>";
+        greet = greetingWord + ', <?php echo addslashes($wo['user']['name']); ?> <img src="<?php echo $wo['config']['theme_url'];?>/img/park.png"/>';
         color = '#7FC583';
         quote = "<?php echo function_exists('Wo_RandomMorningGreeting') ? addslashes(Wo_RandomMorningGreeting()) : addslashes($wo['lang']['good_morning_quote']); ?>";
     } else if (hrs >= 12 && hrs <= 18) {
-        greet = "<?php echo $wo['lang']['good_afternoon']?>" + ', <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/desert.png"/>';
+        greetingWord = "<?php echo addslashes($wo['lang']['good_afternoon']); ?>";
+        greet = greetingWord + ', <?php echo addslashes($wo['user']['name']); ?> <img src="<?php echo $wo['config']['theme_url'];?>/img/desert.png"/>';
         color = '#ffc107';
         quote = "<?php echo function_exists('Wo_RandomAfternoonGreeting') ? addslashes(Wo_RandomAfternoonGreeting()) : addslashes($wo['lang']['good_afternoon_quote']); ?>";
-    } else if (hrs >= 18 && hrs <= 24) {
-        greet = "<?php echo $wo['lang']['good_evening']?>"+', <?php echo $wo['user']['name']?> <img src="<?php echo $wo['config']['theme_url'];?>/img/sea.png"/>';
+    } else {
+        greetingWord = "<?php echo addslashes($wo['lang']['good_evening']); ?>";
+        greet = greetingWord + ', <?php echo addslashes($wo['user']['name']); ?> <img src="<?php echo $wo['config']['theme_url'];?>/img/sea.png"/>';
         color = '#FF4F70';
         quote = "<?php echo function_exists('Wo_RandomEveningGreeting') ? addslashes(Wo_RandomEveningGreeting()) : addslashes($wo['lang']['good_evening_quote']); ?>";
     }
+    if (!greetingWord) greetingWord = "Good day";
 
     window.fonSpeakGreeting = function() {
         if (!('speechSynthesis' in window)) return;
+        
+        // Toggle: if already speaking, cancel
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            $('.fon-tts-speaker i').removeClass('text-success fon-pulse-speaking');
+            return;
+        }
+
         window.speechSynthesis.cancel();
-        var speechText = stripHtml(greet) + ". " + stripHtml(quote);
+
+        var memberName = fonExtractFriendlyName("<?php echo addslashes($wo['user']['name']); ?>", "<?php echo !empty($wo['user']['first_name']) ? addslashes($wo['user']['first_name']) : ''; ?>");
+        
+        var cleanQuote = stripHtml(quote || '');
+        // Strip duplicate leading greeting from quote
+        cleanQuote = cleanQuote.replace(/^(good\s+(morning|afternoon|evening|day)[!.,;:\s-]*)+/i, '').trim();
+        // Strip emojis
+        cleanQuote = cleanQuote.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '').trim();
+
+        // Conversational greeting: punctuation introduces natural breathing pause
+        var speechText = (memberName ? (greetingWord + ", " + memberName + "! ") : (greetingWord + "! ")) + cleanQuote;
+
         var utterance = new SpeechSynthesisUtterance(speechText);
         var voices = window.speechSynthesis.getVoices();
         var naturalVoice = fonFindNaturalVoice(voices);
@@ -557,9 +632,23 @@ $(function () {
         } else {
             utterance.lang = 'en-US';
         }
-        utterance.rate = 0.95;
-        utterance.pitch = 1.0;
+
+        // Natural prosody: 1.0 cadence and 1.04 warm pitch
+        utterance.rate = 1.0;
+        utterance.pitch = 1.04;
         utterance.volume = 1.0;
+
+        var $speakerIcon = $('.fon-tts-speaker i');
+        utterance.onstart = function() {
+            $speakerIcon.addClass('text-success fon-pulse-speaking');
+        };
+        utterance.onend = function() {
+            $speakerIcon.removeClass('text-success fon-pulse-speaking');
+        };
+        utterance.onerror = function() {
+            $speakerIcon.removeClass('text-success fon-pulse-speaking');
+        };
+
         window.speechSynthesis.speak(utterance);
     };
 
