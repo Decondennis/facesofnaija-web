@@ -468,18 +468,6 @@ function getCookieValue(a) {
     return b ? b.pop() : '';
 }
 <?php if ($wo['loggedin']) { ?>
-<style>
-@keyframes fonSpeakerPulse {
-    0% { transform: scale(1); opacity: 0.85; }
-    50% { transform: scale(1.3); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.85; }
-}
-.fon-pulse-speaking {
-    display: inline-block !important;
-    animation: fonSpeakerPulse 1.1s infinite ease-in-out !important;
-    color: #28a745 !important;
-}
-</style>
 function stripHtml(html) {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = html;
@@ -553,7 +541,7 @@ function fonFindNaturalVoice(voices) {
         if (lang === 'en-ca' || lang === 'en-au') score += 80;
 
         // 6. PENALTY: Severe penalty for legacy robotic / monotone SAPI5 voices
-        if (name.indexOf('david') !== -1) score -= 800; // David is the robotic default on Windows
+        if (name.indexOf('david') !== -1) score -= 800; // David is the harsh robotic default on Windows
         if (name.indexOf('desktop') !== -1) score -= 150;
         if (name.indexOf('mark') !== -1) score -= 400;
         if (name.indexOf('hazel') !== -1) score -= 300;
@@ -600,17 +588,22 @@ $(function () {
     }
     if (!greetingWord) greetingWord = "Good day";
 
-    window.fonSpeakGreeting = function() {
+    var fonHasSpoken = false;
+
+    window.fonSpeakGreeting = function(isToggle) {
         if (!('speechSynthesis' in window)) return;
         
-        // Toggle: if already speaking, cancel
-        if (window.speechSynthesis.speaking) {
+        // If clicking speaker icon while speaking, toggle/stop it
+        if (isToggle && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
             window.speechSynthesis.cancel();
             $('.fon-tts-speaker i').removeClass('text-success fon-pulse-speaking');
             return;
         }
 
         window.speechSynthesis.cancel();
+        if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+        }
 
         var memberName = fonExtractFriendlyName("<?php echo addslashes($wo['user']['name']); ?>", "<?php echo !empty($wo['user']['first_name']) ? addslashes($wo['user']['first_name']) : ''; ?>");
         
@@ -640,6 +633,7 @@ $(function () {
 
         var $speakerIcon = $('.fon-tts-speaker i');
         utterance.onstart = function() {
+            fonHasSpoken = true;
             $speakerIcon.addClass('text-success fon-pulse-speaking');
         };
         utterance.onend = function() {
@@ -647,6 +641,14 @@ $(function () {
         };
         utterance.onerror = function() {
             $speakerIcon.removeClass('text-success fon-pulse-speaking');
+            // If browser blocks autoplay audio until user interaction, listen for first touch/click
+            if (!fonHasSpoken && !isToggle) {
+                $(document).one('click.fonTTS scroll.fonTTS keydown.fonTTS touchstart.fonTTS', function() {
+                    if (!fonHasSpoken) {
+                        window.fonSpeakGreeting(false);
+                    }
+                });
+            }
         };
 
         window.speechSynthesis.speak(utterance);
@@ -655,21 +657,21 @@ $(function () {
     if (is_day_enabled != 1) {
       setTimeout(function () {
         $('#daynightmsg').closest('.greetalert').css('border-color', color );
-        $('#daynightmsg').html('<div class="small-texts">' + greet + ' <button type="button" class="btn btn-default btn-xs fon-tts-speaker" onclick="fonSpeakGreeting();" title="Listen to greeting" style="border: none; background: transparent; color: inherit; font-size: 15px; margin-left: 8px; cursor: pointer; padding: 0 4px; vertical-align: middle;"><i class="fa fa-volume-up"></i></button></div><p>' + quote + '</p>');
+        $('#daynightmsg').html('<div class="small-texts">' + greet + ' <button type="button" class="btn btn-default btn-xs fon-tts-speaker" onclick="fonSpeakGreeting(true);" title="Listen to greeting" style="border: none; background: transparent; color: inherit; font-size: 15px; margin-left: 8px; cursor: pointer; padding: 0 4px; vertical-align: middle;"><i class="fa fa-volume-up"></i></button></div><p>' + quote + '</p>');
         $('#daynightmsg').closest('.greetalert').removeClass('hidden');
 
         if ('speechSynthesis' in window) {
             var voices = window.speechSynthesis.getVoices();
             if (voices && voices.length > 0) {
-                fonSpeakGreeting();
+                window.fonSpeakGreeting(false);
             } else {
                 window.speechSynthesis.onvoiceschanged = function() {
                     window.speechSynthesis.onvoiceschanged = null;
-                    fonSpeakGreeting();
+                    window.fonSpeakGreeting(false);
                 };
                 setTimeout(function() {
-                    if (!window.speechSynthesis.speaking) {
-                        fonSpeakGreeting();
+                    if (!fonHasSpoken) {
+                        window.fonSpeakGreeting(false);
                     }
                 }, 400);
             }
@@ -679,3 +681,16 @@ $(function () {
 });
 <?php } ?>
 </script>
+<style>
+@keyframes fonSpeakerPulse {
+    0% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.85; }
+}
+.fon-pulse-speaking {
+    display: inline-block !important;
+    animation: fonSpeakerPulse 1.1s infinite ease-in-out !important;
+    color: #28a745 !important;
+}
+</style>
+
